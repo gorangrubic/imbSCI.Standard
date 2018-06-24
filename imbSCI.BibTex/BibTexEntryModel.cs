@@ -3,6 +3,7 @@ using imbSCI.Core.attributes;
 using imbSCI.Core.extensions.text;
 using imbSCI.Core.extensions.typeworks;
 using imbSCI.Core.reporting;
+using imbSCI.Core.style.color;
 using imbSCI.DataComplex.special;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace imbSCI.BibTex
     /// <summary>
     /// Strong typed object model, with data from/for <see cref="BibTexEntryBase"/>. Inherit this class to introduce support for additional BibTex tags.
     /// </summary>
+    [imb(imbAttributeName.basicColor, ColorWorks.ColorLightGray)]
+    [imb(imbAttributeName.reporting_categoryOrder, "Entry,Topic,Publication")]
     public class BibTexEntryModel
     {
         /// <summary>
@@ -156,21 +159,23 @@ namespace imbSCI.BibTex
         [Category("Entry")]
         [DisplayName("Key")] //[imb(imbAttributeName.measure_letter, "")]
         [Description("Mendeley Entry Key")] // [imb(imbAttributeName.reporting_escapeoff)]
-        [imb(imbAttributeName.reporting_columnWidth, "20")]
+        [imb(imbAttributeName.reporting_columnWidth, "10")]
         public String EntryKey { get; set; } = "";
 
         /// <summary> Entry title </summary>
         [Category("Topic")]
         [DisplayName("Title")] //[imb(imbAttributeName.measure_letter, "")]
         [Description("Entry title")] // [imb(imbAttributeName.reporting_escapeoff)]
-        //[imb(templateFieldDataTable.columnWidth, "50")]
-        //[imb(templateFieldDataTable.col_color, "#478ecf")]
+        [imb(imbAttributeName.reporting_columnWidth, "100")]
+        [imb(imbAttributeName.viewPriority, 200)]
+        [imb(imbAttributeName.basicColor, ColorWorks.ColorCoolCyan)]
         public String title { get; set; } = default(String);
 
         [Category("Topic")]
         [DisplayName("Abstract")] //[imb(imbAttributeName.measure_letter, "")]
         [Description("")] // [imb(imbAttributeName.reporting_escapeoff)]
         [imb(imbAttributeName.measure_letter, "a")]
+        [imb(imbAttributeName.basicColor, ColorWorks.ColorCoolCyan)]
         public String @abstract { get; set; } = default(String);
 
         [Category("Topic")]
@@ -178,6 +183,13 @@ namespace imbSCI.BibTex
         [Description("Defined keywords")] // [imb(imbAttributeName.reporting_escapeoff)]
         [imb(imbAttributeName.reporting_columnWidth, 50)]
         public String keywords { get; set; } = default(String);
+
+        /// <summary> Authors </summary>
+        [Category("Publication")]
+        [DisplayName("Author")] //[imb(imbAttributeName.measure_letter, "")]
+        [Description("Authors of the paper")] // [imb(imbAttributeName.reporting_escapeoff)]
+        [imb(imbAttributeName.reporting_columnWidth, 50)]
+        public String author { get; set; } = "";
 
         /// <summary> Name of publication </summary>
         [Category("Publication")]
@@ -223,19 +235,16 @@ namespace imbSCI.BibTex
         [Category("Document")]
         [DisplayName("DOI")]
         [imb(imbAttributeName.reporting_columnWidth, "40")]
-        [Description("")] // [imb(imbAttributeName.measure_important)][imb(imbAttributeName.reporting_valueformat, "")]
+        [Description("Digital Object Identified system")] // [imb(imbAttributeName.measure_important)][imb(imbAttributeName.reporting_valueformat, "")]
         public String doi { get; set; } = "";
 
-        [Category("URL")]
+        [Category("Document")]
         [DisplayName("Url")]
         [imb(imbAttributeName.reporting_columnWidth, "40")]
-        [Description("")] // [imb(imbAttributeName.measure_important)][imb(imbAttributeName.reporting_valueformat, "")]
+        [imb(imbAttributeName.reporting_escapeoff)]
+        [Description("Url associated with the publication")] // [imb(imbAttributeName.measure_important)][imb(imbAttributeName.reporting_valueformat, "")]
         public String url { get; set; } = "";
 
-        /// <summary> Authors </summary>
-        [Category("Publication")]
-        [DisplayName("author")] //[imb(imbAttributeName.measure_letter, "")]
-        [Description("Authors")] // [imb(imbAttributeName.reporting_escapeoff)]
-        public String author { get; set; } = "";
+
     }
 }

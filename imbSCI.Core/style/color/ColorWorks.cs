@@ -51,8 +51,14 @@ namespace imbSCI.Core.style.color
         public const String ColorOrange = "#FF9900";
         public const String ColorViolet = "#7D00DD";
         public const String ColorGray = "#666666";
-        public const String ColorLightGray = "#eeeeee";
+        public const String ColorLightGray = "#EEEEEE";
         public const String ColorDarkGray = "#333333";
+
+        public const String ColorCoolCyan = "#35bbb0";
+        public const String ColorCoolGreen = "#99ad27";
+        public const String ColorCoolBlue = "#3cb5d0";
+        public const String ColorCoolPink = "#ac78cb";
+        public const String ColorCoolYellow = "#cca71a";
 
         private static List<Color> AllColors { get; set; } = new List<Color>();
 
@@ -235,6 +241,7 @@ namespace imbSCI.Core.style.color
             if (hex.isNullOrEmpty()) return defaultColor;
             byte a = 0, r = 0, g = 0, b = 0;
             //Color[A = 0, R = 153, G = 153, B = 153]
+            hex = hex.ToUpper();
 
             if (hex.Contains("["))
             {

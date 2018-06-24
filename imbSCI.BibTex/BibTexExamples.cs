@@ -113,26 +113,26 @@ namespace imbSCI.BibTex
             }</code></example>
         */
 
-        public void Example3_LoadAndExportToExcel_ShortWay()
+    public void Example3_LoadAndExportToExcel_ShortWay()
+    {
+        // Example 3: Short way - using imbSCI find file
+        String path = folderResources.findFile("S0306457309000259.bib", SearchOption.AllDirectories);
+
+        // High-level method, creates extended version of Excel file, with additional spreadsheet for Legend and other meta information
+        var reportDataTable = BibTexTools.ExportToExcel(path, notation, log);
+
+        // Now, let's load all *.bib files
+        System.Collections.Generic.List<string> paths = folderResources.findFiles("*.bib", SearchOption.AllDirectories);
+
+        // Exports all *.bib files
+        System.Collections.Generic.List<DataTableForStatistics> exports = BibTexTools.ExportToExcel(paths, notation, log, null, folderResults);
+
+        // Printing filename and destination path, to a ILogBuilder log builder
+        foreach (var export in exports)
         {
-            // Example 3: Short way - using imbSCI find file
-            String path = folderResources.findFile("S0306457309000259.bib", SearchOption.AllDirectories);
-
-            // High-level method, creates extended version of Excel file, with additional spreadsheet for Legend and other meta information
-            var reportDataTable = BibTexTools.ExportToExcel(path, notation, log);
-
-            // Now, let's load all *.bib files
-            System.Collections.Generic.List<string> paths = folderResources.findFiles("*.bib", SearchOption.AllDirectories);
-
-            // Exports all *.bib files
-            System.Collections.Generic.List<DataTableForStatistics> exports = BibTexTools.ExportToExcel(paths, notation, log, null, folderResults);
-
-            // Printing filename and destination path, to a ILogBuilder log builder
-            foreach (var export in exports)
-            {
-                log.log(export.TableName + " exported to: " + export.lastFilePath);
-            }
+            log.log(export.TableName + " exported to: " + export.lastFilePath);
         }
+    }
 
         /// <summary>Creation of BibTex entry from code, and generation of Excel table</summary>
         /** <example><para>Creation of BibTex entry from code, and generation of Excel table</para>

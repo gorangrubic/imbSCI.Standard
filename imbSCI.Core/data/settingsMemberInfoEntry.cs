@@ -579,7 +579,7 @@ namespace imbSCI.Core.data
                     break;
 
                 case templateFieldDataTable.col_priority:
-                    priority = (Int32)dtc_val;
+                    priority = dtc_val.imbToNumber<Int32>();
                     break;
 
                 case templateFieldDataTable.col_propertyInfo:
@@ -1133,6 +1133,10 @@ namespace imbSCI.Core.data
         {
             if (extraData == null) extraData = new PropertyCollection();
 
+            extraData[imbAttributeName.basicColor] = color;
+            extraData[imbAttributeName.viewPriority] = priority;
+            extraData[imbAttributeName.menuPriority] = priority;
+
             extraData[imbAttributeName.reporting_valueformat] = format; //*
             extraData[imbAttributeName.measure_displayGroup] = categoryName; //groups.Join(","); //imb.getProperString(me.categoryName, imbAttributeName.measure_displayGroup, imbAttributeName.menuGroupPath); //*
             extraData[imbAttributeName.measure_important] = importance; // imb.getMessage(imbAttributeName.measure_important, false); //*
@@ -1158,7 +1162,7 @@ namespace imbSCI.Core.data
             extraData[templateFieldDataTable.col_imbattributes] = attributes;
             extraData[templateFieldDataTable.col_unit] = unit;
             extraData[templateFieldDataTable.col_color] = color;
-            extraData[imbAttributeName.basicColor] = color;
+
 
             extraData[templateFieldDataTable.col_width] = width;
             extraData[templateFieldDataTable.col_alignment] = Alignment;

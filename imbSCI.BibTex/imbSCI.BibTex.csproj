@@ -5,17 +5,16 @@
     <ApplicationIcon>imbSCI.ico</ApplicationIcon>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>imbSCI.BibTex</PackageId>
-    <Version>0.9.1</Version>
+    <Version>0.9.5</Version>
     <Title>imbSCI.BibTex .NET Standard</Title>
-    <Summary></Summary>
+    <Summary>imbSCI.BibTex is a comprehensive BibTex format API, allowing you to: Load, combine, modify and save BibTex citation definitions, access BibTex entries via value pair dictionaries (auto-discovery of entry fields) or via strong typed class; Extend basic BibTexEntryModel class to gain support less popular and/or special application BibTex tags, Generate Excel spreadsheet and CSV data table export, with data from BibTex file(s), High-level, single-call citation report generation, using one or all BibTex files from a directory, Encoding of LaTeX symbols to UTF-8 equivalents, and vice versa. Fast parsing, using multi-threading and compiled Regex queries; Generation of BibTex format output;</Summary>
     <PackageIconUrl>http://doc.veles.rs/imbACE.ico</PackageIconUrl>
     <PackageProjectUrl>http://blog.veles.rs/</PackageProjectUrl>
     <PackageLicenseUrl>http://doc.veles.rs/LICENCE.txt</PackageLicenseUrl>
     <Copyright>Copyright (C) 2018 imbVeles - GNU GENERAL PUBLIC LICENSE V3.0</Copyright>
-    <Description></Description>
+    <Description>imbSCI.BibTex is a comprehensive BibTex format API, allowing you to: Load, combine, modify and save BibTex citation definitions, access BibTex entries via value pair dictionaries (auto-discovery of entry fields) or via strong typed class; Extend basic BibTexEntryModel class to gain support less popular and/or special application BibTex tags, Generate Excel spreadsheet and CSV data table export, with data from BibTex file(s), High-level, single-call citation report generation, using one or all BibTex files from a directory, Encoding of LaTeX symbols to UTF-8 equivalents, and vice versa. Fast parsing, using multi-threading and compiled Regex queries; Generation of BibTex format output;</Description>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <PackageReleaseNotes>
-    </PackageReleaseNotes>
+    <PackageReleaseNotes>Multi-target (.NET 4.0, .NET 4.5 and .NET Standard).</PackageReleaseNotes>
     <PackageTags>BibTex, citation, science, reference</PackageTags>
     <RepositoryUrl>https://github.com/gorangrubic/</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
@@ -57,5 +56,31 @@
   </ItemGroup>
 
 
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <ShouldCreateLogs>True</ShouldCreateLogs>
+    <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
+    <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
+    <UpdateAssemblyFileVersion>False</UpdateAssemblyFileVersion>
+    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
+    <UpdatePackageVersion>True</UpdatePackageVersion>
+    <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
+    <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <ShouldCreateLogs>True</ShouldCreateLogs>
+    <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
+    <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
+    <UpdateAssemblyFileVersion>False</UpdateAssemblyFileVersion>
+    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
+    <UpdatePackageVersion>True</UpdatePackageVersion>
+    <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
+    <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
+  </PropertyGroup>
+
+  <Target Name="CopyPackage" AfterTargets="Pack">
+    <Copy SourceFiles="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" DestinationFolder="G:\imbVelesOpenSource\LocalNuGet\imbVelesSecondGeneration\" />
+  </Target>
 
 </Project>

@@ -5,7 +5,7 @@
     <ApplicationIcon>imbVeles48.ico</ApplicationIcon>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>imbSCI.DataComplex.Standard</PackageId>
-    <Version>0.3.26</Version>
+    <Version>0.3.35</Version>
     <Title>imbSCI.DataComplex - complex data structures</Title>
     <Summary>
       Part of the base layer of imbVeles Framework: reporting support, graph and directed graphs, concurrent multidimensional collections, serialization helpers
@@ -16,8 +16,13 @@
     <Copyright>Copyright (C) 2017-2018 imbVeles - GNU GENERAL PUBLIC LICENSE V3.0</Copyright>
     <Description>Extended and typed DataTables, DataTable to Excel reporting, various graph structures, translation tables, trend estimation structures, path DOM, reporting extensions, TF-IDF corpus and document data structures, data structures for reporting and other stuff in context of imbSCI framework</Description>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <PackageReleaseNotes>CSV functions are currently disabled. Migrated to .NET Standard 2.0! Targets: .NET 4.0*, .NET 4.5 and .NET Core 2.0 i.e ready for use in cross-platform application development. * Purpose of the .NET 4.0 target is to provide compatibility with Windows XP, that is still popular on console PCs of older CNC machines and industrial controlers. It will be supported "forever", as it is part of the mission.
-</PackageReleaseNotes>
+    <PackageReleaseNotes>Migrated to .NET Standard 2.0! Targets: .NET 4.0*, .NET 4.5 and .NET Core 2.0 i.e ready for use in cross-platform application development. New features: Micro testing environment
+:
+- Abstract class, managing log, resources and results folders
+- 
+Automatic execution of test methods, exception reporting and log autosave
+
+- Generation of directory readme file</PackageReleaseNotes>
     <PackageTags>Reporting, DataTable, static web site, generator, R Tidy Dataset</PackageTags>
     <RepositoryUrl>https://github.com/gorangrubic/imbSCI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>

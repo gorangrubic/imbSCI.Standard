@@ -1,6 +1,7 @@
 ﻿// using BibtexLibrary;
 using imbSCI.Core.extensions.table;
 using imbSCI.Core.reporting;
+using imbSCI.Core.style.color;
 using imbSCI.Core.style.preset;
 using imbSCI.DataComplex.special;
 
@@ -107,13 +108,13 @@ namespace imbSCI.BibTex
             {
                 DataColumn dc = output.Columns.Add(field);
 
-                dc.SetDefaultBackground("#999999");
+              //  dc.SetDefaultBackground(ColorWorks.ColorLightGray);
             }
 
             if (preset != null)
             {
                 output.SetAdditionalInfoEntry("Format template", preset.name);
-                preset.DeployTo(output, true, log);
+                preset.DeployTo(output, false, log);
             }
 
             foreach (BibTexEntryBase ent in UntypedEntries)

@@ -5,7 +5,7 @@
     <ApplicationIcon>imbSCI.ico</ApplicationIcon>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>imbSCI.Core.Standard</PackageId>
-    <Version>0.3.21</Version>
+    <Version>0.3.30</Version>
     <Title>imbSCI.Core - the core library of imbSCI</Title>
     <Summary>
       Part of the base layer of imbVeles Framework: reporting support, graph and directed graphs, concurrent multidimensional collections, serialization helpers
@@ -16,8 +16,10 @@
     <Copyright>Copyright (C) 2017-2018 imbVeles - GNU GENERAL PUBLIC LICENSE V3.0</Copyright>
     <Description>imbSCI.Core library of imbSCI module (imbVeles framework). Provides attributes for data annotation, data aggregation, reporting, PropertyExpression, type description data (advanced reflection), rich extensions library (data, enum works, input/output, math, DataTable, text manipulation, type works (enhanced reflection)), file-data structures, directory tree data model, string templates, color manipulation, HTML/Markdown creation ...</Description>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <PackageReleaseNotes>CSV functionality currently removed. Migrated to .NET Standard 2.0! Targets: .NET 4.0*, .NET 4.5 and .NET Core 2.0 i.e ready for use in cross-platform application development. * Purpose of the .NET 4.0 target is to provide compatibility with Windows XP, that is still popular on console PCs of older CNC machines and industrial controlers. It will be supported "forever", as it is part of the mission.
-</PackageReleaseNotes>
+    <PackageReleaseNotes>Migrated to .NET Standard 2.0! Targets: .NET 4.0*, .NET 4.5 and .NET Core 2.0 i.e ready for use in cross-platform application development. New features: Data Annotation template system
+create templates in code, or construct from Type or DataTable data annotation; 
+load,save,combine templates; 
+apply template on report generation of a collection or directly to DataTable</PackageReleaseNotes>
     <PackageTags>filesystem, aggregation, data annotation, reporting, color, css, DataTable, reflection</PackageTags>
     <RepositoryUrl>https://github.com/gorangrubic/imbSCI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>

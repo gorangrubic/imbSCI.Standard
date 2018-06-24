@@ -185,6 +185,7 @@ namespace imbSCI.Core.style.preset
 
                 i.DeployTo(column, skipExisting, log);
             }
+            table.SetCategoryPriority(CategoryByPriority);
         }
 
         /// <summary>
@@ -199,6 +200,7 @@ namespace imbSCI.Core.style.preset
             {
                 SetFrom(column, skipExistingAnnotations);
             }
+            CategoryByPriority = table.GetCategoryPriority();
             description = description.add("Imported from data table [" + table.GetTitle() + "]", ". ");
         }
 
@@ -215,8 +217,11 @@ namespace imbSCI.Core.style.preset
             {
                 SetFrom(pce.Value, skipExistingAnnotations);
             }
+            CategoryByPriority = sEO.CategoryByPriority;
             description = description.add("Imported from data type [" + type.Name + "]", ". ");
         }
+
+        public List<String> CategoryByPriority { get; set; } = new List<string>();
 
         /// <summary>
         /// Sets or creates new preset item, with data annotations taken from the specified column

@@ -106,28 +106,6 @@ namespace imbSCI.Core.style.preset
 
                 switch (pair.resolvedKey)
                 {
-                    //case imbAttributeName.measure_calcGroup:
-                    //case imbAttributeName.measure_displayGroup:
-
-                    //    column.SetGroup(pair.value.toStringSafe());
-                    //    if (log != null) log.log("Set[" + pair.key + "] = " + pair.value.toStringSafe());
-                    //    break;
-                    //case imbAttributeName.reporting_columnWidth:
-                    //case templateFieldDataTable.columnWidth:
-                    //    column.SetWidth(pair.value.imbConvertValueSafeTyped<Int32>());
-                    //    if (log != null) log.log("Set[" + pair.key + "] = " + pair.value.toStringSafe());
-                    //    break;
-                    //case templateFieldDataTable.col_caption:
-                    //case templateFieldDataTable.title:
-                    //    column.Caption = pair.value.toStringSafe(column.ColumnName.imbTitleCamelOperation(true));
-                    //    if (log != null) log.log("Set[" + pair.key + "] = " + pair.value.toStringSafe());
-                    //    break;
-                    //case imbAttributeName.basicColor:
-                    //case templateFieldDataTable.col_color:
-                    //    column.SetDefaultBackground(pair.value.toStringSafe());
-
-                    //    if (log != null) log.log("Set[" + pair.key + "] = " + pair.value.toStringSafe());
-                    //    break;
                     default:
                         if (pair.resolvedKey is imbAttributeName attName)
                         {
@@ -162,49 +140,6 @@ namespace imbSCI.Core.style.preset
             settingsPropertyEntry pce = BuildPCE(column, skipExisting, log);
             column.SetSPE(pce);
 
-            /*
-
-            foreach (var pair in definitions.keyValuePairs)
-            {
-                Boolean deploy = true;
-
-                if (skipExisting)
-                {
-                    if (column.ExtendedProperties.ContainsKey(pair.resolvedKey))
-                    {
-                        if (!column.ExtendedProperties[pair.resolvedKey].toStringSafe("").isNullOrEmpty())
-                        {
-                            deploy = false;
-                            if (log != null) log.log(" Deploy [" + pair.key + "] = false, because destination is not empty (skipExisting=" + skipExisting.ToString() + ")");
-                        }
-                    }
-                }
-
-                if (deploy)
-                {
-                    String valueCheck = pair.value.toStringSafe("");
-                    if (valueCheck.isNullOrEmpty())
-                    {
-                        if (log != null) log.log(" Deploy [" + pair.key + "] = false, because value is empty");
-                        deploy = false;
-                    }
-                }
-
-                if (deploy)
-                {
-                    if (column.ExtendedProperties.ContainsKey(pair.resolvedKey))
-                    {
-                        column.ExtendedProperties[pair.resolvedKey] = pair.value;
-                        if (log != null) log.log("Set[" + pair.key + "] = " + pair.value.toStringSafe());
-                    }
-                    else
-                    {
-                        column.ExtendedProperties.Add(pair.resolvedKey, pair.value);
-                        if (log != null) log.log("Add[" + pair.key + "] = " + pair.value.toStringSafe());
-                    }
-                }
-            }
-            */
         }
 
         /// <summary>

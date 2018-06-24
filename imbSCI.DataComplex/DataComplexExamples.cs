@@ -13,9 +13,6 @@ using System.Text;
 
 namespace imbSCI.DataComplex
 {
-    /// <summary>
-    /// Example, demonstrating data annotation with reporting, using generic, DataTable based, collection
-    /// </summary>
     /// <summary>Example, demonstrating data annotation with reporting, using generic, DataTable based, collection</summary>
     /** <example><para>Example, demonstrating data annotation with reporting, using generic, DataTable based, collection</para>
      *  <code>
@@ -112,7 +109,6 @@ namespace imbSCI.DataComplex
             DataTableForStatistics report = dataTableTypeExtended.GetReportAndSave(folderResults);
         }</code></example>
     */
-
     /// <seealso cref="imbSCI.DataComplex.data.TestMicroEnvironmentBase" />
     public class DataComplexExamples : TestMicroEnvironmentBase
     {
