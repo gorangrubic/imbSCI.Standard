@@ -82,4 +82,12 @@ namespace imbSCI.Data
     internal class NamespaceDoc
     {
     }
+
+    /// <summary>
+    /// The namespace provides the core layer of shared: enumerations, interfaces and extensions as well as a number of thread-safe collections and data structures.
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    internal class NamespaceGroupDoc
+    {
+    }
 }

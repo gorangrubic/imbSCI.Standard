@@ -58,6 +58,38 @@ namespace imbSCI.Graph
     /// <seealso cref="DOT.DotGraph" />
     /// <seealso cref="FreeGraph.freeGraph" />
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    internal class NamespaceGroupDoc
+    {
+    }
+
+    /// <summary>
+    /// <para>Library dedicated to graph data structures and graph-for-visualisation conversion</para>
+    /// </summary>
+    /// <remarks>
+    /// <para>The main datastructure of the library is <see cref="FreeGraph.freeGraph"/>, a non-hierarchical graph with weighted <see cref="FreeGraph.freeGraphNodeBase"/> nodes and <see cref="FreeGraph.freeGraphLinkBase"/> links.</para>
+    /// <list>
+    /// 	<listheader>
+    ///			<term>Key features of the library</term>
+    ///			<description></description>
+    ///		</listheader>
+    ///		<item>
+    ///			<term>Graph conversion</term>
+    ///			<description>Use <see cref="Converters.GraphConversionTools"/> extensions to convert between <see cref="imbSCI.Data.collection.graph.graphNodeBase"/> graphs, <see cref="DGML.DirectedGraph"/> and <see cref="FreeGraph.freeGraph"/></description>
+    ///		</item>
+    ///		<item>
+    ///			<term>Export for visualisation</term>
+    ///			<description>Use <see cref="DGML.DirectedGraph"/> and <see cref="DOT.DotGraph"/> to export graph structured for visualisation in Visual Studio or GraphViz</description>
+    ///		</item>
+    ///		<item>
+    ///			<term>Query and analyse</term>
+    ///			<description>There are several utility classes for quering and analysis of <see cref="FreeGraph.freeGraph"/>, like: <see cref="FreeGraph.freeGraphIsland"/>, <see cref="FreeGraph.freeGraphQueryResult"/>, <see cref="FreeGraph.freeGraphReport"/></description>
+    ///		</item>
+    /// </list>
+    /// </remarks>
+    /// <seealso cref="DGML.DirectedGraph" />
+    /// <seealso cref="DOT.DotGraph" />
+    /// <seealso cref="FreeGraph.freeGraph" />
+    [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class NamespaceDoc
     {
     }

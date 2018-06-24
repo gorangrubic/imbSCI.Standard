@@ -79,6 +79,10 @@
     <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <DocumentationFile>$(OutputPath)$(PackageId).xml</DocumentationFile>
+  </PropertyGroup>
+  
   <Target Name="CopyPackage" AfterTargets="Pack">
     <Copy SourceFiles="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" DestinationFolder="G:\imbVelesOpenSource\LocalNuGet\imbVelesSecondGeneration\" />
   </Target>
