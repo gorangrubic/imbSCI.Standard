@@ -7,6 +7,7 @@ http://blog.veles.rs
 ## API Documentation
 http://doc.veles.rs/imb-sci-api/
 
+# About
 imbSCI libraries will help you with in-code data annotation for easier reporting. It provides wide range of "exotic" data structures (like directed and free graphs, multidimensional collections, thread safe collections…), serialization, agregation and data manipulation, script driven reporting, single-model for multiple-outputs, static web site generation, generation of D3 (JavaScript) charts, text templates, folder and file Object Model with descriptive information for readme file creation, Easy file search, copy, backup, save and load (serialization) operations. Report formats covered: text, markdown, html, html-bootstrap, open document text, Excel spreadsheet, CSV, XML, JSON, R Tidy Dataset and more, CSS-syntax phraser, old-school ASCII property list read&write. Instance frequency counters, bag-of-words, TF-IDF, translation tables, several path resolvers for graph navigation and lateral node links, vast collection of extension methods, extended reflection descriptors and custom property path expressions.
 
 ## Spreadsheet reporting
