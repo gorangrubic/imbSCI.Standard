@@ -1,0 +1,528 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>imbSCI.Tools</name>
+    </assembly>
+    <members>
+        <member name="T:imbSCI.Tools.BibTex.BibTexCollection`1">
+            <summary>
+            List of typed BibTexEntryModel items
+            </summary>
+            <typeparam name="T"></typeparam>
+            <seealso cref="T:System.Collections.Generic.List`1" />
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexCollection`1.name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexCollection`1.GetIndex">
+            <summary>
+            Gets the index.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexCollection`1.#ctor(System.String,System.Collections.Generic.IEnumerable{imbSCI.Tools.BibTex.BibTexEntryBase})">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Tools.BibTex.BibTexCollection`1" /> class.
+            </summary>
+            <param name="_name">The name.</param>
+            <param name="entries">The entries.</param>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexCollection`1.Add(System.Collections.Generic.IEnumerable{imbSCI.Tools.BibTex.BibTexEntryBase},System.Boolean)">
+            <summary>
+            Adds the specified entries.
+            </summary>
+            <param name="entries">The entries.</param>
+            <param name="ReplaceOnSameKey">if set to <c>true</c> [replace on same key].</param>
+        </member>
+        <member name="T:imbSCI.Tools.BibTex.BibTexDataFile">
+            <summary>
+            BibTex data with load and export methods
+            </summary>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexDataFile.sourcePath">
+            <summary>
+            Gets or sets the source path.
+            </summary>
+            <value>
+            The source path.
+            </value>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexDataFile.name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexDataFile.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Tools.BibTex.BibTexDataFile" /> class.
+            </summary>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexDataFile.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Tools.BibTex.BibTexDataFile" /> class.
+            </summary>
+            <param name="path">The path.</param>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexDataFile.fields">
+            <summary>
+            All fields used by the entries
+            </summary>
+            <value>
+            The fields.
+            </value>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexDataFile.ConvertToModel``1(imbSCI.Core.reporting.ILogBuilder)">
+            <summary>
+            Converts all <see cref="T:imbSCI.Tools.BibTex.BibTexEntryBase" /> from the file, into dictionary. In case of repeated <see cref="P:imbSCI.Tools.BibTex.BibTexEntryModel.EntryKey" />, only the first is part of returned dictionary.
+            </summary>
+            <param name="log">The log.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexDataFile.ConvertToDataTable(System.Collections.Generic.List{System.String},imbSCI.Core.style.preset.propertyAnnotationPreset,imbSCI.Core.reporting.ILogBuilder)">
+            <summary>
+            Builds data table - from BibTex entries
+            </summary>
+            <param name="tagsFilter">List of tag names to include as columns. Include all found, if null</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexDataFile.AddField(System.String)">
+            <summary>
+            Adds the field.
+            </summary>
+            <param name="tokenKey">The token key.</param>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexDataFile.settings">
+            <summary>
+            Gets or sets the settings.
+            </summary>
+            <value>
+            The settings.
+            </value>
+        </member>
+        <member name="F:imbSCI.Tools.BibTex.BibTexDataFile._select_isBibTexEntryStart">
+            <summary>
+            Regex select BibTexEntryStart : ^@{1}([\w]+)\{([\w\d]+),
+            </summary>
+            <remarks>
+            <para>For text: example text</para>
+            <para>Selects: ex</para>
+            </remarks>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexDataFile.isBibTexEntryStart(System.String)">
+            <summary>
+            Test if input matches ^@{1}([\w]+)\{([\w\d]+),
+            </summary>
+            <param name="input">String to test</param>
+            <returns>IsMatch against _select_isBibTexEntryStart</returns>
+        </member>
+        <member name="F:imbSCI.Tools.BibTex.BibTexDataFile._select_SplitEntries">
+            <summary>
+            Regex select SplitEntries : ^@
+            </summary>
+            <remarks>
+            <para>For text: example text</para>
+            <para>Selects: ex</para>
+            </remarks>
+        </member>
+        <member name="F:imbSCI.Tools.BibTex.BibTexDataFile._select_keyAndTypeSelection">
+            <summary>
+            Regex select keyAndTypeSelectionName : ^([\w]*)\{([\w\d]*)
+            </summary>
+            <remarks>
+            <para>For text: example text</para>
+            <para>Selects: ex</para>
+            </remarks>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexDataFile._replace_keyAndTypeSelectionName(System.Text.RegularExpressions.Match)">
+            <summary>
+            Match Evaluation for keyAndTypeSelectionName : _select_keyAndTypeSelectionName
+            </summary>
+            <param name="m">Match with value to process</param>
+            <returns>For m.value "something" returns "SOMETHING"</returns>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexDataFile.UntypedEntries">
+            <summary>
+            List of BibTexEntryBase instances, loaded from the source file
+            </summary>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexDataFile.Load(System.String,imbSCI.Core.reporting.ILogBuilder)">
+            <summary>
+            Loads Bibtex file from <c>path</c>
+            </summary>
+            <param name="path">The path.</param>
+            <param name="log">The log.</param>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexDataFile.GetBibTexCode(System.Boolean,imbSCI.DataComplex.special.translationTextTable,imbSCI.Core.reporting.ILogBuilder)">
+            <summary>
+            Gets the bib tex code.
+            </summary>
+            <param name="processed">if set to <c>true</c> [processed].</param>
+            <param name="processorTable">The processor table.</param>
+            <param name="log">The log.</param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.Tools.BibTex.BibTexEntryBase">
+            <summary>
+            BibTex untyped entry
+            </summary>
+        </member>
+        <member name="F:imbSCI.Tools.BibTex.BibTexEntryBase._select_isSelectTags">
+            <summary>
+            Regex select SelectTags : ^([\w]*) = \{(.*)\},?
+            </summary>
+            <remarks>
+            <para>For text: example text</para>
+            <para>Selects: ex</para>
+            </remarks>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexEntryBase.isSelectTags(System.String)">
+            <summary>
+            Test if input matches ^([\w]*) = \{(.*)\},?
+            </summary>
+            <param name="input">String to test</param>
+            <returns>IsMatch against _select_isSelectTags</returns>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexEntryBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Tools.BibTex.BibTexEntryBase" /> class.
+            </summary>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexEntryBase.#ctor(System.String,System.String,System.String,imbSCI.DataComplex.special.translationTextTable)">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Tools.BibTex.BibTexEntryBase" /> class.
+            </summary>
+            <param name="_source">The source.</param>
+            <param name="_type">The type.</param>
+            <param name="_key">The key.</param>
+            <param name="processor">The processor.</param>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexEntryBase.Deploy(System.String,System.String,System.String,imbSCI.DataComplex.special.translationTextTable)">
+            <summary>
+            Deploys the specified source.
+            </summary>
+            <param name="_source">The source.</param>
+            <param name="_type">The type.</param>
+            <param name="_key">The key.</param>
+            <param name="processor">The processor.</param>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexEntryBase.AddTag(System.String,imbSCI.Tools.BibTex.Tag)">
+            <summary>
+            Adds the tag.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="tag">The tag.</param>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexEntryBase.UpdateSource(imbSCI.DataComplex.special.translationTextTable)">
+            <summary>
+            Updates the source.
+            </summary>
+            <param name="table">The table.</param>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexEntryBase.ProcessSource(imbSCI.DataComplex.special.translationTextTable)">
+            <summary>
+            Processes the source.
+            </summary>
+            <param name="table">The table.</param>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexEntryBase.source">
+            <summary>
+            Gets or sets the source.
+            </summary>
+            <value>
+            The source.
+            </value>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexEntryBase.type">
+            <summary>
+            Gets or sets the type.
+            </summary>
+            <value>
+            The type.
+            </value>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexEntryBase.Key">
+            <summary>
+            Gets or sets the key.
+            </summary>
+            <value>
+            The key.
+            </value>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexEntryBase.Get(System.String)">
+            <summary>
+            Tegs tag value for specified <c>_key</c>, if not defined, returns empty string
+            </summary>
+            <param name="_key">The key.</param>
+            <returns></returns>
+        </member>
+        <member name="F:imbSCI.Tools.BibTex.BibTexEntryBase._tags">
+            <summary>
+            The tags
+            </summary>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexEntryBase.Tags">
+            <summary>
+            Gets or sets the tags.
+            </summary>
+            <value>
+            The tags.
+            </value>
+        </member>
+        <member name="T:imbSCI.Tools.BibTex.BibTexEntryModel">
+            <summary>
+            Strong typed object model, with data from/for <see cref="T:imbSCI.Tools.BibTex.BibTexEntryBase" />. Inherit this class to introduce support for additional BibTex tags.
+            </summary>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexEntryModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Tools.BibTex.BibTexEntryModel" /> class.
+            </summary>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexEntryModel.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Tools.BibTex.BibTexEntryModel" /> class.
+            </summary>
+            <param name="entryKey">The entry key.</param>
+            <param name="entryType">Type of the entry.</param>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexEntryModel.#ctor(imbSCI.Tools.BibTex.BibTexEntryBase)">
+            <summary>
+            Constructs object instance with data from the entry. To enable loging, use <see cref="M:imbSCI.Tools.BibTex.BibTexEntryModel.#ctor" /> and <see cref="M:imbSCI.Tools.BibTex.BibTexEntryModel.SetFromEntry(imbSCI.Tools.BibTex.BibTexEntryBase,imbSCI.Core.reporting.ILogBuilder)" /> instead
+            </summary>
+            <param name="entry">The entry.</param>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexEntryModel.propDictionary">
+            <summary>
+            Property dictionary
+            </summary>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexEntryModel.SetFromEntry(imbSCI.Tools.BibTex.BibTexEntryBase,imbSCI.Core.reporting.ILogBuilder)">
+            <summary>
+            Sets object instance properties.
+            </summary>
+            <param name="entry">The entry.</param>
+            <param name="log">The log - if null, log is off</param>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexEntryModel.GetEntry(imbSCI.DataComplex.special.translationTextTable,imbSCI.Core.reporting.ILogBuilder)">
+            <summary>
+            Gets untyped <see cref="T:imbSCI.Tools.BibTex.BibTexEntryBase" /> object, consumed for BibTex format export
+            </summary>
+            <param name="log">The log.</param>
+            <returns>BibTex entry with data from this object instance</returns>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexEntryModel.EntryType">
+            <summary> Type of BibTex entry </summary>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexEntryModel.EntryKey">
+            <summary> Mendeley Entry Key </summary>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexEntryModel.title">
+            <summary> Entry title </summary>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexEntryModel.journal">
+            <summary> Name of publication </summary>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexEntryModel.volume">
+            <summary> Number of </summary>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexEntryModel.number">
+            <summary> Number of </summary>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexEntryModel.pages">
+            <summary> Number of </summary>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexEntryModel.issn">
+            <summary> Number of </summary>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexEntryModel.author">
+            <summary> Authors </summary>
+        </member>
+        <member name="T:imbSCI.Tools.BibTex.BibTexExamples">
+            <summary>
+            Class with example - test methods
+            </summary>
+            <see cref="M:imbSCI.Tools.BibTex.BibTexExamples.Example1_Basic" />
+            <seealso cref="T:imbSCI.DataComplex.data.TestMicroEnvironmentBase" />
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexExamples.Example1_Basic">
+            <summary>Method demonstrating basic operation of loading BibTex file</summary>
+            <example><para>Method demonstrating basic operation of loading BibTex file</para>
+                     *  <code> // Example 1: Loading BibTex file
+                        BibTexDataFile bib_1 = new BibTexDataFile("Resources\\test\\S0306457309000259.bib");
+                        // Converting BibTex data into object model dictionary
+                        System.Collections.Generic.Dictionary{string, BibTexEntryModel} model = bib_1.ConvertToModel(log);
+                        // Printing [Author : Title] to a ILogBuilder log builder
+                        foreach (var pair in model)
+                        {
+                            log.log(pair.Value.author.or("Unknown") + ": " + pair.Value.title);
+                        }
+                        </code></example>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexExamples.Example2_LoadAndExport">
+            <summary>Load BibTex file, convert data into DataTable, create Excel file without Legend information and generate full Excel report</summary>
+            <example><para>Load BibTex file, convert data into DataTable, create Excel file without Legend information and generate full Excel report</para>
+                     *  <code>
+                         // Example 2: Loading BibTex file
+                        String path = folderResources.findFile("S0306457309000259.bib", SearchOption.AllDirectories);
+
+                        // initializes bibtex data file object
+                        BibTexDataFile bib = new BibTexDataFile();
+
+                        // loads .bib or .bibtex file from path specified
+                        bib.Load(path, log);
+
+                        // converts loaded BibTex entries into DataTable, with all columns discovered in the entries
+                        DataTable dt = bib.ConvertToDataTable();
+
+                        // saves DataTable to Excel file, without adding Legend spreadsheet
+                        var finalPath = dt.serializeDataTable(Data.enums.reporting.dataTableExportEnum.excel, bib.name, folderResults, notation);
+
+                        // creates extended version of Excel file, with additional spreadsheet for Legend and other meta information
+                        var reportDataTable_ref = dt.GetReportAndSave(folderResults, notation);</code></example>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:imbSCI.Tools.BibTex.BibTexExamples.Example3_LoadAndExportToExcel_ShortWay" -->
+        <!-- Badly formed XML comment ignored for member "M:imbSCI.Tools.BibTex.BibTexExamples.Example4_UsingObjectModel" -->
+        <member name="M:imbSCI.Tools.BibTex.BibTexExamples.Example5_SpecifyFormattingManually">
+            <summary>
+            Example5s this instance.
+            </summary>
+            <example><para></para>
+                     * <code> var files = folderResources.findFiles("*.bib*", SearchOption.AllDirectories);
+                       var targetFolder = folderResults.Add("WithoutTemplate", "Without template", "Exporting Excel files without column data annotation template");
+                       BibTexTools.ExportToExcel(files, notation, log, null, targetFolder);
+                       targetFolder = folderResults.Add("WithTemplate", "With template", "Exporting Excel files with column data annotation template");
+                       // creating template from Type
+                       propertyAnnotationPreset template = new propertyAnnotationPreset(typeof(BibTexEntryModel));
+                       template.defaultItem.definitions.Add(templateFieldDataTable.columnWidth, 10);
+                       template.defaultItem.definitions.Add(templateFieldDataTable.col_color, "#FF6600");
+                       BibTexTools.ExportToExcel(files, notation, log, template, targetFolder); </code>
+                       </example>
+        </member>
+        <member name="T:imbSCI.Tools.BibTex.BibTexLoadSettings">
+            <summary>
+            Settings for BibTex file loading and preprocessing
+            </summary>
+            <seealso cref="T:imbSCI.Data.data.imbBindable" />
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexLoadSettings.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Tools.BibTex.BibTexLoadSettings" /> class.
+            </summary>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexLoadSettings.doSplitEntries">
+            <summary>
+            If true, it will process entries separately
+            </summary>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexLoadSettings.doConstructObjectModelDictionary">
+            <summary>
+            If true, it will build dictionary of object instances - after entries loaded
+            </summary>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexLoadSettings.doPreprocessSource">
+            <summary>
+            If true, it will replace LaTeX commands with UTF-8 equivalent characters
+            </summary>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexLoadSettings.doExportBibTexAfterLoad">
+            <summary>
+            If true, it will re-export BibTex file, just after being loaded and parsed
+            </summary>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexLoadSettings.doSavePreprocessedSource">
+            <summary>If true, it will save preprocessed version of the BibTex source file </summary>
+        </member>
+        <member name="T:imbSCI.Tools.BibTex.BibTexTools">
+            <summary>
+            Tools for BibTex data conversion
+            </summary>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexTools.ExportToExcel(System.Collections.Generic.IEnumerable{System.String},imbSCI.Core.data.aceAuthorNotation,imbSCI.Core.reporting.ILogBuilder,imbSCI.Core.style.preset.propertyAnnotationPreset,imbSCI.Core.files.folders.folderNode)">
+            <summary>
+            Exports all acceptable file formats, to excel tables with the same name
+            </summary>
+            <param name="filePaths">The file paths.</param>
+            <param name="author">The author.</param>
+            <param name="log">The log.</param>
+            <returns></returns>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexTools.template">
+            <summary>
+            Default data annotation template, based on <see cref="T:imbSCI.Tools.BibTex.BibTexEntryModel" />
+            </summary>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexTools.ExportToExcel(System.String,imbSCI.Core.data.aceAuthorNotation,imbSCI.Core.reporting.ILogBuilder,imbSCI.Core.style.preset.propertyAnnotationPreset,imbSCI.Core.files.folders.folderNode)">
+            <summary>
+            Loads the BibTex file and converts it to Excel
+            </summary>
+            <param name="filePath">The file path.</param>
+            <param name="author">The author.</param>
+            <param name="log">The log.</param>
+            <param name="customTemplate">Custom data annotation template, to be used for Excel file generation. If not specified, default <see cref="P:imbSCI.Tools.BibTex.BibTexTools.template" /> is used</param>
+            <returns>Extended DataTable that is written in Excel file</returns>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.BibTexTools.fileExtensions">
+            <summary>
+            Gets or sets the file extensions.
+            </summary>
+            <value>
+            The file extensions.
+            </value>
+        </member>
+        <member name="M:imbSCI.Tools.BibTex.BibTexTools.CheckExtension(System.String)">
+            <summary>
+            Checks if the extension is right
+            </summary>
+            <param name="filePath">The file path.</param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.Tools.BibTex.NamespaceDoc">
+            <summary>
+            <para>
+            Extract, Load and Transform classes for BibTex bibliographic references format.
+            </para>
+            </summary>
+            <remarks>
+            <para>
+            High-level API methods are in <see cref="T:imbSCI.Tools.BibTex.BibTexTools" />
+            </para>
+            </remarks>
+            <seealso cref="T:imbSCI.Tools.BibTex.BibTexTools" />
+        </member>
+        <member name="T:imbSCI.Tools.BibTex.Tag">
+            <summary>
+            KeyValue pair from the entry
+            </summary>
+        </member>
+        <member name="T:imbSCI.Tools.BibTex.TextProcessor">
+            <summary>
+            Preprocessing text from Bibtex file
+            </summary>
+        </member>
+        <member name="P:imbSCI.Tools.BibTex.TextProcessor.latex">
+            <summary>
+            LaTeX non-ascii characters excape translation table
+            </summary>
+        </member>
+        <member name="T:imbSCI.Tools.NamespaceGroupDoc">
+            <summary>
+            <para>
+            High-level tools for science authoring and data processing operations
+            </para>
+            </summary>
+            <remarks>
+            <para>
+            Provides toolkit classes, performing tasks that are usual part of scientific writing, publishing and data processing
+            </para>
+            </remarks>
+        </member>
+    </members>
+</doc>

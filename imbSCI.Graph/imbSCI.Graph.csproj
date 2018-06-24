@@ -1,0 +1,133 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net40;net45</TargetFrameworks>
+    <ApplicationIcon>imbSCI.ico</ApplicationIcon>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>imbSCI.Graph.Standard</PackageId>
+    <Version>0.3.20</Version>
+    <Title>imbSCI.Graph - Converters, data structures, rendering</Title>
+    <Summary>
+      Conversion between imbSCI directed graph, undirected (free graph) graph, SVG rendering, import-export for Dia (software), Draw.io (diagramming app), Directed Graph Markup Language (DGML) and DOT graph language.
+    </Summary>
+    <PackageIconUrl>http://doc.veles.rs/imbSCI.ico</PackageIconUrl>
+    <PackageProjectUrl>http://blog.veles.rs/</PackageProjectUrl>
+    <PackageLicenseUrl>http://doc.veles.rs/LICENCE.txt</PackageLicenseUrl>
+    <Copyright>Copyright (C) 2017-2018 imbVeles - GNU GENERAL PUBLIC LICENSE V3.0</Copyright>
+    <Description>imbSCI.Graph is an extension package for imbSCI library, extending graph classes with undirected graph object model and implementation for DGML, Dia, MXGraph (Draw.io) and DOT graph formats. Supports SVG rendering of charts (histograms, pie, bar and linear charts - in 2D and 3D.) and graph structures.
+</Description>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageReleaseNotes>Migrated to .NET Standard 2.0! Targets: .NET 4.0*, .NET 4.5 and .NET Core 2.0 i.e ready for use in cross-platform application development. * Purpose of the .NET 4.0 target is to provide compatibility with Windows XP, that is still popular on console PCs of older CNC machines and industrial controlers. It will be supported "forever", as it is part of the mission.
+</PackageReleaseNotes>
+    <PackageTags>Directed Graph Markup Language, DGML, DOT graph language, graphviz, graph data structure, Draw.io, MXGraph, JGraph, Dia, DiaShape, Charts, SVG</PackageTags>
+    <RepositoryUrl>https://github.com/gorangrubic/imbSCI</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <Authors>Goran Grubić</Authors>
+    <Company>imbVeles</Company>
+    <AssemblyVersion>0.3.1</AssemblyVersion>
+    <FileVersion>0.3.1</FileVersion>
+    <Product>imbSCI.Graph.Standard</Product>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <!-- .NET Standard 2.0 references, compilation flags and build options -->
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
+    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net40'">
+    <DefineConstants>NET40</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net45'">
+    <DefineConstants>NET45;NETFULL</DefineConstants>
+  </PropertyGroup>
+
+
+  <PropertyGroup>
+    <DocumentationFile>$(OutputPath)$(PackageId).xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <ShouldCreateLogs>True</ShouldCreateLogs>
+    <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
+    <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
+    <UpdateAssemblyFileVersion>False</UpdateAssemblyFileVersion>
+    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
+    <UpdatePackageVersion>True</UpdatePackageVersion>
+    <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
+    <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <ShouldCreateLogs>True</ShouldCreateLogs>
+    <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
+    <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
+    <UpdateAssemblyFileVersion>False</UpdateAssemblyFileVersion>
+    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
+    <UpdatePackageVersion>True</UpdatePackageVersion>
+    <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
+    <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
+  </PropertyGroup>
+
+
+
+  <ItemGroup>
+    <Compile Remove="MXGraph\layout\mxCircleLayout.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="resources\graph\Charts.xslt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="imbSCI.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\graph\Charts.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="SVG\Web\Resources\" />
+    <Folder Include="VEGA\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="MXGraph\layout\mxCircleLayout.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+   
+    <PackageReference Include="System.ComponentModel.Annotations">
+      <Version>4.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Drawing.Primitives">
+      <Version>4.3.0</Version>
+    </PackageReference>
+   <!-- <PackageReference Include="WinInsider.System.Windows.Primitives">
+      <Version>1.0.0</Version>
+    </PackageReference>-->
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="System.ComponentModel.Annotations">
+      <Version>4.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Drawing.Primitives">
+      <Version>4.3.0</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\imbSCI.Core\imbSCI.Core.csproj" />
+  </ItemGroup>
+
+  <Target Name="CopyPackage" AfterTargets="Pack">
+    <Copy SourceFiles="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" DestinationFolder="G:\imbVelesOpenSource\LocalNuGet\imbVelesSecondGeneration\" />
+  </Target>
+
+</Project>

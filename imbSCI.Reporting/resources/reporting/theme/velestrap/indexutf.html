@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{{page_title}}}</title>
+
+    <link rel="stylesheet" href="{{{root_relpath}}}include/bootstrap.css" />
+    <link rel="stylesheet" href="{{{root_relpath}}}include/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{{root_relpath}}}include/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="{{{root_relpath}}}include/mermaid.css" />
+
+    <script src="{{{root_relpath}}}include/jquery-3.2.0.min.js"></script>
+    <script src="{{{root_relpath}}}include/bootstrap.min.js"></script>
+    <script src="{{{root_relpath}}}include/showdown.min.js"></script>
+    <script src="{{{root_relpath}}}include/showdown-prettify.min.js"></script>
+    <script src="{{{root_relpath}}}include/d3.js"></script>
+    <script src="{{{root_relpath}}}include/mermaid.min.js"></script>
+    <script src="{{{root_relpath}}}include/bootmark.min.js"></script>
+</head>
+<body>
+    <header style="z-index:100;">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">imbVeles</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{{root_relpath}}}">Home</a></li>
+                        <li><a href="{{{root_relpath}}}/sampleProcessReport">Test</a></li>
+                        <li><a href="#">Data set</a></li>
+                        <li><a href="{{{root_relpath}}}/sampleProcessReport">Process reports</a></li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profiles <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Web sites</a></li>
+                                <li><a href="#">Web pages</a></li>
+                                <li><a href="#">Company SP</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Knowledge <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a>OWL ontologies</a></li>
+                                <li><a href="#">Lexicon</a></li>
+                                <li><a href="#">Companies</a></li>
+                                <li><a href="#">Technology</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a>Knowledge bases</a></li>
+                                <li><a href="#">Lexicon</a></li>
+                                <li><a href="#">Companies</a></li>
+                                <li><a href="#">Technology</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Resources<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Dictionary</a></li>
+                                <li><a href="#">Elements</a></li>
+                                <li><a href="#">Lexicon</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">External language resources</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">CBS web service</a></li>
+                                <li><a href="#">ABR web service</a></li>
+                                <li><a href="#">KOPLAS CRM</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Logs<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Init</a></li>
+                                <li><a href="#">WSP execution</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Sample filtering</a></li>
+                                <li><a href="#">CSP extraction</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">CSB->CSB</a></li>
+                                <li><a href="#">ABR->CSB</a></li>
+                                <li><a href="#">TCH->CSB</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Global</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right navbar-collapse">
+
+<li><a href="#">Back</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Files <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </header>
+
+    <div id="md">
+    </div>
+
+    <div class="bootmark"
+         data-css="{{{root_relpath}}}include/bootstrap.css"
+         data-html="{
+			theme:'unity',
+			indent: true
+		}">
+## Footer
+    </div>
+
+    <script>
+	//console.log("Updated DOM is empty");
+
+	//var md = new showdown.Converter({ extensions: ['katex-latex'] });
+
+	function render() {
+			$output.html(
+				md.makeHtml(
+					$input.val()
+				)
+			);
+	}
+
+	/*
+	function mdModified(event) {
+		var eventDom = event.target;
+
+		if (eventDom.childElementCount > 0) {
+console.log("dom has children" );
+			if (!eventDom.innerText) {
+				console.log("innerHtmlEmpty" );
+
+			} else {
+
+			console.log("innerHtml:" + eventDom.innerText);
+				var html = md.makeHtml(eventDom.innerText);
+				$("#md").html(html);
+
+				//eventDom.html(html);
+
+			}
+		} else {
+			console.log("Updated DOM is empty");
+		}
+	}
+	*/
+//	$("body").on('DOMNodeInserted', "#md",mdModified);
+
+/*
+		var mdc = new showdown.Converter({
+		parseImgDimensions: true,
+				simplifiedAutoLink: true,
+				literalMidWordUnderscores: true,
+				strikethrough: true,
+				tables: true,
+				tablesHeaderId: true,
+				tasklists: true,
+		extensions: ['prettify','katex-latex']
+		});*/
+	//var md = new showdown.Converter({ extensions: ['katex-latex'] });
+
+		// define options. options in individual elements override these
+		// these do not affect the live demo
+		/*
+			window.katex.config = {
+				displayMode: true,
+				throwOnError: true, //allows katex to fail silently
+				errorColor: '#00c2c9'
+			}
+		*/
+		//var converter = new showdown.Converter({extensions: ['katex-latex']});
+
+		//var show = bm.showdown;
+
+		//show.extension('katex-latex',converter);
+
+		$('#md').bootmark({
+		    src: '{{{page_name}}}.md readme_directory.md',
+			join: " --- 		\r\n *Included content*  \r\n   \r\n ---",
+			css: "{{{root_relpath}}}include/bootmark.min.css",
+			html: {
+				//prettifyTheme: 'tomorrow-night-eighties',
+				theme:'journal',
+				prettify: false,
+				indent: true,
+				toc:true,
+				tocTitle: 'Log File',
+				credit:false
+			},
+			showdown: {
+				parseImgDimensions: true,
+				simplifiedAutoLink: true,
+				literalMidWordUnderscores: true,
+				strikethrough: true,
+				tables: true,
+				tablesHeaderId: true,
+				tasklists: true,
+				pedantic: true,
+				gfm: true,
+				sanitize: false,
+				smartLists: true,
+				smartypants: true,
+				extensions: ['katex-latex']	}});
+
+//var bm = $('#md').bootmark;
+			//{
+				//parseImgDimensions: true,
+				//simplifiedAutoLink: true,
+				//literalMidWordUnderscores: true,
+				//strikethrough: true,
+				//tables: true,
+				//tablesHeaderId: true,
+				//tasklists: true,
+				//katex-latex: true,
+
+			//	extensions: ['katex-latex']
+			//}
+		//});
+
+		//window.katex.render(document.body);
+
+		//how to use katex-latex without bootmark
+
+			//
+
+			 //var $output = $('#md');
+			 /*
+			function render() {
+				$output.html(
+					md.makeHtml(
+						$input.val()
+					)
+				);
+			}
+
+			render();
+			*/
+		// sandboxed live demo
+		/*
+		$(function() {
+	    var $input = $( document.getElementById("sandbox-in") );
+	    var $output = $( document.getElementById("sandbox-out") );
+
+			//how to use katex-latex without bootmark
+
+	    function render() {
+				$output.html(
+					md.makeHtml(
+						$input.val()
+					)
+				);
+	    }
+
+	    $input.bind('input propertychange', render);
+
+	    render();
+		*/
+    </script>
+</body>
+</html>

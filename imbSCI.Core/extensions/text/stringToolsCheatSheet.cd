@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="imbCore.stringTools.imbStringCommonTools">
+    <Position X="1" Y="0.75" Width="3.75" />
+    <Members>
+      <Field Name="_editorTag" Hidden="true" />
+      <Field Name="_indexBlok" Hidden="true" />
+      <Field Name="_multiOpRe" Hidden="true" />
+      <Field Name="_multuTag" Hidden="true" />
+      <Field Name="_numOnly" Hidden="true" />
+      <Field Name="_specialMarks" Hidden="true" />
+      <Property Name="specialMarks" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAEACQAgIAAAACAYCAAIAwAAAASwABEEEAAgCAAAKAA=</HashCode>
+      <FileName>stringTools\imbStringCommonTools.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="imbCore.stringTools.imbUrlOps">
+    <Position X="5" Y="0.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAICAAAAAAAAABAAAAAAAAAACAwAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stringTools\imbUrlOps.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="imbCore.stringTools.imbStringExtensions">
+    <Position X="5" Y="5" Width="3.25" />
+    <Members>
+      <Field Name="_camelOps" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAEAAAACAAAAAQAAAAAAAAAAgAAgAAAAAAgAAAAAAAE=</HashCode>
+      <FileName>stringTools\imbStringExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="imbCore.stringTools.imbStringIndexWorks">
+    <Position X="5" Y="3" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AEgAAACAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>stringTools\imbStringIndexWorks.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="imbCore.stringTools.imbStringOperations">
+    <Position X="8.5" Y="0.75" Width="3.75" />
+    <Members>
+      <Field Name="_cyrToLat" Hidden="true" />
+      <Property Name="cyrToLat" Hidden="true" />
+      <Field Name="mySqlTypeVsSystemType" Hidden="true" />
+      <Field Name="systemTypeVsMySqlType" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>gAAAIFAQRggABCoAiAAAAkIBwAAAAFEAAAgABAAIAAI=</HashCode>
+      <FileName>stringTools\imbStringOperations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="imbCore.stringTools.imbNLPbasic">
+    <Position X="12.25" Y="0.75" Width="3" />
+    <Members>
+      <Field Name="_sentenceSeparators" Hidden="true" />
+      <Field Name="_tokenSeparators" Hidden="true" />
+      <Property Name="sentenceSeparators" Hidden="true" />
+      <Property Name="tokenSeparators" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>EAAABAGCAgAAAAgBAABAAAAAABAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>stringTools\imbNLPbasic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="imbCore.stringTools.imbNLPsettings">
+    <Position X="15.25" Y="0.75" Width="2.75" />
+    <Members>
+      <Field Name="_minLength" Hidden="true" />
+      <Field Name="_onlyUnique" Hidden="true" />
+      <Field Name="_splitLevel" Hidden="true" />
+      <Field Name="_toLowerCase" Hidden="true" />
+      <Field Name="_trimTokens" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AACAAAAASAEAAAAAAAAQAAAAAAQCAAAAAAAIQAAAAAA=</HashCode>
+      <FileName>stringTools\imbNLPsettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="imbCore.process.collectionExtendTools">
+    <Position X="12.25" Y="3.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAgAAAAAAAAAAAAIAAAAAAAAAgA=</HashCode>
+      <FileName>process\collectionExtendTools.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="imbCore.process.imbDataExecutor">
+    <Position X="15.25" Y="2.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAEIABAAAQBAABEAAAQAAAABCEAgAAABAAQAAAAkA=</HashCode>
+      <FileName>process\imbDataExecutor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="imbCore.process.imbDataExecutorEngine">
+    <Position X="12.25" Y="5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>process\imbDataExecutorEngine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

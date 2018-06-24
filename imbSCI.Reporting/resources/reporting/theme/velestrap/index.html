@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+{{{startOfFile}}}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{{page_title}}}</title>
+    <link rel="stylesheet" href="{{{root_relpath}}}include/bootstrap.css" />
+    <link rel="stylesheet" href="{{{root_relpath}}}include/mermaid.forest.css" />
+    <link rel="stylesheet" href="{{{root_relpath}}}include/katex.css" />
+
+    <link rel="stylesheet" href="{{{root_relpath}}}include/c3.css" />
+
+    <script src="{{{root_relpath}}}include/jquery-3.2.0.min.js" charset="utf-8"></script>
+    <script src="{{{root_relpath}}}include/bootstrap.min.js" charset="utf-8"></script>
+
+    <script src="{{{root_relpath}}}include/showdown-prettify.min.js" charset="utf-8"></script>
+    <script src="{{{root_relpath}}}include/ASCIIMathTeXImg.js" charset="utf-8"></script>
+    <script src="{{{root_relpath}}}include/showdown.min.js" charset="utf-8"></script>
+
+    <script src="{{{root_relpath}}}include/d3.js" charset="utf-8"></script>
+    <!-- <script src="{{{root_relpath}}}include/mermaid.js" charset="utf-8"></script> -->
+    <script src="{{{root_relpath}}}include/bootmark.min.js" charset="utf-8"></script>
+    <script src="{{{root_relpath}}}include/katex.js" charset="utf-8"></script>
+    <script src="{{{root_relpath}}}include/katex-latex.js" charset="utf-8"></script>
+
+    <script src="{{{root_relpath}}}include/d3.v3.min.js" charset="utf-8"></script>
+    <script src="{{{root_relpath}}}include/c3.min.js" charset="utf-8"></script>
+</head>
+<body style="padding-top:60px">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">imbVeles</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav">
+                <li><a href="{{{root_relpath}}}index.html">Home</a></li>
+                <li><a href="{{{root_relpath}}}testdocs/01TheModel.html">The Experiment</a></li>
+                <li><a href="{{{root_relpath}}}testdocs/02TheSpiders.html">The Spiders</a></li>
+                <li><a href="{{{root_relpath}}}testdocs/03TheWorkflow.html">The Workflow</a></li>
+                <li><a href="{{{root_relpath}}}testdocs/04TheStageControl.html">The Stage Control</a></li>
+                <li><a href="{{{root_relpath}}}testdocs/05TheQuantification.html">The Calculus</a></li>
+
+                <li><a href="{{{root_relpath}}}{{{report_folder}}}/dataSetReport/index.html">DataSet Report</a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Spiders<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{{root_relpath}}}testdocs/02TheSpiders.html">About</a></li>
+                        <li><a href="{{{root_relpath}}}{{{report_folder}}}/index.html">Results navigation</a></li>
+
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-header">BlindSpider</li>
+                        <li><a href="{{{root_relpath}}}{{{report_folder}}}/BlindSpider/index.html">Results</a></li>
+                        <li><a href="{{{root_relpath}}}testdocs/02aBlindSpider.html">Description</a></li>
+                        <li><a href="{{{root_relpath}}}{{{report_folder}}}/BlindSpiderSpecifications/index.html">Rules and settings</a></li>
+                        <li class="dropdown-header">TemplateSpuder</li>
+                        <li><a href="{{{root_relpath}}}{{{report_folder}}}/TemplateSpider/index.html">Results</a></li>
+                        <li><a href="{{{root_relpath}}}testdocs/02bTemplateSpider.html">Description</a></li>
+                        <li><a href="{{{root_relpath}}}{{{report_folder}}}/TemplateSpiderSpecifications/index.html">Rules and settings</a></li>
+                        <li class="dropdown-header">BasicSemanticSpider</li>
+                        <li><a href="{{{root_relpath}}}{{{report_folder}}}/BasicSemanticSpider/index.html">Results</a></li>
+                        <li><a href="{{{root_relpath}}}testdocs/02cBasicSemanticSpider.html">Description</a></li>
+                        <li><a href="{{{root_relpath}}}{{{report_folder}}}/BasicSemanticSpiderSpecifications/index.html">Rules and settings</a></li>
+                        <li class="dropdown-header">DomainSemanticSpider</li>
+                        <li><a href="{{{root_relpath}}}{{{report_folder}}}/DomainSemanticSpider/index.html">Results</a></li>
+                        <li><a href="{{{root_relpath}}}testdocs/02dDomainSemanticSpider.html">Description</a></li>
+                        <li><a href="{{{root_relpath}}}{{{report_folder}}}/DomainSemanticSpiderSpecifications/index.html">Rules and settings</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="{{{root_relpath}}}testdocs/03TheWorkflow.html">Key Pages workflow</a></li>
+                    </ul>
+                </li>
+                {{{html_mainnav}}}
+
+                <!--<li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Knowledge <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">OWL ontologies</li>
+                        <li><a href="#">Lexicon</a></li>
+                        <li><a href="#">Companies</a></li>
+                        <li><a href="#">Technology</a></li>
+                        <li class="dropdown-header">Knowledge bases</li>
+                        <li><a href="#">Lexicon</a></li>
+                        <li><a href="#">Companies</a></li>
+                        <li><a href="#">Technology</a></li>
+                    </ul>
+                </li>-->
+
+                <!--<li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Resources<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Dictionary</a></li>
+                        <li><a href="#">Elements</a></li>
+                        <li><a href="#">Lexicon</a></li>
+                        <li class="dropdown-header">External language resources</li>
+                        <li><a href="#">CBS web service</a></li>
+                        <li><a href="#">ABR web service</a></li>
+                        <li><a href="#">KOPLAS CRM</a></li>
+                    </ul>
+                </li>-->
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Logs<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        {{{logs}}}
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right navbar-collapse">
+
+                <li><a href="../index.html">Back</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Docs<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{{root_relpath}}}docs/help_on_report.html">About the report</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="{{{root_relpath}}}docs/csharp_and_docnet.html">C# and .NET</a></li>
+                        <li><a href="{{{root_relpath}}}docs/csharp_libraries.html">C# libraries and tools</a></li>
+                        <li><a href="{{{root_relpath}}}docs/javascriptlibs_and_markdown.html">JS libs and markdown</a></li>
+                        <li><a href="{{{root_relpath}}}docs/web_technologies.html">Web technologies</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="{{{root_relpath}}}docs/owl_and_triplestors.html">OWL and triplestors</a></li>
+                        <li><a href="{{{root_relpath}}}docs/semanticweb_tools.html">SemanticWeb Tools</a></li>
+                        <li><a href="{{{root_relpath}}}docs/rdf_and_sparql.html">RDF and Sparql</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="{{{root_relpath}}}docs/servers.html">Servers</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="{{{root_relpath}}}docs/imbveles.html">imbVeles</a></li>
+                        <li><a href="{{{root_relpath}}}docs/imbveles_apiabout.html">imbVeles API</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="{{{root_relpath}}}docs/sci_ref_articles.html">Referenced articles</a></li>
+                        <li><a href="{{{root_relpath}}}docs/sci_rel_articles.html">Relevant articles</a></li>
+                        <li><a href="{{{root_relpath}}}docs/about.html">About</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+        <bootmark css="{{{root_relpath}}}include/bootstrap.css"
+                  html="{
+                theme:'sandstone',
+                prettify: true,
+                prettifyTheme: 'tomorrow-night-eighties',
+                indent: true,
+                toc: true,
+                tocLimit: 3,
+                tocTitle: '{{{page_title}}}',
+                credit: false
+              }"
+                  showdown="{
+                parseImgDimensions: true,
+                simplifiedAutoLink: true,
+                literalMidWordUnderscores: true,
+                strikethrough: true,
+                tables: true,
+                tablesHeaderId: true,
+                tasklists: true,
+                pedantic: true,
+                gfm: true,
+                sanitize: true,
+                smartLists: true,
+                smartypants: true,
+                ghCompatibileHeaderId: true,
+                ghCodeBlocks: true,
+                customcontainers: true,
+                listextras: true,
+                medialinks: true,
+                figures: true,
+                footers: true,
+                citations: true,
+                abbrevations: true,
+                mathematics: true,
+                extensions: ['katex-latex']
+              }">
+
+<div class="container-fluid" markdown="1">
+
+{{{html_toolbar}}}
+
+{{{main}}}
+</div>
+
+<div class="container-fluid" markdown="1">
+
+{{{html_footer}}}
+</div>
+        </bootmark>
+
+        <script src="{{{root_relpath}}}include/mermaid.js"></script>
+        <script>
+            var config = {
+                startOnLoad: false,
+                flowchart: {
+                    useMaxWidth: true,
+                    htmlLabels: false
+                }
+            };
+            mermaid.initialize(config);
+            mermaid.init(config, undefined);
+        </script>
+</body>
+{{{bottom_includes}}}
+</html>
+{{{endOfFile}}}

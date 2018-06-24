@@ -1,0 +1,97 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net45;net40</TargetFrameworks>
+    <ApplicationIcon>imbVeles48.ico</ApplicationIcon>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>imbSCI.Data.Standard</PackageId>
+    <Version>0.3.5</Version>
+    <Title>imbSCI.Data - Coding for Science - Base library </Title>
+    <Summary>Base layer of imbVeles Framework's imbSCI .NET Standard 2.0 libraries. 
+    The library provides the core layer of shared: enumerations, interfaces and extensions as well as a number of thread-safe collections and data structures.</Summary>
+    <summary>
+      Base layer of imbVeles Framework's imbSCI .NET Standard 2.0 libraries.
+      The library provides the core layer of shared: enumerations, interfaces and extensions as well as a number of thread-safe collections and data structures.
+    </summary>
+    <PackageIconUrl>http://doc.veles.rs/imbSCI.ico</PackageIconUrl>
+    <PackageProjectUrl>http://blog.veles.rs/</PackageProjectUrl>
+    <PackageLicenseUrl>http://doc.veles.rs/LICENCE.txt</PackageLicenseUrl>
+    <Copyright>Copyright (C) 2017-2018 imbVeles - GNU GENERAL PUBLIC LICENSE V3.0</Copyright>
+    <Description>Base library of imbSCI - Coding for Science - library, part of imbVeles framework.  The library provides the core layer of shared: enumerations, interfaces and extensions as well as a number of thread-safe collections and data structures. Here are thread-safe multidimensional collections and dictionaries consumed on many layers of the imbSCI and imbACE frameworks.</Description>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageReleaseNotes>Introduces new directed graph structures and related utility classes:
++ graphAnalysis - utility class for comparison between two graphs
++ graphMultiRoot - hidden root node (not seen in path) supporting multiple roots/trees/graphs
+-------
+Migrated to .NET Standard 2.0! Targets: .NET 4.0*, .NET 4.5 and .NET Core 2.0 i.e ready for use in cross-platform application development. 
+Purpose of the * .NET 4.0 target is to provide compatibility with Windows XP, that is still popular on console PCs of older CNC machines and industrial controlers. It will be supported "forever", as it is part of the mission.</PackageReleaseNotes>
+    <PackageTags>multi-dimensional collection, graph, layer, imbSCI</PackageTags>
+    <RepositoryUrl>https://github.com/gorangrubic/imbSCI</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <Authors>Goran Grubić</Authors>
+    <Company>imbVeles</Company>
+    <AssemblyVersion>0.3.1</AssemblyVersion>
+    <FileVersion>0.3.1</FileVersion>
+    <Product>imbSCI.Data.Standard</Product>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <RootNamespace>imbSCI.Data</RootNamespace>
+    <AssemblyName>imbSCI.Data</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
+
+
+
+  <!-- .NET Standard 2.0 references, compilation flags and build options -->
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
+    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net40'">
+	<DefineConstants>NET40</DefineConstants>
+</PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net45'">
+    <DefineConstants>NET45;NETFULL</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DocumentationFile>$(OutputPath)$(PackageId).xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <ShouldCreateLogs>True</ShouldCreateLogs>
+    <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
+    <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
+    <UpdateAssemblyFileVersion>False</UpdateAssemblyFileVersion>
+    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
+    <UpdatePackageVersion>True</UpdatePackageVersion>
+    <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
+    <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <ShouldCreateLogs>True</ShouldCreateLogs>
+    <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
+    <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
+    <UpdateAssemblyFileVersion>False</UpdateAssemblyFileVersion>
+    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
+    <UpdatePackageVersion>True</UpdatePackageVersion>
+    <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
+    <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
+  </PropertyGroup>
+
+  
+
+  <ItemGroup>
+    <Content Include="imbVeles48.ico" />
+  </ItemGroup>
+
+
+  <Target Name="CopyPackage" AfterTargets="Pack">
+    <Copy SourceFiles="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" DestinationFolder="G:\imbVelesOpenSource\LocalNuGet\imbVelesSecondGeneration\" />
+  </Target>
+
+</Project>

@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="Block" Category="lateralTop" Bounds="-325.786666870117,-175.975074185181,50,25.96" Label="block" UseManualLocation="True" />
+    <Node Id="Dry" Bounds="309,-363.5399,50,25.96" Label="dry" UseManualLocation="True" />
+    <Node Id="Dry1" Bounds="315.99,-274.24,50,25.96" Label="dry" UseManualLocation="True" />
+    <Node Id="End" Category="end" Bounds="174.000000002539,-432.5,50,25.96" Label="end" UseManualLocation="True" />
+    <Node Id="End1" Category="end" Bounds="-35,-414.539900001992,50,25.96" Label="end" UseManualLocation="True" />
+    <Node Id="End2" Category="end" Bounds="-219.446666667223,-450.279880981445,50,25.96" Label="end" UseManualLocation="True" />
+    <Node Id="End3" Category="end" Bounds="-253.446666666923,-280.24,50,25.96" Label="end" UseManualLocation="True" />
+    <Node Id="Lateral" Bounds="255,-216.5,52.5433333333333,25.96" Label="lateral" UseManualLocation="True" />
+    <Node Id="Lateral1" Bounds="98,-261.5,52.5433333333333,25.96" Label="lateral" UseManualLocation="True" />
+    <Node Id="Lateral2" Bounds="192,-312.5,52.5433333333333,25.96" Label="lateral" UseManualLocation="True" />
+    <Node Id="Lateral3" Bounds="-17,-298.5,52.5433333333333,25.96" Label="lateral" UseManualLocation="True" />
+    <Node Id="Lateral4" Category="lateralTop" Bounds="-128.01,-323.279900000496,52.5433333333333,25.96" Label="lateral" UseManualLocation="True" />
+    <Node Id="LateralLast" Category="lateralTop" Bounds="-2.8421709430404E-14,-358.579800001992,52.5433333333333,25.96" Label="lateral" UseManualLocation="True" />
+    <Node Id="Leaf" Category="leaf" Bounds="279,-475.4601,50,25.96" Label="leaf" UseManualLocation="True" />
+    <Node Id="Leaf1" Category="leaf" Bounds="254,-419.5,50,25.96" Label="leaf" UseManualLocation="True" />
+    <Node Id="Leaf2" Category="leaf" Bounds="130,-492.5,50,25.96" Label="leaf" UseManualLocation="True" />
+    <Node Id="Leaf3" Category="leaf" Bounds="4.99999999999997,-482.5,50,25.96" Label="leaf" UseManualLocation="True" />
+    <Node Id="Leaf4" Category="leaf" Bounds="-80.4466666685667,-470.500004272461,50,25.96" Label="leaf" UseManualLocation="True" />
+    <Node Id="Leaf5" Category="leaf" Bounds="-331.01,-400.24,50,25.96" Label="leaf" UseManualLocation="True" />
+    <Node Id="Leaf6" Category="leaf" Bounds="-362.01,-304.24,50,25.96" Label="leaf" UseManualLocation="True" />
+    <Node Id="Leaf7" Category="leaf" Bounds="-189.01,-506.24,50,25.96" Label="leaf" UseManualLocation="True" />
+    <Node Id="Leaf8" Category="leaf" Bounds="-326.01,-498.24,50,25.96" Label="leaf" UseManualLocation="True" />
+    <Node Id="Leafed" Category="leafed" Bounds="91.6100003051758,-426.539900002096,52.39,25.96" Label="leafed" UseManualLocation="True">
+      <Category Ref="end" />
+    </Node>
+    <Node Id="Leafed1" Category="leafed" Bounds="-222.446666666723,-379.24,52.39,25.96" Label="leafed" UseManualLocation="True">
+      <Category Ref="end" />
+    </Node>
+    <Node Id="Main" Bounds="56,-73.89995,50,25.96" Label="main" UseManualLocation="True" />
+    <Node Id="Main1" Bounds="165.776669514974,-176.499996643066,50,25.96" Label="main" UseManualLocation="True" />
+    <Node Id="Paragraph" Category="end" Bounds="-325.728330078125,-120.014974185181,74.63,25.96" Label="paragraph" UseManualLocation="True" />
+    <Node Id="Root" Bounds="-38.2816666666667,-12.98,50,25.96" Label="root" />
+  </Nodes>
+  <Links>
+    <Link Source="Block" Target="Paragraph" Bounds="-297.916659781311,-150.015079040527,4.69026402960719,21.2123612313534" />
+    <Link Source="End" Target="Leaf" Bounds="223.990019078562,-448.847515311112,46.6901936700432,19.1030037060279" />
+    <Link Source="End" Target="Leaf1" Bounds="224,-415.457502937317,21.1165254634958,3.43143651556227" />
+    <Link Source="End1" Target="Leaf3" Bounds="-2.36022417109904,-448.783762679047,20.1552777406699,34.2438719319767" />
+    <Link Source="End1" Target="Leaf4" Bounds="-39.2315105027804,-437.553699890077,18.690114208251,23.0138091430068" />
+    <Link Source="End2" Target="Leaf7" Bounds="-187.386845673708,-472.373775610821,12.0168481818094,22.0938946293756" />
+    <Link Source="End2" Target="Leaf8" Bounds="-268.03854835612,-470.420800375471,48.8275443552939,21.9754254586561" />
+    <Link Source="End3" Target="Leaf6" Bounds="-303.222175968229,-283.790554199538,49.7755130653974,11.0038307492831" />
+    <Link Source="Lateral" Target="Dry1" Bounds="294.696397494975,-242.024113268764,26.3986421077624,25.5241166256974" />
+    <Link Source="Lateral1" Target="Lateral2" Bounds="148.099675970571,-282.300068026055,38.4332925480389,20.8521055313828" />
+    <Link Source="Lateral1" Target="Lateral3" Bounds="44.1108149026906,-274.310882741453,53.8891850973094,17.3382595530474" />
+    <Link Source="Lateral2" Target="Dry" Bounds="244.173258485692,-335.97402424283,56.7545942024146,25.0305930207107" />
+    <Link Source="Lateral3" Target="Lateral4" Bounds="-66.6828472340901,-302.474736141312,49.6828472340901,11.0903160634238" />
+    <Link Source="Lateral3" Target="LateralLast" Bounds="12.9444485333287,-323.959805215411,7.20403011740439,25.4598052154107" />
+    <Link Source="Lateral4" Target="End3" Bounds="-194.924869673499,-301.376019034375,66.9148696734994,22.7294423078028" />
+    <Link Source="Lateral4" Target="Leafed1" Bounds="-166.584854726231,-348.694672074389,42.9240615835285,25.4147720738933" />
+    <Link Source="LateralLast" Target="End1" Bounds="3.30842668917024,-381.027590093662,14.5499899797783,22.4477900916706" />
+    <Link Source="LateralLast" Target="Leafed" Bounds="43.7540251744632,-395.214811374316,49.3425579929261,36.6350113723245" />
+    <Link Source="Leafed" Target="End" Bounds="144.000000305176,-417.02601312154,21.0241493485831,1.54327388120265" />
+    <Link Source="Leafed" Target="Leaf2" Bounds="125.124441847171,-458.700519380255,18.1354216866562,32.1606193781595" />
+    <Link Source="Leafed1" Target="End2" Bounds="-195.921856290863,-415.322784685419,0.916801117175396,36.0827901785834" />
+    <Link Source="Leafed1" Target="Leaf5" Bounds="-272.170342296986,-380.785476341718,49.723686718373,9.51360645726663" />
+    <Link Source="Main" Target="Main1" Bounds="94.8879194907404,-144.394593993406,75.4255747349074,70.4946454155247" />
+    <Link Source="Main1" Target="Lateral" Bounds="215.606775387016,-188.437618240288,31.5428970215962,13.9423825540605" />
+    <Link Source="Main1" Target="Lateral1" Bounds="139.973280050319,-228.451777563202,40.6476847249021,51.9517809201357" />
+    <Link Source="Root" Target="Main" Bounds="6.80659724906757,-43.0555404615059,46.5458701231951,30.0755404615059" />
+  </Links>
+  <Categories>
+    <Category Id="end" Label="leaf" IsTag="True" />
+    <Category Id="lateralTop" Label="lateralTop" IsTag="True" />
+    <Category Id="leaf" Label="leaf" IsTag="True" />
+    <Category Id="leafed" Label="leafed" IsTag="True" />
+  </Categories>
+  <Properties>
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="IsTag" DataType="System.Boolean" />
+    <Property Id="Label" Label="Label" Description="Displayable label of an Annotatable object" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+  </Properties>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="end" ValueLabel="True">
+      <Condition Expression="HasCategory('end')" />
+      <Setter Property="Background" Value="#FFFFBF00" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="lateralTop" ValueLabel="True">
+      <Condition Expression="HasCategory('lateralTop')" />
+      <Setter Property="Background" Value="#FF8900FF" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="leaf" ValueLabel="True">
+      <Condition Expression="HasCategory('leaf')" />
+      <Setter Property="Background" Value="#FF03A644" />
+    </Style>
+  </Styles>
+</DirectedGraph>

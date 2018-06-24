@@ -1,0 +1,134 @@
+﻿/* Template for Color Pallete block */
+.color{{{color_name}}} {
+    color:{{{color_foreground0}}};                     
+}
+
+.color{{{color_name}}} a {
+    color:{{{color_foreground0}}};
+  /*  background-color:{{{color_background0}}};*/
+}
+
+.color{{{color_name}}} a:hover {
+    color:{{{color_foreground2}}};
+    /*background-color:{{{color_background2}}}; */
+}
+
+.color{{{color_name}}} p {
+                         
+}
+
+/*  */
+.color{{{color_name}}} nav > ul {
+                         
+}
+/* Table cell */
+.color{{{color_name}}} nav > ul li {
+                         
+}
+
+/* Table cell */
+.color{{{color_name}}} nav > ul li:nth-child(odd) {
+    color:{{{color_foreground1}}};
+    background-color:{{{color_background1}}};                     
+}
+
+/* Table cell */
+.color{{{color_name}}} nav > ul li:nth-child(even) {
+    color:{{{color_foreground2}}};
+    background-color:{{{color_background2}}};               
+}
+
+/* Table cell */
+.color{{{color_name}}} nav > ul li:nth-child(odd):hover {
+    color:{{{color_background1}}};
+    background-color:{{{color_foreground1}}};                     
+}
+
+/* Table cell */
+.color{{{color_name}}} nav > ul li:nth-child(odd):hover a {
+    color:{{{color_background1}}};
+                   
+}
+
+
+/* Table cell */
+.color{{{color_name}}} nav > ul li:nth-child(even):hover {
+    color:{{{color_background2}}};
+    background-color:{{{color_foreground2}}};               
+}
+
+/* Table cell */
+.color{{{color_name}}} nav > ul li:nth-child(even):hover a {
+    color:{{{color_background2}}};
+       
+}
+
+
+
+/* Table row*/
+.color{{{color_name}}} tr {
+                         
+}
+
+/* Table cell */
+.color{{{color_name}}} td {
+                         
+}
+
+
+
+/* Table header*/
+.color{{{color_name}}} th {
+    color:{{{color_background0}}};
+    background-color:{{{color_foreground0}}};
+}
+
+/* last row in a table*/
+.color{{{color_name}}} tr:nth-last-child() {
+    color:{{{color_background3}}};
+    background-color:{{{color_foreground3}}};                         
+}
+
+/* last row in a table*/
+.color{{{color_name}}} tr:nth-child(even) {
+    color:{{{color_foreground1}}};
+    background-color:{{{color_background1}}};
+}
+
+/* last row in a table*/
+.color{{{color_name}}} tr:nth-child(odd) {
+    color:{{{color_foreground2}}};
+    background-color:{{{color_background2}}};                     
+}
+
+/* last row in a table*/
+.color{{{color_name}}} tr:nth-last-child():hover {
+    color:{{{color_background4}}};
+    background-color:{{{color_foreground4}}};      
+}
+
+/* last row in a table*/
+.color{{{color_name}}} tr:nth-child(even):hover {
+    color:{{{color_foreground1}}};
+    background-color:{{{color_background1}}};                         
+}
+
+/* last row in a table*/
+.color{{{color_name}}} tr:nth-child(odd):hover {
+    color:{{{color_foreground3}}};
+    background-color:{{{color_background3}}};                                              
+}
+
+/* ID for element being subject of warning*/
+.color{{{color_name}}} #alarm {
+    color:{{{color_background4}}};
+    background-color:{{{color_foreground4}}};   
+                                                
+}
+
+/* ID for element currently very important*/
+.color{{{color_name}}} #important {
+    color:{{{color_background4}}};
+    background-color:{{{color_foreground4}}};  
+                         
+}

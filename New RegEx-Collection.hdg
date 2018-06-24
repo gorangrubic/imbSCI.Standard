@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<RegExSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FileName>G:\imbVelesOpenSource\imbSCI.Standard\New RegEx-Collection.hdg</FileName>
+  <RegEx>
+    <Name>select_isBibTexEntryStart</Name>
+    <Pattern>^@{1}([\w]+)\{([\w\d]+),</Pattern>
+    <Input>@article{SOKOLOVA2009427,
+title = "A systematic analysis of performance measures for classification tasks",
+journal = "Information Processing &amp; Management",
+volume = "45",
+number = "4",
+pages = "427 - 437",
+year = "2009",
+issn = "0306-4573",
+doi = "https://doi.org/10.1016/j.ipm.2009.03.002",
+url = "http://www.sciencedirect.com/science/article/pii/S0306457309000259",
+author = "Marina Sokolova and Guy Lapalme",
+keywords = "Performance evaluation, Machine Learning, Text classification"
+}</Input>
+  </RegEx>
+  <RegEx>
+    <Name>pairSelection</Name>
+    <Pattern>^([\w]*) = (.*),?</Pattern>
+    <Input>@article{Kumar2017,
+abstract = {Performance of any search engine relies heavily on its Web crawler. Web crawlers are the programs that get webpages from the Web by following hyperlinks. These webpages are indexed by a search engine and can be retrieved by a user query. In the area of Web crawling, we still lack an exhaustive study that covers all crawling techniques. This study follows the guidelines of systematic literature review and applies it to the field of Web crawling. We used the standard procedure of carrying out a systematic literature review on 248 studies from a total of 1488 articles published in 12 leading journals and other premier conferences and workshops. Existing literature about the Web crawler is classified into different key subareas. Each subarea is further divided according to the techniques being used. We analyzed the distribution of various articles using multiple criteria and depicted conclusions. Various studies that use open source Web crawlers are also reported. We have highlighted future areas of research. We call for an increased awareness in various fields of the Web crawler and identify how techniques from other domains can be used for crawling the Web. Limitations and recommendations for future are also discussed.For further resources related to this article, please visit the WIREs website.},
+author = {Kumar, Manish and Bhatia, Rajesh and Rattan, Dhavleesh},
+doi = {10.1002/widm.1218},
+file = {:S$\backslash$:/SciencePhdSorted/Wiley Interdisciplinary Reviews Data Mining and Knowledge Discovery/A survey of Web crawlers for information retrieval{\_}Kumar, Bhatia, Rattan{\_}2017.pdf:pdf},
+issn = {19424795},
+journal = {Wiley Interdisciplinary Reviews: Data Mining and Knowledge Discovery},
+number = {6},
+title = {{A survey of Web crawlers for information retrieval}},
+volume = {7},
+year = {2017}
+}
+@article{SOKOLOVA2009427,
+title = "A systematic analysis of performance measures for classification tasks",
+journal = "Information Processing &amp; Management",
+volume = "45",
+number = "4",
+pages = "427 - 437",
+year = "2009",
+issn = "0306-4573",
+doi = "https://doi.org/10.1016/j.ipm.2009.03.002",
+url = "http://www.sciencedirect.com/science/article/pii/S0306457309000259",
+author = "Marina Sokolova and Guy Lapalme",
+keywords = "Performance evaluation, Machine Learning, Text classification"
+}
+@article{Jaganathan2015,
+author = {Jaganathan, P. and Karthikeyan, T.},
+doi = {10.3844/jcssp.2015.120.126},
+file = {:S$\backslash$:/SciencePhdSorted/Journal of Computer Science/Highly efficient architecture for scalable focused crawling using incremental parallel web crawler{\_}Jaganathan, Karthikeyan{\_}2015.pdf:pdf},
+issn = {15493636},
+journal = {Journal of Computer Science},
+keywords = {Focused crawler,Incremental web crawler,Load balance,Relevance,URL distribution issue},
+number = {1},
+pages = {120--126},
+title = {{Highly efficient architecture for scalable focused crawling using incremental parallel web crawler}},
+volume = {11},
+year = {2015}
+}
+@article{Suryawanshi2015,
+author = {Suryawanshi, Parigha and Patil, D V},
+file = {:S$\backslash$:/SciencePhdSorted/Unknown/An Overview of Approaches Used In Focused Crawlers{\_}Suryawanshi, Patil{\_}2015.pdf:pdf},
+keywords = {crawler,focused crawler,search engine},
+pages = {698--702},
+title = {{An Overview of Approaches Used In Focused Crawlers}},
+year = {2015}
+}</Input>
+  </RegEx>
+  <RegEx>
+    <Name>splitToEntries</Name>
+    <Pattern>^@</Pattern>
+    <Input>@article{Kumar2017,
+abstract = {Performance of any search engine relies heavily on its Web crawler. Web crawlers are the programs that get webpages from the Web by following hyperlinks. These webpages are indexed by a search engine and can be retrieved by a user query. In the area of Web crawling, we still lack an exhaustive study that covers all crawling techniques. This study follows the guidelines of systematic literature review and applies it to the field of Web crawling. We used the standard procedure of carrying out a systematic literature review on 248 studies from a total of 1488 articles published in 12 leading journals and other premier conferences and workshops. Existing literature about the Web crawler is classified into different key subareas. Each subarea is further divided according to the techniques being used. We analyzed the distribution of various articles using multiple criteria and depicted conclusions. Various studies that use open source Web crawlers are also reported. We have highlighted future areas of research. We call for an increased awareness in various fields of the Web crawler and identify how techniques from other domains can be used for crawling the Web. Limitations and recommendations for future are also discussed.For further resources related to this article, please visit the WIREs website.},
+author = {Kumar, Manish and Bhatia, Rajesh and Rattan, Dhavleesh},
+doi = {10.1002/widm.1218},
+file = {:S$\backslash$:/SciencePhdSorted/Wiley Interdisciplinary Reviews Data Mining and Knowledge Discovery/A survey of Web crawlers for information retrieval{\_}Kumar, Bhatia, Rattan{\_}2017.pdf:pdf},
+issn = {19424795},
+journal = {Wiley Interdisciplinary Reviews: Data Mining and Knowledge Discovery},
+number = {6},
+title = {{A survey of Web crawlers for information retrieval}},
+volume = {7},
+year = {2017}
+}
+@article{SOKOLOVA2009427,
+title = "A systematic analysis of performance measures for classification tasks",
+journal = "Information Processing &amp; Management",
+volume = "45",
+number = "4",
+pages = "427 - 437",
+year = "2009",
+issn = "0306-4573",
+doi = "https://doi.org/10.1016/j.ipm.2009.03.002",
+url = "http://www.sciencedirect.com/science/article/pii/S0306457309000259",
+author = "Marina Sokolova and Guy Lapalme",
+keywords = "Performance evaluation, Machine Learning, Text classification"
+}
+@article{Jaganathan2015,
+author = {Jaganathan, P. and Karthikeyan, T.},
+doi = {10.3844/jcssp.2015.120.126},
+file = {:S$\backslash$:/SciencePhdSorted/Journal of Computer Science/Highly efficient architecture for scalable focused crawling using incremental parallel web crawler{\_}Jaganathan, Karthikeyan{\_}2015.pdf:pdf},
+issn = {15493636},
+journal = {Journal of Computer Science},
+keywords = {Focused crawler,Incremental web crawler,Load balance,Relevance,URL distribution issue},
+number = {1},
+pages = {120--126},
+title = {{Highly efficient architecture for scalable focused crawling using incremental parallel web crawler}},
+volume = {11},
+year = {2015}
+}
+@article{Suryawanshi2015,
+author = {Suryawanshi, Parigha and Patil, D V},
+file = {:S$\backslash$:/SciencePhdSorted/Unknown/An Overview of Approaches Used In Focused Crawlers{\_}Suryawanshi, Patil{\_}2015.pdf:pdf},
+keywords = {crawler,focused crawler,search engine},
+pages = {698--702},
+title = {{An Overview of Approaches Used In Focused Crawlers}},
+year = {2015}
+}</Input>
+  </RegEx>
+  <RegEx>
+    <Name>New RegEx - 4</Name>
+    <Pattern>^([\w]*)\{([\w\d]*)</Pattern>
+    <Input>article{Kumar2017,
+abstract = {Performance of any search engine relies heavily on its Web crawler. Web crawlers are the programs that get webpages from the Web by following hyperlinks. These webpages are indexed by a search engine and can be retrieved by a user query. In the area of Web crawling, we still lack an exhaustive study that covers all crawling techniques. This study follows the guidelines of systematic literature review and applies it to the field of Web crawling. We used the standard procedure of carrying out a systematic literature review on 248 studies from a total of 1488 articles published in 12 leading journals and other premier conferences and workshops. Existing literature about the Web crawler is classified into different key subareas. Each subarea is further divided according to the techniques being used. We analyzed the distribution of various articles using multiple criteria and depicted conclusions. Various studies that use open source Web crawlers are also reported. We have highlighted future areas of research. We call for an increased awareness in various fields of the Web crawler and identify how techniques from other domains can be used for crawling the Web. Limitations and recommendations for future are also discussed.For further resources related to this article, please visit the WIREs website.},
+author = {Kumar, Manish and Bhatia, Rajesh and Rattan, Dhavleesh},
+doi = {10.1002/widm.1218},
+file = {:S$\backslash$:/SciencePhdSorted/Wiley Interdisciplinary Reviews Data Mining and Knowledge Discovery/A survey of Web crawlers for information retrieval{\_}Kumar, Bhatia, Rattan{\_}2017.pdf:pdf},
+issn = {19424795},
+journal = {Wiley Interdisciplinary Reviews: Data Mining and Knowledge Discovery},
+number = {6},
+title = {{A survey of Web crawlers for information retrieval}},
+volume = {7},
+year = {2017}
+}
+@article{SOKOLOVA2009427,
+title = "A systematic analysis of performance measures for classification tasks",
+journal = "Information Processing &amp; Management",
+volume = "45",
+number = "4",
+pages = "427 - 437",
+year = "2009",
+issn = "0306-4573",
+doi = "https://doi.org/10.1016/j.ipm.2009.03.002",
+url = "http://www.sciencedirect.com/science/article/pii/S0306457309000259",
+author = "Marina Sokolova and Guy Lapalme",
+keywords = "Performance evaluation, Machine Learning, Text classification"
+}
+@article{Jaganathan2015,
+author = {Jaganathan, P. and Karthikeyan, T.},
+doi = {10.3844/jcssp.2015.120.126},
+file = {:S$\backslash$:/SciencePhdSorted/Journal of Computer Science/Highly efficient architecture for scalable focused crawling using incremental parallel web crawler{\_}Jaganathan, Karthikeyan{\_}2015.pdf:pdf},
+issn = {15493636},
+journal = {Journal of Computer Science},
+keywords = {Focused crawler,Incremental web crawler,Load balance,Relevance,URL distribution issue},
+number = {1},
+pages = {120--126},
+title = {{Highly efficient architecture for scalable focused crawling using incremental parallel web crawler}},
+volume = {11},
+year = {2015}
+}
+@article{Suryawanshi2015,
+author = {Suryawanshi, Parigha and Patil, D V},
+file = {:S$\backslash$:/SciencePhdSorted/Unknown/An Overview of Approaches Used In Focused Crawlers{\_}Suryawanshi, Patil{\_}2015.pdf:pdf},
+keywords = {crawler,focused crawler,search engine},
+pages = {698--702},
+title = {{An Overview of Approaches Used In Focused Crawlers}},
+year = {2015}
+}</Input>
+  </RegEx>
+</RegExSet>

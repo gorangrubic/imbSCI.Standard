@@ -1,0 +1,81 @@
+﻿body
+{
+    {{{style_body}}}
+}
+
+h1, h2, h3, h4, h5, h6 {
+    {{{style_h}}}
+}
+
+ul, ol {
+    {{{style_lists}}}
+}
+
+nav ul > li {
+    float: left;
+    height: 32px;
+    min-width::after 150px;
+    border-bottom-style: Solid;
+    border-bottom-width: 3px;
+
+    {{{style_menu}}}
+}
+
+li {
+    {{{style_items}}}
+}
+
+h1 {
+    {{{style_h1}}}
+}
+h2 {
+    {{{style_h2}}}
+}
+h3 {
+    {{{style_h3}}}
+}
+h4 {
+    {{{style_h4}}}
+}
+h5 {
+    {{{style_h5}}}
+}
+h6 {
+    {{{style_h6}}}
+}
+
+p {
+    {{{style_p}}}
+}
+
+q {
+    {{{style_q}}}
+}
+
+header {
+    {{{style_header}}}
+}
+
+section {
+    {{{style_section}}}
+}
+
+nav {
+    {{{style_nav}}}
+}
+
+footer {
+    {{{style_footer}}}
+}
+
+article {
+    {{{style_article}}}
+}
+
+{{{style_appendix}}}
+
+{{{style_colora_css}}}
+
+{{{style_colorb_css}}}
+
+{{{style_colorc_css}}}

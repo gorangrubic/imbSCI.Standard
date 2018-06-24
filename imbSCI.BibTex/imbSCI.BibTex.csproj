@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net45;net40</TargetFrameworks>
+    <ApplicationIcon>imbSCI.ico</ApplicationIcon>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>imbSCI.BibTex</PackageId>
+    <Version>0.9.1</Version>
+    <Title>imbSCI.BibTex .NET Standard</Title>
+    <Summary></Summary>
+    <PackageIconUrl>http://doc.veles.rs/imbACE.ico</PackageIconUrl>
+    <PackageProjectUrl>http://blog.veles.rs/</PackageProjectUrl>
+    <PackageLicenseUrl>http://doc.veles.rs/LICENCE.txt</PackageLicenseUrl>
+    <Copyright>Copyright (C) 2018 imbVeles - GNU GENERAL PUBLIC LICENSE V3.0</Copyright>
+    <Description></Description>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageReleaseNotes>
+    </PackageReleaseNotes>
+    <PackageTags>BibTex, citation, science, reference</PackageTags>
+    <RepositoryUrl>https://github.com/gorangrubic/</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <Authors>Goran Grubić</Authors>
+    <Company>imbVeles</Company>
+    <AssemblyVersion>0.9.1</AssemblyVersion>
+    <FileVersion>0.9.1</FileVersion>
+    <Product>imbSCI.BibTex</Product>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <!-- .NET Standard 2.0 references, compilation flags and build options -->
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
+    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net40'">
+    <DefineConstants>NET40</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net45'">
+    <DefineConstants>NET45;NETFULL</DefineConstants>
+  </PropertyGroup>
+
+ 
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net40'">
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.ComponentModel.DataAnnotations.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+ 
+  <ItemGroup>
+    <ProjectReference Include="..\imbSCI.Core\imbSCI.Core.csproj" />
+    <ProjectReference Include="..\imbSCI.DataComplex\imbSCI.DataComplex.csproj" />
+    <ProjectReference Include="..\imbSCI.Data\imbSCI.Data.csproj" />
+  </ItemGroup>
+
+
+
+</Project>
