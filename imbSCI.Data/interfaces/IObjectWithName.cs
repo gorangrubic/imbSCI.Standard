@@ -27,13 +27,19 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using System;
+
 namespace imbSCI.Data.interfaces
 {
-    #region imbVeles using
+    public interface IObjectWithNameWeightAndType : IObjectWithName
+    {
+        Double weight { get; set; }
 
-    using System;
+        Int32 type { get; set; }
 
-    #endregion imbVeles using
+    }
+
+
 
     /// <summary>
     /// Objekat koji ima svoje ime - moze biti jedinstveno ali i ne mora

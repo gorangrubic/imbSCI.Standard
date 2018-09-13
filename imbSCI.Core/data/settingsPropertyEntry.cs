@@ -166,7 +166,7 @@ namespace imbSCI.Core.data
 
             if (type.IsEnum)//pi.PropertyType.IsEnum)
             {
-                Array vl = Enum.GetValues(pi.PropertyType);
+                Array vl = Enum.GetValues(type);
                 foreach (Object v in vl)
                 {
                     acceptableValues.Add(v);

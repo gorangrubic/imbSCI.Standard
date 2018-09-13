@@ -4,7 +4,10 @@
         <name>imbSCI.DataComplex</name>
     </assembly>
     <members>
-        <!-- Badly formed XML comment ignored for member "T:imbSCI.DataComplex.DataComplexExamples" -->
+        <member name="T:imbSCI.DataComplex.DataComplexExamples">
+            <summary>Example, demonstrating data annotation with reporting, using generic, DataTable based, collection</summary>
+            <seealso cref="T:imbSCI.DataComplex.data.TestMicroEnvironmentBase" />
+        </member>
         <!-- Badly formed XML comment ignored for member "T:imbSCI.DataComplex.DataComplexExamples.DataEntryTest" -->
         <member name="M:imbSCI.DataComplex.DataComplexExamples.DataEntryTest.#ctor">
             <summary>
@@ -25,6 +28,11 @@
         </member>
         <member name="P:imbSCI.DataComplex.DataComplexExamples.DataEntryTest.myPropertyRatio">
             <summary> Ratio </summary>
+        </member>
+        <member name="M:imbSCI.DataComplex.DataComplexExamples.ExampleOne_DataTableDataAnnotation">
+            <summary>
+            Creates generic DataTable collection, adds 5 rows and generates Excel and CSV file
+            </summary>
         </member>
         <member name="T:imbSCI.DataComplex.data.dataUnits.core.dataUnitAgregator`1">
             <summary>
@@ -2642,6 +2650,21 @@
             <param name="innerHtml"></param>
             <returns>String without HTML tags and forbidden characters</returns>
             \ingroup_disabled ace_ext_strings
+        </member>
+        <member name="T:imbSCI.DataComplex.NamespaceGroupDoc">
+            <summary>
+            <para>
+            Extended and typed DataTables, DataTable to Excel reporting, various graph structures, translation tables, trend estimation structures, path DOM, reporting extensions, TF-IDF corpus and document data structures, data structures for reporting and other stuff in context of imbSCI framework
+            </para>
+            </summary>
+            <remarks>
+            <example>
+                <code source="G:\imbVelesOpenSource\imbSCI.Standard\imbSCI.DataComplex\DataComplexExamples.cs" title="How to use Data Annotation" language="cs" />
+            </example>
+            </remarks>
+        </member>
+        <member name="T:imbSCI.DataComplex.NamespaceDoc">
+             <inheritdoc/>
         </member>
         <member name="T:imbSCI.DataComplex.path.pathElementFormat">
             <summary>

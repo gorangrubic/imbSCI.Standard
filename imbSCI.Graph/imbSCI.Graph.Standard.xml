@@ -147,7 +147,7 @@
             <param name="DepthLimit">The depth limit.</param>
             <returns></returns>
         </member>
-        <member name="M:imbSCI.Graph.Converters.GraphConversionTools.ConvertToDGML(imbSCI.Data.collection.graph.graphNode,System.Int32)">
+        <member name="M:imbSCI.Graph.Converters.GraphConversionTools.ConvertToDGML``1(``0,System.Int32)">
             <summary>
             Converts to free graph -- from the specified node to its leafs (downwards)
             </summary>
@@ -170,6 +170,11 @@
             <returns></returns>
         </member>
         <member name="P:imbSCI.Graph.Converters.GraphConversionTools.DefaultDotToDGMLConverter">
+            <summary>
+            static and autoinitiated object
+            </summary>
+        </member>
+        <member name="P:imbSCI.Graph.Converters.GraphConversionTools.IGraphConverter">
             <summary>
             static and autoinitiated object
             </summary>
@@ -314,6 +319,12 @@
             <param name="source">The source.</param>
             <param name="depthLimit">The depth limit.</param>
             <returns></returns>
+        </member>
+        <member name="T:imbSCI.Graph.Converters.IGraphTODirectedGraphConverter">
+            <summary>
+            Universal IGRaphNode converter for directed graph
+            </summary>
+            <seealso cref="!:imbSCI.Graph.Converters.DirectedGraphConverterBase&lt;imbSCI.Data.collection.graph.IGraphNode, imbSCI.Data.collection.graph.IGraphNode&gt;" />
         </member>
         <member name="T:imbSCI.Graph.Converters.NamespaceDoc">
             <summary>
@@ -1706,6 +1717,129 @@
             </summary>
             <param name="element">The element.</param>
         </member>
+        <member name="T:imbSCI.Graph.FreeGraph.adapters.freeGraphAdapter`1">
+            <summary>
+            Provides typed interface to add, remove and query a <see cref="T:imbSCI.Graph.FreeGraph.freeGraph"/> 
+            </summary>
+        </member>
+        <member name="M:imbSCI.Graph.FreeGraph.adapters.freeGraphAdapter`1.#ctor(imbSCI.Graph.FreeGraph.freeGraph,imbSCI.Graph.FreeGraph.adapters.freeGraphTypedNodesRegister,System.String,System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Graph.FreeGraph.adapters.freeGraphAdapter`1"/> class, attaches the graph and assigns prefixes for IDs of nodes, according to type number
+            </summary>
+            <param name="_graph">The graph.</param>
+            <param name="prefixes">The prefixes.</param>
+        </member>
+        <member name="M:imbSCI.Graph.FreeGraph.adapters.freeGraphAdapter`1.GetID(imbSCI.Data.interfaces.IObjectWithNameWeightAndType)">
+            <summary>
+            Makes identifier, used as prefix when interfacing the graph
+            </summary>
+            <param name="item">The item.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Graph.FreeGraph.adapters.freeGraphAdapter`1.AddLink(`0,imbSCI.Data.interfaces.IObjectWithNameWeightAndType,System.Double,System.Int32,imbSCI.Core.enums.operation,imbSCI.Core.enums.operation)">
+            <summary>
+            Adds new link, or update existing
+            </summary>
+            <param name="NodeA">The node a.</param>
+            <param name="NodeB">The node b.</param>
+            <param name="w">The w.</param>
+            <param name="type">The type.</param>
+            <param name="onWeight">The on weight.</param>
+            <param name="onType">Type of the on.</param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.Graph.FreeGraph.adapters.freeGraphTypedResultEntry`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="TNode">The type of the node.</typeparam>
+            <seealso cref="T:imbSCI.Graph.FreeGraph.freeGraphLink" />
+        </member>
+        <member name="M:imbSCI.Graph.FreeGraph.adapters.freeGraphTypedResultEntry`1.#ctor(imbSCI.Graph.FreeGraph.freeGraphLinkBase)">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Graph.FreeGraph.adapters.freeGraphTypedResultEntry`1"/> class.
+            </summary>
+        </member>
+        <member name="T:imbSCI.Graph.FreeGraph.adapters.freeGraphTypedResultSet`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="TNode">The type of the node.</typeparam>
+            <seealso cref="!:System.Collections.Generic.List&lt;imbSCI.Graph.FreeGraph.adapters.freeGraphTypedResultEntry&lt;TNode&gt;&gt;" />
+        </member>
+        <member name="T:imbSCI.Graph.FreeGraph.adapters.freeGraphWithAdapters">
+            <summary>
+            hosts multiple <see cref="T:imbSCI.Graph.FreeGraph.adapters.freeGraphAdapter`1"/> for typed access to entities related via <see cref="P:imbSCI.Graph.FreeGraph.adapters.freeGraphWithAdapters.graph"/>
+            </summary>
+            <seealso cref="T:imbSCI.Graph.FreeGraph.adapters.IFreeGraphAdapter" />
+        </member>
+        <member name="P:imbSCI.Graph.FreeGraph.adapters.freeGraphWithAdapters.register">
+            <summary>
+            Gets or sets the register.
+            </summary>
+            <value>
+            The register.
+            </value>
+        </member>
+        <member name="P:imbSCI.Graph.FreeGraph.adapters.freeGraphWithAdapters.adapters">
+            <summary>
+            Gets or sets the adapters.
+            </summary>
+            <value>
+            The adapters.
+            </value>
+        </member>
+        <member name="P:imbSCI.Graph.FreeGraph.adapters.freeGraphWithAdapters.graph">
+            <summary>
+            Graph that describes relations between instances
+            </summary>
+            <value>
+            The graph.
+            </value>
+        </member>
+        <member name="M:imbSCI.Graph.FreeGraph.adapters.freeGraphWithAdapters.MakeAdapter``1(System.String,System.String[])">
+            <summary>
+            Creates instance of adapter and registers it to the <see cref="P:imbSCI.Graph.FreeGraph.adapters.freeGraphWithAdapters.adapters"/> dictionary. Use this from constructor of the class inheriting this.
+            </summary>
+            <typeparam name="TNode">The type of the node.</typeparam>
+            <param name="_mainPrefix">The main prefix - to be used for type=0 objects.</param>
+            <param name="prefixes">The prefixes - for type=1... n objects</param>
+            <returns>Instance of the adapter</returns>
+        </member>
+        <member name="M:imbSCI.Graph.FreeGraph.adapters.freeGraphWithAdapters.GetID(imbSCI.Data.interfaces.IObjectWithNameWeightAndType)">
+            <summary>
+            Gets the identifier - built from prefix (specified by adapter) and object name
+            </summary>
+            <param name="Node">A node to get identifier for</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">Node type not supported by adapters - Node</exception>
+        </member>
+        <member name="M:imbSCI.Graph.FreeGraph.adapters.freeGraphWithAdapters.AddLink(imbSCI.Data.interfaces.IObjectWithNameWeightAndType,imbSCI.Data.interfaces.IObjectWithNameWeightAndType,System.Double,System.Int32,imbSCI.Core.enums.operation,imbSCI.Core.enums.operation)">
+            <summary>
+            Adds new link, or update existing
+            </summary>
+            <param name="NodeA">The node a.</param>
+            <param name="NodeB">The node b.</param>
+            <param name="w">The w.</param>
+            <param name="type">The type.</param>
+            <param name="onWeight">The on weight.</param>
+            <param name="onType">Type of the on.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Graph.FreeGraph.adapters.IFreeGraphAdapter.Assign(System.Collections.Generic.IEnumerable{imbSCI.Data.interfaces.IObjectWithNameWeightAndType})">
+            <summary>
+            Registers the specified nodes with the graph
+            </summary>
+            <param name="NodeA">The node a.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Graph.FreeGraph.adapters.IFreeGraphAdapter.Assign(imbSCI.Data.interfaces.IObjectWithNameWeightAndType)">
+            <summary>
+            Registers the specified node with the graph
+            </summary>
+            <param name="NodeA">The node a.</param>
+            <returns></returns>
+        </member>
         <!-- Badly formed XML comment ignored for member "T:imbSCI.Graph.FreeGraph.freeGraph" -->
         <member name="M:imbSCI.Graph.FreeGraph.freeGraph.normalizeNodeWeights(System.Boolean)">
             <summary>
@@ -1758,6 +1892,15 @@
             <param name="detectFirst">if set to <c>true</c> [detect first].</param>
             <returns>Final state of inversion</returns>
         </member>
+        <member name="M:imbSCI.Graph.FreeGraph.freeGraph.CountLinks(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Counts the links involving the specified nodeName
+            </summary>
+            <param name="nodeName">Name of the node.</param>
+            <param name="AtoB">if set to <c>true</c> [ato b].</param>
+            <param name="BtoA">if set to <c>true</c> [bto a].</param>
+            <returns></returns>
+        </member>
         <member name="M:imbSCI.Graph.FreeGraph.freeGraph.GetLinks(System.String,System.Boolean,System.Boolean,System.Double,System.Int32,System.Boolean,System.Boolean)">
             <summary>
             Gets the links.
@@ -1809,6 +1952,12 @@
             <param name="type">The type.</param>
             <returns></returns>
         </member>
+        <member name="M:imbSCI.Graph.FreeGraph.freeGraph.AddNodeOrSum(System.String,System.Double,System.Int32)">
+            <summary>
+            Adds new node into graph or sums weight of the specified and existing - and applies type that is greater
+            </summary>
+            <param name="link">The link.</param>
+        </member>
         <member name="M:imbSCI.Graph.FreeGraph.freeGraph.AddNodeOrSum(imbSCI.Graph.FreeGraph.freeGraphNodeBase)">
             <summary>
             Adds new node into graph or sums weight of the specified and existing - and applies type that is greater
@@ -1827,9 +1976,9 @@
             </summary>
             <param name="x">The x.</param>
         </member>
-        <member name="M:imbSCI.Graph.FreeGraph.freeGraph.GetLink(System.String,System.String)">
+        <member name="M:imbSCI.Graph.FreeGraph.freeGraph.GetLink(System.String,System.String,System.Boolean)">
             <summary>
-            Gets link in one or the other direction
+            Gets link in one or the other direction, otherwise returns null;
             </summary>
             <param name="nodeNameA">The node name a.</param>
             <param name="nodeNameB">The node name b.</param>
@@ -2050,6 +2199,16 @@
             The unknown: this indicates some problem, as you should never see an island taggd as <see cref="F:imbSCI.Graph.FreeGraph.freeGraphIslandType.unknown"/>
             </summary>
         </member>
+        <member name="T:imbSCI.Graph.FreeGraph.freeGraphLink">
+            <summary>
+            Describes a node to node link in the graph query results, not used in actual <see cref="T:imbSCI.Graph.FreeGraph.freeGraph"/> model
+            </summary>
+        </member>
+        <member name="T:imbSCI.Graph.FreeGraph.freeGraphLinkBase">
+            <summary>
+            Basic object describing node-to-node relationship in the <see cref="T:imbSCI.Graph.FreeGraph.freeGraph"/>
+            </summary>
+        </member>
         <member name="M:imbSCI.Graph.FreeGraph.freeGraphLinkRegistry.GetLinkKey(System.String,System.String)">
             <summary>
             Makes the link key - for quering the optimized collections
@@ -2073,6 +2232,12 @@
             <param name="link">The link.</param>
             <param name="nodeDictionary">The node dictionary.</param>
             <returns></returns>
+        </member>
+        <member name="T:imbSCI.Graph.FreeGraph.freeGraphNodeBase">
+            <summary>
+            Instance describing a node
+            </summary>
+            <seealso cref="T:imbSCI.Data.interfaces.IObjectWithName" />
         </member>
         <member name="M:imbSCI.Graph.FreeGraph.freeGraphNodeBase.GetQueryResultClone(System.Int32)">
             <summary>
@@ -10422,6 +10587,35 @@
             style.</param>
             <param name="defaultStyle">Default style to be returned if no style can be found.</param>
             <returns>Returns the style for the given formatted cell style.</returns>
+        </member>
+        <member name="T:imbSCI.Graph.NamespaceGroupDoc">
+            <summary>
+            <para>Library dedicated to graph data structures and graph-for-visualisation conversion</para>
+            </summary>
+            <remarks>
+            <para>The main datastructure of the library is <see cref="T:imbSCI.Graph.FreeGraph.freeGraph"/>, a non-hierarchical graph with weighted <see cref="T:imbSCI.Graph.FreeGraph.freeGraphNodeBase"/> nodes and <see cref="T:imbSCI.Graph.FreeGraph.freeGraphLinkBase"/> links.</para>
+            <list>
+            	<listheader>
+            		<term>Key features of the library</term>
+            		<description></description>
+            	</listheader>
+            	<item>
+            		<term>Graph conversion</term>
+            		<description>Use <see cref="T:imbSCI.Graph.Converters.GraphConversionTools"/> extensions to convert between <see cref="T:imbSCI.Data.collection.graph.graphNodeBase"/> graphs, <see cref="T:imbSCI.Graph.DGML.DirectedGraph"/> and <see cref="T:imbSCI.Graph.FreeGraph.freeGraph"/></description>
+            	</item>
+            	<item>
+            		<term>Export for visualisation</term>
+            		<description>Use <see cref="T:imbSCI.Graph.DGML.DirectedGraph"/> and <see cref="T:imbSCI.Graph.DOT.DotGraph"/> to export graph structured for visualisation in Visual Studio or GraphViz</description>
+            	</item>
+            	<item>
+            		<term>Query and analyse</term>
+            		<description>There are several utility classes for quering and analysis of <see cref="T:imbSCI.Graph.FreeGraph.freeGraph"/>, like: <see cref="T:imbSCI.Graph.FreeGraph.freeGraphIsland"/>, <see cref="T:imbSCI.Graph.FreeGraph.freeGraphQueryResult"/>, <see cref="T:imbSCI.Graph.FreeGraph.freeGraphReport"/></description>
+            	</item>
+            </list>
+            </remarks>
+            <seealso cref="T:imbSCI.Graph.DGML.DirectedGraph" />
+            <seealso cref="T:imbSCI.Graph.DOT.DotGraph" />
+            <seealso cref="T:imbSCI.Graph.FreeGraph.freeGraph" />
         </member>
         <member name="T:imbSCI.Graph.NamespaceDoc">
             <summary>

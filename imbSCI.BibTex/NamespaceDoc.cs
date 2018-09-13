@@ -53,7 +53,7 @@ namespace imbSCI.BibTex
     /// </summary>
     /// <remarks>
     /// <example>
-    ///     <code source="BibTexExamples.cs" title="How to use the library" language="cs" />
+    ///     <code source="G:\imbVelesOpenSource\imbSCI.Standard\imbSCI.BibTex\BibTexExamples.cs" title="How to use the library" language="cs" />
     /// </example>
     /// </remarks>
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

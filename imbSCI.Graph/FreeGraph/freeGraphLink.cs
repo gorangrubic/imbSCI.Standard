@@ -31,6 +31,9 @@ using System;
 
 namespace imbSCI.Graph.FreeGraph
 {
+    /// <summary>
+    /// Describes a node to node link in the graph query results, not used in actual <see cref="freeGraph"/> model
+    /// </summary>
     public class freeGraphLink
     {
         public freeGraphLink(freeGraphLinkBase link)

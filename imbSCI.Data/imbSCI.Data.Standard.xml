@@ -919,16 +919,38 @@
             Extensions for <see cref="T:imbSCI.Data.collection.graph.graphNode"/> , <see cref="T:imbSCI.Data.collection.graph.graphWrapNode`1"/> and other graphNode derivatives
             </summary>
         </member>
+        <member name="M:imbSCI.Data.collection.graph.graphTools.GetDescendentFrontierAtOffset``1(``0,System.Int32)">
+            <summary>
+            Returns descendent nodes at specified <c>depthOffset</c>. For branches that end before the offset depth, the leaf node is part of output
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parent">The parent - starting node.</param>
+            <param name="depthOffset">Descendent distance - distance of frontier to select</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Data.collection.graph.graphTools.GetChildAtPath``1(``0,System.String,System.String,System.Boolean)">
+            <summary>
+            Gets a child at given relative path
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parent">The parent, from which the path should be interpretted.</param>
+            <param name="path">Relative path, given with separator defined by {T} or specified. If a path segment not found it will skip it</param>
+            <param name="customSeparator">Custom separator - to be used instead of one defined by the {T}.</param>
+            <param name="returnParentIfNotFound">if set to <c>true</c> [return parent if not found].</param>
+            <returns>
+            Child at path or parent (if no path segment could be matched)
+            </returns>
+        </member>
         <member name="M:imbSCI.Data.collection.graph.graphTools.BuildGraphFromPaths``1(System.Collections.Generic.IEnumerable{System.String},System.String)">
             <summary>
-            Builds the graph from paths.
+            Builds the graph from paths. Created graph has artificial root node (outside first node of the paths)
             </summary>
             <typeparam name="T"></typeparam>
             <param name="inputList">The input list.</param>
             <param name="splitter">The splitter.</param>
             <returns></returns>
         </member>
-        <member name="M:imbSCI.Data.collection.graph.graphTools.ConvertPathToGraph``1(``0,System.String,System.Boolean,System.String)">
+        <member name="M:imbSCI.Data.collection.graph.graphTools.ConvertPathToGraph``1(``0,System.String,System.Boolean,System.String,System.Boolean)">
             <summary>
             Builds graph defined by <c>path</c> or selecte existing graphnode, as pointed by path
             </summary>
@@ -937,7 +959,10 @@
             <param name="path">Path to construct from.</param>
             <param name="isAbsolutePath">if set to <c>true</c> [is absolute path].</param>
             <param name="splitter">The splitter - by default: directory separator.</param>
-            <returns>Leaf instance</returns>
+            <param name="returnHead">if set to <c>true</c> if will return the created node</param>
+            <returns>
+            Leaf instance
+            </returns>
         </member>
         <member name="M:imbSCI.Data.collection.graph.graphTools.GetParents``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
             <summary>
@@ -1432,6 +1457,17 @@
         <member name="P:imbSCI.Data.collection.layers.layerStack.layers">
             <summary> </summary>
         </member>
+        <member name="T:imbSCI.Data.collection.layers.NamespaceDoc">
+            <summary>
+            Stacked layers - provides discrite prioritization of elements
+            </summary>
+            <remarks>
+            <para>Layers were introduced for layered crawler frontier</para>
+            </remarks>
+        </member>
+        <member name="T:imbSCI.Data.collection.layers.NamespaceGroupDoc">
+            <inheritdoc/>
+        </member>
         <member name="T:imbSCI.Data.collection.math.aceInt2DStackedMatrix">
             <summary>
             2D matrix of integer values, where Y is not preset but contains stacked values. Thread-safe version
@@ -1531,12 +1567,12 @@
             <param name="x">The x.</param>
         </member>
         <member name="T:imbSCI.Data.collection.math.aceRelationMatrix`3">
-             <summary>
-            
-             </summary>
-             <typeparam name="TXAxis">The type of the x axis.</typeparam>
-             <typeparam name="TYAxis">The type of the y axis.</typeparam>
-             <typeparam name="TRelation">The type of the relation.</typeparam>
+            <summary>
+            Universal generic matrix, having separate type parameter for X axis, Y axis and relationship definition
+            </summary>
+            <typeparam name="TXAxis">The type of the x axis.</typeparam>
+            <typeparam name="TYAxis">The type of the y axis.</typeparam>
+            <typeparam name="TRelation">The type of the relation.</typeparam>
         </member>
         <member name="M:imbSCI.Data.collection.math.aceRelationMatrix`3.#ctor(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{`1},`2)">
             <summary>
@@ -1628,12 +1664,12 @@
             <summary> </summary>
         </member>
         <member name="T:imbSCI.Data.collection.math.aceRelationMatrixTriple`3">
-             <summary>
-            
-             </summary>
-             <typeparam name="TXAxis">The type of the x axis.</typeparam>
-             <typeparam name="TYAxis">The type of the y axis.</typeparam>
-             <typeparam name="TRelation">The type of the relation.</typeparam>
+            <summary>
+            Generic Triple - data structure defining relationship between two entities in the <see cref="T:imbSCI.Data.collection.math.aceRelationMatrix`3"/> relationship matrix
+            </summary>
+            <typeparam name="TXAxis">The type of the x axis.</typeparam>
+            <typeparam name="TYAxis">The type of the y axis.</typeparam>
+            <typeparam name="TRelation">The type of the relation.</typeparam>
         </member>
         <member name="P:imbSCI.Data.collection.math.aceRelationMatrixTriple`3.itemX">
              <summary>
@@ -1684,6 +1720,27 @@
             <typeparam name="T"></typeparam>
             <seealso cref="T:System.Collections.Generic.IList`1" />
             <seealso cref="T:System.IDisposable" />
+        </member>
+        <member name="T:imbSCI.Data.collection.math.NamespaceDoc">
+            <summary>
+            Generic relationship matrix structures, concurrent 2D matrices and concurrent List
+            </summary>
+            <remarks>
+            Note that concurrent list doesn't make any sense in terms of performances. It was introduced here just as compatibility feature (between multi-threading and single-threaded execution)
+            </remarks>
+        </member>
+        <member name="T:imbSCI.Data.collection.math.NamespaceGroupDoc">
+            <inheritdoc/>
+        </member>
+        <member name="T:imbSCI.Data.collection.NamespaceDoc">
+            <summary>
+            Directed graph data structures, multidimensional dictionaries, relationship matrices and other utility collections
+            </summary>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="T:imbSCI.Data.collection.NamespaceGroupDoc">
+            <inheritdoc/>
         </member>
         <member name="T:imbSCI.Data.collection.nested.aceConcurrentBag`1">
             <summary>
@@ -2001,6 +2058,16 @@
             </summary>
             <param name="defaultToString">Da li da upiše ime enuma kao podrazumevanu vrednost polja ili da ostane prazan string</param>
         </member>
+        <member name="T:imbSCI.Data.collection.nested.NamespaceDoc">
+            <summary>
+            2D and 3D dictionaries, Enum dictionaries with automatic dimension population (Enum.GetValues()), first letter indexed dictionary, List sets
+            </summary>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="T:imbSCI.Data.collection.nested.NamespaceGroupDoc">
+            <inheritdoc/>
+        </member>
         <member name="T:imbSCI.Data.collection.special.circularSelector`1">
             <summary>
             Circular and/or random item provider based on index loop.
@@ -2115,6 +2182,16 @@
             <summary>
             postavlja sve brojace na 0
             </summary>
+        </member>
+        <member name="T:imbSCI.Data.collection.special.NamespaceDoc">
+            <summary>
+            Special utility classes: circular selector of instances, (its implementation:) color wheel, simple instance counter for Enum types....
+            </summary>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="T:imbSCI.Data.collection.special.NamespaceGroupDoc">
+            <inheritdoc/>
         </member>
         <member name="T:imbSCI.Data.data.byteFlag">
             <summary>
@@ -2596,6 +2673,16 @@
             <param name="source"></param>
             <param name="map"></param>
             <returns>Broj propertija koji su postavljeni</returns>
+        </member>
+        <member name="T:imbSCI.Data.data.NamespaceDoc">
+            <summary>
+            Change monitoring, graph structures XML serialization, sampling (sample take), regex markers, property mapping
+            </summary>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="T:imbSCI.Data.data.NamespaceGroupDoc">
+            <inheritdoc/>
         </member>
         <member name="T:imbSCI.Data.data.ObjectPathChangeMonitor">
             <summary>
@@ -5561,6 +5648,11 @@
             <see cref="M:imbSCI.Data.data.maps.mapping.propertyMappingTools.getValuesFromMappedSource(System.Object,imbSCI.Data.data.maps.mapping.propertyMap)"/>
             <see cref="T:imbSCI.Data.collection.nested.aceEnumDictionarySet2D`4"/>
             </seealso>
+        </member>
+        <member name="T:imbSCI.Data.NamespaceGroupDoc">
+            <summary>
+            The namespace provides the core layer of shared: enumerations, interfaces and extensions as well as a number of thread-safe collections and data structures.
+            </summary>
         </member>
         <member name="T:imbSCI.Data.primitives.coordinateXY">
             <summary>

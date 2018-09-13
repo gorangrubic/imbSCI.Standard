@@ -33,6 +33,10 @@ using System.Xml.Serialization;
 
 namespace imbSCI.Graph.FreeGraph
 {
+    /// <summary>
+    /// Instance describing a node
+    /// </summary>
+    /// <seealso cref="imbSCI.Data.interfaces.IObjectWithName" />
     public class freeGraphNodeBase : IObjectWithName
     {
         public freeGraphNodeBase()

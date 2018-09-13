@@ -29,11 +29,14 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Core.reporting.colors
 {
+    using imbSCI.Core.extensions.data;
+    using imbSCI.Core.extensions.enumworks;
     using imbSCI.Data.data;
 
     #region imbVeles using
 
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
 
     //using Xamarin.Forms;
@@ -112,23 +115,23 @@ namespace imbSCI.Core.reporting.colors
 
         #endregion --- colorsRetrieved ------- Koliko je puta boja vracena
 
-        //#region --- paletteLibrary ------- Biblioteka paleta
-        //private static aceColorPaletteForTypes _paletteLibrary;
-        ///// <summary>
-        ///// Biblioteka paleta
-        ///// </summary>
-        //public static aceColorPaletteForTypes paletteLibrary
-        //{
-        //    get
-        //    {
-        //        if (_paletteLibrary == null)
-        //        {
-        //            _paletteLibrary = new aceColorPaletteForTypes();
-        //        }
-        //        return _paletteLibrary;
-        //    }
-        //}
-        //#endregion
+        #region --- paletteLibrary ------- Biblioteka paleta
+        private static aceColorPaletteForTypes _paletteLibrary;
+        /// <summary>
+        /// Biblioteka paleta
+        /// </summary>
+        public static aceColorPaletteForTypes paletteLibrary
+        {
+            get
+            {
+                if (_paletteLibrary == null)
+                {
+                    _paletteLibrary = new aceColorPaletteForTypes();
+                }
+                return _paletteLibrary;
+            }
+        }
+        #endregion
 
         #region -----------  library  -------  [Biblioteka svih boja ]
 
@@ -232,8 +235,8 @@ namespace imbSCI.Core.reporting.colors
 
         public static aceColorPalette getDefaultPalette()
         {
-            throw new NotImplementedException();
-            //return paletteLibrary.defaultPalette;
+            
+            return paletteLibrary.defaultPalette;
         }
 
         /// <summary>
@@ -244,20 +247,20 @@ namespace imbSCI.Core.reporting.colors
         /// <param name="_iconKey">Preporucena ikonica</param>
         public static aceColorPalette getPalette(String palleteName, String basicColor = "", String _iconKey = "")
         {
-            throw new NotImplementedException();
-            //    if (!paletteLibrary.collection.ContainsKey(palleteName))
-            //    {
-            //        if (String.IsNullOrEmpty(basicColor)) return getDefaultPalette();
-            //        List<acePaletteVariationRole> enumValues = Enum.GetValues(typeof(acePaletteVariationRole)).getFlatList<acePaletteVariationRole>();
+            //throw new NotImplementedException();
+            if (!paletteLibrary.collection.ContainsKey(palleteName))
+            {
+                if (String.IsNullOrEmpty(basicColor)) return getDefaultPalette();
+                List<acePaletteVariationRole> enumValues = Enum.GetValues(typeof(acePaletteVariationRole)).getFlatList<acePaletteVariationRole>();
 
-            //        aceColorPalette cp = new aceColorPalette(basicColor, 0.1F, 0, 0.05F, 0.05F, acePaletteRole.none.ToInt32() + 1, true, palleteName);
-            //        cp.iconKey = _iconKey;
-            //        paletteLibrary.collection.Add(palleteName, cp);
-            //        palletsCreated++;
-            //    }
-            //    palletsRetrieved++;
-            //    return paletteLibrary.collection[palleteName];
-            return null;
+                aceColorPalette cp = new aceColorPalette(basicColor, 0.1F, 0, 0.05F, 0.05F, acePaletteRole.none.ToInt32() + 1, true, palleteName);
+                cp.iconKey = _iconKey;
+                paletteLibrary.collection.Add(palleteName, cp);
+                palletsCreated++;
+            }
+            palletsRetrieved++;
+            return paletteLibrary.collection[palleteName];
+            //return null;
         }
 
         //public static aceColorPalette getPaletteInfoBase(imbInfoBase sourceInfo)

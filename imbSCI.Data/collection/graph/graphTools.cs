@@ -38,8 +38,92 @@ namespace imbSCI.Data.collection.graph
     /// </summary>
     public static class graphTools
     {
+
         /// <summary>
-        /// Builds the graph from paths.
+        /// Returns descendent nodes at specified <c>depthOffset</c>. For branches that end before the offset depth, the leaf node is part of output
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="parent">The parent - starting node.</param>
+        /// <param name="depthOffset">Descendent distance - distance of frontier to select</param>
+        /// <returns></returns>
+        public static List<T> GetDescendentFrontierAtOffset<T>(this T parent, Int32 depthOffset = 1) where T : IGraphNode
+        {
+            List<T> output = new List<T>();
+
+            Int32 l = parent.level;
+            List<T> newTasks = new List<T>();
+            newTasks.Add(parent);
+
+            while (newTasks.Any())
+            {
+                var tasks = newTasks.ToList();
+                newTasks = new List<T>();
+                foreach (T cat in tasks)
+                {
+                    if (cat.Count() == 0)
+                    {
+                        output.Add(cat);
+                    }
+                    else
+                    {
+                        if ((cat.level - l) < depthOffset)
+                        {
+                            foreach (T subcat in cat)
+                            {
+                                newTasks.Add(subcat);
+
+                            }
+                        }
+                        else
+                        {
+                            foreach (T subcat in cat)
+                            {
+                                output.Add(subcat);
+
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Gets a child at given relative path
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="parent">The parent, from which the path should be interpretted.</param>
+        /// <param name="path">Relative path, given with separator defined by {T} or specified. If a path segment not found it will skip it</param>
+        /// <param name="customSeparator">Custom separator - to be used instead of one defined by the {T}.</param>
+        /// <param name="returnParentIfNotFound">if set to <c>true</c> [return parent if not found].</param>
+        /// <returns>
+        /// Child at path or parent (if no path segment could be matched)
+        /// </returns>
+        public static T GetChildAtPath<T>(this T parent, String path, String customSeparator = "", Boolean returnParentIfNotFound = true) where T : IGraphNode
+        {
+            if (customSeparator.isNullOrEmpty()) customSeparator = parent.pathSeparator;
+            List<String> pathParts = path.SplitSmart(customSeparator);
+            T head = parent;
+            Boolean noMatch = true;
+            foreach (String pPart in pathParts)
+            {
+                if (head.ContainsKey(pPart))
+                {
+                    head = (T)head[pPart];
+                    noMatch = false;
+                }
+            }
+            if (noMatch && !returnParentIfNotFound)
+            {
+                return default(T);
+            }
+            return head;
+        }
+
+        /// <summary>
+        /// Builds the graph from paths. Created graph has artificial root node (outside first node of the paths)
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="inputList">The input list.</param>
@@ -67,8 +151,11 @@ namespace imbSCI.Data.collection.graph
         /// <param name="path">Path to construct from.</param>
         /// <param name="isAbsolutePath">if set to <c>true</c> [is absolute path].</param>
         /// <param name="splitter">The splitter - by default: directory separator.</param>
-        /// <returns>Leaf instance</returns>
-        public static T ConvertPathToGraph<T>(this T parent, String path, Boolean isAbsolutePath = true, String splitter = "") where T : IGraphNode, new()
+        /// <param name="returnHead">if set to <c>true</c> if will return the created node</param>
+        /// <returns>
+        /// Leaf instance
+        /// </returns>
+        public static T ConvertPathToGraph<T>(this T parent, String path, Boolean isAbsolutePath = true, String splitter = "", Boolean returnHead=true) where T : IGraphNode, new()
         {
             if (splitter == "") splitter = System.IO.Path.DirectorySeparatorChar.ToString();
 
@@ -109,8 +196,13 @@ namespace imbSCI.Data.collection.graph
                     }
                 }
             }
-
-            return parent;
+            if (returnHead)
+            {
+                return (T)head;
+            } else
+            {
+                return parent;
+            }
         }
 
         /// <summary>

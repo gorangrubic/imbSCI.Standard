@@ -31,6 +31,9 @@ using System;
 
 namespace imbSCI.Graph.FreeGraph
 {
+    /// <summary>
+    /// Basic object describing node-to-node relationship in the <see cref="freeGraph"/>
+    /// </summary>
     public class freeGraphLinkBase
     {
         public freeGraphLinkBase()

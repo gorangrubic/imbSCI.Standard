@@ -88,6 +88,12 @@ namespace imbSCI.Graph.Converters
         /// <param name="graph">The graph.</param>
         /// <param name="DepthLimit">The depth limit.</param>
         /// <returns></returns>
+        public static DirectedGraph ConvertToDGML<T>(this T graph, Int32 DepthLimit = 300) where T : IGraphNode, new()
+        {
+
+            return IGraphConverter.Convert(graph, DepthLimit);
+        }
+
         public static DirectedGraph ConvertToDGML(this graphNode graph, Int32 DepthLimit = 300)
         {
             return DefaultGraphToDGMLConverterInstance.Convert(graph, DepthLimit);
@@ -134,6 +140,34 @@ namespace imbSCI.Graph.Converters
                 return _DefaultDotToDGMLConverter;
             }
         }
+
+
+
+        private static Object _IGraphConverter_lock = new Object();
+        private static IGraphTODirectedGraphConverter _IGraphConverter;
+        /// <summary>
+        /// static and autoinitiated object
+        /// </summary>
+        public static IGraphTODirectedGraphConverter IGraphConverter
+        {
+            get
+            {
+                if (_IGraphConverter == null)
+                {
+                    lock (_IGraphConverter_lock)
+                    {
+
+                        if (_IGraphConverter == null)
+                        {
+                            _IGraphConverter = new IGraphTODirectedGraphConverter();
+                            // add here if any additional initialization code is required
+                        }
+                    }
+                }
+                return _IGraphConverter;
+            }
+        }
+
 
         private static propertyExpressionToDirectedGraphConverter _PropertyExpressionConverterToDGML;
 

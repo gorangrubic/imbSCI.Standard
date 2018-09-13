@@ -726,7 +726,7 @@ namespace imbSCI.Core.reporting.colors
                                   float __vDelta, Int32 __colorCount = 8, Boolean __foreColorSnap = false,
                                   String __path = "")
         {
-            /*
+            
             clearCollections();
 
             gDelta = __gradientDelta;
@@ -737,53 +737,55 @@ namespace imbSCI.Core.reporting.colors
             _foreSnap = __foreColorSnap;
             _hexColor = hexBaseColor;
 
-            if (String.IsNullOrEmpty(__path))
-                __path = aceColorConverts.makePath(hexBaseColor, vDelta, sDelta, hDelta, __foreColorSnap);
-            if (!String.IsNullOrEmpty(__path)) path = __path;
+            //if (String.IsNullOrEmpty(__path))
+            //    //ColorWorks.
+            //    //__path = aceColorConverts.makePath(hexBaseColor, vDelta, sDelta, hDelta, __foreColorSnap);
+            //if (!String.IsNullOrEmpty(__path)) path = __path;
 
             //baseColor = aceColorConverts.fromHexColor(hexBaseColor);
-            baseColor = aceColorPaletteManager.getColor(hexBaseColor);
+            
+            baseColor = ColorWorks.GetColor(hexBaseColor);  //aceColorPaletteManager.getColor(hexBaseColor);
 
             if (ccount < minCount) ccount = minCount;
 
-            Int32 a;
-            for (a = 0; a < ccount; a++)
-            {
-                float vd = (vDelta * a);
-                float sd = (sDelta * a);
-                Int32 hd = (hDelta * a);
+            //Int32 a;
+            //for (a = 0; a < ccount; a++)
+            //{
+            //    float vd = (vDelta * a);
+            //    float sd = (sDelta * a);
+            //    Int32 hd = (hDelta * a);
 
-                var tmpTop = aceColorPaletteManager.getColor(hexBaseColor, vd, sd, hd);
-                tpColors.Add(aceColorConverts.toDrawingColor(tmpTop));
-                tpBrushes.Add(new System.Drawing.SolidBrush(tpColors[a]));
-                colorsOnTop.Add(tmpTop);
+            //    var tmpTop = ColorWorks.; //aceColorPaletteManager.getColor(hexBaseColor, vd, sd, hd);
+            //    tpColors.Add(aceColorConverts.toDrawingColor(tmpTop));
+            //    tpBrushes.Add(new System.Drawing.SolidBrush(tpColors[a]));
+            //    colorsOnTop.Add(tmpTop);
 
-                var tmpBg = aceColorPaletteManager.getColor(hexBaseColor, (vd - gDelta), (sd - (gDelta * 2)), hd);
-                bgColors.Add(aceColorConverts.toDrawingColor(tmpBg));
-                colorsBottom.Add(tmpBg);
+            //    var tmpBg = aceColorPaletteManager.getColor(hexBaseColor, (vd - gDelta), (sd - (gDelta * 2)), hd);
+            //    bgColors.Add(aceColorConverts.toDrawingColor(tmpBg));
+            //    colorsBottom.Add(tmpBg);
 
-                //aceColorConverts.getBrighter(vd, baseColor, sd, hd);
+            //    //aceColorConverts.getBrighter(vd, baseColor, sd, hd);
 
-                //aceColorConverts.getBrighter((vd - gradientDelta), baseColor, (sd - (gradientDelta * 2)), hd));
+            //    //aceColorConverts.getBrighter((vd - gradientDelta), baseColor, (sd - (gradientDelta * 2)), hd));
 
-                backgrounds.Add(new LinearGradientBrush(colorsOnTop[a], colorsBottom[a], 90));
+            //    backgrounds.Add(new LinearGradientBrush(colorsOnTop[a], colorsBottom[a], 90));
 
-                gGradient bgGrad = new gGradient(new System.Drawing.PointF(0, 0), new System.Drawing.PointF(50, 50), aceColorConverts.toDrawingColor(colorsOnTop[a]), aceColorConverts.toDrawingColor(colorsBottom[a]));
-                bgBrushes.Add(bgGrad);
+            //    gGradient bgGrad = new gGradient(new System.Drawing.PointF(0, 0), new System.Drawing.PointF(50, 50), aceColorConverts.toDrawingColor(colorsOnTop[a]), aceColorConverts.toDrawingColor(colorsBottom[a]));
+            //    bgBrushes.Add(bgGrad);
 
-                var tmpFg = aceColorPaletteManager.getColor(hexBaseColor, (vd - gDelta), (sd - (gDelta * 2)), hd, true, __foreColorSnap);
-                fgColors.Add(aceColorConverts.toDrawingColor(tmpFg));
-                fgBrushes.Add(new System.Drawing.SolidBrush(fgColors[a]));
-                colorsFore.Add(tmpFg);
+            //    var tmpFg = aceColorPaletteManager.getColor(hexBaseColor, (vd - gDelta), (sd - (gDelta * 2)), hd, true, __foreColorSnap);
+            //    fgColors.Add(aceColorConverts.toDrawingColor(tmpFg));
+            //    fgBrushes.Add(new System.Drawing.SolidBrush(fgColors[a]));
+            //    colorsFore.Add(tmpFg);
 
-                underLines.Add(new colorBrush(colorsOnTop[a]));
-                foregrounds.Add(new colorBrush(colorsFore[a]));
-            }
+            //    underLines.Add(new colorBrush(colorsOnTop[a]));
+            //    foregrounds.Add(new colorBrush(colorsFore[a]));
+            //}
 
-            Color ds = aceColorPaletteManager.getColor(hexBaseColor, -0.4F, -0.2F, 0);
-            Color ds2 = aceColorPaletteManager.getColor(hexBaseColor, -0.3F, -0.1F, 90);
+            //Color ds = aceColorPaletteManager.getColor(hexBaseColor, -0.4F, -0.2F, 0);
+            //Color ds2 = aceColorPaletteManager.getColor(hexBaseColor, -0.3F, -0.1F, 90);
 
-            disabled = new LinearGradientBrush(ds, ds2, 90);*/
+            //disabled = new LinearGradientBrush(ds, ds2, 90);*/
         }
 
         #region Implementation of IHasDescribeMethod

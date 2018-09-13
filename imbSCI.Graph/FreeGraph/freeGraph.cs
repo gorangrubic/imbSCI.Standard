@@ -214,6 +214,13 @@ namespace imbSCI.Graph.FreeGraph
             return output;
         }
 
+        /// <summary>
+        /// Counts the links involving the specified nodeName
+        /// </summary>
+        /// <param name="nodeName">Name of the node.</param>
+        /// <param name="AtoB">if set to <c>true</c> [ato b].</param>
+        /// <param name="BtoA">if set to <c>true</c> [bto a].</param>
+        /// <returns></returns>
         public Int32 CountLinks(String nodeName, Boolean AtoB = true, Boolean BtoA = true)
         {
             Int32 output = 0;
@@ -442,6 +449,29 @@ namespace imbSCI.Graph.FreeGraph
         /// Adds new node into graph or sums weight of the specified and existing - and applies type that is greater
         /// </summary>
         /// <param name="link">The link.</param>
+        public freeGraphNodeBase AddNodeOrSum(String _name, Double _weight, Int32 _type)
+        {
+            if (!ContainsNode(_name))
+            {
+                return AddNode(_name, _weight, _type);
+            }
+            else
+            {
+                var exLink = GetNode(_name); //GetLink(link.nodeNameA, link.nodeNameB);
+                if (exLink != null)
+                {
+                    Double w = exLink.weight + _weight;
+                    exLink.weight = w;
+                    exLink.type = Math.Max(exLink.type, _type);
+                }
+                return exLink;
+            }
+        }
+
+        /// <summary>
+        /// Adds new node into graph or sums weight of the specified and existing - and applies type that is greater
+        /// </summary>
+        /// <param name="link">The link.</param>
         public void AddNodeOrSum(freeGraphNodeBase node)
         {
             if (!ContainsNode(node.name))
@@ -503,12 +533,12 @@ namespace imbSCI.Graph.FreeGraph
         }
 
         /// <summary>
-        /// Gets link in one or the other direction
+        /// Gets link in one or the other direction, otherwise returns null;
         /// </summary>
         /// <param name="nodeNameA">The node name a.</param>
         /// <param name="nodeNameB">The node name b.</param>
         /// <returns></returns>
-        public freeGraphLinkBase GetLink(String nodeNameA, String nodeNameB)
+        public freeGraphLinkBase GetLink(String nodeNameA, String nodeNameB, Boolean includeBtoALinks = false)
         {
             freeGraphLinkBase output = null;
             if (IsReady)
@@ -518,7 +548,7 @@ namespace imbSCI.Graph.FreeGraph
             else
             {
                 output = links.FirstOrDefault(x => (x.nodeNameA == nodeNameA) && (x.nodeNameB == nodeNameB));
-                if ((output == null))
+                if ((output == null) && includeBtoALinks)
                 {
                     output = links.FirstOrDefault(x => (x.nodeNameB == nodeNameA) && (x.nodeNameA == nodeNameB));
                 }

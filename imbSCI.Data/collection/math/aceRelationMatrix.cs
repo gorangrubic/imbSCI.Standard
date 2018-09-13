@@ -37,7 +37,7 @@ namespace imbSCI.Data.collection.math
     using System.Linq;
 
     /// <summary>
-    ///
+    /// Universal generic matrix, having separate type parameter for X axis, Y axis and relationship definition
     /// </summary>
     /// <typeparam name="TXAxis">The type of the x axis.</typeparam>
     /// <typeparam name="TYAxis">The type of the y axis.</typeparam>

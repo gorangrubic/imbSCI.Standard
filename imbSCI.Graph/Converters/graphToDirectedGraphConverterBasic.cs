@@ -29,16 +29,24 @@
 // ------------------------------------------------------------------------------------------------------------------
 //using System.Web.UI.WebControls;
 //using Accord;
+using System;
+using System.Collections.Generic;
 using imbSCI.Core.math;
+using imbSCI.Data;
 using imbSCI.Data.collection.graph;
+using imbSCI.Data.interfaces;
+using imbSCI.Graph.Converters.tools;
+using imbSCI.Graph.DGML;
+using imbSCI.Graph.DGML.core;
 
 namespace imbSCI.Graph.Converters
 {
+
     /// <summary>
     /// Basic implementation of graph to DGML converter
     /// </summary>
     /// <seealso cref="imbSCI.Graph.Converters.graphToDirectedGraphConverterBase{imbSCI.Data.collection.graph.IGraphNode}" />
-    public class graphToDirectedGraphConverterBasic : graphToDirectedGraphConverterBase<graphNode>
+    public class graphToDirectedGraphConverterBasic : graphToDirectedGraphConverterBase<graphNode> // where T : IGraphNode, new()
     {
         public override string GetCategoryID(graphNode nodeOrLink)
         {

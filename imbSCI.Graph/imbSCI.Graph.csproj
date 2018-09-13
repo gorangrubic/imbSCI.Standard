@@ -5,7 +5,7 @@
     <ApplicationIcon>imbSCI.ico</ApplicationIcon>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>imbSCI.Graph.Standard</PackageId>
-    <Version>0.3.28</Version>
+    <Version>0.3.66</Version>
     <Title>imbSCI.Graph - Converters, data structures, rendering</Title>
     <Summary>
       Conversion between imbSCI directed graph, undirected (free graph) graph, SVG rendering, import-export for Dia (software), Draw.io (diagramming app), Directed Graph Markup Language (DGML) and DOT graph language.

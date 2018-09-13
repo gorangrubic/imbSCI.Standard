@@ -72,6 +72,17 @@ namespace imbSCI.Core.math.range
             return (Decimal)rangeChange(tmpOut, tmpDelta, tmpMax, rule, op);
         }
 
+        public static Int32 compute(this operation op, Int32 a, Int32 b)
+        {
+            return calculate(a, op, b);
+        }
+
+        public static Double compute(this operation op, Double a, Double b)
+        {
+            return calculate(a, op, b);
+        }
+
+
         /// <summary>
         /// Calculates the specified oper.
         /// </summary>

@@ -5,7 +5,7 @@
     <ApplicationIcon>imbVeles48.ico</ApplicationIcon>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>imbSCI.DataComplex.Standard</PackageId>
-    <Version>0.3.35</Version>
+    <Version>0.3.48</Version>
     <Title>imbSCI.DataComplex - complex data structures</Title>
     <Summary>
       Part of the base layer of imbVeles Framework: reporting support, graph and directed graphs, concurrent multidimensional collections, serialization helpers

@@ -30,7 +30,7 @@
 namespace imbSCI.Data.collection.math
 {
     /// <summary>
-    ///
+    /// Generic Triple - data structure defining relationship between two entities in the <see cref="aceRelationMatrix{TXAxis, TYAxis, TRelation}"/> relationship matrix
     /// </summary>
     /// <typeparam name="TXAxis">The type of the x axis.</typeparam>
     /// <typeparam name="TYAxis">The type of the y axis.</typeparam>
