@@ -9439,6 +9439,16 @@
             Value will be caption for column in multitable scenario
             </summary>
         </member>
+        <member name="T:imbSCI.Core.math.aggregation.NamespaceDoc">
+            <summary>
+            Data structures and enumerations used with <see cref="T:imbSCI.Core.attributes.imbAttribute"/>s to define data aggegations, used in reporting
+            </summary>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="T:imbSCI.Core.math.aggregation.NamespaceGroupDoc">
+            <inheritdoc/>
+        </member>
         <member name="M:imbSCI.Core.math.analysisExtensions.ClipToP(System.Double,System.Double,System.Double)">
             <summary>
             Clips to p: from -1 to 1
@@ -9631,7 +9641,7 @@
         </member>
         <member name="P:imbSCI.Core.math.classificationMetrics.classificationEval.truePositives">
             <summary>
-            Gets or sets the true positives.
+            T_p - prediction was [true], and truth table said [true]
             </summary>
             <value>
             The true positives.
@@ -9639,7 +9649,7 @@
         </member>
         <member name="P:imbSCI.Core.math.classificationMetrics.classificationEval.falsePositives">
             <summary>
-            Gets or sets the false positives.
+            F_p - prediction was [true], but truth table said [false]
             </summary>
             <value>
             The false positives.
@@ -9647,7 +9657,7 @@
         </member>
         <member name="P:imbSCI.Core.math.classificationMetrics.classificationEval.falseNegatives">
             <summary>
-            Gets or sets the false negatives.
+            F_n - prediction was [false], but the truth table said [true]
             </summary>
             <value>
             The false negatives.
@@ -9655,7 +9665,7 @@
         </member>
         <member name="P:imbSCI.Core.math.classificationMetrics.classificationEval.trueNegatives">
             <summary>
-            Gets or sets the true negatives.
+            T_n - prediction was [false], and the truth table said [false]
             </summary>
             <value>
             The true negatives.
@@ -9734,6 +9744,20 @@
             Constructor with name assigment
             </summary>
             <param name="_name">The name.</param>
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.classificationEvalMetricSet.#ctor(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Constructs eval metrics with categories specified <c>labels</c>
+            </summary>
+            <param name="_name">The name.</param>
+            <param name="labels">The labels.</param>
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.classificationEvalMetricSet.AddRecord(System.String,System.String)">
+            <summary>
+            Adds the record in the confusion matrix
+            </summary>
+            <param name="testResult">Class label - What was the prediction?</param>
+            <param name="truth">Class label - What the truth table said?</param>
         </member>
         <member name="P:imbSCI.Core.math.classificationMetrics.classificationEvalMetricSet.Item(System.String)">
             <summary>
@@ -9897,6 +9921,17 @@
             <summary>
             Interface to classification report objects
             </summary>
+        </member>
+        <member name="T:imbSCI.Core.math.classificationMetrics.NamespaceDoc">
+            <summary>
+            Confusion matrix, classification performance reporting
+            </summary>
+            <remarks>
+            Basic tools for test results evaluation and F1-score computation
+            </remarks>
+        </member>
+        <member name="T:imbSCI.Core.math.classificationMetrics.NamespaceGroupDoc">
+            <inheritdoc/>
         </member>
         <member name="T:imbSCI.Core.math.counter">
             <summary>
@@ -10198,6 +10233,16 @@
             <value>
             The function.
             </value>
+        </member>
+        <member name="T:imbSCI.Core.math.functions.NamespaceDoc">
+            <summary>
+            Elementary functions - used to generate cyclic values from <c>alpha</c> (phase: from 0.0 to 1.0). It may be seen as signal generating functions as well.
+            </summary>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="T:imbSCI.Core.math.functions.NamespaceGroupDoc">
+            <inheritdoc/>
         </member>
         <member name="T:imbSCI.Core.math.functions.noiseFunction">
             <summary>
@@ -11450,8 +11495,14 @@
         </member>
         <member name="T:imbSCI.Core.math.NamespaceDoc">
             <summary>
-            <para>Math, statistics and specialized helpers: <see cref="T:imbSCI.Core.math.counter"/>, <see cref="T:imbSCI.Core.math.md5"/>, <see cref="!:classificationReport"/>...</para>
+            Math, statistics and specialized helpers: <see cref="T:imbSCI.Core.math.counter"/>, <see cref="T:imbSCI.Core.math.md5"/>, <see cref="!:classificationReport"/>...
             </summary>
+            <remarks>
+            Also covers: aggregation, classificaton performance metrics (confusion matrix), functions (signal generators), matrix procedural pattern generation, value range tools...
+            </remarks>
+        </member>
+        <member name="T:imbSCI.Core.math.NamespaceGroupDoc">
+            <inheritdoc/>
         </member>
         <member name="T:imbSCI.Core.math.range.finder.NamespaceDoc">
             <summary>
@@ -11986,6 +12037,17 @@
             <param name="width">The width.</param>
             <param name="height">The height.</param>
             <returns></returns>
+        </member>
+        <member name="T:imbSCI.Core.math.range.NamespaceDoc">
+            <summary>
+            Tools for numeric ranges: value scaling, looping, histogram generation, descriptive statistics and procedural matrix generation
+            </summary>
+            <remarks>
+            The matrix generation uses <see cref="T:imbSCI.Core.math.functions.functionArray"/> and functions for procedural pattern generation.
+            </remarks>
+        </member>
+        <member name="T:imbSCI.Core.math.range.NamespaceGroupDoc">
+            <inheritdoc/>
         </member>
         <member name="T:imbSCI.Core.math.range.numberRange">
             <summary>
