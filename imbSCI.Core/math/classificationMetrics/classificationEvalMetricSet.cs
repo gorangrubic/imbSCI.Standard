@@ -62,6 +62,58 @@ namespace imbSCI.Core.math.classificationMetrics
             name = _name;
         }
 
+
+        /// <summary>
+        /// Constructs eval metrics with categories specified <c>labels</c>
+        /// </summary>
+        /// <param name="_name">The name.</param>
+        /// <param name="labels">The labels.</param>
+        public classificationEvalMetricSet(String _name, IEnumerable<String> labels)
+        {
+            name = _name;
+            foreach (String lbl in labels)
+            {
+                var m = this[lbl];
+            }
+        }
+
+        /// <summary>
+        /// Adds the record in the confusion matrix
+        /// </summary>
+        /// <param name="testResult">Class label - What was the prediction?</param>
+        /// <param name="truth">Class label - What the truth table said?</param>
+        public void AddRecord(String testResult, String truth)
+        {
+
+            foreach (String label in items.Keys)
+            {
+                if (testResult == label)
+                {
+                    if (label == truth)
+                    {
+                        this[label].truePositives++;
+                    }
+                    else
+                    {
+                        this[label].falsePositives++;
+                    }
+                }
+                else
+                {
+                    if (label == truth)
+                    {
+                        this[label].falseNegatives++;
+                    }
+                    else
+                    {
+                        this[label].trueNegatives++;
+                    }
+                }
+            }
+
+        }
+
+
         protected Dictionary<String, classificationEval> items = new Dictionary<string, classificationEval>();
 
         /// <summary>

@@ -49,6 +49,13 @@ namespace imbSCI.Core.math.classificationMetrics
             name = _name;
         }
 
+
+        //public void EvaluateByID(Int32 testResult, Int32 truthTable)
+        //{
+
+
+        //}
+
         /// <summary>
         /// Optional name assigned to this metric structure
         /// </summary>
@@ -66,7 +73,7 @@ namespace imbSCI.Core.math.classificationMetrics
         public Int32 positives { get; set; }
 
         /// <summary>
-        /// Gets or sets the true positives.
+        /// T_p - prediction was [true], and truth table said [true]
         /// </summary>
         /// <value>
         /// The true positives.
@@ -74,7 +81,7 @@ namespace imbSCI.Core.math.classificationMetrics
         public Int32 truePositives { get; set; }
 
         /// <summary>
-        /// Gets or sets the false positives.
+        /// F_p - prediction was [true], but truth table said [false]
         /// </summary>
         /// <value>
         /// The false positives.
@@ -82,7 +89,7 @@ namespace imbSCI.Core.math.classificationMetrics
         public Int32 falsePositives { get; set; }
 
         /// <summary>
-        /// Gets or sets the false negatives.
+        /// F_n - prediction was [false], but the truth table said [true]
         /// </summary>
         /// <value>
         /// The false negatives.
@@ -90,7 +97,7 @@ namespace imbSCI.Core.math.classificationMetrics
         public Int32 falseNegatives { get; set; }
 
         /// <summary>
-        /// Gets or sets the true negatives.
+        /// T_n - prediction was [false], and the truth table said [false]
         /// </summary>
         /// <value>
         /// The true negatives.

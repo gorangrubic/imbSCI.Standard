@@ -33,22 +33,6 @@ using System.ComponentModel;
 
 namespace imbSCI.Core.math.classificationMetrics
 {
-    [Flags]
-    public enum classificationReportRowFlags
-    {
-        none = 0,
-        singleCase = 1,
-        singleCategory = 2,
-        singleFold = 4,
-        multiCase = 8,
-        multiCategory = 16,
-        multiFold = 32,
-        classifier = 64,
-        FVExtractor = 128,
-        macroaverage = 256,
-        microaverage = 512,
-    }
-
     /// <summary>
     /// Base class for classification reporting
     /// </summary>
