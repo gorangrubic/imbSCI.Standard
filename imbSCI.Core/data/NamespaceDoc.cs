@@ -1,4 +1,4 @@
-// --------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="NamespaceDoc.cs" company="imbVeles" >
 //
 // Copyright (C) 2018 imbVeles
@@ -29,11 +29,23 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Core.data
 {
+
     /// <summary>
-    /// <para>Advanced reflection tools - type graph descriptors</para>
+    /// Advanced reflection tools - type graph descriptors, string path to property navigation and type meta data loader: from documentation C# XML and compiled DLL
     /// </summary>
-    [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class NamespaceDoc
+    /// <remarks>
+    /// Some remarks. All XML Documentation defined here will be also included in the NamespaceGroupDoc. Therefore, there is no need to edit comments of the group class below.
+    /// </remarks>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
     {
     }
+
+    /// <inheritdoc/>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceGroupDoc : NamespaceDoc
+    {
+
+    }
+
 }

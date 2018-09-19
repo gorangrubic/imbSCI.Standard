@@ -1103,8 +1103,14 @@
         </member>
         <member name="T:imbSCI.Core.collection.NamespaceDoc">
             <summary>
-            <para>Extended version of <see cref="!:PropertyCollection"/> and extension methods to work with <see cref="T:imbSCI.Core.collection.PropertyCollectionExtended"/> and <see cref="!:PropertyCollection"/></para>
+            Extended version of <see cref="!:PropertyCollection"/> and extension methods to work with <see cref="T:imbSCI.Core.collection.PropertyCollectionExtended"/> and <see cref="!:PropertyCollection"/>, as well as, checklist collections
             </summary>
+            <remarks>
+            Some remarks. All XML Documentation defined here will be also included in the NamespaceGroupDoc. Therefore, there is no need to edit comments of the group class below.
+            </remarks>
+        </member>
+        <member name="T:imbSCI.Core.collection.NamespaceGroupDoc">
+            <inheritdoc/>
         </member>
         <member name="T:imbSCI.Core.collection.oneOrMore`1">
              <summary>
@@ -2182,8 +2188,14 @@
         </member>
         <member name="T:imbSCI.Core.data.NamespaceDoc">
             <summary>
-            <para>Advanced reflection tools - type graph descriptors</para>
+            Advanced reflection tools - type graph descriptors, string path to property navigation and type meta data loader: from documentation C# XML and compiled DLL
             </summary>
+            <remarks>
+            Some remarks. All XML Documentation defined here will be also included in the NamespaceGroupDoc. Therefore, there is no need to edit comments of the group class below.
+            </remarks>
+        </member>
+        <member name="T:imbSCI.Core.data.NamespaceGroupDoc">
+            <inheritdoc/>
         </member>
         <member name="T:imbSCI.Core.data.PropertyExpression">
             <summary>
@@ -4230,8 +4242,13 @@
         </member>
         <member name="T:imbSCI.Core.extensions.NamespaceDoc">
             <summary>
-            <para>Main root namespace for imbSCI extension methods: data manipulation, advanced reflections, input/output, table styling, reporting, Excel-CSV serialization and deserialization, text operations</para>
+            Main root namespace for imbSCI extension methods: data manipulation, advanced reflections, input/output, table styling, reporting, Excel-CSV serialization and deserialization, text operations
             </summary>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="T:imbSCI.Core.extensions.NamespaceGroupDoc">
+            <inheritdoc/>
         </member>
         <member name="T:imbSCI.Core.extensions.table.core.rowMetaEvaluation">
             <summary>
@@ -4864,6 +4881,18 @@
             <returns>
             Color role
             </returns>
+        </member>
+        <member name="T:imbSCI.Core.extensions.table.dataTableTools">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:imbSCI.Core.extensions.table.dataTableTools.GetTextTable(System.Data.DataTable)">
+            <summary>
+            Renders the table into text
+            </summary>
+            <param name="source">The source.</param>
+            <returns></returns>
         </member>
         <member name="M:imbSCI.Core.extensions.table.dataTableTools.validateTable(System.Data.DataTable)">
             <summary>
@@ -8678,8 +8707,13 @@
         </member>
         <member name="T:imbSCI.Core.files.NamespaceDoc">
             <summary>
-            <para>Object serialization, <see cref="!:folderNode"/> structure, text search engines, fileDataStructure base classes </para>
+            Object serialization, <see cref="!:folderNode"/> structure, text search engines, fileDataStructure base classes 
             </summary>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="T:imbSCI.Core.files.NamespaceGroupDoc">
+            <inheritdoc/>
         </member>
         <member name="T:imbSCI.Core.files.objectSerialization">
             <summary>
@@ -9614,7 +9648,12 @@
         </member>
         <member name="T:imbSCI.Core.math.classificationMetrics.classificationEval">
             <summary>
-            Entry for <see cref="T:imbSCI.Core.math.classificationMetrics.classificationEvalMetricSet"/>
+            Entry for <see cref="T:imbSCI.Core.math.classificationMetrics.classificationEvalMetricSet"/>, keeping performance records for a label/category/class
+            </summary>
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.classificationEval.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Core.math.classificationMetrics.classificationEval"/> class.
             </summary>
         </member>
         <member name="M:imbSCI.Core.math.classificationMetrics.classificationEval.#ctor(System.String)">
@@ -9727,7 +9766,7 @@
         </member>
         <member name="T:imbSCI.Core.math.classificationMetrics.classificationEvalMetricSet">
             <summary>
-            Classification eval dictionary for each category separated
+            Classification performance records dictionary, keeping records for each category/label separatly
             </summary>
             <seealso cref="!:System.Collections.Generic.IEnumerable&lt;System.Collections.Generic.KeyValuePair&lt;System.String, imbSCI.Core.math.classificationMetrics.classificationEval&gt;&gt;" />
         </member>
@@ -9761,7 +9800,7 @@
         </member>
         <member name="P:imbSCI.Core.math.classificationMetrics.classificationEvalMetricSet.Item(System.String)">
             <summary>
-            Gets a <see cref="T:imbSCI.Core.math.classificationMetrics.classificationEval"/> for the specified category name
+            Gets a <see cref="T:imbSCI.Core.math.classificationMetrics.classificationEval"/> for the specified category name, if not known so far - creates new <see cref="T:imbSCI.Core.math.classificationMetrics.classificationEval"/> for it
             </summary>
             <value>
             The <see cref="T:imbSCI.Core.math.classificationMetrics.classificationEval"/>.
@@ -9849,6 +9888,13 @@
             </summary>
             <seealso cref="T:imbSCI.Core.math.classificationMetrics.IClassificationReport" />
         </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.classificationReport.#ctor(imbSCI.Core.math.classificationMetrics.classificationEvalMetricSet,imbSCI.Core.math.classificationMetrics.classificationMetricComputation)">
+            <summary>
+            Creates the report from metrics given, using averaging computation specified
+            </summary>
+            <param name="_metrics">The metrics to build report entry from</param>
+            <param name="averageComputation">The average computation method to apply for F1, P and R</param>
+        </member>
         <member name="M:imbSCI.Core.math.classificationMetrics.classificationReport.GetSetMetrics(imbSCI.Core.math.classificationMetrics.classificationEvalMetricSet)">
             <summary>
             Sets (if specified <c>_metrics</c> is not null) and Gets (earlier or just set) metrics object. Makes no change to report content, just stores the metrics temporarrly
@@ -9896,7 +9942,7 @@
         </member>
         <member name="M:imbSCI.Core.math.classificationMetrics.classificationReportExtensions.AddValues(imbSCI.Core.math.classificationMetrics.IClassificationReport,imbSCI.Core.math.classificationMetrics.classificationEvalMetricSet,imbSCI.Core.math.classificationMetrics.classificationMetricComputation)">
             <summary>
-            Adds the values from specified <c>metrics</c> object
+            Sets or Adds the values from specified <c>metrics</c> object. 
             </summary>
             <param name="a">a.</param>
             <param name="metrics">The metrics.</param>
@@ -10081,6 +10127,18 @@
             <summary>
             Counter reset
             </summary>
+        </member>
+        <member name="T:imbSCI.Core.math.DescriptiveStatistics">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:imbSCI.Core.math.DescriptiveStatistics.#ctor(System.Collections.Generic.IEnumerable{System.Double},System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Core.math.DescriptiveStatistics"/> class.
+            </summary>
+            <param name="data">The data.</param>
+            <param name="isSample">if set to <c>true</c> [is sample].</param>
         </member>
         <member name="T:imbSCI.Core.math.Fraction">
             <summary>
@@ -12283,12 +12341,12 @@
         </member>
         <member name="T:imbSCI.Core.math.StatisticsExtensions">
             <summary>
-            Entropy, and some wrappers to <see cref="N:MathNet.Numerics"/>
+            Entropy, and some wrappers to <see cref="!:MathNet.Numerics"/>
             </summary>
         </member>
         <member name="M:imbSCI.Core.math.StatisticsExtensions.GetStatistics(System.Collections.Generic.IEnumerable{System.Double},System.Boolean)">
             <summary>
-            Gets the statistics - <see cref="N:MathNet.Numerics.Statistics"/>
+            Gets the statistics - <see cref="!:MathNet.Numerics.Statistics"/>
             </summary>
             <param name="rFreqs">The r freqs.</param>
             <param name="increasedAccuricy">if set to <c>true</c> [increased accuricy].</param>
@@ -12304,7 +12362,7 @@
         </member>
         <member name="M:imbSCI.Core.math.StatisticsExtensions.GetStdDeviation(System.Collections.Generic.IEnumerable{System.Double},System.Boolean)">
             <summary>
-            Gets the standard deviation - just a wrapper <see cref="N:MathNet.Numerics.Statistics"/>
+            Gets the standard deviation - just a wrapper <see cref="!:MathNet.Numerics.Statistics"/>
             </summary>
             <param name="rFreqs">The r freqs.</param>
             <param name="isSample">if set to <c>true</c> [population].</param>
@@ -14130,8 +14188,13 @@
         </member>
         <member name="T:imbSCI.Core.reporting.NamespaceDoc">
             <summary>
-            <para>Core functionalities of the Reporting engine</para>
+            Core namespace of reporting functionality: Logger, Markdown, HTML, Exce... generators, gasic elements of Text User Interface, color manipulation, string templating
             </summary>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="T:imbSCI.Core.reporting.NamespaceGroupDoc">
+            <inheritdoc/>
         </member>
         <member name="T:imbSCI.Core.reporting.render.builderSelector">
             <summary>
@@ -19890,11 +19953,14 @@
         </member>
         <member name="T:imbSCI.Core.style.NamespaceDoc">
             <summary>
-            <para>New home for Styling functions of the framework</para>
+            Color gradients and manipulation, color format conversion (from hex to <see cref="T:System.Drawing.Color"/> and vice versa), HSL/HSV transformation... CSS style file format parsing, data annotation presets
             </summary>
             <remarks>
-            <para>It will host all color manipulation and general style-theme management used for different types of reporting</para>
+            It will host all color manipulation and general style-theme management used for different types of reporting
             </remarks>
+        </member>
+        <member name="T:imbSCI.Core.style.NamespaceGroupDoc">
+            <inheritdoc/>
         </member>
         <member name="T:imbSCI.Core.style.preset.NamespaceDoc">
             <summary>
@@ -21405,8 +21471,13 @@
         </member>
         <member name="T:imbSCI.Core.syntax.NamespaceDoc">
             <summary>
-            <para>Tools for processing and interpreting formal syntaxes (Obsolite)</para>
+            (OBSOLETE - will be removed soon)
             </summary>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="T:imbSCI.Core.syntax.NamespaceGroupDoc">
+            <inheritdoc/>
         </member>
         <member name="T:imbSCI.Core.syntax.nc.line.ncLine">
             <summary>

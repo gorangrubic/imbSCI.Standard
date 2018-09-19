@@ -45,6 +45,8 @@ namespace imbSCI.Core.math.classificationMetrics
         Double Recall { get; set; }
         Double F1measure { get; set; }
 
+        classificationMetricComputation method { get; set; }
+
         classificationEvalMetricSet GetSetMetrics(classificationEvalMetricSet _metrics = null);
     }
 }

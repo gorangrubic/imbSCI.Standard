@@ -31,7 +31,7 @@
 namespace imbSCI.Graph
 {
     /// <summary>
-    /// <para>Library dedicated to graph data structures and graph-for-visualisation conversion</para>
+    /// <para>imbSCI.Graph is an extension package for imbSCI library, extending graph classes with undirected graph object model and implementation for DGML, Dia, MXGraph (Draw.io) and DOT graph formats. Supports SVG rendering of charts (histograms, pie, bar and linear charts - in 2D and 3D.) and graph structures.</para>
     /// </summary>
     /// <remarks>
     /// <para>The main datastructure of the library is <see cref="FreeGraph.freeGraph"/>, a non-hierarchical graph with weighted <see cref="FreeGraph.freeGraphNodeBase"/> nodes and <see cref="FreeGraph.freeGraphLinkBase"/> links.</para>

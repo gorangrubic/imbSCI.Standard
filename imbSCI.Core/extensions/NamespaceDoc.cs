@@ -29,11 +29,22 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Core.extensions
 {
+
     /// <summary>
-    /// <para>Main root namespace for imbSCI extension methods: data manipulation, advanced reflections, input/output, table styling, reporting, Excel-CSV serialization and deserialization, text operations</para>
+    /// Main root namespace for imbSCI extension methods: data manipulation, advanced reflections, input/output, table styling, reporting, Excel-CSV serialization and deserialization, text operations
     /// </summary>
-    [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class NamespaceDoc
+    /// <remarks>
+    /// </remarks>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
     {
     }
+
+    /// <inheritdoc/>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceGroupDoc : NamespaceDoc
+    {
+
+    }
+
 }

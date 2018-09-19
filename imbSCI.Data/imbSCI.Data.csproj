@@ -5,7 +5,7 @@
     <ApplicationIcon>imbVeles48.ico</ApplicationIcon>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>imbSCI.Data.Standard</PackageId>
-    <Version>0.3.59</Version>
+    <Version>0.3.70</Version>
     <Title>imbSCI.Data - Coding for Science - Base library </Title>
     <Summary>Base layer of imbVeles Framework's imbSCI .NET Standard 2.0 libraries. 
     The library provides the core layer of shared: enumerations, interfaces and extensions as well as a number of thread-safe collections and data structures.</Summary>

@@ -1,4 +1,4 @@
-// --------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="NamespaceDoc.cs" company="imbVeles" >
 //
 // Copyright (C) 2018 imbVeles
@@ -29,11 +29,22 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Core.files
 {
+
     /// <summary>
-    /// <para>Object serialization, <see cref="folderNode"/> structure, text search engines, fileDataStructure base classes </para>
+    /// Object serialization, <see cref="folderNode"/> structure, text search engines, fileDataStructure base classes 
     /// </summary>
-    [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class NamespaceDoc
+    /// <remarks>
+    /// </remarks>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
     {
     }
+
+    /// <inheritdoc/>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceGroupDoc : NamespaceDoc
+    {
+
+    }
+
 }

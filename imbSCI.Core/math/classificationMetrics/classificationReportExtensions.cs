@@ -37,7 +37,7 @@ namespace imbSCI.Core.math.classificationMetrics
     public static class classificationReportExtensions
     {
         /// <summary>
-        /// Adds the values from specified <c>metrics</c> object
+        /// Sets or Adds the values from specified <c>metrics</c> object. 
         /// </summary>
         /// <param name="a">a.</param>
         /// <param name="metrics">The metrics.</param>
@@ -46,7 +46,7 @@ namespace imbSCI.Core.math.classificationMetrics
         {
             a.Precision += metrics.GetPrecision(method);
             a.Recall += metrics.GetRecall(method);
-            a.F1measure += metrics.GetPrecision(method);
+            a.F1measure += metrics.GetF1(method);
 
             foreach (var p in metrics)
             {
@@ -54,6 +54,8 @@ namespace imbSCI.Core.math.classificationMetrics
                 a.Wrong += p.Value.wrong;
                 a.Targets += p.Value.correct + p.Value.wrong;
             }
+
+            a.method = method;
         }
 
         /// <summary>

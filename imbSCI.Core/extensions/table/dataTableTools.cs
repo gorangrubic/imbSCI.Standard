@@ -34,12 +34,43 @@ namespace imbSCI.Core.extensions.table
     using imbSCI.Core.extensions.data;
     using imbSCI.Core.extensions.io;
     using imbSCI.Core.extensions.text;
+    using imbSCI.Core.reporting.lowLevelApi;
     using imbSCI.Data;
     using System.Data;
+    using System.Text;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public static class dataTableTools
     {
         public static Boolean validationDisabled = false;
+
+        /// <summary>
+        /// Renders the table into text
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <returns></returns>
+        public static String GetTextTable(this DataTable source)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Title \t\t\\tt [" + source.GetTitle() + "]");
+            sb.AppendLine("Description \t\t\t [" + source.GetDescription() + "]");
+            sb.AppendLine("---------------------------------------------------------");
+
+            sb.AppendLine(source.markdownTable(true));
+
+            sb.AppendLine("---------------------------------------------------------");
+
+            var extra = source.GetExtraDesc();
+            foreach (String ln in extra)
+            {
+                sb.AppendLine(ln);
+            }
+
+            return sb.ToString();
+        }
+
 
         /// <summary>
         /// Validates the table.

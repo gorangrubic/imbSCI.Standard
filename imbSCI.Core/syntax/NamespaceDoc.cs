@@ -29,11 +29,22 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Core.syntax
 {
+
     /// <summary>
-    /// <para>Tools for processing and interpreting formal syntaxes (Obsolite)</para>
+    /// (OBSOLETE - will be removed soon)
     /// </summary>
-    [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class NamespaceDoc
+    /// <remarks>
+    /// </remarks>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
     {
     }
+
+    /// <inheritdoc/>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceGroupDoc : NamespaceDoc
+    {
+
+    }
+
 }

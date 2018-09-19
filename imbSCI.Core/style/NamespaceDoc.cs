@@ -29,14 +29,23 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Core.style
 {
+
     /// <summary>
-    /// <para>New home for Styling functions of the framework</para>
+    /// Color gradients and manipulation, color format conversion (from hex to <see cref="System.Drawing.Color"/> and vice versa), HSL/HSV transformation... CSS style file format parsing, data annotation presets
     /// </summary>
     /// <remarks>
-    /// <para>It will host all color manipulation and general style-theme management used for different types of reporting</para>
+    /// It will host all color manipulation and general style-theme management used for different types of reporting
     /// </remarks>
-    [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class NamespaceDoc
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
     {
     }
+
+    /// <inheritdoc/>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceGroupDoc : NamespaceDoc
+    {
+
+    }
+
 }

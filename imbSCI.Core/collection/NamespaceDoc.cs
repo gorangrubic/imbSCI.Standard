@@ -1,4 +1,4 @@
-// --------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="NamespaceDoc.cs" company="imbVeles" >
 //
 // Copyright (C) 2018 imbVeles
@@ -29,11 +29,23 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Core.collection
 {
+
     /// <summary>
-    /// <para>Extended version of <see cref="PropertyCollection"/> and extension methods to work with <see cref="PropertyCollectionExtended"/> and <see cref="PropertyCollection"/></para>
+    /// Extended version of <see cref="PropertyCollection"/> and extension methods to work with <see cref="PropertyCollectionExtended"/> and <see cref="PropertyCollection"/>, as well as, checklist collections
     /// </summary>
-    [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class NamespaceDoc
+    /// <remarks>
+    /// Some remarks. All XML Documentation defined here will be also included in the NamespaceGroupDoc. Therefore, there is no need to edit comments of the group class below.
+    /// </remarks>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
     {
     }
+
+    /// <inheritdoc/>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceGroupDoc : NamespaceDoc
+    {
+
+    }
+
 }

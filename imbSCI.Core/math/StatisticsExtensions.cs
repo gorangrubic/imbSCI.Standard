@@ -33,7 +33,9 @@ using System.Linq;
 
 namespace imbSCI.Core.math
 {
-    using MathNet.Numerics.Statistics;
+
+
+
 
     /// <summary>
     /// Entropy, and some wrappers to <see cref="MathNet.Numerics"/>
@@ -61,12 +63,41 @@ namespace imbSCI.Core.math
         public static Double GetVariance(this IEnumerable<Double> rFreqs, Boolean isSample = false)
         {
             if (!rFreqs.Any()) return 0;
+
+            Double mean = rFreqs.Average();
+
+            Double above = 0;
+            Int32 c = 0;
+            foreach (Double rF in rFreqs)
+            {
+                Double d = rF - mean;
+                above += (d * d);
+                c++;
+            }
+
+            if (c == 1)
+            {
+                return 0;
+            }
+
+            if (above == 0)
+            {
+                return 0;
+            }
+
             if (!isSample)
             {
-                return rFreqs.PopulationVariance();
+                return above / c;
             }
-            return rFreqs.Variance();
+            else
+            {
+                return above / (c - 1);
+            }
+
         }
+
+
+        //public static Double GetMeanValue()
 
         /// <summary>
         /// Gets the standard deviation - just a wrapper <see cref="MathNet.Numerics.Statistics"/>
@@ -76,12 +107,38 @@ namespace imbSCI.Core.math
         /// <returns></returns>
         public static Double GetStdDeviation(this IEnumerable<Double> rFreqs, Boolean isSample = true)
         {
-            if (!rFreqs.Any()) return 0;
-            if (!isSample)
-            {
-                return rFreqs.PopulationStandardDeviation();
-            }
-            return rFreqs.StandardDeviation();
+            return Math.Sqrt(GetVariance(rFreqs, isSample));
+            //if (!rFreqs.Any()) return 0;
+
+            //Double mean = rFreqs.Average();
+
+            //Double above = 0;
+            //Int32 c = 0;
+            //foreach (Double rF in rFreqs)
+            //{
+            //    Double d = rF - mean;
+            //    above += (d * d);
+            //    c++;
+            //}
+
+            //if (c == 1)
+            //{
+            //    return 0;
+            //}
+
+            //if (above == 0)
+            //{
+            //    return 0;
+            //}
+
+            //if (!isSample)
+            //{
+            //    return Math.Sqrt(above / c);
+            //} else
+            //{
+            //    return Math.Sqrt(above / (c - 1));
+            //}
+            
         }
 
         /// <summary>

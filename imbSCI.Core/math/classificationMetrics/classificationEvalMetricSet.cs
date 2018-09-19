@@ -36,7 +36,7 @@ using System.Linq;
 namespace imbSCI.Core.math.classificationMetrics
 {
     /// <summary>
-    /// Classification eval dictionary for each category separated
+    /// Classification performance records dictionary, keeping records for each category/label separatly
     /// </summary>
     /// <seealso cref="System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String, imbSCI.Core.math.classificationMetrics.classificationEval}}" />
     public class classificationEvalMetricSet : IEnumerable<KeyValuePair<String, classificationEval>>
@@ -84,32 +84,69 @@ namespace imbSCI.Core.math.classificationMetrics
         /// <param name="truth">Class label - What the truth table said?</param>
         public void AddRecord(String testResult, String truth)
         {
-
-            foreach (String label in items.Keys)
+            if (testResult == truth)
             {
-                if (testResult == label)
+                this[truth].correct++;
+            }
+            else
+            {
+                this[truth].wrong++;
+            }
+
+            if (testResult == truth)
+            {
+                this[testResult].truePositives++;
+                foreach (String label in items.Keys)
                 {
-                    if (label == truth)
-                    {
-                        this[label].truePositives++;
-                    }
-                    else
-                    {
-                        this[label].falsePositives++;
-                    }
-                }
-                else
-                {
-                    if (label == truth)
-                    {
-                        this[label].falseNegatives++;
-                    }
-                    else
+                    if (label != testResult)
                     {
                         this[label].trueNegatives++;
                     }
                 }
+
             }
+            else
+            {
+                this[testResult].falsePositives++;
+                this[truth].falseNegatives++;
+
+                foreach (String label in items.Keys)
+                {
+                    if ((label != testResult) && (label != truth))
+                    {
+                        this[label].trueNegatives++;
+                    }
+                }
+
+            }
+
+
+
+            //foreach (String label in items.Keys)
+            //{
+            //    if (testResult == truth)
+            //    {
+            //        if (label == truth)
+            //        {
+            //            this[label].truePositives++;
+            //        }
+            //        else
+            //        {
+            //            this[label].falsePositives++;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        if (label == truth)
+            //        {
+            //            this[label].falseNegatives++;
+            //        }
+            //        else
+            //        {
+            //            this[label].trueNegatives++;
+            //        }
+            //    }
+            //}
 
         }
 
@@ -117,7 +154,7 @@ namespace imbSCI.Core.math.classificationMetrics
         protected Dictionary<String, classificationEval> items = new Dictionary<string, classificationEval>();
 
         /// <summary>
-        /// Gets a <see cref="classificationEval"/> for the specified category name
+        /// Gets a <see cref="classificationEval"/> for the specified category name, if not known so far - creates new <see cref="classificationEval"/> for it
         /// </summary>
         /// <value>
         /// The <see cref="classificationEval"/>.

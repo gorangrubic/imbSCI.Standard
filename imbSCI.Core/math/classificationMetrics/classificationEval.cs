@@ -27,15 +27,23 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using imbSCI.Core.attributes;
+using imbSCI.Core.enums;
+using imbSCI.Core.math.aggregation;
 using System;
+using System.ComponentModel;
+using System.Xml.Serialization;
 
 namespace imbSCI.Core.math.classificationMetrics
 {
     /// <summary>
-    /// Entry for <see cref="classificationEvalMetricSet"/>
+    /// Entry for <see cref="classificationEvalMetricSet"/>, keeping performance records for a label/category/class
     /// </summary>
     public class classificationEval
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="classificationEval"/> class.
+        /// </summary>
         public classificationEval()
         {
         }
@@ -50,18 +58,15 @@ namespace imbSCI.Core.math.classificationMetrics
         }
 
 
-        //public void EvaluateByID(Int32 testResult, Int32 truthTable)
-        //{
-
-
-        //}
-
         /// <summary>
         /// Optional name assigned to this metric structure
         /// </summary>
         /// <value>
         /// The name.
         /// </value>
+        [imb(imbAttributeName.measure_letter, "C")]
+        [DisplayName("Label")]
+        [Description("Name of class / category / label, that was subject of classification")]
         public String name { get; set; } = "";
 
         /// <summary>
@@ -70,6 +75,9 @@ namespace imbSCI.Core.math.classificationMetrics
         /// <value>
         /// The positives.
         /// </value>
+        [imb(imbAttributeName.reporting_hide)]
+        [DisplayName("Positive")]
+        [Description("Number of positive cases")]
         public Int32 positives { get; set; }
 
         /// <summary>
@@ -78,6 +86,9 @@ namespace imbSCI.Core.math.classificationMetrics
         /// <value>
         /// The true positives.
         /// </value>
+        [imb(imbAttributeName.measure_letter, "TP")]
+        [DisplayName("True Positive")]
+        [Description("Number of cases when predicted label was true")]
         public Int32 truePositives { get; set; }
 
         /// <summary>
@@ -86,6 +97,9 @@ namespace imbSCI.Core.math.classificationMetrics
         /// <value>
         /// The false positives.
         /// </value>
+        [imb(imbAttributeName.measure_letter, "FP")]
+        [DisplayName("False Positive")]
+        [Description("Number of cases when predicted label was false")]
         public Int32 falsePositives { get; set; }
 
         /// <summary>
@@ -94,6 +108,9 @@ namespace imbSCI.Core.math.classificationMetrics
         /// <value>
         /// The false negatives.
         /// </value>
+        [imb(imbAttributeName.measure_letter, "FN")]
+        [DisplayName("False Negatives")]
+        [Description("Number of cases when predicted label was not match with this label, and it was correct")]
         public Int32 falseNegatives { get; set; }
 
         /// <summary>
@@ -102,6 +119,9 @@ namespace imbSCI.Core.math.classificationMetrics
         /// <value>
         /// The true negatives.
         /// </value>
+        [imb(imbAttributeName.measure_letter, "TN")]
+        [DisplayName("True Negatives")]
+        [Description("Number of cases when predicted label was not true, and it was correct")]
         public Int32 trueNegatives { get; set; }
 
         /// <summary>
@@ -110,6 +130,9 @@ namespace imbSCI.Core.math.classificationMetrics
         /// <value>
         /// The correct.
         /// </value>
+        [imb(imbAttributeName.measure_letter, "T")]
+        [DisplayName("Correct")]
+        [Description("Number of correctly identified label")]
         public Int32 correct { get; set; }
 
         /// <summary>
@@ -118,6 +141,9 @@ namespace imbSCI.Core.math.classificationMetrics
         /// <value>
         /// The wrong.
         /// </value>
+        [imb(imbAttributeName.measure_letter, "!T")]
+        [DisplayName("Wrong")]
+        [Description("Number of incorrectly identified label")]
         public Int32 wrong { get; set; }
 
         public static classificationEval operator +(classificationEval a, classificationEval b)
@@ -201,6 +227,10 @@ namespace imbSCI.Core.math.classificationMetrics
         /// <value>
         /// The targets.
         /// </value>
+        [XmlIgnore]
+        [imb(imbAttributeName.measure_letter, "|C|")]
+        [DisplayName("Targets")]
+        [Description("Total number of tested cases")]
         public Int32 targets
         {
             get

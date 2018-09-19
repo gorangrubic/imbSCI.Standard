@@ -30,6 +30,7 @@
 using imbSCI.Core.attributes;
 using System;
 using System.ComponentModel;
+using System.Xml.Serialization;
 
 namespace imbSCI.Core.math.classificationMetrics
 {
@@ -47,6 +48,23 @@ namespace imbSCI.Core.math.classificationMetrics
         {
             Name = caseName;
         }
+
+        /// <summary>
+        /// Creates the report from metrics given, using averaging computation specified
+        /// </summary>
+        /// <param name="_metrics">The metrics to build report entry from</param>
+        /// <param name="averageComputation">The average computation method to apply for F1, P and R</param>
+        public classificationReport(classificationEvalMetricSet _metrics, classificationMetricComputation averageComputation)
+        {
+            Name = _metrics.name;
+            GetSetMetrics(_metrics);
+            this.AddValues(_metrics, averageComputation);
+            method = averageComputation;
+        }
+
+        [XmlIgnore]
+        [imb(imbAttributeName.reporting_hide)]
+        public classificationMetricComputation method { get; set; }
 
         private classificationEvalMetricSet metrics;
 

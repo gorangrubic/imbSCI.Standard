@@ -246,7 +246,7 @@ namespace imbSCI.DataComplex.special
 
             varianceFreq = RFreqArray.GetVariance(false);
             //Accord.Statistics.Measures.Variance(valArray, true);
-            standardDeviation = RFreqArray.GetStdDeviation(false); // Accord.Statistics.Measures.StandardDeviation(valArray, avgFreq, true);
+            standardDeviation = Math.Sqrt(varianceFreq); //RFreqArray.GetStdDeviation(false); // Accord.Statistics.Measures.StandardDeviation(valArray, avgFreq, true);
             //}
 
             Accept();
