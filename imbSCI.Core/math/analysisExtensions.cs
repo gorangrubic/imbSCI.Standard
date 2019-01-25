@@ -29,11 +29,20 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Core.math
 {
+    using imbSCI.Data.collection.nested;
     using System;
     using System.Collections;
+    using System.Collections.Generic;
 
     public static class analysisExtensions
     {
+
+
+
+
+
+
+
         /// <summary>
         /// Clips to p: from -1 to 1
         /// </summary>

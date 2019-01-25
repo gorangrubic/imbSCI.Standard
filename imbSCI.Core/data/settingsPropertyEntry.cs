@@ -109,7 +109,7 @@ namespace imbSCI.Core.data
             importance = dc.GetImportance();
             expression = dc.Expression;
             unit = dc.GetUnit();
-
+            textColor = dc.GetTextColor().ColorToHex();
             width = dc.GetWidth();
 
             //spe.displayName = dc.Caption;

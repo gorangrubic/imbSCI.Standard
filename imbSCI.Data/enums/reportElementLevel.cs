@@ -55,12 +55,12 @@ namespace imbSCI.Data.enums
         servicepage,
 
         /// <summary>
-        /// The document
+        /// The document - has its own directory and default file name
         /// </summary>
         document,
 
         /// <summary>
-        /// The page
+        /// The page - custom file name, in the same directory as document
         /// </summary>
         page,
 

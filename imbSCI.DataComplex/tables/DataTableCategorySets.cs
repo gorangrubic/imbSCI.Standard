@@ -48,6 +48,10 @@ namespace imbSCI.DataComplex.tables
         //    theLastColumn,
         //}
 
+        public static Color DefaultHeaderBackGround { get; set; } = Color.LightGray;
+
+
+
         /// <summary> </summary>
         public aceDictionarySet<string, selectZone> categoryZones { get; protected set; } = new aceDictionarySet<string, selectZone>();
 
@@ -72,7 +76,7 @@ namespace imbSCI.DataComplex.tables
                 String groupName = cn.GetGroup().ToUpper();
                 categoryList.Add(groupName);
 
-                if (!categoryColors.ContainsKey(groupName)) categoryColors.Add(groupName, cn.DefaultBackground(Color.Gray));
+                if (!categoryColors.ContainsKey(groupName)) categoryColors.Add(groupName, cn.DefaultBackground(DefaultHeaderBackGround));
                 categoryZones.Add(groupName, new selectZone(c, 0, group.Count - 1, 0));
                 Add(groupName, cn);
                 c = c + group.Count;

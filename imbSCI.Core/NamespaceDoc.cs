@@ -27,6 +27,8 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using imbSCI.Core.data.help;
+
 namespace imbSCI.Core
 {
     /// <summary>
@@ -36,6 +38,7 @@ namespace imbSCI.Core
     /// <para>At this namespace, you have control over Console output: <see cref="screenOutputControl"/></para>
     /// </remarks>
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    [imbMeta(imbMetaAttributeEnum.AddSearchLink, @"http://doc.veles.rs/imb-sci-api/search.html?SearchText={0}", "Search API")]
     internal class NamespaceDoc
     {
     }

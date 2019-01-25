@@ -27,8 +27,11 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using imbSCI.Core.extensions.table;
+using imbSCI.Core.reporting;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace imbSCI.Core.data
 {
@@ -38,6 +41,55 @@ namespace imbSCI.Core.data
     /// <seealso cref="System.Collections.Generic.List{imbSCI.Core.data.settingsMemberInfoEntry}" />
     public class settingsMemberInfoGroup : List<settingsMemberInfoEntry>
     {
+
+        ///// <summary>
+        ///// Adds columns and transfers formating and other meta information specified in the <see cref="settingsPropertyEntry"/> entries. 
+        ///// </summary>
+        ///// <param name="table">The table to write columns into. If not specified, it will create new with name of the group.</param>
+        ///// <remarks>The method will declare only <see cref="settingsPropertyEntry"/>s, not the entries of other type</remarks>
+        ///// <returns></returns>
+        //public DataTable SetDataTable(DataTable table = null)
+        //{
+        //    if (table == null) table = new DataTable(GroupName);
+
+        //    return settingsEntriesForObjectExtensions.SetDataTable(this, table); 
+        //}
+
+        //public Dictionary<String, Object> GetDictionary(Object data, String prefix = "")
+        //{
+        //    foreach (settingsMemberInfoEntry entry in this)
+        //    {
+        //        if ()
+        //    }
+        //}
+
+        //public DataRow SetDataRow(DataRow dr, DataTable table, Object data, String prefix = "", bool addRowBeforeEnd = true)
+        //{
+        //    if (dr == null) dr = table.NewRow(); // new DataTable(name);
+
+        //    var dict = GetDictionary();
+
+        //    if (!table.Columns.Contains("Name"))
+        //    {
+        //        dr["Name"] = name;
+        //    }
+
+        //    foreach (var p in dict)
+        //    {
+        //        dr[p.Key] = p.Value;
+        //    }
+
+
+        //    if (addRowBeforeEnd)
+        //    {
+        //        table.Rows.Add(dr);
+        //    }
+
+        //    return dr;
+        //}
+
+
+
         public settingsMemberInfoGroup()
         {
         }

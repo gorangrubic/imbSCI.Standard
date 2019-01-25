@@ -2,7 +2,9 @@ using Svg.Transforms;
 using System;
 using System.ComponentModel;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Xml;
 
 namespace Svg
@@ -284,12 +286,14 @@ namespace Svg
             this.Render(renderer);
         }
 
-        public void WriteElement(XmlTextWriter writer)
+
+
+        public void WriteElement(XmlWriter writer)
         {
             this.Write(writer);
         }
 
-        protected virtual void WriteStartElement(XmlTextWriter writer)
+        protected virtual void WriteStartElement(XmlWriter writer)
         {
             if (this.ElementName != String.Empty)
             {
@@ -298,7 +302,7 @@ namespace Svg
             this.WriteAttributes(writer);
         }
 
-        protected virtual void WriteEndElement(XmlTextWriter writer)
+        protected virtual void WriteEndElement(XmlWriter writer)
         {
             if (this.ElementName != String.Empty)
             {
@@ -306,7 +310,7 @@ namespace Svg
             }
         }
 
-        protected virtual void WriteAttributes(XmlTextWriter writer)
+        protected virtual void WriteAttributes(XmlWriter writer)
         {
             var attributes = from PropertyDescriptor a in TypeDescriptor.GetProperties(this)
                              let attribute = a.Attributes[typeof(SvgAttributeAttribute)] as SvgAttributeAttribute
@@ -329,7 +333,7 @@ namespace Svg
             }
         }
 
-        protected virtual void Write(XmlTextWriter writer)
+        protected virtual void Write(XmlWriter writer)
         {
             if (this.ElementName != String.Empty)
             {
@@ -339,7 +343,7 @@ namespace Svg
             }
         }
 
-        protected virtual void WriteChildren(XmlTextWriter writer)
+        protected virtual void WriteChildren(XmlWriter writer)
         {
             foreach (SvgElement child in this.Children)
             {

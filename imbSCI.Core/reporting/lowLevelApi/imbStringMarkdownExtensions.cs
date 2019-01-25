@@ -621,6 +621,7 @@ namespace imbSCI.Core.reporting.lowLevelApi
                 foreach (DataColumn dc in table.Columns)
                 {
                     String content = dc.markdownFieldForColumn(dr, skipEscape.Contains(dc), dcfs[dc.ColumnName]);
+                    content = content.Replace(Environment.NewLine, "");
                     /*
 
                     String content = "";
@@ -684,7 +685,7 @@ namespace imbSCI.Core.reporting.lowLevelApi
                     String wrapTag = dc.GetWrapTag();
                     if (!wrapTag.isNullOrEmpty()) content = "<span>" + content + "</span>";
                     */
-                    rowline = imbSciStringExtensions.add(rowline, content, "|");
+                    rowline = rowline.add(content, "|"); // imbSciStringExtensions.add(rowline, content, "|");
                 }
                 rowline = rowline + "|" + Environment.NewLine;
                 output = output + rowline;

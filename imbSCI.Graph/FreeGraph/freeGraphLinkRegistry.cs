@@ -34,6 +34,7 @@ using System.Linq;
 
 namespace imbSCI.Graph.FreeGraph
 {
+
     public class freeGraphLinkRegistry
     {
         public freeGraphLinkRegistry()
@@ -54,6 +55,21 @@ namespace imbSCI.Graph.FreeGraph
             if (linkedAtoBDictionary.Any()) return true;
             if (linkedBtoADictionary.Any()) return true;
             return false;
+        }
+
+
+        /// <summary>
+        /// Number of links defined in the dictionary
+        /// </summary>
+        /// <value>
+        /// The count.
+        /// </value>
+        public Int32 Count
+        {
+            get
+            {
+                return linkDictionary.Count;
+            }
         }
 
         /// <summary>
@@ -283,7 +299,11 @@ namespace imbSCI.Graph.FreeGraph
                 linkedBtoADictionary[link.nodeNameB].Add(nodeDictionary[link.nodeNameA]);
                 linkAtoBDictionary[link.nodeNameA].Add(link);
                 linkBtoADictionary[link.nodeNameB].Add(link);
-                linkDictionary.Add(GetLinkKey(link.nodeNameA, link.nodeNameB), link);
+                String k = GetLinkKey(link.nodeNameA, link.nodeNameB);
+                if (!linkDictionary.ContainsKey(k))
+                {
+                    linkDictionary.Add(k, link);
+                }
             }
             return isRedundant;
         }

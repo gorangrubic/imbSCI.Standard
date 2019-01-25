@@ -180,7 +180,13 @@ namespace imbSCI.Data.collection
             get
             {
                 key = resolveKey(key);
-                return items[key];
+                if (key < items.Count)
+                {
+                    return items[key];
+                } else
+                {
+                    return default(T);
+                }
             }
             set
             {

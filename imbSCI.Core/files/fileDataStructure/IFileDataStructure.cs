@@ -55,7 +55,7 @@ namespace imbSCI.Core.files.fileDataStructure
         void OnLoaded();
 
         /// <summary>
-        /// Called when before saving the data structure
+        /// Called before saving the data structure
         /// </summary>
         void OnBeforeSave();
 

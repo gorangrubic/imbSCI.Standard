@@ -523,7 +523,7 @@ namespace imbSCI.Core.extensions.text
         }
 
         /// <summary>
-        /// V3.1: Pretvara camel naming convention string
+        /// Converts camel name (e.g. "imbTitleCamelOperation") into proper, space separated, caption (Imb Title Camel Operation)
         /// u normalan title. Ubacuje razmake i sredjuje prva slova.
         /// </summary>
         /// <param name="source"></param>
@@ -623,7 +623,7 @@ namespace imbSCI.Core.extensions.text
         }
 
         /// <summary>
-        /// Vraca skracenicu naziva koji ima vise reci - radi i sa jednom, onda prosledjuje imbGetWordAbbrevation
+        /// Creates abbreviation from multi word phrase - it also supports single word source
         /// </summary>
         /// <param name="source"></param>
         /// <param name="targetLength"></param>

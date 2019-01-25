@@ -28,6 +28,8 @@
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
 using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace imbSCI.Core.math.classificationMetrics
 {
@@ -36,6 +38,70 @@ namespace imbSCI.Core.math.classificationMetrics
     /// </summary>
     public static class classificationReportExtensions
     {
+
+        public static Double GetReportValue(this classificationReport report, String valueToUseKey)
+        {
+            Double val = 0;
+
+
+            switch (valueToUseKey)
+            {
+                case classificationReportStyleDefinition.VALUE_F1:
+                    val = report.F1measure;
+                    break;
+                case classificationReportStyleDefinition.VALUE_FS:
+                    val = report.GetSelectedFeatureAverage();
+                    break;
+            }
+
+            return val;
+        }
+
+        public static Double GetSelectedFeatureAverage(this classificationReport report)
+        {
+            return report.data.GetMeanValue("SelectedFeatures");
+        }
+
+        public static Dictionary<String, List<classificationReportExpanded>> GetSpaceLayers(this IEnumerable<classificationReportExpanded> reports, classificationReportStyleDefinition style, Dictionary<String, List<classificationReportExpanded>> output = null)
+        {
+            if (output == null) output = new Dictionary<string, List<classificationReportExpanded>>();
+            style.Prepare();
+
+            foreach (classificationReportExpanded rep in reports)
+            {
+                foreach (var pair in style.layerNeedleByNameCompiled)
+                {
+                    if (pair.Key.IsMatch(rep.Name))
+                    {
+                        Match mc = pair.Key.Match(rep.Name);
+                        String nm = rep.Name;
+
+                        var splits = pair.Key.Split(nm);
+                        nm = "";
+
+                        foreach (String sp in splits)
+                        {
+                            nm += sp;
+                        }
+
+                        rep.layer = pair.Value;
+
+                    }
+
+
+                }
+
+                if (!output.ContainsKey(rep.layer)) output.Add(rep.layer, new List<classificationReportExpanded>());
+                output[rep.layer].Add(rep);
+            }
+
+
+            return output;
+
+        }
+
+
+
         /// <summary>
         /// Sets or Adds the values from specified <c>metrics</c> object. 
         /// </summary>
@@ -71,6 +137,14 @@ namespace imbSCI.Core.math.classificationMetrics
             a.Correct += source.Correct;
             a.Targets += source.Targets;
             a.Wrong += source.Wrong;
+
+            if (a is classificationReport cReport)
+            {
+                if (source is classificationReport sReport)
+                {
+                    cReport.data.Merge(sReport.data);
+                }
+            }
         }
 
         /// <summary>

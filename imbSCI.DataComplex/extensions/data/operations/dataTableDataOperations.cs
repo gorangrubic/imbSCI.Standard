@@ -336,7 +336,7 @@ namespace imbSCI.DataComplex.extensions.data.operations
         }
 
         /// <summary>
-        /// Gets the aggregated table.
+        /// Gets the aggregated table> where values are computed as agregation from multi source tables. 
         /// </summary>
         /// <param name="tables">The tables.</param>
         /// <param name="tablename">The tablename.</param>

@@ -242,5 +242,6 @@ namespace imbSCI.Data.enums.fields
         description,
         title,
         table_styleset,
+        col_textColor,
     }
 }

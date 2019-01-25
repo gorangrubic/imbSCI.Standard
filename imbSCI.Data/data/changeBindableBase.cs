@@ -33,6 +33,7 @@ namespace imbSCI.Data.data
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
+    using System.Xml.Serialization;
 
     /// <summary>
     /// Keeps record on properties whose values were changed since last call to <see cref="Accept"/> method
@@ -66,7 +67,7 @@ namespace imbSCI.Data.data
         /// <summary>
         /// Clears all changes recorded since object creation or last Accept()
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if there were changes</returns>
         protected virtual Boolean Accept()
         {
             if (Changes.Count > 0)
@@ -84,6 +85,7 @@ namespace imbSCI.Data.data
         /// <value>
         /// <c>true</c> if this instance has changes; otherwise, <c>false</c>.
         /// </value>
+        [XmlIgnore]
         public Boolean HasChanges
         {
             get
@@ -103,6 +105,7 @@ namespace imbSCI.Data.data
         /// <value>
         /// The changes.
         /// </value>
+        [XmlIgnore]
         public List<string> Changes
         {
             get

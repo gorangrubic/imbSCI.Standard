@@ -29,12 +29,14 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Core.extensions.text
 {
+    using imbSCI.Core.math;
     #region imbVeles using
 
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using System.Text.RegularExpressions;
 
     #endregion imbVeles using
@@ -297,8 +299,84 @@ namespace imbSCI.Core.extensions.text
             return input.Length;
         }
 
+
+
         /// <summary>
-        /// V4> pronalazi najduzi zajednici pod string
+        /// It extracts common substring at left end (at start, root) of input strings
+        /// </summary>
+        /// <param name="strings">The strings.</param>
+        /// <param name="tolerance">The tolerance: what proportion of input strings could be excluded in order to get longest possible common root from the rest of the input</param>
+        /// <returns></returns>
+        public static String commonStartSubstring(this IEnumerable<String> strings, Double tolerance = 0.1)
+        {
+
+            List<String> iteration = strings.ToList();
+            List<String> excluded = new List<string>();
+            StringBuilder sb = new StringBuilder();
+
+            Int32 inputSize = iteration.Count;
+
+            Int32 p = 0;
+            while (iteration.Any())
+            {
+                List<String> nextIteration = new List<string>();
+                String currentChar = "";
+
+                foreach (String str in iteration)
+                {
+                    if (p < str.Length)
+                    {
+
+                        if (currentChar == "")
+                        {
+                            currentChar = str.Substring(p, 1);
+                            nextIteration.Add(str);
+                        }
+                        else
+                        {
+                            var candidateChar = str.Substring(p, 1);
+                            if (candidateChar == currentChar)
+                            {
+                                nextIteration.Add(str);
+                            }
+                            else
+                            {
+                                excluded.Add(str);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        excluded.Add(str);
+                    }
+
+                }
+
+                if (excluded.Count.GetRatio(inputSize) > tolerance)
+                {
+                    break;
+                }
+                else
+                {
+                    if (currentChar == "")
+                    {
+                        sb.Append(currentChar);
+                    }
+                }
+                p++;
+
+            }
+
+            return sb.ToString();
+
+
+        }
+
+
+
+
+        /// <summary>
+        /// Extracts one longest common sugstring
         /// </summary>
         /// <param name="strings"></param>
         /// <returns></returns>
@@ -322,7 +400,7 @@ namespace imbSCI.Core.extensions.text
         }
 
         /// <summary>
-        /// V4> pronalazi najduze zajednicke pod stringove
+        /// Extracts the longest possibile common substrings
         /// </summary>
         /// <param name="strings"></param>
         /// <returns></returns>

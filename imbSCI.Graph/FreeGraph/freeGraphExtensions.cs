@@ -29,6 +29,7 @@
 // ------------------------------------------------------------------------------------------------------------------
 using imbSCI.Core.extensions.io;
 using imbSCI.Core.files;
+using imbSCI.Data.collection.math;
 using imbSCI.Data.enums;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,109 @@ namespace imbSCI.Graph.FreeGraph
     /// </summary>
     public static class freeGraphExtensions
     {
+        public static aceRelationMatrix<String, String, Int32> GetIDMatrix(this freeGraph graph, Int32 scoreFactor)
+        {
+
+            List<freeGraphNodeBase> nodes = graph.nodes;
+
+            List<String> nodeIDs = nodes.Select(x => x.name).ToList();
+
+            aceRelationMatrix<String, String, Double> output = GetIDMatrix(graph);
+            aceRelationMatrix<String, String, Int32> outputInt32 = new aceRelationMatrix<string, string, Int32>(output.GetXAxis(), output.GetYAxis(), 0);
+
+            foreach (string kx in output.GetXAxis())
+            {
+                foreach (string ky in output.GetYAxis())
+                {
+                    outputInt32[kx, ky] = Convert.ToInt32(output[kx, ky] * scoreFactor);
+
+                }
+            }
+
+
+            return outputInt32;
+
+        }
+
+
+        public static aceRelationMatrix<String, String, Double> GetIDMatrix(this freeGraph graph)
+        {
+
+            List<freeGraphNodeBase> nodes = graph.nodes;
+
+            List<String> nodeIDs = nodes.Select(x => x.name).ToList();
+
+            aceRelationMatrix<String, String, Double> output = new aceRelationMatrix<String, String, Double>(nodeIDs, nodeIDs, 0);
+
+            foreach (freeGraphNodeBase node in nodes)
+            {
+
+                var links = graph.GetLinks(node.name, true, true);
+
+                foreach (freeGraphLinkBase link in links.links)
+                {
+
+                    if (link.nodeNameA == node.name)
+                    {
+                        output[link.nodeNameA, link.nodeNameB] += link.weight;
+                    }
+                    else
+                    {
+                        output[link.nodeNameB, link.nodeNameA] += link.weight;
+
+                    }
+                }
+
+            }
+
+            return output;
+
+        }
+
+
+
+        /// <summary>
+        /// Transforms the free graph into relationship matrix
+        /// </summary>
+        /// <param name="graph">The graph.</param>
+        /// <returns></returns>
+        public static aceRelationMatrix<freeGraphNodeBase, freeGraphNodeBase, Double> GetMatrix(this freeGraph graph)
+        {
+
+            List<freeGraphNodeBase> nodes = graph.nodes;
+
+            aceRelationMatrix<freeGraphNodeBase, freeGraphNodeBase, Double> output = new aceRelationMatrix<freeGraphNodeBase, freeGraphNodeBase, Double>(nodes, nodes, 0);
+
+            foreach (freeGraphNodeBase node in nodes)
+            {
+
+                var links = graph.GetLinks(node.name, true, true);
+
+                foreach (freeGraphLinkBase link in links.links)
+                {
+                    var nodeA = graph.GetNode(link.nodeNameA);
+                    var nodeB = graph.GetNode(link.nodeNameB);
+
+                    if (link.nodeNameA == node.name)
+                    {
+                        output[nodeA, nodeB] += link.weight;
+                    }
+                    else
+                    {
+                        output[nodeB, nodeA] += link.weight;
+                    }
+                }
+
+
+
+            }
+
+            return output;
+
+        }
+
+
+
         /// <summary>
         /// Pings the size of the graph by expanding from specified <c>pingSources</c> until number of reached nodes is increasing. <see cref="freeGraphPingType" />
         /// </summary>

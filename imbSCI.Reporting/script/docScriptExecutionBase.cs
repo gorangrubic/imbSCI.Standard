@@ -350,7 +350,7 @@ namespace imbSCI.Reporting.script
         /// <value>
         /// The directory current.
         /// </value>
-        public DirectoryInfo directoryScope { get; set; }
+        public abstract DirectoryInfo directoryScope { get; set; }
 
         /// <summary>
         /// Gets or sets the directory root.
@@ -358,7 +358,7 @@ namespace imbSCI.Reporting.script
         /// <value>
         /// The directory root.
         /// </value>
-        public DirectoryInfo directoryRoot { get; set; }
+        public abstract DirectoryInfo directoryRoot { get; set; }
 
         /// <summary>
         /// Gets or sets the fileinfo.

@@ -36,8 +36,6 @@ namespace imbSCI.Data.collection.nested
     using System.Linq;
     using System.Threading;
 
-    // using aceCommonTypes.extensions;
-    //   using aceCommonTypes.extensions.enumworks;
 
     /// <summary>
     /// 2D dictionary with automatic dimension dictionary management.

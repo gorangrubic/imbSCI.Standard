@@ -206,8 +206,8 @@ namespace imbSCI.DataComplex.tables
             // <--- ovde ubaciti da atributi klase odredjuju stra prikazuje
             extraRowStyles.Add(output.AddExtraRow(templateFieldDataTable.col_group, 200), DataRowInReportTypeEnum.mergedCategoryHeader);
             extraRowStyles.Add(output.AddExtraRow(templateFieldDataTable.col_caption, 200), DataRowInReportTypeEnum.columnCaption);
-            //extraRowStyles.Add(output.AddExtraRow(templateFieldDataTable.col_unit, 200), DataRowInReportTypeEnum.columnInfo);
             extraRowStyles.Add(output.AddExtraRow(templateFieldDataTable.col_unit, 200), DataRowInReportTypeEnum.columnDescription);
+            extraRowStyles.Add(output.AddExtraRow(templateFieldDataTable.col_letter, 200), DataRowInReportTypeEnum.columnDescription);
             // extraRowStyles.Add(output.AddExtraRow(templateFieldDataTable.col_desc, 300), DataRowInReportTypeEnum.columnDesc);
 
             RowStart = output.Rows.Count;

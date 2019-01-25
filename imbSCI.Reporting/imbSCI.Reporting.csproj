@@ -5,7 +5,7 @@
     <ApplicationIcon>imbVeles48.ico</ApplicationIcon>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>imbSCI.Reporting.Standard</PackageId>
-    <Version>0.3.70</Version>
+    <Version>0.3.378</Version>
     <Title>imbSCI.Reporting - static web site generator</Title>
     <Summary>Part of the base layer of imbVeles Framework: reporting support, graph and directed graphs, concurrent multidimensional collections, serialization helpers</Summary>
     <PackageIconUrl>http://doc.veles.rs/imbSCI.ico</PackageIconUrl>
@@ -56,6 +56,8 @@ imbSCI libraries will help you with in-code data annotation for easier reporting
     <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
     <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
     <WarningLevel>0</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
@@ -183,6 +185,8 @@ imbSCI libraries will help you with in-code data annotation for easier reporting
     <Folder Include="meta\presets\demo\" />
     <Folder Include="meta\presets\sets\" />
     <Folder Include="meta\style\" />
+    <Folder Include="model\core\" />
+    <Folder Include="model\basic\" />
   </ItemGroup>
 
   <ItemGroup>

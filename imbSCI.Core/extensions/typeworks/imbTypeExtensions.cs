@@ -409,6 +409,11 @@ namespace imbSCI.Core.extensions.typeworks
 
             if (targetType.IsInstanceOfType(input)) return input;
 
+            if (targetType.IsEnum)
+            {
+                return imbSCI.Core.extensions.enumworks.imbTypeEnumExtensions.imbToEnumeration(input, targetType);
+            }
+
             MethodInfo iMI = null;
             ConstructorInfo oneParameter = outputTi.GetConstructors().Where(x => x.GetParameters().Count() == 1).imbFirstSafe();
             List<Object> inputPar = new List<object>();

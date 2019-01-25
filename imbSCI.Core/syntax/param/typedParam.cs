@@ -72,6 +72,10 @@ namespace imbSCI.Core.syntax.param
                 {
                     output += "\"" + value.toStringSafe() + "\"";
                 }
+                else if (info.type.isEnum())
+                {
+                    output += value.ToString(); //.Replace(",", "|");
+                }
                 else
                 {
                     output += value.toStringSafe();

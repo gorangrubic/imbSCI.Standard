@@ -71,10 +71,30 @@ namespace imbSCI.Core.files.folders
     /// <seealso cref="System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String, imbACE.Core.files.folders.folderNode}}" />
     public class folderNode : imbBindable, IFolderNode, IEnumerable<KeyValuePair<string, folderNode>>, IEnumerable<folderNode>
     {
+
+        public static folderStructure GetFolderNodeForPath(String path)
+        {
+            DirectoryInfo di = new DirectoryInfo(path);
+
+            folderStructure node = new folderStructure(di.FullName, di.Name.imbTitleCamelOperation(true), "Folder node generated from DirectoryInfo object: " + di.FullName);
+
+            return node;
+        }
+
+        /// <summary>
+        /// Returns index with found xml files
+        /// </summary>
+        /// <param name="searchString">The search string.</param>
+        /// <returns></returns>
+        public SerializedXMLFileDictionary ScanForResources(String searchString = "*.xml")
+        {
+            return SerializedXMLFileDictionary.ScanFolder(this, searchString);
+        }
+
         /// <summary>
         /// Refers to the current directory of application
         /// </summary>
-        public folderNode(String _description = "")
+        public folderNode()
         {
             DirectoryInfo info = new DirectoryInfo(Directory.GetCurrentDirectory());
             folderNode par = info.Parent;
@@ -83,6 +103,7 @@ namespace imbSCI.Core.files.folders
 
             _name = info.Name;
             caption = _name.imbTitleCamelOperation(true);
+            /*
             if (_description.isNullOrEmpty())
             {
                 description = "Application root directory";
@@ -90,7 +111,7 @@ namespace imbSCI.Core.files.folders
             else
             {
                 description = _description;
-            }
+            }*/
 
             par.Add(this);
         }
@@ -545,6 +566,35 @@ namespace imbSCI.Core.files.folders
             }
 
             return output;
+        }
+
+        /// <summary>
+        /// Tries to locate files specified in inputNames if no files specified, than applies search pattern
+        /// </summary>
+        /// <param name="inputNames">Comma separated list of filenames, leave empty if search pattern should be used</param>
+        /// <param name="searchPattern">The search pattern.</param>
+        /// <returns></returns>
+        public List<String> GetOrFindFiles(String inputNames, String searchPattern = "", SearchOption searchOption = SearchOption.TopDirectoryOnly)
+        {
+            List<string> filepaths = new List<string>();
+
+            List<String> filenames = new List<String>();
+
+            if (!inputNames.isNullOrEmpty())
+            {
+                filenames = inputNames.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            }
+
+            if (!filenames.Any())
+            {
+                filenames.Add(searchPattern);
+            }
+
+            var fnm = findFiles(filenames, searchOption);
+
+            filepaths.AddRange(fnm);
+
+            return filepaths;
         }
 
         /// <summary>

@@ -31,6 +31,7 @@ namespace imbSCI.Core.data
 {
     using imbSCI.Core.attributes;
     using imbSCI.Core.collection;
+    using imbSCI.Core.data.help;
     using imbSCI.Core.enums;
     using imbSCI.Core.extensions.enumworks;
     using imbSCI.Core.extensions.text;
@@ -62,6 +63,15 @@ namespace imbSCI.Core.data
         public String info_helpTips { get; set; } = "";
 
         public String info_helpTitle { get; set; } = "";
+
+
+        /// <summary>
+        /// Set meta attributa
+        /// </summary>
+        /// <value>
+        /// The meta attribute set.
+        /// </value>
+        public imbMetaAttributeSet metaAttributeSet { get; set; } = new imbMetaAttributeSet();
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance is hidden in report.
@@ -96,12 +106,15 @@ namespace imbSCI.Core.data
         /// <param name="mi">The mi.</param>
         public settingsMemberInfoEntry(MemberInfo mi, PropertyCollectionExtended pce = null)
         {
+            metaAttributeSet.Set(mi);
             process(mi, pce);
         }
 
         public DescriptionAttribute descAttribute;
         public DisplayNameAttribute displayNameAttribute;
         public CategoryAttribute catAttribute;
+
+
 
         public MemberInfo memberInfo;
 
@@ -516,6 +529,9 @@ namespace imbSCI.Core.data
                 case templateFieldDataTable.col_color:
                     color = dtc_val.toStringSafe(color);
                     break;
+                case templateFieldDataTable.col_textColor:
+                    textColor = dtc_val.toStringSafe(textColor);
+                    break;
 
                 case templateFieldDataTable.col_desc:
                     description = dtc_val.toStringSafe(description);
@@ -726,6 +742,8 @@ namespace imbSCI.Core.data
         /// <param name="propAttributes">The property attributes.</param>
         public void deployAttributes(Object[] propAttributes)
         {
+
+
             foreach (Object propAtt in propAttributes)
             {
                 descAttribute = propAtt as DescriptionAttribute;
@@ -911,6 +929,16 @@ namespace imbSCI.Core.data
         /// The color.
         /// </value>
         public String color { get; set; } = "";
+
+
+        /// <summary>
+        /// Gets or sets the color of the text.
+        /// </summary>
+        /// <value>
+        /// The color of the text.
+        /// </value>
+        public String textColor { get; set; } = "";
+
 
         /// <summary>
         /// Gets or sets a value indicating whether the range is defined.
@@ -1162,7 +1190,7 @@ namespace imbSCI.Core.data
             extraData[templateFieldDataTable.col_imbattributes] = attributes;
             extraData[templateFieldDataTable.col_unit] = unit;
             extraData[templateFieldDataTable.col_color] = color;
-
+            extraData[templateFieldDataTable.col_textColor] = textColor;
 
             extraData[templateFieldDataTable.col_width] = width;
             extraData[templateFieldDataTable.col_alignment] = Alignment;

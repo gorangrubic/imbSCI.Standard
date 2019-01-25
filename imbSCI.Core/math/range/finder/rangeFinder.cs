@@ -28,11 +28,29 @@
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
 using imbSCI.Core.attributes;
+using imbSCI.Core.data;
+using imbSCI.Core.extensions.data;
+using imbSCI.Core.extensions.table;
+using imbSCI.Core.extensions.text;
+using imbSCI.Core.extensions.typeworks;
+using imbSCI.Data;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
+using System.Reflection;
 
 namespace imbSCI.Core.math.range.finder
 {
+
+    //public interface IRangeFinder
+    //{
+    //    void Reset();
+    //    String id { get; set; }
+
+    //}
+
+
     /// <summary>
     /// Math utility class for: min-max-range computations
     /// </summary>
@@ -80,10 +98,29 @@ namespace imbSCI.Core.math.range.finder
         /// <param name="input">The input.</param>
         public virtual void Learn(Double input)
         {
-            Sum = Sum + input;
-            Maximum = Math.Max(input, Maximum);
-            Minimum = Math.Min(input, Minimum);
-            Count++;
+            if (input != Double.NaN)
+            {
+                Sum = Sum + input;
+                Maximum = Math.Max(input, Maximum);
+                Minimum = Math.Min(input, Minimum);
+                Count++;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is learned.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is learned; otherwise, <c>false</c>.
+        /// </value>
+        public Boolean IsLearned
+        {
+            get
+            {
+                if (Maximum == Double.MinValue) return false;
+                if (Minimum == Double.MaxValue) return false;
+                return true;
+            }
         }
 
         /// <summary>
@@ -97,6 +134,24 @@ namespace imbSCI.Core.math.range.finder
             if (input > Range) return 1;
             if (input < 0) return 0;
             return input.GetRatio(Range);
+        }
+
+        /// <summary>
+        /// Returns dictionary with values
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<String, Double> GetDictionary(String prefix = "")
+        {
+            Dictionary<String, Double> output = new Dictionary<string, double>();
+
+            output.Add(prefix + nameof(Minimum), Minimum);
+            output.Add(prefix + nameof(Maximum), Maximum);
+            output.Add(prefix + nameof(Range), Range);
+            output.Add(prefix + nameof(Average), Average);
+            output.Add(prefix + nameof(Sum), Sum);
+            output.Add(prefix + nameof(Count), Count);
+
+            return output;
         }
 
         /// <summary> Ratio </summary>
@@ -134,6 +189,7 @@ namespace imbSCI.Core.math.range.finder
         [DisplayName("Count")]
         [imb(imbAttributeName.measure_letter, "|r|")]
         [imb(imbAttributeName.measure_setUnit, "n")]
+        [imb(imbAttributeName.reporting_valueformat, "D2")]
         [Description("Count - size of the set - number of readings")] // [imb(imbAttributeName.measure_important)][imb(imbAttributeName.reporting_valueformat, "")]
         public Int32 Count { get; set; } = 0;
 

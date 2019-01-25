@@ -463,13 +463,17 @@ namespace imbSCI.Core.extensions.table
             settingsEntriesForObject sEO = new settingsEntriesForObject(data_value, false, false);
             foreach (var spe in sEO.spes.Values)
             {
-                if (containsQueries.Contains(propertyTypes, spe.type))
+                if (propertyTypes.Contains(spe.type))
                 {
                     if (spe.value != null)
                     {
                         dc.SetAdditionalInfoEntry(data_name_refix.add(spe.name, "_"), spe.value);
                     }
                 }
+                //if (containsQueries.Contains(propertyTypes, spe.type))
+                //{
+                    
+                //}
             }
             return dc;
         }

@@ -40,13 +40,13 @@ namespace imbSCI.Core.math.range.histogram
         /// <summary>
         /// Initializes a new instance of the <see cref="histogramModelBin"/> class.
         /// </summary>
-        /// <param name="_lavel">The lavel.</param>
+        /// <param name="_label">The lavel.</param>
         /// <param name="_start">The start.</param>
         /// <param name="_end">The end.</param>
         /// <param name="_binPlace">The bin place.</param>
-        public histogramModelBin(String _lavel, Double _start, Double _end, Int32 _binPlace)
+        public histogramModelBin(String _label, Double _start, Double _end, Int32 _binPlace)
         {
-            Label = _lavel;
+            Label = _label;
             start = _start;
             end = _end;
             binPlace = _binPlace;

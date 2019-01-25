@@ -28,13 +28,26 @@
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
 using imbSCI.Core.attributes;
+using imbSCI.Core.enums;
+using imbSCI.Core.extensions.data;
+using imbSCI.Core.extensions.table;
+using imbSCI.Core.extensions.typeworks;
+using imbSCI.Core.files;
+using imbSCI.Core.files.folders;
+using imbSCI.Core.reporting;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
 namespace imbSCI.Core.math.classificationMetrics
 {
-    /// <summary>
+  /// <summary>
     /// Base class for classification reporting
     /// </summary>
     /// <seealso cref="imbSCI.Core.math.classificationMetrics.IClassificationReport" />
@@ -47,6 +60,26 @@ namespace imbSCI.Core.math.classificationMetrics
         public classificationReport(String caseName)
         {
             Name = caseName;
+        }
+
+        /// <summary>
+        /// Gets or sets the data.
+        /// </summary>
+        /// <value>
+        /// The data.
+        /// </value>
+        [imb(imbAttributeName.reporting_hide)]
+        public reportExpandedData data { get; set; } = new reportExpandedData();
+
+        /// <summary>
+        /// Loads the classification report
+        /// </summary>
+        /// <param name="filepath">The filepath.</param>
+        /// <param name="log">The log.</param>
+        /// <returns></returns>
+        public static classificationReport Load(String filepath, ILogBuilder log)
+        {
+            return objectSerialization.loadObjectFromXML<classificationReport>(filepath, log);
         }
 
         /// <summary>

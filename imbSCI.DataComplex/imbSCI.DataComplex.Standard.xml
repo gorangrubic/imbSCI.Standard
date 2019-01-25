@@ -4,6 +4,12 @@
         <name>imbSCI.DataComplex</name>
     </assembly>
     <members>
+        <member name="T:imbSCI.DataComplex.converters.DataTableConverterASCII">
+            <summary>
+            Converts <see cref="T:System.Data.DataTable"/> to tab separated ASCII
+            </summary>
+            <seealso cref="!:imbSCI.DataComplex.converters.core.ConverterBase&lt;System.Data.DataTable, System.String, imbSCI.DataComplex.converters.DataTableConverterASCIISettings&gt;" />
+        </member>
         <member name="T:imbSCI.DataComplex.DataComplexExamples">
             <summary>Example, demonstrating data annotation with reporting, using generic, DataTable based, collection</summary>
             <seealso cref="T:imbSCI.DataComplex.data.TestMicroEnvironmentBase" />
@@ -2318,7 +2324,7 @@
         </member>
         <member name="M:imbSCI.DataComplex.extensions.data.operations.dataTableDataOperations.GetAggregatedTable(System.Collections.Generic.IEnumerable{System.Data.DataTable},System.String,imbSCI.Core.math.aggregation.dataPointAggregationAspect,imbSCI.Core.reporting.ILogBuilder)">
             <summary>
-            Gets the aggregated table.
+            Gets the aggregated table> where values are computed as agregation from multi source tables. 
             </summary>
             <param name="tables">The tables.</param>
             <param name="tablename">The tablename.</param>
@@ -3548,7 +3554,7 @@
             <param name="key">The key.</param>
             <returns></returns>
         </member>
-        <member name="M:imbSCI.DataComplex.special.instanceCountCollection`1.getSorted">
+        <member name="M:imbSCI.DataComplex.special.instanceCountCollection`1.getSorted(System.Int32)">
             <summary>
             Gets the sorted list with all instances
             </summary>
@@ -4246,6 +4252,27 @@
             Temporary object - handling report export process
             </summary>
         </member>
+        <member name="M:imbSCI.DataComplex.tables.DataTableForStatisticsExtension.GetReportAndSave(System.Collections.Generic.Dictionary{System.String,System.Data.DataTable},imbSCI.Core.files.folders.folderNode,imbSCI.Core.data.aceAuthorNotation,System.String,imbSCI.DataComplex.converters.DataTableConverterASCII)">
+            <summary>
+            Gets the report and save.
+            </summary>
+            <param name="input">The input.</param>
+            <param name="folder">The folder.</param>
+            <param name="notation">The notation.</param>
+            <param name="fileprefix">The fileprefix.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataComplex.tables.DataTableForStatisticsExtension.BuildDataTableSplits``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.String,System.String)">
+            <summary>
+            Builds the data table splits.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="input">The input.</param>
+            <param name="numberOfSplits">The number of splits.</param>
+            <param name="name">The name.</param>
+            <param name="description">The description.</param>
+            <returns></returns>
+        </member>
         <member name="M:imbSCI.DataComplex.tables.DataTableForStatisticsExtension.SetStyle(OfficeOpenXml.Style.ExcelStyle,imbSCI.Core.extensions.table.style.dataTableStyleEntry,System.Boolean)">
             <summary>
             Sets the style.
@@ -4288,6 +4315,26 @@
             <param name="source">The source.</param>
             <param name="rows">The rows.</param>
             <param name="rowsSkip">The rows skip.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataComplex.tables.DataTableForStatisticsExtension.GetReportAndSave(System.Data.DataSet,imbSCI.Core.files.folders.folderNode,imbSCI.Core.data.aceAuthorNotation,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Gets the report and save.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="folder">The folder.</param>
+            <param name="notation">The notation.</param>
+            <param name="filenamePrefix">The filename prefix.</param>
+            <param name="disablePrimaryKey">if set to <c>true</c> [disable primary key].</param>
+            <param name="allowAsyncCall">if set to <c>true</c> [allow asynchronous call].</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataComplex.tables.DataTableForStatisticsExtension.GetReportVersion(System.Data.DataSet,System.Boolean)">
+            <summary>
+            Gets the report version.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="disablePrimaryKey">if set to <c>true</c> [disable primary key].</param>
             <returns></returns>
         </member>
         <member name="M:imbSCI.DataComplex.tables.DataTableForStatisticsExtension.GetReportAndSave(System.Data.DataTable,imbSCI.Core.files.folders.folderNode,imbSCI.Core.data.aceAuthorNotation,System.String,System.Boolean,System.Boolean)">

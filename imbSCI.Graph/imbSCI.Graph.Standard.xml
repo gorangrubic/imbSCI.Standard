@@ -1841,6 +1841,11 @@
             <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "T:imbSCI.Graph.FreeGraph.freeGraph" -->
+        <member name="P:imbSCI.Graph.FreeGraph.freeGraph.name">
+            <summary>
+            Ime koje je dodeljeno objektu
+            </summary>
+        </member>
         <member name="M:imbSCI.Graph.FreeGraph.freeGraph.normalizeNodeWeights(System.Boolean)">
             <summary>
             Normalizes the node weights.
@@ -1891,6 +1896,19 @@
             <param name="toState">State of inversion that is desired.</param>
             <param name="detectFirst">if set to <c>true</c> [detect first].</param>
             <returns>Final state of inversion</returns>
+        </member>
+        <member name="M:imbSCI.Graph.FreeGraph.freeGraph.SetNotReady">
+            <summary>
+            Will force the graph model to recreate cache
+            </summary>
+        </member>
+        <member name="M:imbSCI.Graph.FreeGraph.freeGraph.GetLinkInstance(imbSCI.Graph.FreeGraph.freeGraphLinkBase,System.Boolean)">
+            <summary>
+            Returns link instance, detached from the <see cref="T:imbSCI.Graph.FreeGraph.freeGraph"/> model
+            </summary>
+            <param name="link">The link.</param>
+            <param name="skipCheck">if set to <c>true</c> [skip check].</param>
+            <returns></returns>
         </member>
         <member name="M:imbSCI.Graph.FreeGraph.freeGraph.CountLinks(System.String,System.Boolean,System.Boolean)">
             <summary>
@@ -1952,6 +1970,16 @@
             <param name="type">The type.</param>
             <returns></returns>
         </member>
+        <member name="M:imbSCI.Graph.FreeGraph.freeGraph.AddLink(System.String,System.String,System.Double,System.Int32)">
+            <summary>
+            Adds link if not found, returns existing if found. Weight and type are not set to existing link
+            </summary>
+            <param name="nodeNameA">The node name a.</param>
+            <param name="nodeNameB">The node name b.</param>
+            <param name="weight">The weight.</param>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
         <member name="M:imbSCI.Graph.FreeGraph.freeGraph.AddNodeOrSum(System.String,System.Double,System.Int32)">
             <summary>
             Adds new node into graph or sums weight of the specified and existing - and applies type that is greater
@@ -1982,9 +2010,21 @@
             </summary>
             <param name="nodeNameA">The node name a.</param>
             <param name="nodeNameB">The node name b.</param>
+            <param name="includeBtoALinks">if set to <c>true</c> [include bto a links].</param>
             <returns></returns>
         </member>
-        <member name="M:imbSCI.Graph.FreeGraph.freeGraph.GetLinkedNodes(System.Collections.Generic.IEnumerable{System.String},System.Int32,System.Boolean,System.Boolean,System.Boolean)">
+        <member name="M:imbSCI.Graph.FreeGraph.freeGraph.ContainsLink(System.String,System.String,System.Boolean)">
+            <summary>
+            Determines whether a contains link pointing to the specified nodes.
+            </summary>
+            <param name="nodeNameA">The node name a.</param>
+            <param name="nodeNameB">The node name b.</param>
+            <param name="includeBtoALinks">if set to <c>true</c> [include bto a links].</param>
+            <returns>
+              <c>true</c> if the specified node name a contains link; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:imbSCI.Graph.FreeGraph.freeGraph.GetLinkedNodes(System.Collections.Generic.IEnumerable{System.String},System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             Iterative query for linked nodes.
             </summary>
@@ -2045,6 +2085,33 @@
               <c>true</c> if  contains node, with the specified name otherwise, <c>false</c>.
             </returns>
         </member>
+        <member name="M:imbSCI.Graph.FreeGraph.freeGraph.RebuildIndex">
+            <summary>
+            Rebuilds the indexing and performs index chache check
+            </summary>
+        </member>
+        <member name="P:imbSCI.Graph.FreeGraph.freeGraph.DisableCheck">
+            <summary>
+            If true it will disable registry check
+            </summary>
+            <value>
+              <c>true</c> if [disable check]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:imbSCI.Graph.FreeGraph.freeGraph.Check">
+            <summary>
+            Checks this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:imbSCI.Graph.FreeGraph.freeGraph.IsReady">
+            <summary>
+            Gets a value indicating whether this instance is ready.
+            </summary>
+            <value>
+              <c>true</c> if this instance is ready; otherwise, <c>false</c>.
+            </value>
+        </member>
         <member name="P:imbSCI.Graph.FreeGraph.freeGraph.nodes">
             <summary>
             List of nodes, used only for serialization and deserialization
@@ -2065,6 +2132,13 @@
             <summary>
             Extensions when working with free graphs
             </summary>
+        </member>
+        <member name="M:imbSCI.Graph.FreeGraph.freeGraphExtensions.GetMatrix(imbSCI.Graph.FreeGraph.freeGraph)">
+            <summary>
+            Transforms the free graph into relationship matrix
+            </summary>
+            <param name="graph">The graph.</param>
+            <returns></returns>
         </member>
         <member name="M:imbSCI.Graph.FreeGraph.freeGraphExtensions.PingGraphSize(imbSCI.Graph.FreeGraph.freeGraph,imbSCI.Graph.FreeGraph.freeGraphNodeBase,System.Boolean,imbSCI.Graph.FreeGraph.freeGraphPingType,System.Int32)">
             <summary>
@@ -2206,8 +2280,56 @@
         </member>
         <member name="T:imbSCI.Graph.FreeGraph.freeGraphLinkBase">
             <summary>
-            Basic object describing node-to-node relationship in the <see cref="T:imbSCI.Graph.FreeGraph.freeGraph"/>
+            Basic object describing node-to-node relationship in the <see cref="T:imbSCI.Graph.FreeGraph.freeGraph"/>,used by the <see cref="T:imbSCI.Graph.FreeGraph.freeGraph"/> model internally
             </summary>
+        </member>
+        <member name="P:imbSCI.Graph.FreeGraph.freeGraphLinkBase.type">
+            <summary>
+            Numeric ID of link type. Has no specific implementation in base <see cref="T:imbSCI.Graph.FreeGraph.freeGraph"/>, meant for custom applications
+            </summary>
+            <value>
+            The type.
+            </value>
+        </member>
+        <member name="P:imbSCI.Graph.FreeGraph.freeGraphLinkBase.weight">
+            <summary>
+            Weight associated with the link, no specific implementation by default - meant for custom applications
+            </summary>
+            <value>
+            The weight.
+            </value>
+        </member>
+        <member name="P:imbSCI.Graph.FreeGraph.freeGraphLinkBase.nodeNameA">
+            <summary>
+            Node ID for source / from node
+            </summary>
+            <value>
+            The node name a.
+            </value>
+        </member>
+        <member name="P:imbSCI.Graph.FreeGraph.freeGraphLinkBase.nodeNameB">
+            <summary>
+            Node ID for target / to node
+            </summary>
+            <value>
+            The node name b.
+            </value>
+        </member>
+        <member name="P:imbSCI.Graph.FreeGraph.freeGraphLinkBase.linkLabel">
+            <summary>
+            Customized link label, by default stays blank
+            </summary>
+            <value>
+            The link label.
+            </value>
+        </member>
+        <member name="P:imbSCI.Graph.FreeGraph.freeGraphLinkRegistry.Count">
+            <summary>
+            Number of links defined in the dictionary
+            </summary>
+            <value>
+            The count.
+            </value>
         </member>
         <member name="M:imbSCI.Graph.FreeGraph.freeGraphLinkRegistry.GetLinkKey(System.String,System.String)">
             <summary>
@@ -2232,6 +2354,30 @@
             <param name="link">The link.</param>
             <param name="nodeDictionary">The node dictionary.</param>
             <returns></returns>
+        </member>
+        <member name="P:imbSCI.Graph.FreeGraph.freeGraphNodeAndLinks.node">
+            <summary>
+            Pivot node
+            </summary>
+            <value>
+            The node.
+            </value>
+        </member>
+        <member name="P:imbSCI.Graph.FreeGraph.freeGraphNodeAndLinks.links">
+            <summary>
+            Selected links
+            </summary>
+            <value>
+            The links.
+            </value>
+        </member>
+        <member name="P:imbSCI.Graph.FreeGraph.freeGraphNodeAndLinks.linkedNodeClones">
+            <summary>
+            Gets or sets the linked node clones.
+            </summary>
+            <value>
+            The linked node clones.
+            </value>
         </member>
         <member name="T:imbSCI.Graph.FreeGraph.freeGraphNodeBase">
             <summary>
@@ -11859,6 +12005,12 @@
             Renders the <see cref="T:Svg.SvgDocument"/> and returns the image as a <see cref="T:System.Drawing.Bitmap"/>.
             </summary>
             <returns>A <see cref="T:System.Drawing.Bitmap"/> containing the rendered document.</returns>
+        </member>
+        <member name="M:Svg.SvgDocument.Save(System.String)">
+            <summary>
+            Saves the specified filepath.
+            </summary>
+            <param name="filepath">The filepath.</param>
         </member>
         <member name="M:Svg.SvgDtdResolver.GetEntity(System.Uri,System.String,System.Type)">
             <summary>

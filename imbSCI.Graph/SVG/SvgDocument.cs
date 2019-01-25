@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
 using System.Text;
@@ -347,6 +348,45 @@ namespace Svg
             //Trace.TraceInformation("End Render");
             return bitmap;
         }
+
+        /// <summary>
+        /// Saves the specified filepath.
+        /// </summary>
+        /// <param name="filepath">The filepath.</param>
+        public void Save(String filepath)
+        {
+            var settings = new XmlWriterSettings();
+            settings.Indent = true;
+            settings.Encoding = Encoding.UTF8;
+            settings.NamespaceHandling = NamespaceHandling.OmitDuplicates;
+
+            XmlWriter writer = XmlWriter.Create(filepath, settings);
+
+            Write(writer);
+            // this.WriteElement(writer);
+            writer.Close();
+
+            //File.WriteAllText(filepath, output.Content);
+        }
+
+        public void SaveJPEG(String filepath, Int32 DPI = 300)
+        {
+
+            Bitmap bitmap = new Bitmap(Convert.ToInt32(Width.ToDeviceValue() * DPI), Convert.ToInt32(Height.ToDeviceValue() * DPI));
+
+
+            SvgRenderer renderer = SvgRenderer.FromImage(bitmap);
+            // ImageFormatConverter.StandardValuesCollection;
+
+            // ImageConverter imageConverter = new ImageConverter.StandardValuesCollection;
+            Render(renderer);
+
+            bitmap.Save(filepath, ImageFormat.Jpeg);
+
+
+        }
+
+
 
         public void Write(Stream stream)
         {

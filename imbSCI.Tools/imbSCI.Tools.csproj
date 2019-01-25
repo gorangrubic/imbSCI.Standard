@@ -5,7 +5,7 @@
     <ApplicationIcon>imbSCI - Copy.ico</ApplicationIcon>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>imbSCI.Tools</PackageId>
-    <Version>0.3.25</Version>
+    <Version>0.3.72</Version>
     <Title>imbACE.Core .NET Standard</Title>
     <Summary></Summary>
     <PackageIconUrl>http://doc.veles.rs/imbSCI.ico</PackageIconUrl>

@@ -37,7 +37,12 @@ namespace imbSCI.Reporting.meta.delivery.units
     using imbSCI.Data.enums.fields;
     using imbSCI.Reporting.meta.delivery.items;
     using imbSCI.Reporting.script;
+    using System.IO;
 
+    /// <summary>
+    /// Delivery unit for compact report
+    /// </summary>
+    /// <seealso cref="imbSCI.Reporting.meta.delivery.deliveryUnit" />
     public class deliveryUnitCompactReport : deliveryUnit
     {
         public deliveryUnitCompactReport() : base("Compact report delivery")

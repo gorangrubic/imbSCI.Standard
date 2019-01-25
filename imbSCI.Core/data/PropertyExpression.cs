@@ -230,13 +230,7 @@ namespace imbSCI.Core.data
             {
                 try
                 {
-                    //PropertyExpression pe = parent as PropertyExpression;
 
-                    //Object value = property.GetValue(parentExpression.host, null); // host.imbGetPropertySafe(property,null);
-
-                    if (children.Count == 0) return host;
-                    //Object value = host.imbGetPropertySafe(property.Name, null);
-                    //if (hostType.IsValueType) return host;
 
                     return property.GetValue(host, null);
                     //return value;
@@ -246,6 +240,9 @@ namespace imbSCI.Core.data
                     return ex.Message + " property: " + property.PropertyType.Name + " [" + valueType.Name + "]  host[" + hostType.Name + "]";
                     throw;
                 }
+            } else if (property == null)
+            {
+                return host;
             }
             return ifNotFoundReturn;
         }
@@ -331,6 +328,7 @@ namespace imbSCI.Core.data
                 }
                 else
                 {
+
                     property.SetValue(host, vl, null);
                 }
             }
@@ -520,20 +518,33 @@ namespace imbSCI.Core.data
             //if (valueType == null) valueType = hostType.GetProperty(name)
 
             //if (subhost == null) subhost = getValue();
-            if (subhost == null) subhost = host.imbGetPropertySafe(name, null); //getValue();
+            if (subhost == null)
+            {
+                subhost = host.imbGetPropertySafe(name, null); //getValue();
+
+            }
+
+
+            var output = new PropertyExpression(subhost, __pathPart, this);
+
+            // var sType = subhost.GetType();
+
             //Object subhost = getValue();//property.GetValue(host, null);// getValue();
             //  if (__pathPart == name) return this;
 
             // var p = valueType.GetProperty(__pathPart);  //property.PropertyType.GetProperty(__pathPart);//hostType.GetProperty(__pathPart);
             // var subsubhost = subhost.imbGetPropertySafe(__pathPart, null);
-            var p = hostType.GetProperty(__pathPart);
-            var output = new PropertyExpression(subhost, p, this);
+            // var p = property.PropertyType.GetProperty(__pathPart); //hostType.GetProperty(__pathPart, BindingFlags.Instance | BindingFlags.Public);
+            // var output = new PropertyExpression(subhost, p, this);
 
             return output;
         }
 
+        public override string pathSeparator { get => PATH_SPLITER; set { } }
+
         internal void Deploy(Object __host, String __pathPath, PropertyInfo __prop, PropertyExpression __parent, Boolean __isInIndexer = false, Int32 indexInList = -1)
         {
+
             host = __host;
             if (host != null) hostType = host.GetType();
             if (hostType != null)

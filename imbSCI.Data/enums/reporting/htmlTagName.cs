@@ -27,29 +27,32 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using System;
+
 namespace imbSCI.Data.enums.reporting
 {
+    [Flags]
     public enum htmlTagName
     {
-        none,
-        div,
-        p,
-        span,
-        ul,
-        li,
-        dt,
-        dd,
-        dl,
-        ol,
-        title,
-        meta,
-        h1,
-        h2,
-        h3,
-        b,
-        pre,
-        a,
-        img,
+        none = 0,
+        div = 1,
+        p = 2,
+        span = 4,
+        ul = 8,
+        li = 16,
+        dt = 32,
+        dd = 64,
+        dl = 128,
+        ol = 256,
+        title = 512,
+        meta = 1024,
+        h1 = 2048,
+        h2 = 4096,
+        h3 = 8192,
+        b = 16384,
+        pre = 32768,
+        a = 65536,
+        img = 131072,
         table,
         td,
         tr,

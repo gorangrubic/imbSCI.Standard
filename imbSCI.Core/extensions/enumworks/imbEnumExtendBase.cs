@@ -36,6 +36,7 @@ namespace imbSCI.Core.extensions.enumworks
 
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     #endregion imbVeles using
 
@@ -165,6 +166,51 @@ namespace imbSCI.Core.extensions.enumworks
             if (EnumType == null) return null;
             return Enum.Parse(EnumType, name);
         }
+
+
+        /// <summary>
+        /// Gets the enum from string flags.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="stringFlags">The string flags.</param>
+        /// <returns></returns>
+        public static List<T> GetEnumFromStringFlags<T>(IEnumerable<String> stringFlags, T defaultValue)
+        {
+            var match = GetEnumFromStringFlags(typeof(T), stringFlags);
+            List<T> output = new List<T>();
+            foreach (var m in match)
+            {
+                output.Add((T)m);
+            }
+            if (!output.Any())
+            {
+                output.Add(defaultValue);
+            }
+            return output;
+        }
+
+        /// <summary>
+        /// Returns all matching enumeration members, if no match returns empty list
+        /// </summary>
+        /// <param name="EnumType">Type of the enum.</param>
+        /// <param name="stringFlags">The string flags.</param>
+        /// <returns></returns>
+        public static List<Object> GetEnumFromStringFlags(this Type EnumType, IEnumerable<String> stringFlags)
+        {
+            List<Object> output = new List<object>();
+
+            var enums = Enum.GetNames(EnumType).ToList();
+            foreach (String fl in stringFlags)
+            {
+                if (enums.Contains(fl))
+                {
+                    output.Add(Enum.Parse(EnumType, fl));
+                }
+            }
+
+            return output;
+        }
+
 
         /// <summary>
         /// Na osnovu zadatog tipa i imena vraća instancu enumeracijije. Ako ne može da pronađe po imenu onda vraća prvu

@@ -1,5 +1,5 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="entropy.cs" company="imbVeles" >
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ISupportLoadSave.cs" company="imbVeles" >
 //
 // Copyright (C) 2018 imbVeles
 //
@@ -14,10 +14,10 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see http://www.gnu.org/licenses/. 
+// along with this program.  If not, see http://www.gnu.org/licenses/.
 // </copyright>
 // <summary>
-// Project: imbSCI.Core
+// Project: imbSCI.Data
 // Author: Goran Grubic
 // ------------------------------------------------------------------------------------------------------------------
 // Project web site: http://blog.veles.rs
@@ -27,6 +27,19 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
-namespace imbSCI.Core.math
+using imbSCI.Data.enums;
+using System;
+
+namespace imbSCI.Data.interfaces
 {
+    /// <summary>
+    /// The method OnAfterLoaded will be called after serialization
+    /// </summary>
+    public interface IOnAfterLoaded
+    {
+        /// <summary>
+        /// Called after loaded
+        /// </summary>
+        void OnAfterLoaded();
+    }
 }

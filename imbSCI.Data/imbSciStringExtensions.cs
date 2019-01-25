@@ -128,6 +128,8 @@ namespace imbSCI.Data
         /// <param name="target">The target.</param>
         /// <param name="needle">The needle.</param>
         /// <param name="targetDefault">If the target is null or empty it will use this value</param>
+        /// <param name="trimResults">if set to <c>true</c> [trim results].</param>
+        /// <param name="removeEmptyResults">if set to <c>true</c> [remove empty results].</param>
         /// <returns>
         /// List with one (if no <c>needle</c> found, original string) or two strings (if <c>needle</c> found, left and right substrings
         /// </returns>
@@ -145,18 +147,41 @@ namespace imbSCI.Data
             }
             else
             {
-                output.AddRange(target.Split(needle.ToCharArray(), StringSplitOptions.RemoveEmptyEntries));
+                if (removeEmptyResults)
+                {
+                    output.AddRange(target.Split(needle.ToCharArray(), StringSplitOptions.RemoveEmptyEntries));
+                }
+                else
+                {
+                    output.AddRange(target.Split(needle.ToCharArray(), StringSplitOptions.None));
+                }
             }
 
             List<string> realOutput = new List<string>();
             foreach (string st in output)
             {
                 String stt = st;
-                if (trimResults) stt = stt.Trim();
-                if (!removeEmptyResults || !stt.isNullOrEmpty())
+                if (trimResults)
+                {
+                    stt = stt.Trim();
+                }
+
+                if (removeEmptyResults)
+                {
+                    if (!stt.isNullOrEmpty())
+                    {
+                        realOutput.Add(stt);
+                    }
+                }
+                else
                 {
                     realOutput.Add(stt);
                 }
+
+                //if (!removeEmptyResults || !stt.isNullOrEmpty())
+                //{
+                //    realOutput.Add(stt);
+                //}
             }
             return realOutput;
 
@@ -341,7 +366,10 @@ namespace imbSCI.Data
         {
             if (String.IsNullOrEmpty(input)) return input;
             if (String.IsNullOrEmpty(sufix)) return input;
-            if (input.EndsWith(sufix)) input = input.Substring(0, input.Length - sufix.Length);
+            if (input.EndsWith(sufix))
+            {
+                input = input.Substring(0, input.Length - sufix.Length); //input.PadRight(sufix.Length); //input.Substring(0, input.Length - sufix.Length);
+            }
             return input;
         }
 

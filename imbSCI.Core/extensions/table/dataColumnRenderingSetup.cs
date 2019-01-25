@@ -128,6 +128,30 @@ namespace imbSCI.Core.extensions.table
             return dc;
         }
 
+
+        public static Color GetTextColor(this DataColumn dc)
+        {
+            if (!dc.ExtendedProperties.ContainsKey(templateFieldDataTable.col_textColor))
+            {
+                return Color.DarkGray;
+            }
+            return ColorWorks.GetColorSafe(dc.ExtendedProperties[templateFieldDataTable.col_textColor]);
+        }
+
+        public static DataColumn SetTextColor(this DataColumn dc, String col_color)
+        {
+            dc.ExtendedProperties.add(templateFieldDataTable.col_textColor, col_color);
+
+            return dc;
+        }
+
+        public static DataColumn SetTextColor(this DataColumn dc, Color col_color)
+        {
+            dc.ExtendedProperties.add(templateFieldDataTable.col_textColor, ColorWorks.ColorToHex(col_color));
+
+            return dc;
+        }
+
         /// <summary>
         /// Formats the specified default col format.
         /// </summary>
@@ -401,6 +425,7 @@ namespace imbSCI.Core.extensions.table
             dc.SetDesc(col_spe.description);
             dc.SetGroup(col_spe.categoryName);
             dc.SetDefaultBackground(col_spe.color);
+            dc.SetTextColor(col_spe.textColor);
             dc.SetHeading(col_spe.displayName);
             dc.ColumnName = col_spe.name;
             if (col_spe.type.isNullable())

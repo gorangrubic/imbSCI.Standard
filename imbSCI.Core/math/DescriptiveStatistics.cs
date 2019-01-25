@@ -27,6 +27,7 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using imbSCI.Core.reporting.render;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,6 +88,16 @@ namespace imbSCI.Core.math
             StandardDeviation = Math.Sqrt(Variance);
 
 
+        }
+
+        public void Describe(ITextRender textRender)
+        {
+            textRender.AppendPair(nameof(Count), Count);
+            textRender.AppendPair(nameof(Mean), Mean);
+            textRender.AppendPair(nameof(Variance), Variance);
+            textRender.AppendPair(nameof(StandardDeviation), StandardDeviation);
+            textRender.AppendPair(nameof(Maximum), Maximum);
+            textRender.AppendPair(nameof(Minimum), Minimum);
         }
 
 

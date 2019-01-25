@@ -89,6 +89,12 @@ namespace imbSCI.Core.reporting.render.core
             return pTb;
         }
 
+        public String GetPeekName()
+        {
+            if (Count == 0) return "";
+            return getPeek().tag;
+        }
+
         public tagBlock getPeek()
         {
             tagBlock pTb = null;

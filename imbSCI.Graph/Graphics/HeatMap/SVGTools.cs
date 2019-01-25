@@ -41,7 +41,7 @@ namespace imbSCI.Graph.Graphics.HeatMap
 
             Svg.SvgText label = new SvgText(text);
 
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
 
             //label.X = new SvgUnit (xStart + (format.width / 2) - ((text.Length * format.spatialUnit) / 2)));
             //label.Y = (yStart + (format.height / 2) + (format.spatialUnitHeight)).Get_px();

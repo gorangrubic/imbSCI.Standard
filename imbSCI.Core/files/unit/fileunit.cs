@@ -119,12 +119,14 @@ namespace imbSCI.Core.files.unit
             else
             {
                 _info = new FileInfo(__path);
-                preloadContent();
+                if (doPreload)  preloadContent();
             }
 
             _path = __path;
-
-            _lastWrite = info.LastWriteTime;
+            if (_info != null)
+            {
+                _lastWrite = info.LastWriteTime;
+            }
         }
 
         private DateTime _lastWrite; // = "";
@@ -217,24 +219,37 @@ namespace imbSCI.Core.files.unit
             }
         }
 
+
+        private Object setContentLinesLock = new Object();
+
+
         /// <summary>
         /// Sets the content lines - overwriting any existing
         /// </summary>
         /// <param name="input">The input.</param>
         public void setContentLines(IList<String> input)
         {
+            StringBuilder sb = new StringBuilder();
+            input = input.ToList();
+            Int32 len = input.Count;
+            for (int i = 0; i < len; i++)
+            {
+
+                sb.AppendLine(input[i]);
+            }
             if (input.Any())
             {
-                File.WriteAllLines(info.FullName, input.ToList());
+                //File.WriteAllLines(info.FullName, input.ToList());
+                File.WriteAllText(info.FullName, sb.ToString());
                 InvokeChanged();
             }
         }
 
         private Boolean _contentChanged; // = "";
 
-                                         /// <summary>
-                                         /// Gets TRUE if the content was changed after the last load
-                                         /// </summary>
+        /// <summary>
+        /// Gets TRUE if the content was changed after the last load
+        /// </summary>
         public Boolean contentChanged
         {
             get { return _contentChanged; }
@@ -285,20 +300,31 @@ namespace imbSCI.Core.files.unit
 
         public void Save(ILogBuilder loger = null)
         {
-            setContentLines(contentLines);
-
-            if (loger != null)
+            try
             {
-                if (!info.Exists)
+
+                setContentLines(contentLines.ToList());
+
+                if (loger != null)
                 {
-                    loger.log("File [" + path + "] not saved since the content is empty.");
+                    if (!info.Exists)
+                    {
+                        loger.log("File [" + path + "] not saved since the content is empty.");
+                    }
+                    else
+                    {
+                        loger.log("File [" + path + "] saved. Size: " + imbStringFormats.getKByteCountFormated(getByteSize()) + " - lines: " + contentLines.Count());
+                    }
                 }
-                else
+                Accept();
+            }
+            catch (Exception ex)
+            {
+                if (loger != null)
                 {
-                    loger.log("File [" + path + "] saved. Size: " + imbStringFormats.getKByteCountFormated(getByteSize()) + " - lines: " + contentLines.Count());
+                    loger.log("File [" + path + "] not saved due exception: " + ex.Message);
                 }
             }
-            Accept();
         }
 
         /// <summary>
@@ -347,6 +373,10 @@ namespace imbSCI.Core.files.unit
 
         private List<String> _contentLines = new List<string>();
 
+
+
+        private Object contentLinesGetLock = new Object();
+
         /// <summary>
         ///
         /// </summary>
@@ -354,7 +384,12 @@ namespace imbSCI.Core.files.unit
         {
             get
             {
-                return _contentLines;
+                List<String> _output = null;
+                lock (contentLinesGetLock)
+                {
+                    _output = _contentLines;
+                }
+                return _output;
             }
             protected set { _contentLines = value; }
         }

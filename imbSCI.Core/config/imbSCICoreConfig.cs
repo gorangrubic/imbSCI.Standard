@@ -27,6 +27,7 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using imbSCI.Core.data.help;
 using System;
 
 namespace imbSCI.Core.config
@@ -99,6 +100,8 @@ namespace imbSCI.Core.config
         public Boolean DataTableReports_AsyncExportCalls { get; set; } = true;
 
         public String DataTableReports_SignatureLine { get; set; } = "Report generated with imbSCI library - imbVeles \"Coding for Science\" framework [GNU GPLv3] - blog.veles.rs";
+
+        public helpBuilderConfiguration globalHelpBuilderSetup { get; set; } = new helpBuilderConfiguration();
 
         // Insert below your global configuration properties.
         // Snippets: _imbSCI_DoBool, _imbSCI_String, _imbSCI_Ratio ....

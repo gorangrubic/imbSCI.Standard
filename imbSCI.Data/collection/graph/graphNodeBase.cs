@@ -260,7 +260,10 @@ namespace imbSCI.Data.collection.graph
             List<IObjectWithPathAndChildren> output = new List<IObjectWithPathAndChildren>();
             foreach (Object k in children.Keys)
             {
-                output.Add(children[k] as IGraphNode);
+                if (children[k] != this)
+                {
+                    output.Add(children[k] as IGraphNode);
+                }
             }
 
             return output.GetEnumerator(); //.GetEnumerator();

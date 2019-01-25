@@ -71,22 +71,22 @@ namespace imbSCI.Core.extensions.text
         {
             List<string> output = new List<string>();
 
-            if (content.Contains("ж"))
-            {
-            }
+            //if (content.Contains("ж"))
+            //{
+            //}
 
             content = System.Net.WebUtility.HtmlDecode(content);
             //HttpUtility
 
-            if (content.Contains("с"))
-            {
-            }
+            //if (content.Contains("с"))
+            //{
+            //}
 
             foreach (Match mc in wordMatch.Matches(content))
             {
-                if (mc.Value.Contains("protivpo"))
-                {
-                }
+                //if (mc.Value.Contains("protivpo"))
+                //{
+                //}
                 output.Add(mc.Value);
             }
             return output;

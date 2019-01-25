@@ -96,6 +96,9 @@ namespace imbSCI.Core.reporting.render
         /// <param name="cleanPriorContent">if set to <c>true</c> [clean prior content].</param>
         void SubcontentStart(templateFieldSubcontent key, Boolean cleanPriorContent = false);
 
+
+        void SubcontentStart(String customSubContentName, Boolean cleanPriorContent = false);
+
         /// <summary>
         /// Subcontents the close.
         /// </summary>

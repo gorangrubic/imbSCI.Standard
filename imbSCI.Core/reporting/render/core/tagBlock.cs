@@ -66,9 +66,10 @@ namespace imbSCI.Core.reporting.render.core
         {
             get
             {
+                if (_parent == this) return 0;
                 if (parent == null)
                 {
-                    return 0;
+                    return 0; //prop
                 }
                 else
                 {
@@ -116,7 +117,18 @@ namespace imbSCI.Core.reporting.render.core
         public tagBlock parent
         {
             get { return _parent; }
-            protected set { _parent = value; }
+            protected set {
+                if (value == this)
+                {
+                    _parent = null;
+                }
+                else
+                {
+
+                    _parent = value;
+                }
+
+            }
         }
 
         private String _tag;

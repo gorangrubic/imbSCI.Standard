@@ -37,6 +37,7 @@ namespace imbSCI.Graph.FreeGraph
     /// Instance describing a node
     /// </summary>
     /// <seealso cref="imbSCI.Data.interfaces.IObjectWithName" />
+    [Serializable]
     public class freeGraphNodeBase : IObjectWithName
     {
         public freeGraphNodeBase()

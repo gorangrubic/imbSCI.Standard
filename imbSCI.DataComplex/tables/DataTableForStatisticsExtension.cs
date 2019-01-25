@@ -45,6 +45,7 @@ namespace imbSCI.DataComplex.tables
     using imbSCI.Core.reporting.zone;
     using imbSCI.Data.enums;
     using imbSCI.Data.enums.reporting;
+    using imbSCI.DataComplex.converters;
     using imbSCI.DataComplex.extensions.data.formats;
     using imbSCI.DataComplex.extensions.data.operations;
     using imbSCI.DataComplex.extensions.data.schema;
@@ -54,10 +55,103 @@ namespace imbSCI.DataComplex.tables
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Linq;
+    using System.Text;
     using System.Threading;
 
     public static class DataTableForStatisticsExtension
     {
+
+
+        /// <summary>
+        /// Gets the report and save.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <param name="folder">The folder.</param>
+        /// <param name="notation">The notation.</param>
+        /// <param name="fileprefix">The fileprefix.</param>
+        /// <returns></returns>
+        public static List<DataTableForStatistics> GetReportAndSave(this Dictionary<String, DataTable> input, folderNode folder, aceAuthorNotation notation, String fileprefix = "", DataTableConverterASCII converter = null)
+        {
+            List<DataTableForStatistics> output = new List<DataTableForStatistics>();
+            foreach (var pair in input)
+            {
+                String p_m = folder.pathFor(fileprefix + pair.Key);
+                output.Add(pair.Value.GetReportAndSave(folder, notation, fileprefix + pair.Key));
+
+                if (converter != null)
+                {
+
+
+                    converter.ConvertToFile(pair.Value, folder, pair.Value.TableName);
+                }
+            }
+
+            return output;
+
+        }
+
+        /// <summary>
+        /// Builds the data table splits.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="input">The input.</param>
+        /// <param name="numberOfSplits">The number of splits.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="description">The description.</param>
+        /// <returns></returns>
+        public static Dictionary<String, DataTable> BuildDataTableSplits<T>(this IEnumerable<T> input, Int32 numberOfSplits, String name = "", String description = "") where T : class
+        {
+
+            DataTableTypeExtended<T> table = new DataTableTypeExtended<T>(name, description);
+
+
+            Dictionary<String, DataTable> output = new Dictionary<String, DataTable>();
+
+            Int32 c = 0;
+            Int32 block = input.Count() / numberOfSplits;
+
+            Int32 b = 0;
+
+            foreach (T metrics in input)
+            {
+
+                table.AddRow(metrics);
+
+                c++;
+                if (c > block)
+                {
+                    String n = table.TableName;
+
+                    if (output.ContainsKey(n))
+                    {
+                        n = n + b.ToString("D3");
+                        table.TableName = n;
+                        table.SetTitle(n);
+                    }
+                    else
+                    {
+
+                    }
+
+                    output.Add(n, table);
+
+                    table = new DataTableTypeExtended<T>(name, description);
+                    table.TableName = name + "_" + output.Count.ToString();
+                    table.SetDescription(description + ".Block [" + output.Count.ToString() + "]");
+                    c = 0;
+                    b++;
+                }
+            }
+
+            return output;
+
+        }
+
+
+
+
+
         public static ExcelNamedStyleXml MakeStyle(this ExcelStyles styles, dataTableStyleSet styleSet, DataRowInReportTypeEnum data)
         {
             var output = styles.CreateNamedStyle(data.ToString());
@@ -379,14 +473,66 @@ namespace imbSCI.DataComplex.tables
             return legend;
         }
 
+        /// <summary>
+        /// Gets the report and save.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="folder">The folder.</param>
+        /// <param name="notation">The notation.</param>
+        /// <param name="filenamePrefix">The filename prefix.</param>
+        /// <param name="disablePrimaryKey">if set to <c>true</c> [disable primary key].</param>
+        /// <param name="allowAsyncCall">if set to <c>true</c> [allow asynchronous call].</param>
+        /// <returns></returns>
+        public static DataSetForStatistics GetReportAndSave(this DataSet source, folderNode folder, aceAuthorNotation notation = null, string filenamePrefix = "", bool disablePrimaryKey = true, Boolean allowAsyncCall = false)
+        {
+            DataSetForStatistics output = GetReportVersion(source, disablePrimaryKey);
+
+            output.Save(folder, notation, filenamePrefix);
+
+            return output;
+        }
+
+        public static String GetColumnSignatures(this DataTable table)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (DataColumn dc in table.Columns)
+            {
+                sb.Append(dc.ColumnName);
+            }
+
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// Gets the report version.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="disablePrimaryKey">if set to <c>true</c> [disable primary key].</param>
+        /// <returns></returns>
         public static DataSetForStatistics GetReportVersion(this DataSet source, bool disablePrimaryKey = true)
         {
             DataSetForStatistics output = new DataSetForStatistics();
             output.DataSetName = source.DataSetName;
 
+
+            List<String> columnSignatures = new List<string>();
+
             foreach (DataTable dt in source.Tables)
             {
-                output.AddTable(dt.GetReportTableVersion(disablePrimaryKey));
+                String sng = dt.GetColumnSignatures();
+
+                var reportV = dt.GetReportTableVersion(disablePrimaryKey);
+
+                output.AddTable(reportV);
+                if (!columnSignatures.Contains(sng))
+                {
+                    output.AddTable(reportV.RenderLegend());
+                    columnSignatures.Add(sng);
+                }
+
+
+
             }
 
             return output;
@@ -459,6 +605,17 @@ namespace imbSCI.DataComplex.tables
 
             return source;
         }
+
+        public static DataSet Save(this DataSet source, folderNode folder, aceAuthorNotation notation = null, string filenamePrefix = "")
+        {
+
+            string path = source.serializeDataSet(filenamePrefix, folder, dataTableExportEnum.excel, notation); //.serializeDataTable(dataTableExportEnum.excel, filenamePrefix, folder, notation);
+
+            //source.serializeDataTable(enums.dataTableExportEnum.excel, filenamePrefix + "_source", folder, notation);
+
+            return source;
+        }
+
 
         public static DataTable Save(this DataTable source, folderNode folder, aceAuthorNotation notation = null, string filenamePrefix = "")
         {

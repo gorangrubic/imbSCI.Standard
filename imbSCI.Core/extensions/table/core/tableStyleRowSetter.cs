@@ -113,11 +113,11 @@ namespace imbSCI.Core.extensions.table.core
         /// <typeparam name="TValueType">The type of the value type.</typeparam>
         /// <param name="style">The style.</param>
         /// <param name="columnName">Name of the column.</param>
-        /// <param name="rowIndex">Index of the row.</param>
+        /// <param name="valueToMatch">Index of the row.</param>
         /// <returns></returns>
-        public dataValueMatchCriterionDynamicStyle<TValueType, DataRowInReportTypeEnum> SetStyleForRowsWithValue<TValueType>(DataRowInReportTypeEnum style, String columnName, TValueType rowIndex) where TValueType : IComparable
+        public dataValueMatchCriterionDynamicStyle<TValueType, DataRowInReportTypeEnum> SetStyleForRowsWithValue<TValueType>(DataRowInReportTypeEnum style, String columnName, TValueType valueToMatch) where TValueType : IComparable
         {
-            var indexC = new dataValueMatchCriterionDynamicStyle<TValueType, DataRowInReportTypeEnum>(new TValueType[] { rowIndex }, style, columnName);
+            var indexC = new dataValueMatchCriterionDynamicStyle<TValueType, DataRowInReportTypeEnum>(new TValueType[] { valueToMatch }, style, columnName);
 
             units.Add(indexC);
             return indexC;
@@ -129,11 +129,11 @@ namespace imbSCI.Core.extensions.table.core
         /// <typeparam name="TValueType">The type of the value type.</typeparam>
         /// <param name="style">The style.</param>
         /// <param name="columnName">Name of the column.</param>
-        /// <param name="rowIndexes">The row indexes.</param>
+        /// <param name="valuesToMatch">The row indexes.</param>
         /// <returns></returns>
-        public dataValueMatchCriterionDynamicStyle<TValueType, DataRowInReportTypeEnum> SetStyleForRowsWithValue<TValueType>(DataRowInReportTypeEnum style, String columnName, IEnumerable<TValueType> rowIndexes) where TValueType : IComparable
+        public dataValueMatchCriterionDynamicStyle<TValueType, DataRowInReportTypeEnum> SetStyleForRowsWithValue<TValueType>(DataRowInReportTypeEnum style, String columnName, IEnumerable<TValueType> valuesToMatch) where TValueType : IComparable
         {
-            var indexC = new dataValueMatchCriterionDynamicStyle<TValueType, DataRowInReportTypeEnum>(rowIndexes, style, columnName);
+            var indexC = new dataValueMatchCriterionDynamicStyle<TValueType, DataRowInReportTypeEnum>(valuesToMatch, style, columnName);
 
             units.Add(indexC);
             return indexC;

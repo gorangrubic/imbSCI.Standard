@@ -83,6 +83,8 @@ namespace imbSCI.Graph.FreeGraph
             Deploy(graph);
         }
 
+        public Boolean EmptyGraph { get; set; } = false;
+
         /// <summary>
         /// Populates the graph report
         /// </summary>
@@ -102,6 +104,12 @@ namespace imbSCI.Graph.FreeGraph
 
                 Int32 lc = graph.CountLinks(node.name, true, true);
                 nodesByNumberOfLinks.Add(lc, node);
+            }
+
+            if (!ws.Any())
+            {
+                EmptyGraph = true;
+                return;
             }
 
             TotalWeight = ws.Sum();

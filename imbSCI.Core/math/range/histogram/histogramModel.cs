@@ -103,6 +103,11 @@ namespace imbSCI.Core.math.range.histogram
         public const string DEFAULT_COLUMN_NAME = "name";
         public const string DEFAULT_COLUMN_VALUE = "value";
 
+        /// <summary>
+        /// Generates data table with bins
+        /// </summary>
+        /// <param name="output">The output.</param>
+        /// <returns></returns>
         public DataTable GetDataTableForFrequencies(DataTable output = null)
         {
             if (output == null) output = new DataTable();
@@ -123,6 +128,33 @@ namespace imbSCI.Core.math.range.histogram
 
             return output;
         }
+
+        /// <summary>
+        /// Generates data table with bins
+        /// </summary>
+        /// <param name="output">The output.</param>
+        /// <returns></returns>
+        public DataTable GetDataTableForFunction(Func<histogramModelBin, Double> function, DataTable output = null)
+        {
+            if (output == null) output = new DataTable();
+            output.SetTitle(name);
+
+            var cn_name = output.Columns.Add(DEFAULT_COLUMN_NAME);
+            var cn_value = output.Columns.Add(DEFAULT_COLUMN_VALUE);
+
+            foreach (var bin in bins)
+            {
+                var dr = output.NewRow();
+
+                dr[cn_name] = bin.Label;
+                dr[cn_value] = function.Invoke(bin);
+
+                output.Rows.Add(dr);
+            }
+
+            return output;
+        }
+
 
         public IEnumerator<histogramModelBin> GetEnumerator()
         {

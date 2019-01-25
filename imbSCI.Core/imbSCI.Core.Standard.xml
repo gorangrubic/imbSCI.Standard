@@ -1873,6 +1873,189 @@
         <member name="P:imbSCI.Core.data.aceAuthorNotation.Email">
             <summary> E-mail address of the project, author, organization... </summary>
         </member>
+        <member name="T:imbSCI.Core.data.cache.CacheServiceProvider">
+            <summary>
+            Provides cached data
+            </summary>
+        </member>
+        <member name="P:imbSCI.Core.data.cache.CacheServiceProvider.instanceID">
+            <summary>
+            Cache provider instance ID
+            </summary>
+            <value>
+            The instance identifier.
+            </value>
+        </member>
+        <member name="M:imbSCI.Core.data.cache.CacheServiceProvider.GetFilename(System.String,System.String,System.String,System.String)">
+            <summary>
+            Makes path name for existing or non existing cached data object
+            </summary>
+            <param name="setupSignature">The setup signature.</param>
+            <param name="datasetSignature">The dataset signature.</param>
+            <param name="itemName">Name of the item.</param>
+            <param name="typename">The typename.</param>
+            <returns></returns>
+        </member>
+        <member name="P:imbSCI.Core.data.cache.CacheServiceProvider.loaded">
+            <summary>
+            Dictionary of loaded data objects
+            </summary>
+            <value>
+            The loaded.
+            </value>
+        </member>
+        <member name="M:imbSCI.Core.data.cache.CacheServiceProvider.Dispose">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+        </member>
+        <member name="M:imbSCI.Core.data.cache.CacheServiceProvider.SetCached``1(System.String,System.String,System.String,``0)">
+            <summary>
+            Saves cached data object
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setupSignature">The setup signature.</param>
+            <param name="datasetSignature">The dataset signature.</param>
+            <param name="itemName">Name of the item.</param>
+            <param name="item">The item.</param>
+        </member>
+        <member name="M:imbSCI.Core.data.cache.CacheServiceProvider.GetCached``1(System.String,System.String,System.String)">
+            <summary>
+            Gets cached data object
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setupSignature">The setup signature.</param>
+            <param name="datasetSignature">The dataset signature.</param>
+            <param name="itemName">Name of the item.</param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.Core.data.cache.IHasCacheProvider">
+            <summary>
+            Classes that use cache provider
+            </summary>
+        </member>
+        <member name="T:imbSCI.Core.data.help.helpBuilderConfiguration">
+            <summary>
+            Configuration for helpBuilder
+            </summary>
+        </member>
+        <member name="P:imbSCI.Core.data.help.helpBuilderConfiguration.GeneralBlogSearchURL">
+            <summary> General blog search URL prefix - called when search blog for this entry link is generated </summary>
+        </member>
+        <member name="P:imbSCI.Core.data.help.helpBuilderConfiguration.doLoadXMLMeta">
+            <summary> If true it will try to load meta data from XML file </summary>
+        </member>
+        <member name="P:imbSCI.Core.data.help.helpBuilderConfiguration.outputPath">
+            <summary> Path to export help content, relative to application execution path </summary>
+        </member>
+        <member name="T:imbSCI.Core.data.help.aceCommandConsoleHelpOptions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:imbSCI.Core.data.help.helpBuilderContext">
+            <summary>
+            Context of help documentation construction, created as single help generation medium
+            </summary>
+        </member>
+        <member name="M:imbSCI.Core.data.help.helpBuilderContext.GenerateMetaContent(imbSCI.Core.reporting.render.ITextRender,imbSCI.Core.data.help.imbMetaAttributeEnum,imbSCI.Core.data.settingsMemberInfoEntry)">
+            <summary>
+            Constructs meta content
+            </summary>
+            <param name="output">The output.</param>
+            <param name="meta">The meta.</param>
+            <param name="helpContext">The help context.</param>
+            <param name="item">The item.</param>
+        </member>
+        <member name="T:imbSCI.Core.data.help.imbMetaAttribute">
+            <summary>
+            Defines additional meta information for documentation generation
+            </summary>
+            <seealso cref="T:System.Attribute" />
+        </member>
+        <member name="M:imbSCI.Core.data.help.imbMetaAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Core.data.help.imbMetaAttribute"/> class.
+            </summary>
+        </member>
+        <member name="M:imbSCI.Core.data.help.imbMetaAttribute.#ctor(imbSCI.Core.data.help.imbMetaAttributeEnum,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Core.data.help.imbMetaAttribute"/> class.
+            </summary>
+            <param name="_type">The type.</param>
+            <param name="_path">The path.</param>
+            <param name="_description">The description.</param>
+        </member>
+        <member name="P:imbSCI.Core.data.help.imbMetaAttribute.path">
+            <summary>
+            Path leading to external content. For search link, it must contain {0} place holder
+            </summary>
+            <value>
+            The path.
+            </value>
+        </member>
+        <member name="P:imbSCI.Core.data.help.imbMetaAttribute.description">
+            <summary>
+            Additional description
+            </summary>
+            <value>
+            The description.
+            </value>
+        </member>
+        <member name="P:imbSCI.Core.data.help.imbMetaAttribute.type">
+            <summary>
+            Gets or sets the type.
+            </summary>
+            <value>
+            The type.
+            </value>
+        </member>
+        <member name="T:imbSCI.Core.data.help.imbMetaAttributeEnum">
+            <summary>
+            Meta attribute type
+            </summary>
+        </member>
+        <member name="F:imbSCI.Core.data.help.imbMetaAttributeEnum.AttachExample">
+            <summary>
+            Attaches external example to a member
+            </summary>
+        </member>
+        <member name="F:imbSCI.Core.data.help.imbMetaAttributeEnum.AttachContent">
+            <summary>
+            Attaches external markdown content to a member 
+            </summary>
+        </member>
+        <member name="F:imbSCI.Core.data.help.imbMetaAttributeEnum.AttachLink">
+            <summary>
+            Defines a static web link
+            </summary>
+        </member>
+        <member name="F:imbSCI.Core.data.help.imbMetaAttributeEnum.AddSearchLink">
+            <summary>
+            Defines API / Blog search link
+            </summary>
+        </member>
+        <member name="F:imbSCI.Core.data.help.imbMetaAttributeEnum.AddContextProperty">
+            <summary>
+            Defines a property as Plugin / Command console execution context
+            </summary>
+        </member>
+        <member name="F:imbSCI.Core.data.help.imbMetaAttributeEnum.AddProjectProperty">
+            <summary>
+            Defines a property as Project instance
+            </summary>
+        </member>
+        <member name="F:imbSCI.Core.data.help.imbMetaAttributeEnum.AddExampleInLine">
+            <summary>
+            Adds inline example, related to the member
+            </summary>
+        </member>
+        <member name="M:imbSCI.Core.data.help.imbMetaAttributeSet.Set(System.Reflection.MemberInfo)">
+            <summary>
+            Selects all imbMeta attributes from member info
+            </summary>
+            <param name="mi">The mi.</param>
+        </member>
         <member name="T:imbSCI.Core.data.metadata.memberCrefElement">
             <summary>
             Universal C# XML comment element used for : see also,
@@ -2445,6 +2628,23 @@
             Extensions for <see cref="T:imbSCI.Core.data.settingsEntriesForObject"/>
             </summary>
         </member>
+        <member name="M:imbSCI.Core.data.settingsEntriesForObjectExtensions.SetDataTable(System.Collections.Generic.IEnumerable{imbSCI.Core.data.settingsMemberInfoEntry},System.Data.DataTable)">
+            <summary>
+            Adds columns and transfers formating and other meta information specified in the <see cref="T:imbSCI.Core.data.settingsPropertyEntry"/> entries. 
+            </summary>
+            <param name="table">The table to write columns into. If not specified, it will create new with name of the group.</param>
+            <remarks>The method will declare only <see cref="T:imbSCI.Core.data.settingsPropertyEntry"/>s, not the entries of other type</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.data.settingsEntriesForObjectExtensions.GetDictionary(System.Collections.Generic.IEnumerable{imbSCI.Core.data.settingsMemberInfoEntry},System.Object,System.String)">
+            <summary>
+            Gets the dictionary of values, key = prefix + PropertyInfo.Name
+            </summary>
+            <param name="input">The input.</param>
+            <param name="data">The data.</param>
+            <param name="prefix">The prefix.</param>
+            <returns></returns>
+        </member>
         <member name="M:imbSCI.Core.data.settingsEntriesForObjectExtensions.GetMemberInfoGroupDictionary(imbSCI.Core.data.settingsEntriesForObject)">
             <summary>
             Builds member info group dictionary
@@ -2458,6 +2658,14 @@
             </summary>
             <remarks>The best way to use this model is to call <see cref="T:imbSCI.Core.data.settingsEntriesForObject"/> constructor, that will generate this object for each reflected member</remarks>
             <seealso cref="T:System.ComponentModel.INotifyPropertyChanged" />
+        </member>
+        <member name="P:imbSCI.Core.data.settingsMemberInfoEntry.metaAttributeSet">
+            <summary>
+            Set meta attributa
+            </summary>
+            <value>
+            The meta attribute set.
+            </value>
         </member>
         <member name="P:imbSCI.Core.data.settingsMemberInfoEntry.isHiddenInReport">
             <summary>
@@ -2530,6 +2738,14 @@
             </summary>
             <value>
             The color.
+            </value>
+        </member>
+        <member name="P:imbSCI.Core.data.settingsMemberInfoEntry.textColor">
+            <summary>
+            Gets or sets the color of the text.
+            </summary>
+            <value>
+            The color of the text.
             </value>
         </member>
         <member name="P:imbSCI.Core.data.settingsMemberInfoEntry.range_defined">
@@ -2682,6 +2898,133 @@
             trenutna vrednost
             </summary>
         </member>
+        <member name="T:imbSCI.Core.data.systemWatch.MemoryWatch">
+            <summary>
+            Provides memory consumption bogwatch mechanism
+            </summary>
+        </member>
+        <member name="M:imbSCI.Core.data.systemWatch.MemoryWatch.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Core.data.systemWatch.MemoryWatch"/> class.
+            </summary>
+        </member>
+        <member name="M:imbSCI.Core.data.systemWatch.MemoryWatch.Deploy(System.Double,System.Double,System.Int32)">
+            <summary>
+            Deploys the specified limit normal.
+            </summary>
+            <param name="_limit_normal">The limit normal.</param>
+            <param name="_limit_critical">The limit critical.</param>
+            <param name="secondsTick">The seconds tick.</param>
+        </member>
+        <member name="P:imbSCI.Core.data.systemWatch.MemoryWatch.limit_normal">
+            <summary>
+            Megabytes, limit for normal operations
+            </summary>
+            <value>
+            The limit normal.
+            </value>
+        </member>
+        <member name="P:imbSCI.Core.data.systemWatch.MemoryWatch.limit_critical">
+            <summary>
+            Megabytes, limit that triggers <see cref="F:imbSCI.Core.data.systemWatch.MemoryWatchDirective.flush"/> directive
+            </summary>
+            <value>
+            The limit normal.
+            </value>
+        </member>
+        <member name="P:imbSCI.Core.data.systemWatch.MemoryWatch.currentlyUsed">
+            <summary>
+            Megabytes of RAM consumed - last measurement
+            </summary>
+            <value>
+            The currently used.
+            </value>
+        </member>
+        <member name="P:imbSCI.Core.data.systemWatch.MemoryWatch.currentMode">
+            <summary>
+            Gets or sets the current mode.
+            </summary>
+            <value>
+            The current mode.
+            </value>
+        </member>
+        <member name="M:imbSCI.Core.data.systemWatch.MemoryWatch.Describe(imbSCI.Core.reporting.render.ITextRender)">
+            <summary>
+            Describes the specified output.
+            </summary>
+            <param name="output">The output.</param>
+        </member>
+        <member name="M:imbSCI.Core.data.systemWatch.MemoryWatch.Evaluate">
+            <summary>
+            Evaluates current state of the memory consumption
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.Core.data.systemWatch.MemoryWatchDirective">
+            <summary>
+            Directive that <see cref="T:imbSCI.Core.data.systemWatch.MemoryWatch"/> produces
+            </summary>
+        </member>
+        <member name="F:imbSCI.Core.data.systemWatch.MemoryWatchDirective.normal">
+            <summary>
+            Used memory is below allowed limit, therefore continue normal operation
+            </summary>
+        </member>
+        <member name="F:imbSCI.Core.data.systemWatch.MemoryWatchDirective.prevent">
+            <summary>
+            The program should stop consuming additional memory
+            </summary>
+        </member>
+        <member name="F:imbSCI.Core.data.systemWatch.MemoryWatchDirective.flush">
+            <summary>
+            The program should flush cached data in order to release memory
+            </summary>
+        </member>
+        <member name="T:imbSCI.Core.data.UniversalTypeProvider`1">
+            <summary>
+            Provides types and instances for type names
+            </summary>
+            <typeparam name="TInterface">The type of the interface.</typeparam>
+        </member>
+        <member name="M:imbSCI.Core.data.UniversalTypeProvider`1.Prepare(imbSCI.Core.reporting.ILogBuilder)">
+            <summary>
+            Prepares the type provider
+            </summary>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="P:imbSCI.Core.data.UniversalTypeProvider`1.namespaceToScan">
+            <summary>
+            Gets or sets the namespace to scan.
+            </summary>
+            <value>
+            The namespace to scan.
+            </value>
+        </member>
+        <member name="M:imbSCI.Core.data.UniversalTypeProvider`1.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Core.data.UniversalTypeProvider`1"/> class.
+            </summary>
+            <param name="_namespaceToScan">The namespace to scan.</param>
+        </member>
+        <member name="P:imbSCI.Core.data.UniversalTypeProvider`1.typeDictionary">
+            <summary>
+            class name vs type dictionary 
+            </summary>
+        </member>
+        <member name="M:imbSCI.Core.data.UniversalTypeProvider`1.GetTypeByName(System.String)">
+            <summary>
+            Performs safe search within this provider
+            </summary>
+            <param name="classname">The classname.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.data.UniversalTypeProvider`1.GetInstance(System.String)">
+            <summary>
+            Gets new instance for the class name
+            </summary>
+            <param name="classname">The classname.</param>
+            <returns></returns>
+        </member>
         <member name="T:imbSCI.Core.enums.existingDataMode">
             <summary>
             Rule how to handle existing data when append new data collection or single entry
@@ -2737,6 +3080,15 @@
             2nd operatior as angle
             </summary>
         </member>
+        <member name="M:imbSCI.Core.enums.operationExtensions.CompressNumericVector(System.Double[],imbSCI.Core.enums.operation)">
+            <summary>
+            Compresses the numeric vector.
+            </summary>
+            <param name="nVector">The n vector.</param>
+            <param name="operation">Allowed operations: <see cref="F:imbSCI.Core.enums.operation.multiplication"/>, <see cref="F:imbSCI.Core.enums.operation.max"/>, <see cref="F:imbSCI.Core.enums.operation.min"/>, <see cref="F:imbSCI.Core.enums.operation.plus"/></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">Operation [" + operation.ToString() + "] not supported by this method. - operation</exception>
+        </member>
         <member name="T:imbSCI.Core.extensions.data.collectionExtensions">
             <summary>
             Ekstenzije za manipulaciju kolekcijama
@@ -2760,15 +3112,6 @@
             Returns a new list where the elements are randomly shuffled.
             Based on the Fisher-Yates shuffle, which has O(n) complexity.
             </summary>
-        </member>
-        <member name="M:imbSCI.Core.extensions.data.collectionExtensions.GetCrossSection``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IList{``0}[])">
-            <summary>
-            Gets the cross section: only items that are in common to all collections
-            </summary>
-            <typeparam name="TItem">The type of the item.</typeparam>
-            <param name="first">The first.</param>
-            <param name="others">The others.</param>
-            <returns></returns>
         </member>
         <member name="M:imbSCI.Core.extensions.data.collectionExtensions.imbGetItemAt(System.Collections.IEnumerable,System.Int32,System.Boolean)">
             <summary>
@@ -3104,27 +3447,6 @@
             <param name="item">The item.</param>
             <param name="format">The format.</param>
             <returns></returns>
-        </member>
-        <member name="M:imbSCI.Core.extensions.data.containsQueries.Contains``1(System.Collections.Generic.IList{``0},``0[])">
-            <summary>
-            Logical sum of criterias. All must be true to pass.
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="list">The list.</param>
-            <param name="criteria">The criteria.</param>
-            <returns>
-              <c>true</c> if [contains] [the specified criteria]; otherwise, <c>false</c>.
-            </returns>
-        </member>
-        <member name="M:imbSCI.Core.extensions.data.containsQueries.ContainsAny(System.Collections.IList,System.Collections.IEnumerable)">
-            <summary>
-            Determines whether the <c>target</c> contains any of specified needles
-            </summary>
-            <param name="target">The target.</param>
-            <param name="needles">The needles.</param>
-            <returns>
-              <c>true</c> if the specified needles contains any; otherwise, <c>false</c>.
-            </returns>
         </member>
         <member name="T:imbSCI.Core.extensions.data.imbPropertyCollectionExtensions">
             <summary>
@@ -3617,6 +3939,22 @@
             Generates default list in string format out of Type
             </summary>
             <param name="EnumType">Enumeration type</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.extensions.enumworks.imbEnumExtendBase.GetEnumFromStringFlags``1(System.Collections.Generic.IEnumerable{System.String},``0)">
+            <summary>
+            Gets the enum from string flags.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="stringFlags">The string flags.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.extensions.enumworks.imbEnumExtendBase.GetEnumFromStringFlags(System.Type,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Returns all matching enumeration members, if no match returns empty list
+            </summary>
+            <param name="EnumType">Type of the enum.</param>
+            <param name="stringFlags">The string flags.</param>
             <returns></returns>
         </member>
         <member name="M:imbSCI.Core.extensions.enumworks.imbEnumExtendBase.getEnumByName(System.Type,System.String,System.Object)">
@@ -4313,7 +4651,7 @@
             <typeparam name="TValueType">The type of the value type.</typeparam>
             <param name="style">The style.</param>
             <param name="columnName">Name of the column.</param>
-            <param name="rowIndex">Index of the row.</param>
+            <param name="valueToMatch">Index of the row.</param>
             <returns></returns>
         </member>
         <member name="M:imbSCI.Core.extensions.table.core.tableStyleRowSetter.SetStyleForRowsWithValue``1(imbSCI.Core.extensions.table.DataRowInReportTypeEnum,System.String,System.Collections.Generic.IEnumerable{``0})">
@@ -4323,7 +4661,7 @@
             <typeparam name="TValueType">The type of the value type.</typeparam>
             <param name="style">The style.</param>
             <param name="columnName">Name of the column.</param>
-            <param name="rowIndexes">The row indexes.</param>
+            <param name="valuesToMatch">The row indexes.</param>
             <returns></returns>
         </member>
         <member name="M:imbSCI.Core.extensions.table.core.tableStyleRowSetter.evaluate(System.Data.DataRow,System.Data.DataTable,imbSCI.Core.extensions.table.style.dataTableStyleEntry)">
@@ -5340,7 +5678,7 @@
         </member>
         <member name="M:imbSCI.Core.extensions.text.imbStringExtensions.imbTitleCamelOperation(System.String,System.Boolean,System.Boolean)">
             <summary>
-            V3.1: Pretvara camel naming convention string
+            Converts camel name (e.g. "imbTitleCamelOperation") into proper, space separated, caption (Imb Title Camel Operation)
             u normalan title. Ubacuje razmake i sredjuje prva slova.
             </summary>
             <param name="source"></param>
@@ -5377,7 +5715,7 @@
         </member>
         <member name="M:imbSCI.Core.extensions.text.imbStringExtensions.imbGetAbbrevation(System.String,System.Int32,System.Boolean)">
             <summary>
-            Vraca skracenicu naziva koji ima vise reci - radi i sa jednom, onda prosledjuje imbGetWordAbbrevation
+            Creates abbreviation from multi word phrase - it also supports single word source
             </summary>
             <param name="source"></param>
             <param name="targetLength"></param>
@@ -6302,16 +6640,24 @@
             <param name="input">String form of a number or real textual string</param>
             <returns></returns>
         </member>
+        <member name="M:imbSCI.Core.extensions.text.imbStringOperations.commonStartSubstring(System.Collections.Generic.IEnumerable{System.String},System.Double)">
+            <summary>
+            It extracts common substring at left end (at start, root) of input strings
+            </summary>
+            <param name="strings">The strings.</param>
+            <param name="tolerance">The tolerance: what proportion of input strings could be excluded in order to get longest possible common root from the rest of the input</param>
+            <returns></returns>
+        </member>
         <member name="M:imbSCI.Core.extensions.text.imbStringOperations.longestCommonSubstring(System.Collections.IList)">
             <summary>
-            V4> pronalazi najduzi zajednici pod string
+            Extracts one longest common sugstring
             </summary>
             <param name="strings"></param>
             <returns></returns>
         </member>
         <member name="M:imbSCI.Core.extensions.text.imbStringOperations.longestCommonSubstrings(System.Collections.IList)">
             <summary>
-            V4> pronalazi najduze zajednicke pod stringove
+            Extracts the longest possibile common substrings
             </summary>
             <param name="strings"></param>
             <returns></returns>
@@ -8043,7 +8389,7 @@
         </member>
         <member name="M:imbSCI.Core.files.fileDataStructure.IFileDataStructure.OnBeforeSave">
             <summary>
-            Called when before saving the data structure
+            Called before saving the data structure
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "T:imbSCI.Core.files.fileDataStructure.NamespaceDoc" -->
@@ -8160,7 +8506,14 @@
             <seealso cref="!:imbACE.Core.files.folders.IFolderNode" />
             <seealso cref="!:System.Collections.Generic.IEnumerable&lt;System.Collections.Generic.KeyValuePair&lt;System.String, imbACE.Core.files.folders.folderNode&gt;&gt;" />
         </member>
-        <member name="M:imbSCI.Core.files.folders.folderNode.#ctor(System.String)">
+        <member name="M:imbSCI.Core.files.folders.folderNode.ScanForResources(System.String)">
+            <summary>
+            Returns index with found xml files
+            </summary>
+            <param name="searchString">The search string.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.files.folders.folderNode.#ctor">
             <summary>
             Refers to the current directory of application
             </summary>
@@ -8306,6 +8659,14 @@
             <param name="partOrPattern">The part or pattern.</param>
             <param name="options">The options.</param>
             <param name="returnRelative">if set to <c>true</c> [return relative].</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.files.folders.folderNode.GetOrFindFiles(System.String,System.String,System.IO.SearchOption)">
+            <summary>
+            Tries to locate files specified in inputNames if no files specified, than applies search pattern
+            </summary>
+            <param name="inputNames">Comma separated list of filenames, leave empty if search pattern should be used</param>
+            <param name="searchPattern">The search pattern.</param>
             <returns></returns>
         </member>
         <member name="M:imbSCI.Core.files.folders.folderNode.findFiles(System.Collections.Generic.IEnumerable{System.String},System.IO.SearchOption)">
@@ -8566,6 +8927,48 @@
             
              </summary>
         </member>
+        <member name="T:imbSCI.Core.files.folders.SerializedXMLFileDictionary">
+            <summary>
+            XML resources scan result
+            </summary>
+        </member>
+        <member name="P:imbSCI.Core.files.folders.SerializedXMLFileDictionary.folder">
+            <summary>
+            Gets or sets the folder.
+            </summary>
+            <value>
+            The folder.
+            </value>
+        </member>
+        <member name="P:imbSCI.Core.files.folders.SerializedXMLFileDictionary.filesByType">
+            <summary>
+            Gets or sets the type of the files by.
+            </summary>
+            <value>
+            The type of the files by.
+            </value>
+        </member>
+        <member name="M:imbSCI.Core.files.folders.SerializedXMLFileDictionary.Register(imbSCI.Core.files.folders.SerializedXMLFile)">
+            <summary>
+            Registers the specified x file.
+            </summary>
+            <param name="xFile">The x file.</param>
+        </member>
+        <member name="M:imbSCI.Core.files.folders.SerializedXMLFileDictionary.GetResources``1(System.String)">
+            <summary>
+            Gets the resources.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="filename">The filename.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.files.folders.SerializedXMLFileDictionary.ScanFolder(imbSCI.Core.files.folders.folderNode,System.String)">
+            <summary>
+            Scans the folder.
+            </summary>
+            <param name="folder">The folder.</param>
+            <returns></returns>
+        </member>
         <member name="T:imbSCI.Core.files.imbFileException">
             <summary>
             Exception related to this namespace
@@ -8720,6 +9123,24 @@
             Tool for easy object serialization
             </summary>
         </member>
+        <member name="M:imbSCI.Core.files.objectSerialization.CloneViaXML``1(``0,imbSCI.Core.reporting.ILogBuilder)">
+            <summary>
+            Creates clone of the object, using XML serialization. Only serializable properties will be set to the result object.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="input">The input.</param>
+            <param name="logger">The logger.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.files.objectSerialization.CloneViaBinary``1(``0,imbSCI.Core.reporting.ILogBuilder)">
+            <summary>
+            Clones the via binary.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="input">The input.</param>
+            <param name="logger">The logger.</param>
+            <returns></returns>
+        </member>
         <member name="M:imbSCI.Core.files.objectSerialization.ObjectToXML``1(``0)">
             <summary>
             Serialize object to XML
@@ -8728,13 +9149,23 @@
             <param name="settings"></param>
             <returns></returns>
         </member>
-        <member name="M:imbSCI.Core.files.objectSerialization.ObjectFromXML``1(System.String)">
+        <member name="M:imbSCI.Core.files.objectSerialization.ObjectToXML(System.Object,System.Type)">
+            <summary>
+            Serializes object of provided type (to be used for interface instances
+            </summary>
+            <param name="data">The data.</param>
+            <param name="dataType">Type of the data.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.files.objectSerialization.ObjectFromXML``1(System.String,System.Type)">
             <summary>
             Unserialize object from XML
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="xml"></param>
-            <returns></returns>
+            <param name="xml">The XML.</param>
+            <param name="targetType">The t.</param>
+            <returns>Deserialized instance, casted to specified generic type</returns>
+            <exception cref="T:System.ArgumentException">Generic type T is a interface and target type was not specified - please specify argument for target type - targetType</exception>
         </member>
         <member name="M:imbSCI.Core.files.objectSerialization.saveObjectToXML``1(System.String,``0,imbSCI.Core.reporting.ILogBuilder)">
             <summary>
@@ -9429,7 +9860,7 @@
         </member>
         <member name="F:imbSCI.Core.math.aggregation.dataPointAggregationAspect.subSetOfRows">
             <summary>
-            Sub set of some row
+            Computes falue from sub set of a row
             </summary>
         </member>
         <member name="P:imbSCI.Core.math.aggregation.dataPointAggregationDefinition.lateralRightColumns">
@@ -9888,6 +10319,22 @@
             </summary>
             <seealso cref="T:imbSCI.Core.math.classificationMetrics.IClassificationReport" />
         </member>
+        <member name="P:imbSCI.Core.math.classificationMetrics.classificationReport.data">
+            <summary>
+            Gets or sets the data.
+            </summary>
+            <value>
+            The data.
+            </value>
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.classificationReport.Load(System.String,imbSCI.Core.reporting.ILogBuilder)">
+            <summary>
+            Loads the classification report
+            </summary>
+            <param name="filepath">The filepath.</param>
+            <param name="log">The log.</param>
+            <returns></returns>
+        </member>
         <member name="M:imbSCI.Core.math.classificationMetrics.classificationReport.#ctor(imbSCI.Core.math.classificationMetrics.classificationEvalMetricSet,imbSCI.Core.math.classificationMetrics.classificationMetricComputation)">
             <summary>
             Creates the report from metrics given, using averaging computation specified
@@ -9935,6 +10382,61 @@
         <member name="P:imbSCI.Core.math.classificationMetrics.classificationReport.Count">
             <summary> Number of cases that were aggregated in this row </summary>
         </member>
+        <member name="T:imbSCI.Core.math.classificationMetrics.classificationReportCollection">
+            <summary>
+            
+            </summary>
+            <seealso cref="!:System.Collections.Generic.List&lt;imbSCI.Core.math.classificationMetrics.classificationReportExpanded&gt;" />
+        </member>
+        <member name="P:imbSCI.Core.math.classificationMetrics.classificationReportCollection.rootPath">
+            <summary>
+            Gets or sets the root path.
+            </summary>
+            <value>
+            The root path.
+            </value>
+        </member>
+        <member name="T:imbSCI.Core.math.classificationMetrics.classificationReportExpanded">
+            <summary>
+            Expanded version of the report
+            </summary>
+            <seealso cref="T:imbSCI.Core.math.classificationMetrics.classificationReport" />
+        </member>
+        <member name="P:imbSCI.Core.math.classificationMetrics.classificationReportExpanded.filepath">
+            <summary>
+            Gets or sets the filepath on which the report was found
+            </summary>
+            <value>
+            The filepath.
+            </value>
+        </member>
+        <member name="P:imbSCI.Core.math.classificationMetrics.classificationReportExpanded.filecreation">
+            <summary>
+            Gets or sets the file creation.
+            </summary>
+            <value>
+            The filecreation.
+            </value>
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.classificationReportExpanded.LoadSimpleReport(System.String,imbSCI.Core.reporting.ILogBuilder)">
+            <summary>
+            Loads the simple report and builds the expanded version
+            </summary>
+            <param name="reportFile">The report file.</param>
+            <param name="logger">The logger.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.classificationReportExpanded.#ctor(imbSCI.Core.math.classificationMetrics.classificationReport)">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Core.math.classificationMetrics.classificationReportExpanded"/> class.
+            </summary>
+            <param name="report">The report.</param>
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.classificationReportExpanded.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Core.math.classificationMetrics.classificationReportExpanded"/> class.
+            </summary>
+        </member>
         <member name="T:imbSCI.Core.math.classificationMetrics.classificationReportExtensions">
             <summary>
             Extension methods for <see cref="T:imbSCI.Core.math.classificationMetrics.IClassificationReport"/>
@@ -9963,6 +10465,81 @@
             <param name="divisor">The divisor.</param>
             <param name="OnlyRatios">if set to <c>true</c> [only ratios].</param>
         </member>
+        <member name="T:imbSCI.Core.math.classificationMetrics.classificationReportSpace">
+            <summary>
+            Data structure used for report construction
+            </summary>
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.classificationReportSpace.ConstructTable(System.String,System.String,imbSCI.Core.math.classificationMetrics.classificationReportTableMode)">
+            <summary>
+            Constructs the table.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="description">The description.</param>
+            <param name="style">The style.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.classificationReportSpace.SetF1(System.String,System.Int32,imbSCI.Core.math.classificationMetrics.classificationReportExpanded,System.Int32)">
+            <summary>
+            Sets the F1 score and returns alternatuve run name - if had to be assigned, or original
+            </summary>
+            <param name="runName">Name of the run.</param>
+            <param name="size">The size.</param>
+            <param name="F1">The f1.</param>
+            <param name="iteration">The iteration.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.classificationReportSpace.BuildReportSpace(System.Collections.Generic.IEnumerable{imbSCI.Core.math.classificationMetrics.classificationReportExpanded},System.String,System.Text.RegularExpressions.Regex,imbSCI.Core.math.classificationMetrics.classificationReportStyleDefinition,System.String)">
+            <summary>
+            Builds the report space from report collection
+            </summary>
+            <param name="reports">The reports.</param>
+            <param name="dataset">The dataset.</param>
+            <param name="SELECT_REPORT_NAME_PARTS">The select report name parts.</param>
+            <returns></returns>
+        </member>
+        <member name="P:imbSCI.Core.math.classificationMetrics.classificationReportSpace.max_total">
+            <summary>
+             Maximum for the complete space
+            </summary>
+            <value>
+            The maximum total.
+            </value>
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.classificationReportSpace.Complete">
+            <summary>
+            Performs closing computations, using aggregated data
+            </summary>
+        </member>
+        <member name="T:imbSCI.Core.math.classificationMetrics.ExperimentRunNameGroup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.ExperimentRunNameGroup.DeployForRunNames(System.Collections.Generic.List{System.String})">
+            <summary>
+            Deploys for run names.
+            </summary>
+            <param name="runs">The runs.</param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.Core.math.classificationMetrics.ExperimentRunNameGroups">
+            <summary>
+            Declaration of runName groups, used for comparation reporting
+            </summary>
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.ExperimentRunNameGroups.CheckForDefault">
+            <summary>
+            Checks for default.
+            </summary>
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.ExperimentRunNameGroups.DeployForRunNames(System.Collections.Generic.IEnumerable{System.String},System.String[])">
+            <summary>
+            Returns clone filtered for matched runNames
+            </summary>
+            <param name="runNames">The run names.</param>
+            <returns></returns>
+        </member>
         <member name="T:imbSCI.Core.math.classificationMetrics.IClassificationReport">
             <summary>
             Interface to classification report objects
@@ -9978,6 +10555,70 @@
         </member>
         <member name="T:imbSCI.Core.math.classificationMetrics.NamespaceGroupDoc">
             <inheritdoc/>
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.reportDataFlag.Deploy(System.String,System.String,System.String,System.String)">
+            <summary>
+            Deploys the specified name.
+            </summary>
+            <param name="_name">The name.</param>
+            <param name="_needles">The needles.</param>
+            <param name="_replacement">The replacement.</param>
+        </member>
+        <member name="T:imbSCI.Core.math.classificationMetrics.reportDataFlagDictionary">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.reportDataFlagDictionary.ProcessRunName(System.String,imbSCI.Core.math.classificationMetrics.reportExpandedData)">
+            <summary>
+            Processes the name of the run, and assignes data entries for matched flags
+            </summary>
+            <param name="_name">The name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.reportDataFlagDictionary.Add(System.String,System.String,System.String,System.String)">
+            <summary>
+            Deploys the specified name.
+            </summary>
+            <param name="_name">The name.</param>
+            <param name="_needles">The needles.</param>
+            <param name="_replacement">The replacement.</param>
+        </member>
+        <member name="T:imbSCI.Core.math.classificationMetrics.reportExpandedData">
+            <summary>
+            Collection of custom data entries
+            </summary>
+            <seealso cref="!:System.Collections.Generic.List&lt;imbSCI.Core.math.classificationMetrics.reportExpandedDataPair&gt;" />
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.reportExpandedData.GetDictionary">
+            <summary>
+            Gets the dictionary of the data pairs
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.reportExpandedData.Add(System.String,System.String,System.String)">
+            <summary>
+            Adds the specified key.
+            </summary>
+            <param name="_key">The key.</param>
+            <param name="_value">The value.</param>
+            <param name="_description">The description.</param>
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.reportExpandedData.Merge(System.Collections.Generic.IEnumerable{imbSCI.Core.math.classificationMetrics.reportExpandedDataPair})">
+            <summary>
+            Merges the specified pairs.
+            </summary>
+            <param name="pairs">The pairs.</param>
+        </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.reportExpandedData.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Core.math.classificationMetrics.reportExpandedData"/> class.
+            </summary>
+        </member>
+        <member name="T:imbSCI.Core.math.classificationMetrics.reportExpandedDataPair">
+            <summary>
+            Custom data entry, embedded in the report
+            </summary>
         </member>
         <member name="T:imbSCI.Core.math.counter">
             <summary>
@@ -10689,6 +11330,104 @@
             <summary>
             MeasureSet for external application
             </summary>
+        </member>
+        <member name="M:imbSCI.Core.math.measurement.MetricExtensions.Sum``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Sums the specified metrics.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="metrics">The metrics.</param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.Core.math.measurement.MetricsBase">
+            <summary>
+            Base class for metrics containers
+            </summary>
+        </member>
+        <member name="M:imbSCI.Core.math.measurement.MetricsBase.SendTo(imbSCI.Core.math.classificationMetrics.reportExpandedData,System.String)">
+            <summary>
+            Sends metric data into
+            </summary>
+            <param name="target">The target.</param>
+            <param name="formatDouble">The format double.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.measurement.MetricsBase.Plus``1(``0)">
+            <summary>
+            Pluses the specified b.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="b">The b.</param>
+        </member>
+        <member name="M:imbSCI.Core.math.measurement.MetricsBase.Minus``1(``0)">
+            <summary>
+            Minuses the specified b.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="b">The b.</param>
+        </member>
+        <member name="M:imbSCI.Core.math.measurement.MetricsBase.Divide``1(``0)">
+            <summary>
+            Divides the specified b.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="b">The b.</param>
+        </member>
+        <member name="M:imbSCI.Core.math.measurement.MetricsBase.Power``1(``0)">
+            <summary>
+            Powers the specified b.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="b">The b.</param>
+        </member>
+        <member name="M:imbSCI.Core.math.measurement.MetricsBase.Divide(System.Double)">
+            <summary>
+            Divides the specified b.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="b">The b.</param>
+        </member>
+        <member name="M:imbSCI.Core.math.measurement.MetricsBase.Power(System.Double)">
+            <summary>
+            Powers the specified b.
+            </summary>
+            <param name="b">The b.</param>
+        </member>
+        <member name="M:imbSCI.Core.math.measurement.MetricsBase.Init">
+            <summary>
+            Initializes this instance, registers all Integers and Doubles
+            </summary>
+        </member>
+        <member name="M:imbSCI.Core.math.measurement.MetricsBase.GetVector(System.String)">
+            <summary>
+            Gets value of specified property or 0 if no property found under that name
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.measurement.MetricsBase.GetDictionary(System.Boolean,System.Boolean)">
+            <summary>
+            Gets the dictionary.
+            </summary>
+            <param name="includeIntegers">if set to <c>true</c> [include integers].</param>
+            <param name="includeDoubles">if set to <c>true</c> [include doubles].</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.measurement.MetricsBase.GetVectors(System.Boolean,System.Boolean)">
+            <summary>
+            Gets list of integer and double properties
+            </summary>
+            <param name="includeIntegers">if set to <c>true</c> [include integers].</param>
+            <param name="includeDoubles">if set to <c>true</c> [include doubles].</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.measurement.MetricsBase.GetFields(System.Boolean,System.Boolean)">
+            <summary>
+            Gets list of integer and double properties
+            </summary>
+            <param name="includeIntegers">if set to <c>true</c> [include integers].</param>
+            <param name="includeDoubles">if set to <c>true</c> [include doubles].</param>
+            <returns></returns>
         </member>
         <member name="T:imbSCI.Core.math.measureSystem.core.measure`1">
              <summary>
@@ -11620,11 +12359,25 @@
             </summary>
             <param name="input">The input.</param>
         </member>
+        <member name="P:imbSCI.Core.math.range.finder.rangeFinder.IsLearned">
+            <summary>
+            Gets a value indicating whether this instance is learned.
+            </summary>
+            <value>
+              <c>true</c> if this instance is learned; otherwise, <c>false</c>.
+            </value>
+        </member>
         <member name="M:imbSCI.Core.math.range.finder.rangeFinder.GetPositionInRange(System.Double)">
             <summary>
             Returns 0 (min) to 1 (max) position of the <c>input</c>, within <see cref="P:imbSCI.Core.math.range.finder.rangeFinder.Minimum"/> - <see cref="P:imbSCI.Core.math.range.finder.rangeFinder.Maximum"/> range
             </summary>
             <param name="input">The input.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.range.finder.rangeFinder.GetDictionary(System.String)">
+            <summary>
+            Returns dictionary with values
+            </summary>
             <returns></returns>
         </member>
         <member name="P:imbSCI.Core.math.range.finder.rangeFinder.Minimum">
@@ -11645,9 +12398,55 @@
         <member name="P:imbSCI.Core.math.range.finder.rangeFinder.Sum">
             <summary> Summary of all values </summary>
         </member>
+        <member name="T:imbSCI.Core.math.range.finder.rangeFinderCollectionForMetrics`1">
+            <summary>
+            rangeFinders for numeric properties of the object {T}
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:imbSCI.Core.math.range.finder.rangeFinderCollectionForMetrics`1.#ctor(imbSCI.Core.math.range.finder.rangeFinderCollectionForMetrics{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Core.math.range.finder.rangeFinderCollectionForMetrics`1"/> class.
+            </summary>
+            <param name="learnMetaDataFrom">The learn meta data from.</param>
+        </member>
+        <member name="M:imbSCI.Core.math.range.finder.rangeFinderCollectionForMetrics`1.Deploy(System.Type)">
+            <summary>
+            Deploys the specified type.
+            </summary>
+            <param name="type">The type.</param>
+        </member>
+        <member name="M:imbSCI.Core.math.range.finder.rangeFinderCollectionForMetrics`1.GetDictionary">
+            <summary>
+            Gets the dictionary with all values
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.range.finder.rangeFinderCollectionForMetrics`1.SetDataTable(System.Data.DataTable)">
+            <summary>
+            Adds columns and transfers formating and other meta information specified in the <see cref="T:imbSCI.Core.data.settingsPropertyEntry"/> entries. 
+            </summary>
+            <param name="table">The table to write columns into. If not specified, it will create new with name of the group.</param>
+            <remarks>The method will declare only <see cref="T:imbSCI.Core.data.settingsPropertyEntry"/>s, not the entries of other type</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.range.finder.rangeFinderCollectionForMetrics`1.SetDataRow(System.Data.DataRow)">
+            <summary>
+            Sets values to the datarow
+            </summary>
+            <param name="dr">The dr.</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">dr</exception>
+        </member>
+        <member name="M:imbSCI.Core.math.range.finder.rangeFinderCollectionForMetrics`1.Learn(`0)">
+            <summary>
+            Performs one learning call
+            </summary>
+            <param name="dataObject">The data object.</param>
+        </member>
         <member name="T:imbSCI.Core.math.range.finder.rangeFinderForDataTable">
             <summary>
-            Performs aggregation over data in the table
+            Performs aggregation over data in the specified data table and inserts the aggregation rows
             </summary>
         </member>
         <member name="M:imbSCI.Core.math.range.finder.rangeFinderForDataTable.#ctor(System.Data.DataTable,System.String)">
@@ -11691,7 +12490,7 @@
         </member>
         <member name="M:imbSCI.Core.math.range.finder.rangeFinderForDataTable.prepareForNextAggregationBlock(System.Data.DataTable,System.String)">
             <summary>
-            Prepares for the next aggregation block.
+            Prepares for the next aggregation block. You are using this when reporting more one aggregations i.e. splitting the table into more groups and then reporting max,min... for each group
             </summary>
             <param name="targetTable">The target table.</param>
             <param name="keyDataColumn">The key data column.</param>
@@ -11702,6 +12501,23 @@
             </summary>
             <param name="targetTable">The target table.</param>
             <param name="keyDataColumn">The key (name/uid) column.</param>
+        </member>
+        <member name="M:imbSCI.Core.math.range.finder.rangeFinderForDataTable.GetRangerStartingWith(System.String)">
+            <summary>
+            Returns all rangers having key starting with the specified string
+            </summary>
+            <param name="columnNameStart">The column name start.</param>
+            <returns></returns>
+        </member>
+        <member name="P:imbSCI.Core.math.range.finder.rangeFinderForDataTable.Item(System.String)">
+            <summary>
+            Gets the <see cref="T:imbSCI.Core.math.range.finder.rangeFinderWithData"/> with the specified key (property name and/or data table column name
+            </summary>
+            <value>
+            The <see cref="T:imbSCI.Core.math.range.finder.rangeFinderWithData"/>.
+            </value>
+            <param name="key">The key.</param>
+            <returns></returns>
         </member>
         <member name="M:imbSCI.Core.math.range.finder.rangeFinderForDataTable.AddRangeRows(System.String,System.Data.DataTable,System.Boolean,imbSCI.Core.math.aggregation.dataPointAggregationType)">
             <summary>
@@ -11716,6 +12532,52 @@
             <summary>
             The finders
             </summary>
+        </member>
+        <member name="T:imbSCI.Core.math.range.finder.rangeFinderForProperty`1">
+            <summary>
+            Typed version of <see cref="T:imbSCI.Core.math.range.finder.rangeFinderForProperty"/> 
+            </summary>
+            <typeparam name="T"></typeparam>
+            <seealso cref="T:imbSCI.Core.math.range.finder.rangeFinderForProperty" />
+        </member>
+        <member name="M:imbSCI.Core.math.range.finder.rangeFinderForProperty`1.Learn(`0)">
+            <summary>
+            Performs one learning call
+            </summary>
+            <param name="dataObject">The data object.</param>
+        </member>
+        <member name="T:imbSCI.Core.math.range.finder.rangeFinderForProperty">
+            <summary>
+            Range finder set to a property
+            </summary>
+            <seealso cref="T:imbSCI.Core.math.range.finder.rangeFinderForProperty" />
+        </member>
+        <member name="M:imbSCI.Core.math.range.finder.rangeFinderForProperty.GetSettingsInfoGroup">
+            <summary>
+            Gets the settings information group.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.range.finder.rangeFinderForProperty.SetDataTable(System.Data.DataTable)">
+            <summary>
+            Declares data columns in the data table
+            </summary>
+            <param name="table">The table.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.range.finder.rangeFinderForProperty.SetDataRow(System.Data.DataRow)">
+            <summary>
+            Sets values to the datarow
+            </summary>
+            <param name="dr">The dr.</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">dr</exception>
+        </member>
+        <member name="M:imbSCI.Core.math.range.finder.rangeFinderForProperty.Learn(System.Object)">
+            <summary>
+            Learns property value from the specified data object.
+            </summary>
+            <param name="dataObject">The data object.</param>
         </member>
         <member name="T:imbSCI.Core.math.range.finder.rangeFinderWithData">
             <summary>
@@ -11778,6 +12640,20 @@
             <param name="_binCount">The bin count.</param>
             <param name="_name">The name.</param>
         </member>
+        <member name="M:imbSCI.Core.math.range.histogram.histogramModel.GetDataTableForFrequencies(System.Data.DataTable)">
+            <summary>
+            Generates data table with bins
+            </summary>
+            <param name="output">The output.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.range.histogram.histogramModel.GetDataTableForFunction(System.Func{imbSCI.Core.math.range.histogram.histogramModelBin,System.Double},System.Data.DataTable)">
+            <summary>
+            Generates data table with bins
+            </summary>
+            <param name="output">The output.</param>
+            <returns></returns>
+        </member>
         <member name="T:imbSCI.Core.math.range.histogram.histogramModelBin">
              <summary>
             
@@ -11787,7 +12663,7 @@
             <summary>
             Initializes a new instance of the <see cref="T:imbSCI.Core.math.range.histogram.histogramModelBin"/> class.
             </summary>
-            <param name="_lavel">The lavel.</param>
+            <param name="_label">The lavel.</param>
             <param name="_start">The start.</param>
             <param name="_end">The end.</param>
             <param name="_binPlace">The bin place.</param>
@@ -11846,6 +12722,26 @@
             <value>
             The count.
             </value>
+        </member>
+        <member name="M:imbSCI.Core.math.range.histogram.histogramModelExtensions.GetHistogramModel``1(System.Collections.Generic.IEnumerable{``0},System.String,System.Func{``0,System.Double},System.Int32)">
+            <summary>
+            Gets the histogram model.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sourceSet">The source set.</param>
+            <param name="name">The name.</param>
+            <param name="selector">The selector.</param>
+            <param name="bins">The bins.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.range.histogram.histogramModelExtensions.ProcessData``1(imbSCI.Core.math.range.histogram.histogramModel,System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Double})">
+            <summary>
+            Processes the data.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="model">The model.</param>
+            <param name="sourceSet">The source set.</param>
+            <param name="selector">The selector.</param>
         </member>
         <member name="T:imbSCI.Core.math.range.imbNumberScale">
             <summary>
@@ -12339,6 +13235,120 @@
              </summary>
             
         </member>
+        <member name="T:imbSCI.Core.math.similarity.nGramsModeEnum">
+            <summary>
+            Mode of word decomposition
+            </summary>
+        </member>
+        <member name="F:imbSCI.Core.math.similarity.nGramsModeEnum.overlap">
+            <summary>
+            The overlap mode: e.g. for "category", N=2 it will produce: ca, at, te, eg, go, or, ry
+            </summary>
+        </member>
+        <member name="F:imbSCI.Core.math.similarity.nGramsModeEnum.ordinal">
+            <summary>
+            The ordinal mode: e.g. for "category", N=2 it will produce: ca, te, go, ry
+            </summary>
+        </member>
+        <member name="T:imbSCI.Core.math.similarity.nGramsSimilarityEquationEnum">
+            <summary>
+            Equation to use for word to word similarity assesment
+            </summary>
+        </member>
+        <member name="F:imbSCI.Core.math.similarity.nGramsSimilarityEquationEnum.JaccardIndex">
+            <summary>
+            The Jaccard Index: <see cref="!:wordAnalysisTools.GetJaccardIndex(List&lt;string&gt;, List&lt;string&gt;)"/>
+            </summary>
+        </member>
+        <member name="F:imbSCI.Core.math.similarity.nGramsSimilarityEquationEnum.DiceCoefficient">
+            <summary>
+            The dice coefficient: <see cref="!:wordAnalysisTools.GetDiceCoefficient(List&lt;string&gt;, List&lt;string&gt;)"/>
+            </summary>
+        </member>
+        <member name="F:imbSCI.Core.math.similarity.nGramsSimilarityEquationEnum.continualOverlapRatio">
+            <summary>
+            The get continual overlap ratio: <see cref="!:wordAnalysisTools.GetContinualOverlapRatio(List&lt;string&gt;, List&lt;string&gt;)"/>
+            </summary>
+        </member>
+        <member name="F:imbSCI.Core.math.similarity.nGramsSimilarityEquationEnum.KunchevaIndex">
+            <summary>
+            The kuncheva index
+            </summary>
+        </member>
+        <member name="M:imbSCI.Core.math.similarity.setAnalysisExtensions.GetSimilarity``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.List{``0}},imbSCI.Core.math.similarity.nGramsSimilarityEquationEnum)">
+            <summary>
+            Gets the similarity.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sets">The sets.</param>
+            <param name="equationEnum">The equation enum.</param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.Core.math.similarity.setAnalysisTools`1">
+            <summary>
+            Static methods for word similarity computation (works with any string)
+            </summary>
+        </member>
+        <member name="M:imbSCI.Core.math.similarity.setAnalysisTools`1.GetSimilarity(System.Collections.Generic.List{`0},System.Collections.Generic.List{`0},imbSCI.Core.math.similarity.nGramsSimilarityEquationEnum)">
+            <summary>
+            Computes word similarity
+            </summary>
+            <param name="wordA">The word a.</param>
+            <param name="wordB">The word b.</param>
+            <param name="equationEnum">The equation enum.</param>
+            <param name="nGramSize">Size of the n gram.</param>
+            <param name="nGramMode">The n gram mode.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.similarity.setAnalysisTools`1.GetKunchevaIndex(System.Collections.Generic.List{`0},System.Collections.Generic.List{`0},System.Int32)">
+            <summary>
+            Ratio describes % of uninteruppted n-grams overlap. Example:  "elektromotorni", "motorski" = 5 / 14
+            </summary>
+            <param name="ngrams_A">The ngrams a.</param>
+            <param name="ngrams_b">The ngrams b.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.similarity.setAnalysisTools`1.GetContinualOverlapRatio(System.Collections.Generic.List{`0},System.Collections.Generic.List{`0})">
+            <summary>
+            Ratio describes % of uninteruppted n-grams overlap. Example:  "elektromotorni", "motorski" = 5 / 14
+            </summary>
+            <param name="ngrams_A">The ngrams a.</param>
+            <param name="ngrams_b">The ngrams b.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.similarity.setAnalysisTools`1.getContinualOverlapR(System.Collections.Generic.List{`0},System.Collections.Generic.List{`0})">
+            <summary>
+            Gets the continual overlap r.
+            </summary>
+            <param name="A">a.</param>
+            <param name="B">The b.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.similarity.setAnalysisTools`1.GetJaccardIndex(System.Collections.Generic.List{`0},System.Collections.Generic.List{`0})">
+            <summary>
+            Gets the index of the Jaccard index: number of common ngrams divided by number of total unique ngrams
+            </summary>
+            <param name="ngrams_A">The ngrams a.</param>
+            <param name="ngrams_b">The ngrams b.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.similarity.setAnalysisTools`1.GetDiceCoefficient(System.Collections.Generic.List{`0},System.Collections.Generic.List{`0})">
+            <summary>
+            Gets the index of the Dice coefficient: number of common ngrams divided by number of n-grams in both sets
+            </summary>
+            <param name="ngrams_A">The ngrams a.</param>
+            <param name="ngrams_b">The ngrams b.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.similarity.setAnalysisTools`1.getNGrams(System.Collections.Generic.List{System.Collections.Generic.List{`0}},System.Int32,imbSCI.Core.math.similarity.nGramsModeEnum)">
+            <summary>
+            Breaks the specified word into <c>N</c>-grams
+            </summary>
+            <param name="word">The word to be splitted into n-grams</param>
+            <param name="N">Size of N-grams, e.g. for bigrams: N=2</param>
+            <param name="mode">The slicing mode</param>
+            <returns>Set of NGrams</returns>
+        </member>
         <member name="T:imbSCI.Core.math.StatisticsExtensions">
             <summary>
             Entropy, and some wrappers to <see cref="!:MathNet.Numerics"/>
@@ -12350,6 +13360,14 @@
             </summary>
             <param name="rFreqs">The r freqs.</param>
             <param name="increasedAccuricy">if set to <c>true</c> [increased accuricy].</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.math.StatisticsExtensions.GetVarianceCoefficient(System.Collections.Generic.IEnumerable{System.Double},System.Boolean)">
+            <summary>
+            The coefficient of variation (CV) is defined as the ratio of the standard deviation {\displaystyle \ \sigma } \ \sigma  to the mean {\displaystyle \ \mu } \ \mu :[1] {\displaystyle c_{\rm {v}}={\frac {\sigma }{\mu }}.} {\displaystyle c_{\rm {v}}={\frac {\sigma }{\mu }}.} It shows the extent of variability in relation to the mean of the population.
+            </summary>
+            <param name="rFreqs">The r freqs.</param>
+            <param name="isSample">if set to <c>true</c> [is sample].</param>
             <returns></returns>
         </member>
         <member name="M:imbSCI.Core.math.StatisticsExtensions.GetVariance(System.Collections.Generic.IEnumerable{System.Double},System.Boolean)">
@@ -14626,6 +15644,11 @@
         <member name="P:imbSCI.Core.reporting.render.contentControl.stringBuilderControler.active">
             <summary>
             Determinates the active StringBuilder
+            </summary>
+        </member>
+        <member name="M:imbSCI.Core.reporting.render.contentControl.stringBuilderControler.switchToBack">
+            <summary>
+            Switched to previous subcontent or to the main content if there were no subcontent keys in history
             </summary>
         </member>
         <member name="P:imbSCI.Core.reporting.render.contentControl.stringBuilderControler.sb">

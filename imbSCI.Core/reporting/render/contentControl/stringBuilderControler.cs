@@ -29,11 +29,13 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Core.reporting.render.contentControl
 {
+    using imbSCI.Core.extensions.data;
     using imbSCI.Data.data;
     using imbSCI.Data.enums.fields;
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Linq;
     using System.Text;
 
     /// <summary>
@@ -91,15 +93,16 @@ namespace imbSCI.Core.reporting.render.contentControl
         {
             PropertyCollection output = new PropertyCollection();
 
-            foreach (KeyValuePair<templateFieldSubcontent, StringBuilder> de in registry)
+            foreach (KeyValuePair<String, StringBuilder> de in registry)
             {
-                if (de.Key != templateFieldSubcontent.main)
+                if (includeMain)
                 {
                     output.Add(de.Key, de.Value.ToString());
+
                 }
                 else
                 {
-                    if (includeMain)
+                    if (de.Key != nameof(templateFieldSubcontent.main))
                     {
                         output.Add(de.Key, de.Value.ToString());
                     }
@@ -109,8 +112,25 @@ namespace imbSCI.Core.reporting.render.contentControl
             return output;
         }
 
+
+        protected List<String> history { get; set; } = new List<string>();
+
+
         public void switchToActive(templateFieldSubcontent subfield)
         {
+            String k = subfield.ToString();
+
+            if (!registry.ContainsKey(k))
+            {
+                registry.Add(k, new StringBuilder());
+            }
+            active = k;
+        }
+
+        public void switchToActive(String subfield)
+        {
+            if (subfield.isNullOrEmpty()) subfield = nameof(templateFieldSubcontent.main);
+
             if (!registry.ContainsKey(subfield))
             {
                 registry.Add(subfield, new StringBuilder());
@@ -118,15 +138,54 @@ namespace imbSCI.Core.reporting.render.contentControl
             active = subfield;
         }
 
-        private templateFieldSubcontent _active = templateFieldSubcontent.main;
+        private String _active = nameof(templateFieldSubcontent.main);
 
         /// <summary>
         /// Determinates the active StringBuilder
         /// </summary>
-        protected templateFieldSubcontent active
+        protected String active
         {
             get { return _active; }
-            set { _active = value; }
+            set
+            {
+                if (_active != value)
+                {
+                    if (history.Contains(_active))
+                    {
+                        Int32 _activeIndex = history.IndexOf(_active);
+                        if (_activeIndex > 0)
+                        {
+                            history = history.Take(_activeIndex).ToList();
+                        }
+
+                    }
+                    else
+                    {
+                        history.Add(_active);
+                    }
+
+                }
+                _active = value;
+            }
+        }
+
+        /// <summary>
+        /// Switched to previous subcontent or to the main content if there were no subcontent keys in history
+        /// </summary>
+        public void switchToBack()
+        {
+            String lastKey = "";
+            if (history.Any())
+            {
+                lastKey = history.Last();
+            }
+            if (lastKey.isNullOrEmpty())
+            {
+                lastKey = nameof(templateFieldSubcontent.main);
+            }
+
+
+            switchToActive(lastKey);
         }
 
         /// <summary>
@@ -146,6 +205,7 @@ namespace imbSCI.Core.reporting.render.contentControl
         public void Clear()
         {
             registry.Clear();
+            history.Clear();
             switchToActive(templateFieldSubcontent.main);
         }
 
@@ -161,20 +221,21 @@ namespace imbSCI.Core.reporting.render.contentControl
         {
             get
             {
-                if (!registry.ContainsKey(key))
+                String k = key.ToString();
+                if (!registry.ContainsKey(k))
                 {
-                    registry.Add(key, new StringBuilder());
+                    registry.Add(k, new StringBuilder());
                 }
-                return registry[key] as StringBuilder;
+                return registry[k] as StringBuilder;
             }
         }
 
-        private Dictionary<templateFieldSubcontent, StringBuilder> _registry = new Dictionary<templateFieldSubcontent, StringBuilder>();
+        private Dictionary<String, StringBuilder> _registry = new Dictionary<String, StringBuilder>();
 
         /// <summary>
         /// Container for string builders
         /// </summary>
-        protected Dictionary<templateFieldSubcontent, StringBuilder> registry
+        protected Dictionary<String, StringBuilder> registry
         {
             get { return _registry; }
             set { _registry = value; }

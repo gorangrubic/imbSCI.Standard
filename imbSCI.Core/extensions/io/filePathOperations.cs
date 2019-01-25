@@ -546,6 +546,10 @@ namespace imbSCI.Core.extensions.io
 
         //}
 
+
+        private static Object CreateDirLock = new Object();
+
+
         /// <summary>
         /// Gets writable file based on selected mode. By default it will do overwrite. Autorename calls <see cref="addUniqueSufix(string, string)" /> extension that counts existing files and sets proper number.
         /// </summary>
@@ -570,12 +574,21 @@ namespace imbSCI.Core.extensions.io
             {
                 try
                 {
-                    var di = Directory.CreateDirectory(dir);
+                    if (!Directory.Exists(dir))
+                    {
+                        lock (CreateDirLock)
+                        {
+                            if (!Directory.Exists(dir))
+                            {
+                                var di = Directory.CreateDirectory(dir);
+                            }
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
-                    throw new imbFileException("getWritableFile [" + mode.ToString() + "] failed when directory should be created from [" + dir.toStringSafe() + "]. "
-                        + ex.Message, ex, null, path, null);
+                    //    throw new imbFileException("getWritableFile [" + mode.ToString() + "] failed when directory should be created from [" + dir.toStringSafe() + "]. "
+                    //      + ex.Message, ex, null, path, null);
                 }
             }
 

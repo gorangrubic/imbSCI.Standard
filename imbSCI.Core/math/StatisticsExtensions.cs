@@ -54,6 +54,25 @@ namespace imbSCI.Core.math
             return new DescriptiveStatistics(rFreqs, increasedAccuricy);
         }
 
+
+        /// <summary>
+        /// The coefficient of variation (CV) is defined as the ratio of the standard deviation {\displaystyle \ \sigma } \ \sigma  to the mean {\displaystyle \ \mu } \ \mu :[1] {\displaystyle c_{\rm {v}}={\frac {\sigma }{\mu }}.} {\displaystyle c_{\rm {v}}={\frac {\sigma }{\mu }}.} It shows the extent of variability in relation to the mean of the population.
+        /// </summary>
+        /// <param name="rFreqs">The r freqs.</param>
+        /// <param name="isSample">if set to <c>true</c> [is sample].</param>
+        /// <returns></returns>
+        public static Double GetVarianceCoefficient(this IEnumerable<Double> rFreqs, Boolean isSample = false)
+        {
+            Double stdev = GetStdDeviation(rFreqs, isSample);
+            Double mean = rFreqs.Average();
+            if (Double.IsNaN(stdev)) return 0;
+            if (Double.IsNaN(mean)) return 0;
+            if (mean == 0) return 0;
+            if (stdev == 0) return 0;
+            return stdev / mean;
+        }
+
+
         /// <summary>
         /// Gets the variance.
         /// </summary>
@@ -75,6 +94,8 @@ namespace imbSCI.Core.math
                 c++;
             }
 
+            Double output = 0;
+
             if (c == 1)
             {
                 return 0;
@@ -87,13 +108,14 @@ namespace imbSCI.Core.math
 
             if (!isSample)
             {
-                return above / c;
+                output = above / c;
             }
             else
             {
-                return above / (c - 1);
+                output = above / (c - 1);
             }
 
+            return output;
         }
 
 
@@ -138,7 +160,7 @@ namespace imbSCI.Core.math
             //{
             //    return Math.Sqrt(above / (c - 1));
             //}
-            
+
         }
 
         /// <summary>

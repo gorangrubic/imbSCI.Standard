@@ -27,21 +27,89 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using imbSCI.Data;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace imbSCI.Core.extensions.data
 {
-    public enum containsQueryTypeEnum
-    {
-        ContainsOnly,
-        ContainsAny,
-        ContainsAll,
-    }
+
+
+
+    /*
 
     public static class containsQueries
     {
+
+
+        public static List<TItem> GetDifference<TItem>(this IEnumerable<TItem> first, IList<TItem> other)
+        {
+            List<TItem> output = new List<TItem>();
+
+            foreach (TItem item in first)
+            {
+                if (!other.Contains(item))
+                {
+                    output.Add(item);
+                }
+            }
+
+            return output;
+        }
+
+        public static List<TItem> GetUnion<TItem>(this IEnumerable<TItem> first, IList<TItem>[] others)
+        {
+            List<TItem> output = new List<TItem>();
+
+            output.AddRange(first);
+
+            var oth = others.ToList();
+            foreach (var other in others)
+            {
+                output.AddUnique(other);
+                //oth.ForEach((XmlReadMode=))
+
+                // output.AddRangeUnique(other);
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Gets the cross section: only items that are in common to all collections
+        /// </summary>
+        /// <typeparam name="TItem">The type of the item.</typeparam>
+        /// <param name="first">The first.</param>
+        /// <param name="others">The others.</param>
+        /// <returns></returns>
+        public static List<TItem> GetCrossSection<TItem>(this IEnumerable<TItem> first, IList<TItem>[] others)
+        {
+            List<TItem> output = new List<TItem>();
+
+            foreach (TItem item in first)
+            {
+                Boolean ok = true;
+
+                for (int i = 0; i < others.Length; i++)
+                {
+                    if (!others[i].Contains(item))
+                    {
+                        ok = false;
+                        break;
+                    }
+                }
+                if (ok)
+                {
+                    output.Add(item);
+                }
+            }
+
+            return output;
+        }
+
+
         public static Boolean ContainsByEnum(this IList flags, Object[] needles, containsQueryTypeEnum type)
         {
             switch (type)
@@ -169,4 +237,5 @@ namespace imbSCI.Core.extensions.data
             return false;
         }
     }
+    */
 }

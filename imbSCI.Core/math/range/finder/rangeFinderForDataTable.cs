@@ -40,7 +40,7 @@ using System.Linq;
 namespace imbSCI.Core.math.range.finder
 {
     /// <summary>
-    /// Performs aggregation over data in the table
+    /// Performs aggregation over data in the specified data table and inserts the aggregation rows
     /// </summary>
     public class rangeFinderForDataTable
     {
@@ -60,7 +60,7 @@ namespace imbSCI.Core.math.range.finder
         /// <value>
         /// The key column.
         /// </value>
-        public DataColumn keyColumn { get; protected set; }
+        internal DataColumn keyColumn { get;  set; }
 
         /// <summary>
         /// Name of column that is UID
@@ -84,10 +84,10 @@ namespace imbSCI.Core.math.range.finder
         /// <value>
         /// The rows to skip from learning.
         /// </value>
-        public Int32 rowsToSkipFromLearning { get; protected set; } = 0;
+        internal Int32 rowsToSkipFromLearning { get; set; } = 0;
 
         /// <summary>
-        /// Prepares for the next aggregation block.
+        /// Prepares for the next aggregation block. You are using this when reporting more one aggregations i.e. splitting the table into more groups and then reporting max,min... for each group
         /// </summary>
         /// <param name="targetTable">The target table.</param>
         /// <param name="keyDataColumn">The key data column.</param>
@@ -132,6 +132,11 @@ namespace imbSCI.Core.math.range.finder
             }
         }
 
+        /// <summary>
+        /// Returns all rangers having key starting with the specified string
+        /// </summary>
+        /// <param name="columnNameStart">The column name start.</param>
+        /// <returns></returns>
         public List<rangeFinderWithData> GetRangerStartingWith(String columnNameStart)
         {
             var columns = finders.Keys.Where(x => x.ColumnName.StartsWith(columnNameStart));
@@ -144,6 +149,14 @@ namespace imbSCI.Core.math.range.finder
             return output;
         }
 
+        /// <summary>
+        /// Gets the <see cref="rangeFinderWithData"/> with the specified key (property name and/or data table column name
+        /// </summary>
+        /// <value>
+        /// The <see cref="rangeFinderWithData"/>.
+        /// </value>
+        /// <param name="key">The key.</param>
+        /// <returns></returns>
         public rangeFinderWithData this[String key]
         {
             get

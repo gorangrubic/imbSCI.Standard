@@ -40,7 +40,7 @@ namespace imbSCI.Graph.Graphics.HeatMap
         /// <param name="filePath">The file path.</param>
         public void RenderAndSave(HeatMapModel model, String filePath)
         {
-            Render(model, filePath);
+            var doc = Render(model, filePath);
         }
 
         protected void prepareLabels(HeatMapModel model)
@@ -66,7 +66,7 @@ namespace imbSCI.Graph.Graphics.HeatMap
         /// <param name="model">The model.</param>
         /// <param name="filePath">The file path.</param>
         /// <returns></returns>
-        public Svg.SvgDocument Render(HeatMapModel model, String filePath)
+        public Svg.SvgDocument Render(HeatMapModel model, String filePath = "")
         {
             model.DetectMinMax();
 
@@ -111,8 +111,8 @@ namespace imbSCI.Graph.Graphics.HeatMap
 
                 //Svg.SvgText label = new SvgText(xLabels[x])
                 //{
-                //    X = (xStart+(format.width/2) - format.margin.right).Get_px(),
-                //    Y = (-format.height/2).Get_px(),
+                //    X = (xStart + (format.width / 2) - format.margin.right).Get_px(),
+                //    Y = (-format.height / 2).Get_px(),
                 //    Color = new SvgColourServer(Color.Black),
                 //    Font = "Gulliver"
 
@@ -205,11 +205,14 @@ namespace imbSCI.Graph.Graphics.HeatMap
                     filePath += ".svg";
                 }
 
-                throw new NotImplementedException();
+
+                output.Save(filePath);
+
+                //  throw new NotImplementedException();
 
                 /* var code = output.GetXML();  //Encoding.UTF8.GetString(stream.GetBuffer());
 
-                File.WriteAllText(filePath, code);*/
+                */
             }
 
             return output;

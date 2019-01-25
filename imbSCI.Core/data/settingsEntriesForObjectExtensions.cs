@@ -28,8 +28,10 @@
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
 using imbSCI.Core.extensions.data;
+using imbSCI.Core.extensions.table;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace imbSCI.Core.data
@@ -39,6 +41,99 @@ namespace imbSCI.Core.data
     /// </summary>
     public static class settingsEntriesForObjectExtensions
     {
+
+        /// <summary>
+        /// Adds columns and transfers formating and other meta information specified in the <see cref="settingsPropertyEntry"/> entries. 
+        /// </summary>
+        /// <param name="table">The table to write columns into. If not specified, it will create new with name of the group.</param>
+        /// <remarks>The method will declare only <see cref="settingsPropertyEntry"/>s, not the entries of other type</remarks>
+        /// <returns></returns>
+        public static DataTable SetDataTable(this IEnumerable<settingsMemberInfoEntry> input, DataTable table)
+        {
+            //if (table == null) table = new DataTable();
+
+            foreach (var p in input)
+            {
+                if (p is settingsPropertyEntry spe)
+                {
+                    if (!table.Columns.Contains(p.name))
+                    {
+                        var dtc = table.Columns.Add(p.name);
+                        dtc.SetSPE(spe);
+                    }
+                }
+            }
+
+            return table;
+        }
+
+        public static DataRow SetDataRow(this IEnumerable<settingsMemberInfoEntry> input, DataTable table, Object data, DataRow dr, bool addRowBeforeEnd = true)
+        {
+            if (dr == null) dr = table.NewRow(); // new DataTable(name);
+
+            var dict = GetDictionary(input, data);
+
+            foreach (var p in dict)
+            {
+
+                if (dr.Table.Columns.Contains(p.Key))
+                {
+                    dr[p.Key] = p.Value;
+                }
+
+            }
+
+            if (addRowBeforeEnd)
+            {
+                table.Rows.Add(dr);
+            }
+
+            return dr;
+        }
+
+
+        /// <summary>
+        /// Gets the dictionary of values, key = prefix + PropertyInfo.Name
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <param name="data">The data.</param>
+        /// <param name="prefix">The prefix.</param>
+        /// <returns></returns>
+        public static Dictionary<String, Object> GetDictionary(this IEnumerable<settingsMemberInfoEntry> input, Object data, String prefix = "")
+        {
+            Dictionary<String, Object> output = new Dictionary<string, Object>();
+
+            foreach (settingsMemberInfoEntry entry in input)
+            {
+                if (entry is settingsPropertyEntry pe)
+                {
+                    Object v = pe.pi.GetValue(data, null);
+                    output.Add(prefix + pe.name, v);
+                }
+            }
+            return output;
+        }
+
+
+        public static Dictionary<String, T> GetDictionaryOf<T>(this IEnumerable<settingsMemberInfoEntry> input, Object data, String prefix = "")
+        {
+            Dictionary<String, T> output = new Dictionary<string, T>();
+            Type type = typeof(T);
+            foreach (settingsMemberInfoEntry entry in input)
+            {
+                if (entry is settingsPropertyEntry pe)
+                {
+                    if (pe.type == type)
+                    {
+                        T v = (T)pe.pi.GetValue(data, null);
+                        output.Add(prefix + pe.name, v);
+                    }
+                }
+            }
+            return output;
+        }
+
+
         /// <summary>
         /// Builds member info group dictionary
         /// </summary>

@@ -33,6 +33,7 @@ namespace imbSCI.Data
     using imbSCI.Data.extensions.data;
     using imbSCI.Data.interfaces;
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;

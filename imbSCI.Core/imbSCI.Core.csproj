@@ -5,7 +5,7 @@
     <ApplicationIcon>imbSCI.ico</ApplicationIcon>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>imbSCI.Core.Standard</PackageId>
-    <Version>0.3.70</Version>
+    <Version>0.3.377</Version>
     <Title>imbSCI.Core - the core library of imbSCI</Title>
     <Summary>
       Part of the base layer of imbVeles Framework: reporting support, graph and directed graphs, concurrent multidimensional collections, serialization helpers
@@ -62,6 +62,11 @@ apply template on report generation of a collection or directly to DataTable</Pa
     <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
     <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
     <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
 
@@ -123,6 +128,12 @@ apply template on report generation of a collection or directly to DataTable</Pa
 
   <ItemGroup>
     <ProjectReference Include="..\imbSCI.Data\imbSCI.Data.csproj" />
+  </ItemGroup>
+
+  
+
+  <ItemGroup>
+    <Folder Include="syntax\macro\" />
   </ItemGroup>
 
   <Target Name="CopyPackage" AfterTargets="Pack">

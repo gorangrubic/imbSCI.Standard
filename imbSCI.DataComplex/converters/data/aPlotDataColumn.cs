@@ -1,0 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Text;
+using System.Xml.Serialization;
+
+namespace imbSCI.DataComplex.converters.data
+{
+public class aPlotDataColumn : aPlotDataElementBase
+    {
+        public List<aPlotFilterDeclaration> input_filter { get; set; } = new List<aPlotFilterDeclaration>();
+        public List<aPlotFilterDeclaration> output_filter { get; set; } = new List<aPlotFilterDeclaration>();
+
+
+
+    }
+}

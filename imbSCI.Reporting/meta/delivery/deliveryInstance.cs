@@ -60,6 +60,18 @@ namespace imbSCI.Reporting.meta.delivery
     /// </summary>
     public class deliveryInstance : docScriptExecution, IMetaLevelElement, IDeliveryComposer, IRenderExecutionContext, IObjectWithReportLevel
     {
+
+
+        public override DirectoryInfo directoryRoot
+        {
+            get { return _directoryRoot; }
+            set { _directoryRoot = value; }
+        }
+
+        private DirectoryInfo _directoryScope;
+
+        private DirectoryInfo _directoryRoot;
+
         public ILogBuilder aceLog { get; set; }
 
         public override object dUnit
@@ -93,6 +105,12 @@ namespace imbSCI.Reporting.meta.delivery
             return addOrUpdateStateData(data);
         }
 
+        /// <summary>
+        /// Calls prepare and then <see cref="execute(metaDocumentRootSet, string, PropertyCollection)"/>
+        /// </summary>
+        /// <param name="report">The report.</param>
+        /// <param name="runstamp">The runstamp.</param>
+        /// <param name="__data">The data.</param>
         public void executeAndSave(metaDocumentRootSet report, string runstamp, PropertyCollection __data = null)
         {
             executePrepare(report, runstamp, __data);
@@ -110,7 +128,7 @@ namespace imbSCI.Reporting.meta.delivery
         /// <param name="report">The report.</param>
         /// <param name="runstamp">The runstamp.</param>
         /// <param name="__data">The data.</param>
-        public void execute(metaDocumentRootSet report, string runstamp, PropertyCollection __data = null)
+        protected void execute(metaDocumentRootSet report, string runstamp, PropertyCollection __data = null)
         {
             dataDictionary = new PropertyCollectionDictionary();
 
@@ -293,17 +311,19 @@ namespace imbSCI.Reporting.meta.delivery
         /// Prepares the output folders --
         /// </summary>
         /// <param name="runstamp">The runstamp or adjuster output folder name</param>
-        public void folderPrepare(string runstamp)
+        protected void folderPrepare(string runstamp)
         {
-            string startPath = unit.outputpath.add(runstamp, "\\");
+            string startPath = unit.outputpath.add(runstamp, Path.DirectorySeparatorChar);
 
             directoryScope = Directory.CreateDirectory(startPath);
             directoryRoot = Directory.CreateDirectory(startPath);
         }
 
-        public void executePrepare(metaDocumentRootSet report, string runstamp, PropertyCollection __data = null)
+        protected void executePrepare(metaDocumentRootSet report, string runstamp, PropertyCollection __data = null)
         {
             //  aceLog.consoleControl.setAsOutput(this, "Delivery");
+
+            folderPrepare(runstamp);
 
             report.context = this;
             theme = unit.theme;
@@ -505,29 +525,32 @@ namespace imbSCI.Reporting.meta.delivery
             }
         }
 
-        public void executeMain()
+        protected void executeMain()
         {
         }
 
-        public void executeEnd()
+        protected void executeEnd()
         {
         }
 
         public override ILogBuilder logStartPhase(string title, string message)
         {
-            throw new NotImplementedException();
+
+            return aceLog;
+            //throw new NotImplementedException();
         }
 
         public override ILogBuilder logEndPhase()
         {
-            throw new NotImplementedException();
+            return aceLog;
+            // throw new NotImplementedException();
         }
 
         public override void log(string message) => aceLog.log(message);
 
         public override void save(string destination_path = "")
         {
-            throw new NotImplementedException();
+            //    throw new NotImplementedException();
         }
 
         /// <summary>
@@ -580,5 +603,15 @@ namespace imbSCI.Reporting.meta.delivery
         }
 
         public override string logContent => throw new NotImplementedException();
+
+        public override DirectoryInfo directoryScope
+        {
+            get { return _directoryScope; }
+            set
+            {
+                //if (_directoryScope == null) _directoryScope = new DirectoryInfo(outputRepositorium.basePath)
+                _directoryScope = value;
+            }
+        }
     }
 }

@@ -11,6 +11,7 @@ using System.Reflection;
 
 namespace imbSCI.DataComplex.data
 {
+
     /// <summary>
     /// Class with testing environment resources: <see cref="folderNode"/>s, log builder (<see cref="builderForLogBase"/> and <see cref="aceAuthorNotation"/>
     /// </summary>

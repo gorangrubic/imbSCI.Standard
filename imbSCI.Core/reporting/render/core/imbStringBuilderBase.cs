@@ -402,6 +402,18 @@ namespace imbSCI.Core.reporting.render.core
             }
         }// = new StringBuilder();
 
+
+        public virtual void SubcontentStart(String key, Boolean cleanPriorContent = false)
+        {
+            sbControler.switchToActive(key);
+            //sbControler.active = key;
+            if (cleanPriorContent)
+            {
+                sb.Clear();
+            }
+        }
+
+
         /// <summary>
         /// Starts Subcontent session or continues existing. Optionally erazes all existing content under subsession specified by <c>key</c>
         /// </summary>
@@ -425,8 +437,9 @@ namespace imbSCI.Core.reporting.render.core
             //if (sbControler.active == templateFieldSubcontent.main) return "";
 
             String output = sb.ToString();
+            sbControler.switchToBack();
 
-            sbControler.switchToActive(templateFieldSubcontent.main);
+            //sbControler.switchToActive(templateFieldSubcontent.main);
             //sbControler.active = templateFieldSubcontent.main;
 
             return output;
@@ -891,6 +904,7 @@ namespace imbSCI.Core.reporting.render.core
         {
             get
             {
+
                 return _zone;
             }
         }
@@ -922,7 +936,17 @@ namespace imbSCI.Core.reporting.render.core
         /// \ingroup_disabled renderapi_service
         public String tabInsert
         {
-            get { return new String(tab, tabLevel); }
+            get
+            {
+                if (tabLevel > 0)
+                {
+                    return new String(tab, tabLevel);
+                }
+                else
+                {
+                    return "";
+                }
+            }
         }
 
         /// <summary>
@@ -965,7 +989,7 @@ namespace imbSCI.Core.reporting.render.core
             set
             {
                 _linePrefix = value;
-                OnPropertyChanged("linePrefix");
+                // OnPropertyChanged("linePrefix");
             }
         }
 
@@ -1017,9 +1041,21 @@ namespace imbSCI.Core.reporting.render.core
         {
             // String newContent = linePrefix + tabInsert + input;
             // sb.AppendLine
-            input = input.ensureStartsWith(linePrefix + tabInsert);
-            input = imbSciStringExtensions.removeStartsWith(imbSciStringExtensions.removeEndsWith(input, newLineInsert), newLineInsert);
-            input = imbSciStringExtensions.ensureEndsWith(input, newLineInsert);
+
+
+            String nl = newLineInsert;
+
+            String lpt = linePrefix + tabInsert;
+
+            if (!input.StartsWith(lpt)) input = lpt + input;
+            //input = input.ensureStartsWith(linePrefix + tabInsert);
+
+
+            if (!input.StartsWith(nl)) input = nl + input;
+            if (!input.EndsWith(nl)) input = input + nl;
+
+            //input = input.removeStartsWith(newLineInsert).removeEndsWith(newLineInsert);  //imbSciStringExtensions.removeStartsWith(imbSciStringExtensions.removeEndsWith(input, newLineInsert), newLineInsert);
+            //input = imbSciStringExtensions.ensureEndsWith(input, newLineInsert);
 
             // contentElements.Add(newContent);
 
@@ -1078,7 +1114,10 @@ namespace imbSCI.Core.reporting.render.core
         /// \ingroup_disabled renderapi_append
         public void prevTabLevel()
         {
-            tabLevel--;
+            if (tabLevel > 0)
+            {
+                tabLevel--;
+            }
         }
 
         /// <summary>
@@ -1130,7 +1169,7 @@ namespace imbSCI.Core.reporting.render.core
         /// \ingroup_disabled renderapi_append
         public virtual void Append(String content, appendType type, Boolean breakLine = false)
         {
-            String input = content.plainText(type);
+            // String input = content.plainText(type);
             if (breakLine)
             {
                 _Append(content);
@@ -1411,7 +1450,7 @@ namespace imbSCI.Core.reporting.render.core
         public virtual void AppendList(IEnumerable<Object> content, Boolean isOrderedList = false)
         {
             String cont = content.textList(isOrderedList, sb);
-
+            AppendParagraph(cont);
             //sb.AppendLine(linePrefix + tabInsert + content.ToUpper());
         }
 
@@ -1421,7 +1460,14 @@ namespace imbSCI.Core.reporting.render.core
         ///  \ingroup_disabled renderapi_append
         public virtual void AppendHorizontalLine()
         {
-            _AppendLine(" ".Repeat(zone.innerLeftPosition) + "-".Repeat(zone.innerRightPosition));
+            if (zone != null)
+            {
+                _AppendLine(" ".Repeat(zone.innerLeftPosition) + "-".Repeat(zone.innerRightPosition));
+            }
+            else
+            {
+                _AppendLine(" --- ");
+            }
             //sb.AppendLine(linePrefix + tabInsert + "---");
         }
 

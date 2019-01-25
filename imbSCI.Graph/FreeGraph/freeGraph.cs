@@ -43,8 +43,12 @@ namespace imbSCI.Graph.FreeGraph
     /// <summary>
     /// Undirected graph structure, defined by <see cref="freeGraphNodeBase"/> and <see cref=freeGraphLinkBase"/>
     /// </summary>
+    [Serializable]
     public class freeGraph : IObjectWithName
     {
+        /// <summary>
+        /// Ime koje je dodeljeno objektu
+        /// </summary>
         public String name { get; set; } = "freeGraph";
 
         /// <summary>
@@ -195,11 +199,20 @@ namespace imbSCI.Graph.FreeGraph
             return LinkWeightsInversed;
         }
 
+        /// <summary>
+        /// Will force the graph model to recreate cache
+        /// </summary>
         public void SetNotReady()
         {
             nodeDictionary.Clear();
         }
 
+        /// <summary>
+        /// Returns link instance, detached from the <see cref="freeGraph"/> model
+        /// </summary>
+        /// <param name="link">The link.</param>
+        /// <param name="skipCheck">if set to <c>true</c> [skip check].</param>
+        /// <returns></returns>
         public freeGraphLink GetLinkInstance(freeGraphLinkBase link, Boolean skipCheck = true)
         {
             freeGraphLink output = new freeGraphLink(link.GetClone());
@@ -224,6 +237,11 @@ namespace imbSCI.Graph.FreeGraph
         public Int32 CountLinks(String nodeName, Boolean AtoB = true, Boolean BtoA = true)
         {
             Int32 output = 0;
+
+            if (AtoB && BtoA)
+            {
+                return links.Count();
+            }
 
             if (AtoB)
             {
@@ -254,20 +272,22 @@ namespace imbSCI.Graph.FreeGraph
             //if (!nodeDictionary.ContainsKey(nodeName)) return null;
 
             freeGraphNodeAndLinks output = new freeGraphNodeAndLinks();
-            List<freeGraphLinkBase> lnks = new List<freeGraphLinkBase>();
+
+
+            //List<freeGraphLinkBase> lnks = new List<freeGraphLinkBase>();
             if (skipCheck)
             {
-                if (AtoB) lnks.AddRange(links.Where(x => x.nodeNameA.Equals(nodeName)));
-                if (BtoA) lnks.AddRange(links.Where(x => x.nodeNameB.Equals(nodeName)));
+                if (AtoB) output.links.AddRange(links.Where(x => x.nodeNameA.Equals(nodeName)));
+                if (BtoA) output.links.AddRange(links.Where(x => x.nodeNameB.Equals(nodeName)));
             }
             else
             {
-                lnks = linkRegistry.GetLinks(nodeName, AtoB, BtoA);
+                output.links.AddRange(linkRegistry.GetLinks(nodeName, AtoB, BtoA));
             }
 
             output.node = GetNode(nodeName, skipCheck);
 
-            foreach (freeGraphLinkBase link in lnks)
+            foreach (freeGraphLinkBase link in output.links)
             {
                 freeGraphLink link_instance = GetLinkInstance(link, skipCheck);
                 if (link_instance.IsReady)
@@ -402,6 +422,7 @@ namespace imbSCI.Graph.FreeGraph
             node.weight = weight;
             node.type = type;
             nodes.Add(node);
+            nodeDictionary.Add(proposal, node);
             return node;
         }
 
@@ -425,13 +446,22 @@ namespace imbSCI.Graph.FreeGraph
                 node.weight = weight;
                 node.type = type;
                 nodes.Add(node);
+                nodeDictionary.Add(nodeName, node);
                 return node;
             }
         }
 
+        /// <summary>
+        /// Adds link if not found, returns existing if found. Weight and type are not set to existing link
+        /// </summary>
+        /// <param name="nodeNameA">The node name a.</param>
+        /// <param name="nodeNameB">The node name b.</param>
+        /// <param name="weight">The weight.</param>
+        /// <param name="type">The type.</param>
+        /// <returns></returns>
         public freeGraphLinkBase AddLink(String nodeNameA, String nodeNameB, Double weight = 1, Int32 type = 0)
         {
-            if (!ContainsLink(nodeNameA, nodeNameB))
+            if (!ContainsLink(nodeNameA, nodeNameB, false))
             {
                 freeGraphLinkBase link = new freeGraphLinkBase();
                 link.nodeNameA = nodeNameA;
@@ -439,10 +469,11 @@ namespace imbSCI.Graph.FreeGraph
                 link.weight = weight;
                 link.type = type;
                 links.Add(link);
+                linkRegistry.RegisterLink(link, nodeDictionary);
                 return link;
             }
 
-            return GetLink(nodeNameA, nodeNameB);
+            return GetLink(nodeNameA, nodeNameB, false);
         }
 
         /// <summary>
@@ -537,13 +568,14 @@ namespace imbSCI.Graph.FreeGraph
         /// </summary>
         /// <param name="nodeNameA">The node name a.</param>
         /// <param name="nodeNameB">The node name b.</param>
+        /// <param name="includeBtoALinks">if set to <c>true</c> [include bto a links].</param>
         /// <returns></returns>
         public freeGraphLinkBase GetLink(String nodeNameA, String nodeNameB, Boolean includeBtoALinks = false)
         {
             freeGraphLinkBase output = null;
             if (IsReady)
             {
-                linkRegistry.GetLink(nodeNameA, nodeNameB);
+                output = linkRegistry.GetLink(nodeNameA, nodeNameB);
             }
             else
             {
@@ -556,6 +588,15 @@ namespace imbSCI.Graph.FreeGraph
             return output;
         }
 
+        /// <summary>
+        /// Determines whether a contains link pointing to the specified nodes.
+        /// </summary>
+        /// <param name="nodeNameA">The node name a.</param>
+        /// <param name="nodeNameB">The node name b.</param>
+        /// <param name="includeBtoALinks">if set to <c>true</c> [include bto a links].</param>
+        /// <returns>
+        ///   <c>true</c> if the specified node name a contains link; otherwise, <c>false</c>.
+        /// </returns>
         public Boolean ContainsLink(String nodeNameA, String nodeNameB, Boolean includeBtoALinks = false)
         {
             Boolean output = false;
@@ -582,9 +623,18 @@ namespace imbSCI.Graph.FreeGraph
         /// <param name="includeBtoAlinks">if set to <c>true</c> [include bto alinks].</param>
         /// <param name="includeQueryNodesInResult">if set to <c>true</c> [include query nodes in result].</param>
         /// <returns></returns>
-        public freeGraphQueryResult GetLinkedNodes(IEnumerable<String> queryNodeNames, Int32 expansionSteps = 1, Boolean includeBtoAlinks = false, Boolean includeQueryNodesInResult = false, Boolean cloneAndAdjustWeight = true)
+        public freeGraphQueryResult GetLinkedNodes(IEnumerable<String> queryNodeNames, Int32 expansionSteps = 1,
+            Boolean includeBtoAlinks = false, Boolean includeQueryNodesInResult = false,
+            Boolean cloneAndAdjustWeight = true, Boolean includeAtoBlinks = true)
         {
+
             var output = new freeGraphQueryResult();
+            if (!includeAtoBlinks && !includeBtoAlinks)
+            {
+                //throw new ArgumentException("Both " + nameof(includeAtoBlinks) + " and " + nameof(includeBtoAlinks) + " are set to false. ")
+                return output;
+            }
+
             if (!Check())
             {
                 output.graphNotReady = true;
@@ -605,7 +655,7 @@ namespace imbSCI.Graph.FreeGraph
 
                 foreach (var node in queryNodes)
                 {
-                    expansion.AddRange(GetLinksBase(node.name, false, 1, cloneAndAdjustWeight));
+                    if (includeAtoBlinks) expansion.AddRange(GetLinksBase(node.name, false, 1, cloneAndAdjustWeight));
                     if (includeBtoAlinks) expansion.AddRange(GetLinksBase(node.name, true, 1, cloneAndAdjustWeight));
                 }
 
@@ -744,6 +794,9 @@ namespace imbSCI.Graph.FreeGraph
             }
         }
 
+        /// <summary>
+        /// Rebuilds the indexing and performs index chache check
+        /// </summary>
         public virtual void RebuildIndex()
         {
             nodeDictionary.Clear();
@@ -751,10 +804,20 @@ namespace imbSCI.Graph.FreeGraph
             Check();
         }
 
+        /// <summary>
+        /// If true it will disable registry check
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [disable check]; otherwise, <c>false</c>.
+        /// </value>
         public Boolean DisableCheck { get; set; } = false;
 
         private Object checkLock { get; set; } = new object();
 
+        /// <summary>
+        /// Checks this instance.
+        /// </summary>
+        /// <returns></returns>
         protected Boolean Check()
         {
             if (DisableCheck) return false;
@@ -789,13 +852,43 @@ namespace imbSCI.Graph.FreeGraph
             return IsReady;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance is ready.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is ready; otherwise, <c>false</c>.
+        /// </value>
         protected Boolean IsReady
         {
             get
             {
                 if (DisableCheck) return false;
-                if (nodeDictionary.Any()) return true;
-                if (linkRegistry.Any()) return true;
+                if (nodeDictionary.Any())
+                {
+                    if (nodes.Count > nodeDictionary.Count)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+
+
+
+                }
+                if (linkRegistry.Any())
+                {
+                    if (links.Count > linkRegistry.Count)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                    //return true;
+                }
                 return false;
             }
         }

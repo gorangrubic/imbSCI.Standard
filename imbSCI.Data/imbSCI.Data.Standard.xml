@@ -2068,6 +2068,110 @@
         <member name="T:imbSCI.Data.collection.nested.NamespaceGroupDoc">
             <inheritdoc/>
         </member>
+        <member name="T:imbSCI.Data.collection.nested.OverlapMatrix`1">
+            <summary>
+            Matrix of overlapping elements
+            </summary>
+            <typeparam name="T"></typeparam>
+            <seealso cref="!:imbSCI.Data.collection.nested.aceDictionary2D&lt;System.Int32, System.Int32, System.Collections.Generic.List&lt;T&gt;&gt;" />
+        </member>
+        <member name="M:imbSCI.Data.collection.nested.OverlapMatrix`1.Deploy(System.Collections.Generic.IEnumerable{System.Collections.Generic.List{`0}})">
+            <summary>
+            Deploys the specified collections.
+            </summary>
+            <param name="collections">The collections.</param>
+        </member>
+        <member name="T:imbSCI.Data.collection.Relationship`2">
+            <summary>
+            Generic class for single relationship definition
+            </summary>
+            <typeparam name="TNodeA">The type of the node a.</typeparam>
+            <typeparam name="TNodeB">The type of the node b.</typeparam>
+        </member>
+        <member name="P:imbSCI.Data.collection.Relationship`2.NodeA">
+            <summary>
+            Gets or sets the node a.
+            </summary>
+            <value>
+            The node a.
+            </value>
+        </member>
+        <member name="P:imbSCI.Data.collection.Relationship`2.NodeB">
+            <summary>
+            Gets or sets the node b.
+            </summary>
+            <value>
+            The node b.
+            </value>
+        </member>
+        <member name="P:imbSCI.Data.collection.Relationship`2.weight">
+            <summary>
+            Gets or sets the weight.
+            </summary>
+            <value>
+            The weight.
+            </value>
+        </member>
+        <member name="T:imbSCI.Data.collection.Relationships`2">
+            <summary>
+            Describes relationships between instances in the <see cref="!:SpaceModel"/>
+            </summary>
+            <typeparam name="TNodeA">The type of the node a.</typeparam>
+            <typeparam name="TNodeB">The type of the node b.</typeparam>
+        </member>
+        <member name="F:imbSCI.Data.collection.Relationships`2.links">
+            <summary>
+            The links
+            </summary>
+        </member>
+        <member name="M:imbSCI.Data.collection.Relationships`2.Add(`0,`1,System.Double)">
+            <summary>
+            Adds the specified a.
+            </summary>
+            <param name="A">a.</param>
+            <param name="B">The b.</param>
+            <param name="weight">The weight.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Data.collection.Relationships`2.GetAllLinkedB(System.String,System.Boolean)">
+            <summary>
+            Gets all linked.
+            </summary>
+            <param name="nodeA">The node a.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Data.collection.Relationships`2.GetAllLinkedA(System.String,System.Boolean)">
+            <summary>
+            Gets all linked.
+            </summary>
+            <param name="nodeA">The node a.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Data.collection.Relationships`2.GetAllLinked(`0,System.Boolean)">
+            <summary>
+            Gets all linked.
+            </summary>
+            <param name="nodeA">The node a.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Data.collection.Relationships`2.Remove(`1)">
+            <summary>
+            Removes all links having specified node
+            </summary>
+        </member>
+        <member name="M:imbSCI.Data.collection.Relationships`2.Remove(`0)">
+            <summary>
+            Removes all links having specified node
+            </summary>
+            <param name="vec">The vec.</param>
+        </member>
+        <member name="M:imbSCI.Data.collection.Relationships`2.GetAllLinked(`1,System.Boolean)">
+            <summary>
+            Gets all nodes A linked to specified node B
+            </summary>
+            <param name="nodeB">The node b.</param>
+            <returns></returns>
+        </member>
         <member name="T:imbSCI.Data.collection.special.circularSelector`1">
             <summary>
             Circular and/or random item provider based on index loop.
@@ -2225,7 +2329,7 @@
             <summary>
             Clears all changes recorded since object creation or last Accept()
             </summary>
-            <returns></returns>
+            <returns>true if there were changes</returns>
         </member>
         <member name="P:imbSCI.Data.data.changeBindableBase.HasChanges">
             <summary>
@@ -4755,12 +4859,12 @@
         </member>
         <member name="F:imbSCI.Data.enums.reportElementLevel.document">
             <summary>
-            The document
+            The document - has its own directory and default file name
             </summary>
         </member>
         <member name="F:imbSCI.Data.enums.reportElementLevel.page">
             <summary>
-            The page
+            The page - custom file name, in the same directory as document
             </summary>
         </member>
         <member name="F:imbSCI.Data.enums.reportElementLevel.block">
@@ -5199,6 +5303,36 @@
             <param name="nameFilter">The name filter.</param>
             <returns></returns>
         </member>
+        <member name="M:imbSCI.Data.imbSciDataExtensions.GetCrossSection``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IList{``0}[])">
+            <summary>
+            Gets the cross section: only items that are in common to all collections
+            </summary>
+            <typeparam name="TItem">The type of the item.</typeparam>
+            <param name="first">The first.</param>
+            <param name="others">The others.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Data.imbSciDataExtensions.Contains``1(System.Collections.Generic.IList{``0},``0[])">
+            <summary>
+            Logical sum of criterias. All must be true to pass.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list">The list.</param>
+            <param name="criteria">The criteria.</param>
+            <returns>
+              <c>true</c> if [contains] [the specified criteria]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:imbSCI.Data.imbSciDataExtensions.ContainsAny(System.Collections.IList,System.Collections.IEnumerable)">
+            <summary>
+            Determines whether the <c>target</c> contains any of specified needles
+            </summary>
+            <param name="target">The target.</param>
+            <param name="needles">The needles.</param>
+            <returns>
+              <c>true</c> if the specified needles contains any; otherwise, <c>false</c>.
+            </returns>
+        </member>
         <member name="T:imbSCI.Data.imbSciEnumExtensions">
             <summary>
             Enum type extensions
@@ -5256,6 +5390,8 @@
             <param name="target">The target.</param>
             <param name="needle">The needle.</param>
             <param name="targetDefault">If the target is null or empty it will use this value</param>
+            <param name="trimResults">if set to <c>true</c> [trim results].</param>
+            <param name="removeEmptyResults">if set to <c>true</c> [remove empty results].</param>
             <returns>
             List with one (if no <c>needle</c> found, original string) or two strings (if <c>needle</c> found, left and right substrings
             </returns>
@@ -5554,6 +5690,26 @@
         <member name="T:imbSCI.Data.interfaces.IObjectWithUID">
             <summary>
             Object with universal identification string
+            </summary>
+        </member>
+        <member name="T:imbSCI.Data.interfaces.IOnAfterLoaded">
+            <summary>
+            The method OnAfterLoaded will be called after serialization
+            </summary>
+        </member>
+        <member name="M:imbSCI.Data.interfaces.IOnAfterLoaded.OnAfterLoaded">
+            <summary>
+            Called after loaded
+            </summary>
+        </member>
+        <member name="T:imbSCI.Data.interfaces.IOnBeforeSave">
+            <summary>
+            The method before save will be called by serialization method
+            </summary>
+        </member>
+        <member name="M:imbSCI.Data.interfaces.IOnBeforeSave.OnBeforeSave">
+            <summary>
+            Called before serialization
             </summary>
         </member>
         <member name="P:imbSCI.Data.interfaces.IPerformanceTaker.name">

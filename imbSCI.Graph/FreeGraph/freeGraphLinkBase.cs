@@ -32,22 +32,53 @@ using System;
 namespace imbSCI.Graph.FreeGraph
 {
     /// <summary>
-    /// Basic object describing node-to-node relationship in the <see cref="freeGraph"/>
+    /// Basic object describing node-to-node relationship in the <see cref="freeGraph"/>,used by the <see cref="freeGraph"/> model internally
     /// </summary>
+    [Serializable]
     public class freeGraphLinkBase
     {
         public freeGraphLinkBase()
         {
         }
 
+        /// <summary>
+        /// Numeric ID of link type. Has no specific implementation in base <see cref="freeGraph"/>, meant for custom applications
+        /// </summary>
+        /// <value>
+        /// The type.
+        /// </value>
         public Int32 type { get; set; } = 0;
 
+        /// <summary>
+        /// Weight associated with the link, no specific implementation by default - meant for custom applications
+        /// </summary>
+        /// <value>
+        /// The weight.
+        /// </value>
         public Double weight { get; set; } = 1;
 
+        /// <summary>
+        /// Node ID for source / from node
+        /// </summary>
+        /// <value>
+        /// The node name a.
+        /// </value>
         public String nodeNameA { get; set; } = "";
 
+        /// <summary>
+        /// Node ID for target / to node
+        /// </summary>
+        /// <value>
+        /// The node name b.
+        /// </value>
         public String nodeNameB { get; set; } = "";
 
+        /// <summary>
+        /// Customized link label, by default stays blank
+        /// </summary>
+        /// <value>
+        /// The link label.
+        /// </value>
         public String linkLabel { get; set; } = "";
 
         public freeGraphLinkBase GetClone()

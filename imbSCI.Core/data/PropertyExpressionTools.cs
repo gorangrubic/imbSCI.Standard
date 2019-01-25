@@ -57,9 +57,11 @@ namespace imbSCI.Core.data
             {
                 root = pathPart.First();
                 output = new PropertyExpression(host, root);
+
+                pathPart = pathPart.GetRange(1, pathPart.Count() - 1);
             }
             // pathPart.Remove(pathPart.First());
-
+            
             Object head = host;
             if (output.property == null)
             {

@@ -36,6 +36,7 @@ namespace imbSCI.Data.collection.math
     using System.Collections.Generic;
     using System.Linq;
 
+
     /// <summary>
     /// Universal generic matrix, having separate type parameter for X axis, Y axis and relationship definition
     /// </summary>
@@ -126,6 +127,8 @@ namespace imbSCI.Data.collection.math
             }
             return incomingLinks;
         }
+
+        
 
         /// <summary>
         /// Gets the triple.

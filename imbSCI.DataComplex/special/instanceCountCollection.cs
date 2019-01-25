@@ -762,11 +762,12 @@ namespace imbSCI.DataComplex.special
         /// Gets the sorted list with all instances
         /// </summary>
         /// <returns></returns>
-        public List<T> getSorted()
+        public List<T> getSorted(Int32 limit = -1)
         {
             List<T> output = new List<T>();
             var sorted = items.OrderByDescending(pair => pair.Value).ToList();
-            for (int i = 0; i < sorted.Count(); i++)
+            if (limit < 0) limit = sorted.Count();
+            for (int i = 0; i < limit; i++)
             {
                 output.Add(sorted[i].Key);
             }

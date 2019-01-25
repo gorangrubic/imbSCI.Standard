@@ -34,8 +34,28 @@ namespace imbSCI.Graph.FreeGraph
 {
     public class freeGraphNodeAndLinks : List<freeGraphLink>
     {
+        /// <summary>
+        /// Pivot node
+        /// </summary>
+        /// <value>
+        /// The node.
+        /// </value>
         public freeGraphNodeBase node { get; set; } = null;
 
+        /// <summary>
+        /// Selected links
+        /// </summary>
+        /// <value>
+        /// The links.
+        /// </value>
+        public List<freeGraphLinkBase> links { get; set; } = new List<freeGraphLinkBase>();
+
+        /// <summary>
+        /// Gets or sets the linked node clones.
+        /// </summary>
+        /// <value>
+        /// The linked node clones.
+        /// </value>
         public Dictionary<String, freeGraphNodeBase> linkedNodeClones { get; set; } = new Dictionary<string, freeGraphNodeBase>();
     }
 }

@@ -50,10 +50,12 @@ namespace imbSCI.Core.data
     /// <seealso cref="imbBindable" />
     public class aceAuthorNotation : imbBindable, IAppendDataFields, IAppendDataFieldsExtended
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="aceAuthorNotation"/>, setting default data by reading <see cref="Assembly.GetCallingAssembly()"/> attributes
-        /// </summary>
-        public aceAuthorNotation(Assembly assembly = null)
+        public aceAuthorNotation()
+        {
+            Deploy(null);
+        }
+
+        protected void Deploy(Assembly assembly)
         {
             if (assembly == null) assembly = Assembly.GetCallingAssembly();
             var attributes = assembly.GetCustomAttributes(true);
@@ -85,6 +87,14 @@ namespace imbSCI.Core.data
                     comment = attDescription.Description;
                 }
             }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="aceAuthorNotation"/>, setting default data by reading <see cref="Assembly.GetCallingAssembly()"/> attributes
+        /// </summary>
+        public aceAuthorNotation(Assembly assembly)
+        {
+            Deploy(assembly);
         }
 
         /// <summary>

@@ -231,7 +231,7 @@ namespace imbSCI.Core.reporting.render.builders
         /// <param name="breakLine">should break line </param>
         public override void AppendPair(String key, Object value, Boolean breakLine = true, String between = " = ")
         {
-            _Append((imbStringMarkdownExtensions.markdown(appendType.bold, key.toStringSafe())) + (between) + imbStringMarkdownExtensions.markdown(appendType.italic, value.toStringSafe()), breakLine);
+            base._Append((imbStringMarkdownExtensions.markdown(appendType.bold, key.toStringSafe())) + (between) + imbStringMarkdownExtensions.markdown(appendType.italic, value.toStringSafe()), breakLine);
         }
 
         public override object AppendHeading(string content, int level = 1)
@@ -258,7 +258,7 @@ namespace imbSCI.Core.reporting.render.builders
         /// <param name="breakLine">Inline (FALSE) or new line (TRUE)</param>
         public override void Append(String content, appendType type = appendType.none, Boolean breakLine = false)
         {
-            _Append(content.markdownText(type), breakLine);
+            base._Append(content.markdownText(type), breakLine);
         }
 
         /// <summary>
@@ -268,7 +268,7 @@ namespace imbSCI.Core.reporting.render.builders
         /// <param name="isOrderedList">On TRUE it will be ordered list with number, FALSE will create button list</param>
         public override void AppendList(IEnumerable<Object> content, Boolean isOrderedList = false)
         {
-            _AppendLine(content.markdownList(isOrderedList));
+            base._AppendLine(content.markdownList(isOrderedList));
         }
 
         /// <summary>

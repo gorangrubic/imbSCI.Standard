@@ -5,7 +5,7 @@
     <ApplicationIcon>imbSCI.ico</ApplicationIcon>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>imbSCI.BibTex</PackageId>
-    <Version>0.9.10</Version>
+    <Version>0.9.12</Version>
     <Title>imbSCI.BibTex .NET Standard</Title>
     <Summary>imbSCI.BibTex is a comprehensive BibTex format API, allowing you to: Load, combine, modify and save BibTex citation definitions, access BibTex entries via value pair dictionaries (auto-discovery of entry fields) or via strong typed class; Extend basic BibTexEntryModel class to gain support less popular and/or special application BibTex tags, Generate Excel spreadsheet and CSV data table export, with data from BibTex file(s), High-level, single-call citation report generation, using one or all BibTex files from a directory, Encoding of LaTeX symbols to UTF-8 equivalents, and vice versa. Fast parsing, using multi-threading and compiled Regex queries; Generation of BibTex format output;</Summary>
     <PackageIconUrl>http://doc.veles.rs/imbACE.ico</PackageIconUrl>

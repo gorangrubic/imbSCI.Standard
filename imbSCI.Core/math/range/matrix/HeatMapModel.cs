@@ -30,12 +30,15 @@
 namespace imbSCI.Core.math.range.matrix
 {
     using imbSCI.Core.collection;
+    using imbSCI.Core.extensions.io;
+    using imbSCI.Core.extensions.table;
     using imbSCI.Core.math;
 
     //using imbSCI.Data.collection.nested;
     using imbSCI.Core.math.range.finder;
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Xml.Serialization;
 
     /// <summary>
@@ -44,6 +47,39 @@ namespace imbSCI.Core.math.range.matrix
     /// <seealso cref="System.Collections.Generic.List{System.Collections.Generic.List{System.Double}}" />
     public class HeatMapModel : List<List<Double>>
     {
+
+        public DataTable GetDataTable(String name, String description)
+        {
+            DataTable table = new DataTable(name);
+            table.SetDescription(description);
+
+
+            foreach (String xk in xKeys)
+            {
+                DataColumn dc = table.Columns.Add(xk, typeof(Double));
+                dc.SetFormat("F5");
+
+
+            }
+
+            foreach (String yk in yKeys)
+            {
+                var dr = table.NewRow();
+                foreach (String xk in xKeys)
+                {
+                    dr[xk] = this[xk, yk];
+                }
+                table.Rows.Add(dr);
+            }
+
+
+
+            return table;
+        }
+
+
+
+
         [XmlIgnore]
         public PropertyCollectionExtended properties { get; set; } = new PropertyCollectionExtended();
 

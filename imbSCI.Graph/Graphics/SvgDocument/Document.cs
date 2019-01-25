@@ -71,7 +71,7 @@ namespace imbSCI.Graph.Graphics.SvgDocument
             this.height = _height;
             this.svgObjects = new ArrayList();
             this.svgDoc = new XmlDocument();
-            this.svgDoc.AppendChild(this.svgDoc.CreateXmlDeclaration("1.0", "utf-16", "no"));
+            this.svgDoc.AppendChild(this.svgDoc.CreateXmlDeclaration("1.0", "utf-8", "no"));
             this.svgDoc.LoadXml("<svg></svg>");
             XmlNode xmlObjects = this.svgDoc.CreateElement("svgObjects");
             XmlNode xmlDetails = this.svgDoc.CreateElement("svgDetails");

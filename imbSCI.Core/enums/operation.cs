@@ -27,10 +27,15 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using imbSCI.Core.math.range;
+using System;
+using System.Linq;
+
 namespace imbSCI.Core.enums
 {
     public enum operation
     {
+        none,
         plus,
         minus,
         division,
@@ -39,7 +44,7 @@ namespace imbSCI.Core.enums
         divisionNatural,
         power,
 
-        none,
+
         min,
         max,
         avg,

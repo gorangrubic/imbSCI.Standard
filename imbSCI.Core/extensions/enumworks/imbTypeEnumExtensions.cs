@@ -186,6 +186,7 @@ namespace imbSCI.Core.extensions.enumworks
 
             Type inputTi = input.GetType();
             MemberInfo same = null;
+            List<MemberInfo> sameList = new List<MemberInfo>();
 
             //  imbEnumMemberInfo same = null;
 
@@ -207,11 +208,15 @@ namespace imbSCI.Core.extensions.enumworks
                     }
                     else
                     {
+
                         String inputName = input.ToString();
                         Int32 inputInt = (Int32)input;
                         //same = enumerationType.GetMember(inputName).getFirstSafe() as MemberInfo;
 
                         same = enumerationType.findEnumerationMember(inputName, inputInt);
+
+
+
                         // enumMembers.imbFirstSafe(x => x.enumValue.ToString().ToLower() == inputName.ToLower());
                     }
                     break;
@@ -246,7 +251,24 @@ namespace imbSCI.Core.extensions.enumworks
                         }
                         else
                         {
-                            same = enumerationType.findEnumerationMember(tmp, 0);
+
+
+                            if (tmp.ContainsAny(new String[] { "|", ",", " " }))
+                            {
+                                var flags = tmp.Split("|, ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+                                foreach (String flag in flags)
+                                {
+                                    sameList.Add(enumerationType.findEnumerationMember(flag.Trim(), 0));
+                                }
+
+                            }
+                            else
+                            {
+                                same = enumerationType.findEnumerationMember(tmp, 0);
+                            }
+
+
                         }
                     }
 
@@ -257,6 +279,24 @@ namespace imbSCI.Core.extensions.enumworks
                 output = Enum.Parse(enumerationType, same.Name) as Enum;
                 //output = same as Enum;
             }
+            else
+            {
+                Enum fl = null;
+                if (sameList.Any())
+                {
+                    Int32 v = 0;
+                    foreach (var s in sameList)
+                    {
+                        var e = Enum.Parse(enumerationType, s.Name, true) as Enum;
+                        Int32 inputInt = e.ToInt32();
+                        v += inputInt;
+                    }
+                    output = Enum.ToObject(enumerationType, v) as Enum;
+
+                }
+            }
+
+
             return output;
         }
 

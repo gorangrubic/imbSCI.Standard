@@ -32,7 +32,7 @@ using System;
 
 namespace imbSCI.Data.interfaces
 {
-    /// <summary>
+/// <summary>
     /// Objects that support Load and Save
     /// </summary>
     public interface ISupportLoadSave : IObjectWithName

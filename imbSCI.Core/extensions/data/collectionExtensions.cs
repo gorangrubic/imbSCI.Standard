@@ -40,6 +40,7 @@ namespace imbSCI.Core.extensions.data
     using imbSCI.Core.extensions.text;
     using imbSCI.Core.extensions.typeworks;
     using imbSCI.Data;
+    using imbSCI.Data.interfaces;
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -63,6 +64,60 @@ namespace imbSCI.Core.extensions.data
             {
                 output.Add(mch.Value);
             }
+            return output;
+        }
+
+        public static Dictionary<String, List<T>> GetAllignedByName<T>(this IEnumerable<T> input, Func<T, String> nameSelector) where T : class
+        {
+            Dictionary<String, List<T>> output = new Dictionary<string, List<T>>();
+
+            foreach (T item in input)
+            {
+                String n = nameSelector(item);
+                if (!output.ContainsKey(n)) output.Add(n, new List<T>());
+                output[n].Add(item);
+            }
+
+
+
+            return output;
+        }
+
+
+        public static Dictionary<String, List<T>> GetAllignedByName<T>(this IEnumerable<IEnumerable<T>> input, Func<T, String> nameSelector) where T : class
+        {
+            Dictionary<String, List<T>> output = new Dictionary<string, List<T>>();
+
+            foreach (var items in input)
+            {
+                foreach (T item in items)
+                {
+                    String n = nameSelector(item);
+                    if (!output.ContainsKey(n)) output.Add(n, new List<T>());
+                    output[n].Add(item);
+                }
+            }
+
+
+            return output;
+        }
+
+        public static Dictionary<String, List<T>> GetAllignedByKey<T>(this IEnumerable<KeyValuePair<String, IEnumerable<T>>> input) where T : class
+        {
+            Dictionary<String, List<T>> output = new Dictionary<string, List<T>>();
+
+            foreach (var items in input)
+            {
+
+                foreach (T item in items.Value)
+                {
+
+                    if (!output.ContainsKey(items.Key)) output.Add(items.Key, new List<T>());
+                    output[items.Key].Add(item);
+                }
+            }
+
+
             return output;
         }
 
@@ -158,70 +213,6 @@ namespace imbSCI.Core.extensions.data
             return shuffled;
         }
 
-        public static List<TItem> GetDifference<TItem>(this IEnumerable<TItem> first, IList<TItem> other)
-        {
-            List<TItem> output = new List<TItem>();
-
-            foreach (TItem item in first)
-            {
-                if (!other.Contains(item))
-                {
-                    output.Add(item);
-                }
-            }
-
-            return output;
-        }
-
-        public static List<TItem> GetUnion<TItem>(this IEnumerable<TItem> first, IList<TItem>[] others)
-        {
-            List<TItem> output = new List<TItem>();
-
-            output.AddRange(first);
-
-            var oth = others.ToList();
-            foreach (var other in others)
-            {
-                output.AddUnique(other);
-                //oth.ForEach((XmlReadMode=))
-
-                // output.AddRangeUnique(other);
-            }
-
-            return output;
-        }
-
-        /// <summary>
-        /// Gets the cross section: only items that are in common to all collections
-        /// </summary>
-        /// <typeparam name="TItem">The type of the item.</typeparam>
-        /// <param name="first">The first.</param>
-        /// <param name="others">The others.</param>
-        /// <returns></returns>
-        public static List<TItem> GetCrossSection<TItem>(this IEnumerable<TItem> first, IList<TItem>[] others)
-        {
-            List<TItem> output = new List<TItem>();
-
-            foreach (TItem item in first)
-            {
-                Boolean ok = true;
-
-                foreach (var other in others)
-                {
-                    if (!other.Contains(item))
-                    {
-                        ok = false;
-                        break;
-                    }
-                }
-                if (ok)
-                {
-                    output.Add(item);
-                }
-            }
-
-            return output;
-        }
 
         /// <summary>
         /// Universal method for getting element out of unknown <see cref="IEnumerable" />

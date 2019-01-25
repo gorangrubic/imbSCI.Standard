@@ -105,10 +105,10 @@ namespace imbSCI.Reporting.enums
             return output.a(input.ToString());
         }
 
-        public static object removeStartsWith(string path, string name)
-        {
-            throw new NotImplementedException();
-        }
+        //public static object removeStartsWith(string path, string name)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         /// <summary>
         /// short string contacting - a from Add

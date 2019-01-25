@@ -30,7 +30,7 @@ namespace imbSCI.Graph.Graphics.HeatMap
 
         public Int32 fieldHeight { get; set; } = 50;
 
-        public Double minimalOpacity { get; set; } = 0;
+        public Double minimalOpacity { get; set; } = 50;
 
         public String valueFormat { get; set; } = "F1";
 
