@@ -34,11 +34,13 @@ namespace imbSCI.Data.collection.layers
     using System.Collections.Generic;
     using System.Linq;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// Contains multiple <see cref="layerCollection"/>
     /// </summary>
     /// <seealso cref="aceCommonTypes.primitives.imbBindable" />
     public class layerStack : IEnumerable<layerCollection>
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="layerStack"/> class.

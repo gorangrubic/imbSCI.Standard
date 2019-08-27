@@ -60,12 +60,14 @@ namespace imbSCI.Reporting.script
     using System.IO;
     using System.Text;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'builderForLog' that could not be resolved
     /// <summary>
     ///
     /// </summary>
     /// <seealso cref="imbACE.Core.core.builderForLog" />
     /// <seealso cref="imbSCI.Core.reporting.render.IRenderExecutionContext" />
     public abstract class docScriptExecutionBase : builderForMarkdown, ILogBuilder, IDocScriptExecutionContext, IRenderExecutionContext
+#pragma warning restore CS1574 // XML comment has cref attribute 'builderForLog' that could not be resolved
     {
         private bool _doVerboseLog;
 

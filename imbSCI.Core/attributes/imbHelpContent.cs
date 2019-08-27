@@ -38,11 +38,20 @@ namespace imbSCI.Core.attributes
     /// <summary>
     /// Pomocne informacije
     /// </summary>
-    public struct imbHelpContent
+    public class imbHelpContent
     {
-        private String _description;
-        private String _hints;
-        private String _title;
+
+        public imbHelpContent()
+        {
+
+        }
+
+        private String _description = "";
+        private String _hints = "";
+        private String _title = "";
+
+
+        public String link { get; set; } = "";
 
         #region --- purpose ------- svrha opisane klase
 
@@ -73,7 +82,7 @@ namespace imbSCI.Core.attributes
         }
 
         /// <summary>
-        /// Description
+        /// Description - i.e. main help content
         /// </summary>
         [imb(imbAttributeName.metaValueFromAttribute, imbAttributeName.menuHelp)]
         [imb(imbAttributeName.metaValueFromAttribute, imbAttributeName.helpDescription)]

@@ -5,11 +5,13 @@ using System.Xml;
 
 namespace imbSCI.Graph.Graphics.SvgAPI.Meta
 {
+#pragma warning disable CS1574 // XML comment has cref attribute 'svgGraphicElementBase' that could not be resolved
     /// <summary>
     ///
     /// </summary>
     /// <seealso cref="imbSCI.Graph.Graphics.SvgAPI.svgGraphicElementBase" />
     public class svgDescriptiveElement : svgGraphicElementBase
+#pragma warning restore CS1574 // XML comment has cref attribute 'svgGraphicElementBase' that could not be resolved
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="svgDescriptiveElement"/> class.

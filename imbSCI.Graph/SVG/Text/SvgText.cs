@@ -140,6 +140,7 @@ namespace Svg
             set { this._font = value; this.IsPathDirty = true; }
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'SvgGraphicsElement' that could not be resolved
         /// <summary>
         /// Gets or sets the fill.
         /// </summary>
@@ -148,6 +149,7 @@ namespace Svg
         /// </remarks>
         /// <value>The fill.</value>
         public override SvgPaintServer Fill
+#pragma warning restore CS1574 // XML comment has cref attribute 'SvgGraphicsElement' that could not be resolved
         {
             get { return (this.Attributes["Fill"] == null) ? new SvgColourServer(Color.Black) : (SvgPaintServer)this.Attributes["Fill"]; }
             set { this.Attributes["Fill"] = value; }

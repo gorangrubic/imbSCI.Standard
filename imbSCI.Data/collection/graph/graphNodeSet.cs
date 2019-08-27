@@ -3,11 +3,15 @@ using System.Collections.Generic;
 
 namespace imbSCI.Data.collection.graph
 {
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.List{imbSCI.Data.collection.graph.IGraphNode}'
     /// <summary>
     /// Set of <see cref="IGraphNode"/> instances, used temporarly in process of common-root graph construction
     /// </summary>
     /// <seealso cref="System.Collections.Generic.List{imbSCI.Data.collection.graph.IGraphNode}" />
     public class graphNodeSet : List<IGraphNode>
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.List{imbSCI.Data.collection.graph.IGraphNode}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="graphNodeSet"/> class.

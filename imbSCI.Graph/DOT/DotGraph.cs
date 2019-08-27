@@ -59,21 +59,21 @@ namespace imbSCI.Graph.DOT
             }
         }
 
-        /// <summary>
-        /// Gets or sets the nodes.
-        /// </summary>
-        /// <value>
-        /// The nodes.
-        /// </value>
-        public NodeCollection Nodes { get; set; } = new NodeCollection();
+        ///// <summary>
+        ///// Gets or sets the nodes.
+        ///// </summary>
+        ///// <value>
+        ///// The nodes.
+        ///// </value>
+        //public NodeCollection Nodes { get; set; } = new NodeCollection();
 
-        /// <summary>
-        /// Gets or sets the link.
-        /// </summary>
-        /// <value>
-        /// The link.
-        /// </value>
-        public LinkCollection Link { get; set; } = new LinkCollection();
+        ///// <summary>
+        ///// Gets or sets the link.
+        ///// </summary>
+        ///// <value>
+        ///// The link.
+        ///// </value>
+        //public LinkCollection Link { get; set; } = new LinkCollection();
 
         /// <summary>
         /// The elements

@@ -30,6 +30,7 @@
 namespace imbSCI.Data.data.text
 {
     using System;
+    using System.Collections.Generic;
     using System.Text.RegularExpressions;
 
     /// <summary>
@@ -37,6 +38,8 @@ namespace imbSCI.Data.data.text
     /// </summary>
     public class regexMarkerResult
     {
+        public IRegexMarker regexMarker { get; set; }
+
         /// <summary>
         /// Regex result
         /// </summary>
@@ -60,6 +63,27 @@ namespace imbSCI.Data.data.text
         /// The content.
         /// </value>
         public String content { get; set; }
+
+
+        public List<String> GetGroups()
+        {
+            List<String> output = new List<string>();
+
+            foreach (Group g in match.Groups)
+            {
+                //if (match.Groups.Count > 0 && output.Count == 0)
+                //{
+
+                //}
+                //else
+                //{
+                
+                   output.Add(g.Value);
+               //}
+                
+            }
+            return output;
+        }
 
         private Int32 _index = 0;
 
@@ -116,6 +140,8 @@ namespace imbSCI.Data.data.text
             content = __content;
             marker = __marker;
         }
+
+   
 
         /// <summary>
         /// Initializes a new instance of the <see cref="regexMarkerResult"/> class.

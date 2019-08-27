@@ -31,11 +31,17 @@ namespace imbSCI.Data.collection.math
 {
     using System;
 
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.List{System.Collections.Generic.List{System.Int32}}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// 2D matrix of integer values, where Y is not preset but contains stacked values. Thread-safe version
     /// </summary>
     /// <seealso cref="System.Collections.Generic.List{System.Collections.Generic.List{System.Int32}}" />
     public class aceInt2DStackedMatrixConcurrent : ConcurrentList<ConcurrentList<Int32>>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.List{System.Collections.Generic.List{System.Int32}}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     {
         /// <summary>
         /// Constructor for serialization, do not use directly
@@ -89,12 +95,14 @@ namespace imbSCI.Data.collection.math
             }
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'List{T}' that could not be resolved
         /// <summary>
         /// Gets the Y stack by X. It creates automatically new List instance if X was empty. Use this better than <see cref="List{T}"/> indexer.
         /// </summary>
         /// <param name="x">The x.</param>
         /// <returns></returns>
         public ConcurrentList<Int32> GetByX(Int32 x)
+#pragma warning restore CS1574 // XML comment has cref attribute 'List{T}' that could not be resolved
         {
             while (x >= this.Count)
             {

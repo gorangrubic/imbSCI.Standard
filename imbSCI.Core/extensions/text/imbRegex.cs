@@ -99,6 +99,18 @@ namespace imbSCI.Core.extensions.text
             return escapePairs.escapeString(input);
         }
 
+        public const String REGEX_SELECTALL = "[.]*";
+        
+
+        public static Regex SearchPatternToRegex(this String searchPattern)
+        {
+            searchPattern = Regex.Escape(searchPattern);
+            searchPattern = searchPattern.Replace("*", ".*");
+            return new Regex(searchPattern);
+        }
+
+
+
         public static imbRegexQuery createCompareRegexQuery(this String operantB, stringMatchPolicy compareMode)
         {
             imbRegexQuery output = new imbRegexQuery();

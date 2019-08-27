@@ -29,11 +29,15 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Core.math.measureUnit
 {
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'aceCommonTypes.math.units.aceMathUnitBase{System.Decimal}'
     /// <summary>
     /// Decimal number with two decimals and thousants separation
     /// </summary>
     /// <seealso cref="aceCommonTypes.math.units.aceMathUnitBase{System.Decimal}" />
     public class money : aceMathUnitBase<decimal>
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'aceCommonTypes.math.units.aceMathUnitBase{System.Decimal}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     {
         protected override string format
         {

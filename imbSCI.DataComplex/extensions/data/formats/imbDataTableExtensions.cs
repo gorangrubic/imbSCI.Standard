@@ -583,7 +583,7 @@ namespace imbSCI.DataComplex.extensions.data.formats
                                 table.TableName = title;
                                 //DataTableForStatistics dt_stat = table as DataTableForStatistics;
 
-                                dt_stat.SaveToWorksheet(ws);
+                                dt_stat.RenderToWorksheet(ws);
 
                                 /*
 
@@ -729,7 +729,7 @@ namespace imbSCI.DataComplex.extensions.data.formats
                             }
 
                             ExcelWorksheet ws = pck.Workbook.Worksheets.Add(source.GetTitle());
-                            dt_stat.SaveToWorksheet(ws);
+                            dt_stat.RenderToWorksheet(ws);
 
                             /*
                             pck.Workbook.Properties.Title = source.GetTitle();

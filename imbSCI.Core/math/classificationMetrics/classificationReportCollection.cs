@@ -50,11 +50,15 @@ namespace imbSCI.Core.math.classificationMetrics
 {
     public delegate void LoadAdditionalInformationDelegate(classificationReportExpanded report, classificationReportCollection hostCollection, classificationReportCollectionSettings setup, ILogBuilder logger);
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.List{imbSCI.Core.math.classificationMetrics.classificationReportExpanded}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// 
     /// </summary>
     /// <seealso cref="System.Collections.Generic.List{imbSCI.Core.math.classificationMetrics.classificationReportExpanded}" />
     public class classificationReportCollection : List<classificationReportExpanded>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.List{imbSCI.Core.math.classificationMetrics.classificationReportExpanded}'
     {
 
 

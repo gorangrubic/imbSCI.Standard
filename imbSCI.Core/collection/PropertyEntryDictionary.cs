@@ -34,11 +34,17 @@ namespace imbSCI.Core.collection
     using System.Collections;
     using System.Collections.Generic;
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.Dictionary{System.Object, aceCommonTypes.collection.PropertyEntry}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// Contains meta-information about entries in <see cref="PropertyCollectionExtended"/>
     /// </summary>
     /// <seealso cref="System.Collections.Generic.Dictionary{System.Object, aceCommonTypes.collection.PropertyEntry}" />
     public sealed class PropertyEntryDictionary : IEnumerable<KeyValuePair<object, PropertyEntry>>, IDictionary<object, PropertyEntry>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.Dictionary{System.Object, aceCommonTypes.collection.PropertyEntry}'
     {
         private Dictionary<Object, PropertyEntry> _items = new Dictionary<Object, PropertyEntry>();
 

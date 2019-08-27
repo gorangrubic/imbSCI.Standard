@@ -65,7 +65,7 @@ namespace imbSCI.Data.enums
         autoRenameThis,
 
         /// <summary>
-        /// The automatic rename the existing file if it was created on another date
+        /// Existing file will be renamed to have creation date as sufix. If such backup copy already exists, the backup will be overwriten with this one
         /// </summary>
         autoRenameExistingOnOtherDate,
 

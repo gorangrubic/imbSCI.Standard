@@ -27,11 +27,19 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using imbSCI.Core.data;
+using imbSCI.Core.extensions.text;
+using imbSCI.Core.math.classificationMetrics;
+using imbSCI.Data;
 using imbSCI.Data.interfaces;
+using imbSCI.Graph.DGML.collections;
 
 //using System.Windows;
 using imbSCI.Graph.DGML.enums;
 using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Xml;
 using System.Xml.Serialization;
 
 #if NETFULL
@@ -43,18 +51,23 @@ using imbSCI.Core.style;
 namespace imbSCI.Graph.DGML.core
 {
     /// <summary>
-    ///
+    /// 
     /// </summary>
     public abstract class GraphElement : IGraphElement
     {
+
+
+        [XmlIgnore]
+        public reportExpandedData Properties { get; protected set; } = new reportExpandedData();
+
         [XmlAttribute]
-        public String Stroke { get; set; }
+        public String Stroke { get; set; } = "";
 
         [XmlAttribute]
         public Int32 StrokeThinkness { get; set; } = 1;
 
         [XmlAttribute]
-        public String StrokeDashArray { get; set; }
+        public String StrokeDashArray { get; set; } = "";
 
         [XmlAttribute]
         public String Label { get; set; } = "";
@@ -80,6 +93,7 @@ namespace imbSCI.Graph.DGML.core
             set { _id = value; }
         }
 
+        [XmlIgnore]
         string IObjectWithName.name { get { return Label; } set { Label = value; } }
     }
 }

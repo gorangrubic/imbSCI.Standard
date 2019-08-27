@@ -30,14 +30,19 @@
 namespace imbSCI.Core.reporting.zone
 {
     using System;
+    using System.Xml.Serialization;
 
+    /// <summary>
+    /// Defines selection zone
+    /// </summary>
     public struct selectZone
     {
+
         public selectZone(Int32 _x, Int32 _y, Int32 _w, Int32 _h)
         {
             x = _x;
             y = _y;
-            weight = _w;
+            width = _w;
             height = _h;
             //isDefined = true;
         }
@@ -45,26 +50,31 @@ namespace imbSCI.Core.reporting.zone
         /// <summary>
         /// Horizontalna pozicija
         /// </summary>
+        [XmlAttribute]
         public Int32 x;
 
         /// <summary>
         /// Vertikalna pozicija
         /// </summary>
+        [XmlAttribute]
         public Int32 y;
 
         /// <summary>
         /// Sirina
         /// </summary>
-        public Int32 weight;
+        [XmlAttribute]
+        public Int32 width;
 
         /// <summary>
         /// Visina
         /// </summary>
+        [XmlAttribute]
         public Int32 height;
 
+        [XmlIgnore]
         public Boolean isDefined
         {
-            get { return (weight > 0); }
+            get { return (width > 0); }
         }
     }
 }

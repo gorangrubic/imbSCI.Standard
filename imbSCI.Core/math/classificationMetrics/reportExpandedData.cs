@@ -39,17 +39,54 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
 namespace imbSCI.Core.math.classificationMetrics
 {
+
     /// <summary>
     /// Collection of custom data entries
     /// </summary>
     /// <seealso cref="System.Collections.Generic.List{imbSCI.Core.math.classificationMetrics.reportExpandedDataPair}" />
+    [Serializable]
     public class reportExpandedData : List<reportExpandedDataPair>
     {
+
+
+        public List<reportExpandedDataPair> GetObjectPairs()
+        {
+            List<reportExpandedDataPair> output = new List<reportExpandedDataPair>();
+            foreach (var pair in this)
+            {
+                if (pair.IsObjectValue)
+                {
+                    output.Add(pair);
+                }
+            }
+            return output;
+        }
+
+
+        /// <summary>
+        /// Gets the string value.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="defaultValue">If not found</param>
+        /// <returns></returns>
+        public String GetStringValue(String key, String defaultValue)
+        {
+            reportExpandedDataPair pair = this.FirstOrDefault(x => x.key == key);
+            if (pair == null)
+            {
+                return defaultValue;
+            }
+            return pair.value;
+        }
+
+
+
         /// <summary>
         /// Gets the dictionary of the data pairs
         /// </summary>

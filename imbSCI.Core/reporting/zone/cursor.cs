@@ -441,12 +441,12 @@ namespace imbSCI.Core.reporting.zone
             {
                 case selectZoneOption.takeFromPositionToRightEnd:
                     output.x = x;
-                    output.weight = selectToCorner(textCursorZoneCorner.Right).x;
+                    output.width = selectToCorner(textCursorZoneCorner.Right).x;
                     break;
 
                 case selectZoneOption.takeCompleteLine:
                     output.x = frame.innerLeftPosition;
-                    output.weight = frame.innerWidth;
+                    output.width = frame.innerWidth;
                     break;
             }
 

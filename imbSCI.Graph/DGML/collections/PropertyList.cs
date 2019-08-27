@@ -27,10 +27,13 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using imbSCI.Core.data;
 using imbSCI.Graph.DGML.core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Xml.Serialization;
 
 namespace imbSCI.Graph.DGML.collections
 {
@@ -40,22 +43,75 @@ namespace imbSCI.Graph.DGML.collections
         {
         }
 
-        /// <summary>
-        /// Adds the property.
-        /// </summary>
-        /// <param name="propertyName">Name of the property.</param>
-        /// <param name="label">The label.</param>
-        /// <param name="type">The type.</param>
-        /// <returns></returns>
-        public Property AddProperty(String propertyName, String label, Type type)
+        [XmlIgnore]
+        public List<settingsEntriesForObject> SEOs { get; protected set; } = new List<settingsEntriesForObject>();
+
+
+        //public void RegisterProperties(settingsEntriesForObject seo)
+        //{
+        //    if (SEOs.Contains(seo)) return 
+        //}
+
+        public Property RegisterProperty(settingsPropertyEntry sme)
         {
-            if (!this.Any(x => x.Id == propertyName))
-            {
-                Property p = new Property(propertyName, label, type);
-                Add(p);
-                return p;
-            }
-            return this.FirstOrDefault(x => x.Id == propertyName);
+            String UID = sme.memberInfo.DeclaringType.Name + "." + sme.memberInfo.Name;
+
+            Property p = this.FirstOrDefault(x => x.Id == UID);
+            if (p != null) return p;
+           
+            p = new Property(UID, sme.displayName, sme.pi.PropertyType);
+
+            Add(p);
+
+            return p;
         }
+
+        public Property RegisterProperty(PropertyInfo pi)
+        {
+            String UID = pi.DeclaringType.Name + "." + pi.Name;
+
+            Property p = this.FirstOrDefault(x => x.Id == UID);
+            if (p != null) return p;
+
+             p = new Property(UID, pi.Name, pi.PropertyType);
+
+            Add(p);
+
+            return p;
+        }
+
+        public Property RegisterProperty(String UID, String Label, String DataType)
+        {
+            Property p = this.FirstOrDefault(x => x.Id == UID);
+            if (p != null) return p;
+            p = new Property()
+            {
+                Id = UID,
+                Label = Label
+            };
+            p.DataType = DataType;
+
+            Add(p);
+
+            return p;
+        }
+
+        ///// <summary>
+        ///// Adds the property.
+        ///// </summary>
+        ///// <param name="propertyName">Name of the property.</param>
+        ///// <param name="label">The label.</param>
+        ///// <param name="type">The type.</param>
+        ///// <returns></returns>
+        //public Property AddProperty(String propertyName, String label, Type type)
+        //{
+        //    if (!this.Any(x => x.Id == propertyName))
+        //    {
+        //        Property p = new Property(propertyName, label, type);
+        //        Add(p);
+        //        return p;
+        //    }
+        //    return this.FirstOrDefault(x => x.Id == propertyName);
+        //}
     }
 }

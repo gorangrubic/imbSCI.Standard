@@ -33,12 +33,14 @@ using imbSCI.Core.extensions.data;
 using imbSCI.Core.extensions.table;
 using imbSCI.Core.extensions.text;
 using imbSCI.Core.extensions.typeworks;
+using imbSCI.Core.reporting.render;
 using imbSCI.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Reflection;
+using System.Xml.Serialization;
 
 namespace imbSCI.Core.math.range.finder
 {
@@ -54,7 +56,8 @@ namespace imbSCI.Core.math.range.finder
     /// <summary>
     /// Math utility class for: min-max-range computations
     /// </summary>
-    public class rangeFinder
+    [Serializable]
+    public class rangeFinder:IEquatable<rangeFinder>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="rangeFinder"/> class.
@@ -70,6 +73,23 @@ namespace imbSCI.Core.math.range.finder
         public rangeFinder(String _id)
         {
             id = _id;
+        }
+
+        public rangeFinder GetDifference(rangeFinder other)
+        {
+            rangeFinder output = new rangeFinder();
+            if (other.IsLearned && IsLearned)
+            {
+                if (!id.isNullOrEmpty() && !other.id.isNullOrEmpty())
+                {
+                    output.id = id.add(other.id, "-");
+                }
+                output.Maximum = Maximum - other.Maximum;
+                output.Minimum = Minimum - other.Minimum;
+                output.Count = Count - other.Count;
+                output.Sum = Sum  - other.Sum;
+            }
+            return output;
         }
 
         /// <summary>
@@ -92,6 +112,19 @@ namespace imbSCI.Core.math.range.finder
             Sum = 0;
         }
 
+         /// <summary>
+        /// Updates the instance with data
+        /// </summary>
+        /// <param name="input">The input.</param>
+        public virtual void Learn(IEnumerable<Double> input)
+        {
+            foreach (Double i in input)
+            {
+                Learn(i);
+            }
+        }
+
+
         /// <summary>
         /// Updates the instance with data
         /// </summary>
@@ -113,6 +146,7 @@ namespace imbSCI.Core.math.range.finder
         /// <value>
         ///   <c>true</c> if this instance is learned; otherwise, <c>false</c>.
         /// </value>
+        [XmlIgnore]
         public Boolean IsLearned
         {
             get
@@ -137,12 +171,107 @@ namespace imbSCI.Core.math.range.finder
         }
 
         /// <summary>
-        /// Returns dictionary with values
+        /// Returns value gradinet from <see cref="Minimum"/> to <see cref="Maximum"/> in <c>steps</c>, returned in zig-zag order. i.e. for 10 steps, min 0, max 1: it will return> 0, 0.9, 0.1, 0.8, 0.2 ... 
+        /// </summary>
+        /// <param name="steps">The steps.</param>
+        /// <returns></returns>
+        public List<Double> GetValueRangeZigZagSteps(Int32 steps)
+        {
+            List<Double> output = new List<double>();
+            Int32 halfSteps = steps / 2;
+
+            List<Double> rs = new List<double>();
+            for (int i = 0; i < halfSteps; i++)
+            {
+
+                Double r_l = (i*2).GetRatio(steps);
+                Double r_h = (steps-(i*2)).GetRatio(steps);
+                rs.AddUnique(r_l);
+                rs.AddUnique(r_h);
+                
+            }
+
+            foreach (Double r in rs)
+            {
+                output.Add(GetValueForRangePosition(r));
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Returns value gradinet from <see cref="Minimum"/> to <see cref="Maximum"/>, in given steps
+        /// </summary>
+        /// <param name="steps">The steps.</param>
+        /// <returns></returns>
+        public List<Double> GetValueRangeSteps(Int32 steps)
+        {
+            List<Double> output = new List<double>();
+            for (int i = 0; i <= steps; i++)
+            {
+                Double r = i.GetRatio(steps);
+                output.Add(GetValueForRangePosition(r));
+            }
+            return output;
+        }
+
+        /// <summary>
+        /// For specified position in range, returns value
+        /// </summary>
+        /// <param name="ratio">The ratio.</param>
+        /// <returns></returns>
+        public Double GetValueForRangePosition(Double ratio)
+        {
+            while (ratio > 1)
+            {
+                ratio = ratio - 1;
+            }
+            Double output = Minimum;
+            output += Range * ratio;
+            return output;
+        }
+
+
+        public void Report(ITextRender output, String rangeName, String prefix)
+        {
+            if (rangeName == "") rangeName = id;
+            
+            output.AppendLine("Range [" + rangeName + "]");
+            output.nextTabLevel();
+            foreach (var pair in GetDictionary(prefix))
+            {
+                output.AppendPair(pair.Key, pair.Value.ToString("F3"));
+            }
+            output.prevTabLevel();
+        }
+
+        /// <summary>
+        /// Gets list of dictionary fields for a <see cref="rangeFinder"/> with given <c>prefix</c>
+        /// </summary>
+        /// <param name="prefix">The prefix.</param>
+        /// <returns></returns>
+        public static List<String> GetRangeFinderDictionaryFields(String prefix = "")
+        {
+            List<String> output = new List<string>();
+            
+            output.Add(prefix + nameof(Minimum));
+            output.Add(prefix + nameof(Maximum));
+            output.Add(prefix + nameof(Range));
+            output.Add(prefix + nameof(Average));
+            output.Add(prefix + nameof(Sum));
+            output.Add(prefix + nameof(Count));
+
+            return output;
+        }
+
+        /// <summary>
+        /// Returns dictionary with range descriptive statistics (min, max, range, sum, count)
         /// </summary>
         /// <returns></returns>
         public Dictionary<String, Double> GetDictionary(String prefix = "")
         {
             Dictionary<String, Double> output = new Dictionary<string, double>();
+            if (prefix.isNullOrEmpty()) prefix = id;
 
             output.Add(prefix + nameof(Minimum), Minimum);
             output.Add(prefix + nameof(Maximum), Maximum);
@@ -152,6 +281,19 @@ namespace imbSCI.Core.math.range.finder
             output.Add(prefix + nameof(Count), Count);
 
             return output;
+        }
+
+        /// <summary>
+        /// Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>
+        /// true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
+        /// </returns>
+        public bool Equals(rangeFinder other)
+        {
+            if (Minimum == other.Minimum && Maximum == other.Maximum) return true;
+            return false;
         }
 
         /// <summary> Ratio </summary>
@@ -176,6 +318,7 @@ namespace imbSCI.Core.math.range.finder
         [imb(imbAttributeName.measure_letter, "R")]
         [imb(imbAttributeName.measure_setUnit, "u")]
         [Description("Maximum value, minus minimum value")] // [imb(imbAttributeName.measure_important)][imb(imbAttributeName.reporting_valueformat, "")][imb(imbAttributeName.reporting_escapeoff)]
+        [XmlIgnore]
         public Double Range
         {
             get
@@ -199,6 +342,7 @@ namespace imbSCI.Core.math.range.finder
         [imb(imbAttributeName.measure_letter, "Avg")]
         [imb(imbAttributeName.measure_setUnit, "u")]
         [Description("Aritmetic mean of the measured set")] // [imb(imbAttributeName.measure_important)][imb(imbAttributeName.reporting_valueformat, "")][imb(imbAttributeName.reporting_escapeoff)]
+        [XmlIgnore]
         public Double Average
         {
             get

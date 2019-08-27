@@ -58,7 +58,7 @@ namespace imbSCI.DataComplex.data
                 var comparative_table = pair.Value.GetRowCollectionTable("complete_summary_ascii" + pair.Key); //context.comparative_tables.GetRowCollectionTable("complete_comparative");
                 comparative_table.SetTitle("complete_summary_ascii" + pair.Key);
 
-                dataTableConverterASCII.ConvertToFile(comparative_table, reportCollection.rootFolder, comparative_table.TableName + "_ascii.txt");
+                dataTableConverterASCII.ConvertToFile(comparative_table, reportCollection.rootFolder, comparative_table.TableName + "_ascii.txt", DataTableConverterASCIISettings.GetCommaSeparatedValues());
 
                 //builderForText bt = new builderForText();
                 //bt.AppendTable(comparative_table);

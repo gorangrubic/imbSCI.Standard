@@ -29,6 +29,16 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Core.reporting.render.converters
 {
+
+    public enum glutenberg_containers
+    {
+        paragraph,
+        list,
+        quote,
+        table,
+        image
+    }
+
     public enum bootstrap_containers
     {
         alert,

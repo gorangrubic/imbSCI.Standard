@@ -34,11 +34,11 @@ namespace imbSCI.Data.data.text
     using System.Collections.Generic;
     using System.Linq;
 
+  
     /// <summary>
     /// Single dimension marked map - the results created with <see cref="regexMarkerCollection{T}"/>
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class regexMarkerResultCollection<T>
+    public class regexMarkerResultCollection
     {
         /// <summary>
         /// Gets the marker results by order of appearance -- taking only first layer
@@ -67,10 +67,10 @@ namespace imbSCI.Data.data.text
             return output;
         }
 
-        private aceDictionarySet<T, regexMarkerResult> _byMarker = new aceDictionarySet<T, regexMarkerResult>();
+        private aceDictionarySet<Object, regexMarkerResult> _byMarker = new aceDictionarySet<Object, regexMarkerResult>();
 
         /// <summary> Dictionary set by marker rule</summary>
-        public aceDictionarySet<T, regexMarkerResult> byMarker
+        public aceDictionarySet<Object, regexMarkerResult> byMarker
         {
             get
             {
@@ -120,13 +120,13 @@ namespace imbSCI.Data.data.text
                 byAllocation.Add(ind, res);
             }
 
-            byMarker.Add((T)res.marker, res);
+            byMarker.Add(res.marker, res);
         }
 
         /// <summary>
         /// Default marker to apply
         /// </summary>
-        public T defaultMarker = default(T);
+        public Object defaultMarker ;
 
         public regexMarkerResultCollection()
         {

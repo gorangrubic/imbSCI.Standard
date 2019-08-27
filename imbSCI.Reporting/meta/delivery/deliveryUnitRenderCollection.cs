@@ -34,12 +34,18 @@ namespace imbSCI.Reporting.meta.delivery
     using System.Collections.Generic;
     using System.Linq;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'IRender' that could not be resolved
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IEnumerable{imbSCI.Reporting.meta.delivery.deliveryUnit}'
     /// <summary>
     /// Collection of renders
     /// </summary>
     /// <seealso cref="System.Collections.Generic.IEnumerable{imbSCI.Reporting.meta.delivery.deliveryUnit}" />
     /// <seealso cref="imbSCI.Reporting.reporting.render.IRender"/>
     public class deliveryUnitRenderCollection : IEnumerable<IRender>
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IEnumerable{imbSCI.Reporting.meta.delivery.deliveryUnit}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1574 // XML comment has cref attribute 'IRender' that could not be resolved
     {
         /// <summary>
         /// Gets this instance.

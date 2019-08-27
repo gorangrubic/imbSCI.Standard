@@ -1,9 +1,11 @@
 ﻿using imbSCI.Graph.DGML;
+using imbSCI.Graph.MXGraph.io;
 using imbSCI.Graph.MXGraph.layout;
 using imbSCI.Graph.MXGraph.model;
 using imbSCI.Graph.MXGraph.view;
 using System;
 using System.Collections.Generic;
+using System.Xml;
 
 namespace imbSCI.Graph.MXGraph
 {

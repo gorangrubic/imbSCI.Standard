@@ -688,6 +688,40 @@ namespace imbSCI.DataComplex.special
             }
         }
 
+        public Dictionary<Int32, List<T>> GetInstanceDictionaryByFrequency()
+        {
+            Dictionary<Int32, List<T>> toRemove = new Dictionary<Int32, List<T>>();
+            foreach (var pair in items)
+            {
+                Int32 freq = items[pair.Key];
+                if (!toRemove.ContainsKey(freq)) toRemove.Add(freq, new List<T>());
+                toRemove[freq].Add(pair.Key);
+
+            }
+
+            return toRemove;
+        }
+
+
+        /// <summary>
+        /// Gets the instances with frequency.
+        /// </summary>
+        /// <param name="frequency">The frequency.</param>
+        /// <returns></returns>
+        public List<T> GetInstancesWithFrequency(Int32 frequency)
+        {
+            List<T> toRemove = new List<T>();
+            foreach (var pair in items)
+            {
+                if (items[pair.Key] == frequency)
+                {
+                    toRemove.Add(pair.Key);
+                }
+            }
+
+            return toRemove;
+        }
+
         /// <summary>
         /// Returns relative frequency calculated as follows: absolute frequency divided by maximum frequency: rF = aF / maxF
         /// </summary>

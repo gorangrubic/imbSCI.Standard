@@ -30,6 +30,7 @@
 //using System.Web.UI.WebControls;
 //using Accord;
 using imbSCI.Core.extensions.data;
+using imbSCI.Core.style.color;
 using imbSCI.Data;
 using imbSCI.Data.collection.graph;
 using imbSCI.Data.interfaces;
@@ -41,6 +42,9 @@ using System.Linq;
 
 namespace imbSCI.Graph.Converters
 {
+
+
+
     public abstract class graphToDirectedGraphConverterBase<T> : DirectedGraphConverterBase<T, T> where T : IGraphNode, new()
     {
         public override string GetNodeID(T node)
@@ -220,7 +224,15 @@ namespace imbSCI.Graph.Converters
                     }
                 }
 
+                Int32 cc = output.Categories.Count;
+
                 var c = output.Categories.AddOrGetCategory(GetTypeID(ch), GetCategoryID(ch), "");
+
+                if (cc != output.Categories.Count)
+                {
+                    c.Background = setup.colorWheel.next().ColorToHex();
+
+                }
                 output.Categories.AddUnique(c);
             }
             return output;

@@ -1,0 +1,393 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>imbSCI.BusinessData</name>
+    </assembly>
+    <members>
+        <member name="M:imbSCI.BusinessData.Core.RecordsWithUIDCollection`1.AddOrReplace(`0)">
+            <summary>
+            Adds item and replaces if any existing item is identified by same <see cref="M:imbSCI.BusinessData.Core.IRecordWithGetUID.GetUID"/>.
+            </summary>
+            <param name="item">Item to add or replace</param>
+            <returns>Existing item that was removed from collection. If no existing item found, returns null</returns>
+        </member>
+        <member name="T:imbSCI.BusinessData.Metrics.Core.AnnualMetricsBase">
+            <summary>
+            Base class for annual business metrics
+            </summary>
+        </member>
+        <member name="M:imbSCI.BusinessData.Metrics.Core.AnnualMetricsBase.GetUID">
+            <summary>
+            Gets UID used to identify matching entries
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.BusinessData.Metrics.Core.AnnualMetricsBase.Equals(imbSCI.BusinessData.Metrics.Core.IAnnualMetricsBase)">
+            <summary>
+            Indicates whether the current object is equal by <see cref="M:imbSCI.BusinessData.Metrics.Core.AnnualMetricsBase.GetUID"/>to another object of the same type
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>
+            true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:imbSCI.BusinessData.Metrics.Core.AnnualMetricsBase.Equals(imbSCI.BusinessData.Core.IRecordWithGetUID)">
+            <summary>
+            Indicates whether the current object is equal by <see cref="M:imbSCI.BusinessData.Metrics.Core.AnnualMetricsBase.GetUID"/>to another object of the same type
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>
+            true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
+            </returns>
+        </member>
+        <member name="P:imbSCI.BusinessData.Metrics.Core.AnnualMetricsBase.year">
+            <summary>
+            Year of the metrics
+            </summary>
+            <value>
+            The year.
+            </value>
+        </member>
+        <member name="P:imbSCI.BusinessData.Metrics.Core.AnnualMetricsBase.PeriodEnd">
+            <summary>Inclusive end of the period.</summary>
+            <value>The period end.</value>
+        </member>
+        <member name="T:imbSCI.BusinessData.Metrics.FinanceOverview">
+            <summary>Short finance overview for particular year</summary>
+            <seealso cref="T:imbSCI.BusinessData.Metrics.Core.AnnualMetricsBase" />
+        </member>
+        <member name="M:imbSCI.BusinessData.Metrics.FinanceOverview.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.BusinessData.Metrics.FinanceOverview"/> class - used for XML serialization
+            </summary>
+        </member>
+        <member name="T:imbSCI.BusinessData.Metrics.FinanceOverviewRecords">
+            <summary>
+            Overview annual records
+            </summary>
+        </member>
+        <member name="T:imbSCI.BusinessData.Metrics.InternationalTradeByCountry">
+            <summary>
+            Import and/or export turnover, by country
+            </summary>
+            <seealso cref="T:imbSCI.BusinessData.Metrics.Core.AnnualMetricsBase" />
+        </member>
+        <member name="P:imbSCI.BusinessData.Metrics.InternationalTradeByCountry.Turnover">
+            <summary>
+            Gets or sets the turnover.
+            </summary>
+            <value>
+            The turnover.
+            </value>
+        </member>
+        <member name="P:imbSCI.BusinessData.Metrics.InternationalTradeByCountry.Country">
+            <summary>
+            Gets or sets the country name
+            </summary>
+            <value>
+            The country.
+            </value>
+        </member>
+        <member name="P:imbSCI.BusinessData.Metrics.InternationalTradeByCountry.Direction">
+            <summary>
+            Gets or sets the direction.
+            </summary>
+            <value>
+            The direction.
+            </value>
+        </member>
+        <member name="T:imbSCI.BusinessData.Metrics.InternationalTradeDirection">
+            <summary>
+            Direction of international trade
+            </summary>
+        </member>
+        <member name="F:imbSCI.BusinessData.Metrics.InternationalTradeDirection.unknown">
+            <summary>
+            Never specified
+            </summary>
+        </member>
+        <member name="F:imbSCI.BusinessData.Metrics.InternationalTradeDirection.import">
+            <summary>
+            Imports
+            </summary>
+        </member>
+        <member name="F:imbSCI.BusinessData.Metrics.InternationalTradeDirection.export">
+            <summary>
+            The export
+            </summary>
+        </member>
+        <member name="F:imbSCI.BusinessData.Metrics.InternationalTradeDirection.combined">
+            <summary>
+            The combined: <see cref="F:imbSCI.BusinessData.Metrics.InternationalTradeDirection.import"/> and <see cref="F:imbSCI.BusinessData.Metrics.InternationalTradeDirection.export"/>
+            </summary>
+        </member>
+        <member name="T:imbSCI.BusinessData.Metrics.InternationalTradeRecords">
+            <summary>
+            Contains annual records on international trade
+            </summary>
+        </member>
+        <member name="P:imbSCI.BusinessData.Metrics.InternationalTradeRecords.year">
+            <summary>
+            Year of the metrics
+            </summary>
+            <value>
+            The year.
+            </value>
+        </member>
+        <member name="P:imbSCI.BusinessData.Metrics.InternationalTradeRecords.PeriodEnd">
+            <summary>Inclusive end of the period.</summary>
+            <value>The period end.</value>
+        </member>
+        <member name="M:imbSCI.BusinessData.Metrics.InternationalTradeRecords.GetRecords(imbSCI.BusinessData.Metrics.InternationalTradeDirection,System.String)">
+            <summary>Gets the records according to criteria</summary>
+            <param name="direction">Trade direction</param>
+            <param name="countryNameNeedle">Country name or names, given as string list with items separated by , | or ;</param>
+            <returns>Matched records</returns>
+        </member>
+        <member name="T:imbSCI.BusinessData.Models.BankAccount.bankAccount">
+            <summary>
+            Data on a bank account
+            </summary>
+            <seealso cref="T:imbSCI.BusinessData.Core.IRecordWithGetUID" />
+            <seealso cref="!:System.IEquatable&lt;imbSCI.BusinessData.Models.BankAccount.bankAccount&gt;" />
+        </member>
+        <member name="F:imbSCI.BusinessData.Models.BankAccount.bankAccountNumberTools._select_FORMAT_BANKACCOUNTNUMBER">
+            <summary>
+            Regex select FORMAT_BANKACCOUNTNUMBER : \A([\d]{3})\-?([\d]{0,8})\-?([\d]{2})\Z
+            </summary>
+            <remarks>
+            <para>For text: example text</para>
+            <para>Selects: ex</para>
+            </remarks>
+        </member>
+        <member name="M:imbSCI.BusinessData.Models.BankAccount.bankAccountNumberTools._replace_FORMAT_BANKACCOUNTNUMBER(System.Text.RegularExpressions.Match)">
+            <summary>
+            Match Evaluation for FORMAT_BANKACCOUNTNUMBER : _select_FORMAT_BANKACCOUNTNUMBER
+            </summary>
+            <param name="m">Match with value to process</param>
+            <returns>For m.value "something" returns "SOMETHING"</returns>
+        </member>
+        <member name="T:imbSCI.BusinessData.Models.BankAccount.bankAccountNumber">
+            <summary>
+            Object model for bank account number
+            </summary>
+        </member>
+        <member name="M:imbSCI.BusinessData.Models.BankAccount.bankAccountNumber.ToString(System.Boolean,imbSCI.BusinessData.Models.BankAccount.bankAccountNumberFormat,System.Text.StringBuilder)">
+            <summary>
+            To the string.
+            </summary>
+            <param name="useLeadingZeros">if set to <c>true</c> [use leading zeros].</param>
+            <param name="mode">The mode.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.BusinessData.Models.BankAccount.bankAccountNumber.Equals(imbSCI.BusinessData.Models.BankAccount.bankAccountNumber)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>
+            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:imbSCI.BusinessData.Models.BankAccount.bankAccountNumberList.ToString(System.Boolean,imbSCI.BusinessData.Models.BankAccount.bankAccountNumberFormat)">
+            <summary>
+            To the string.
+            </summary>
+            <param name="useLeadingZeros">if set to <c>true</c> [use leading zeros].</param>
+            <param name="mode">The mode.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.BusinessData.Models.BankAccount.bankAccountNumberList.AddEntry(imbSCI.BusinessData.Models.BankAccount.bankAccountNumber,System.Boolean)">
+            <summary>
+            Adds the entry
+            </summary>
+            <param name="entry">The entry.</param>
+            <param name="onlyUnique">if set to <c>true</c> if will add only if it does not already exist</param>
+        </member>
+        <member name="P:imbSCI.BusinessData.Models.BankAccount.bankAccountNumberList.nonNumericCharacters">
+            <summary>
+            Used to check if string input line contains non numeric characters.
+            </summary>
+            <value>
+            The non numeric characters.
+            </value>
+        </member>
+        <member name="M:imbSCI.BusinessData.Models.BankAccount.bankAccountNumberList.FromString(System.String,System.Boolean,imbSCI.Core.reporting.render.ITextRender)">
+            <summary>
+            REturns count of phrased bank accounts
+            </summary>
+            <param name="input">The input.</param>
+            <param name="output">The output.</param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.BusinessData.Models.CompanyIdentification">
+            <summary>
+            Elementary information used to identify a company (for query/search purposes)
+            </summary>
+            <seealso cref="T:imbSCI.BusinessData.Models.CompanyIdentificationCore" />
+        </member>
+        <member name="T:imbSCI.BusinessData.Models.CompanyIdentificationCore">
+            <summary>
+            Data structure providing the most fundamental (core) business entity identification data
+            </summary>
+        </member>
+        <member name="P:imbSCI.BusinessData.Models.CompanyIdentificationCore.VAT">
+            <summary>
+            VAT identification number, considered as UID in this library
+            </summary>
+            <value>
+            The vat.
+            </value>
+        </member>
+        <member name="P:imbSCI.BusinessData.Models.CompanyIdentificationCore.UID">
+            <summary>
+            Unique ID used by an external business software package (i.e. SugarCRM)
+            </summary>
+            <value>
+            The uid.
+            </value>
+        </member>
+        <member name="T:imbSCI.BusinessData.Models.CompanyInformation">
+            <summary>
+            Basic company information
+            </summary>
+            <seealso cref="T:imbSCI.BusinessData.Models.CompanyIdentificationCore" />
+            <seealso cref="T:imbSCI.BusinessData.Core.IRecordWithGetUID" />
+        </member>
+        <member name="T:imbSCI.BusinessData.Models.Company.CompanyBankAccountCollection">
+            <summary>
+            Set of bank accounts
+            </summary>
+            <seealso cref="!:imbSCI.BusinessData.Models.Core.ModelRecordsCollectionBase&lt;imbSCI.BusinessData.Models.BankAccount.bankAccount&gt;" />
+        </member>
+        <member name="T:imbSCI.BusinessData.Models.Company.CompanyInformationCollection">
+            <summary>
+            Collection of <see cref="T:imbSCI.BusinessData.Models.CompanyInformation"/> instances
+            </summary>
+            <seealso cref="!:imbSCI.BusinessData.Models.Core.ModelRecordsCollectionBase&lt;imbSCI.BusinessData.Models.Company.CompanyInformation&gt;" />
+        </member>
+        <member name="T:imbSCI.BusinessData.Models.Company.CompanyPersonCollection">
+            <summary>
+            Collection of <see cref="T:imbSCI.BusinessData.Models.Organization.Person"/> instances, referenced to a company model instance via <see cref="P:imbSCI.BusinessData.Models.Core.ModelRecordsCollectionBase`1.name"/> identifier
+            </summary>
+            <seealso cref="!:imbSCI.BusinessData.Models.Core.ModelRecordsCollectionBase&lt;imbSCI.BusinessData.Models.Organization.Person&gt;" />
+        </member>
+        <member name="P:imbSCI.BusinessData.Models.Organization.BusinessActivityDefinition.CodeFull">
+            <summary>
+            <see cref="P:imbSCI.BusinessData.Models.Organization.BusinessActivityDefinition.Group"/> + <see cref="P:imbSCI.BusinessData.Models.Organization.BusinessActivityDefinition.Code"/>
+            </summary>
+            <value>
+            The code full.
+            </value>
+        </member>
+        <member name="T:imbSCI.BusinessData.Models.Organization.PersonCollection">
+            <summary>
+            Collection of <see cref="T:imbSCI.BusinessData.Models.Organization.Person"/> instances, not referenced
+            </summary>
+            <seealso cref="!:imbSCI.BusinessData.Core.RecordsWithUIDCollection&lt;imbSCI.BusinessData.Models.Organization.Person&gt;" />
+        </member>
+        <member name="T:imbSCI.BusinessData.Models.Organization.PersonPosition">
+            <summary>
+            Position of an employee
+            </summary>
+        </member>
+        <member name="T:imbSCI.BusinessData.Storage.FileSystemRecordProvider`2">
+            <summary>
+            Provides access and storage mechanism for records collections
+            </summary>
+            <typeparam name="TCollection">The type of the collection.</typeparam>
+            <typeparam name="TRecord">The type of the record.</typeparam>
+        </member>
+        <member name="M:imbSCI.BusinessData.Storage.FileSystemRecordProvider`2.#ctor(imbSCI.Core.files.folders.folderNode,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.BusinessData.Storage.FileSystemRecordProvider`2"/> class.
+            </summary>
+            <param name="storageFolder">Folder where collections are stored</param>
+            <param name="record_prefix">Filename prefix for records</param>
+            <param name="collection_prefix">Subdirectory name prefix for collections</param>
+        </member>
+        <member name="M:imbSCI.BusinessData.Storage.FileSystemRecordProvider`2.GetCollection(System.String)">
+            <summary>
+            Loads entire collection, if found
+            </summary>
+            <param name="collection_uid">The collection uid.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.BusinessData.Storage.FileSystemRecordProvider`2.SaveCollection(`0,System.Boolean,imbSCI.BusinessData.Storage.RecordProviderResponse)">
+            <summary>
+            Saves the collection.
+            </summary>
+            <param name="collection">The collection.</param>
+            <param name="delete_all_existing_records">if set to <c>true</c> [delete all existing records].</param>
+            <param name="response">The response.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.BusinessData.Storage.FileSystemRecordProvider`2.SaveRecord(`1,System.String,imbSCI.BusinessData.Storage.RecordProviderResponse)">
+            <summary>
+            Saves the record.
+            </summary>
+            <param name="collection_uid">The collection uid.</param>
+            <param name="record">The record.</param>
+            <param name="response">The response.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.BusinessData.Storage.FileSystemRecordProvider`2.GetRecord(System.String,System.String)">
+            <summary>
+            Gets the record.
+            </summary>
+            <param name="collection_uid">The collection uid.</param>
+            <param name="record_uid">The record uid.</param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.BusinessData.Storage.RecordProvider`2">
+            <summary>
+            Base for a record provider implementation
+            </summary>
+            <typeparam name="TCollection">The type of the collection.</typeparam>
+            <typeparam name="TRecord">The type of the record.</typeparam>
+        </member>
+        <member name="M:imbSCI.BusinessData.Storage.RecordProvider`2.LoadCollection(System.String)">
+            <summary>
+            Loads entire collection, under specified <c>collection_uid</c>
+            </summary>
+            <param name="collection_uid">The collection uid.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.BusinessData.Storage.RecordProvider`2.LoadRecord(System.String,System.String)">
+            <summary>
+            Loads a record, designated by specifeid <c>record_uid</c> and <c>collection_uid</c>
+            </summary>
+            <param name="record_uid">The record uid.</param>
+            <param name="collection_uid">The collection uid.</param>
+            <returns>Loaded record</returns>
+        </member>
+        <member name="T:imbSCI.BusinessData.Storage.RecordProviderOperationMode">
+            <summary>
+            Operation mode
+            </summary>
+        </member>
+        <member name="F:imbSCI.BusinessData.Storage.RecordProviderOperationMode.singleCollectionMode">
+            <summary>
+            The single collection mode: only one collection is subject of the provider, serving its records
+            </summary>
+        </member>
+        <member name="F:imbSCI.BusinessData.Storage.RecordProviderOperationMode.multiCollectionMode">
+            <summary>
+            The multi collection mode: provider serves multiple collections, with records in each one
+            </summary>
+        </member>
+        <member name="P:imbSCI.BusinessData.Storage.RecordProviderResponse.Path">
+            <summary>
+            Relevant path information (filepath, directory path, URI or other kind of location description
+            </summary>
+            <value>
+            The filepath.
+            </value>
+        </member>
+        <member name="F:imbSCI.BusinessData.Storage.RecordProviderResponseStatus.recordTypeNameNotFound">
+            <summary>
+            Name of Record Type was not found in loaded XML file
+            </summary>
+        </member>
+    </members>
+</doc>

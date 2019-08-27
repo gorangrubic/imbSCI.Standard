@@ -82,7 +82,7 @@ namespace imbSCI.Core.files.folders
         /// <typeparam name="T"></typeparam>
         /// <param name="filename">The filename.</param>
         /// <returns></returns>
-        public List<T> GetResources<T>(String filename_needle = "") where T : new()
+        public List<T> GetResources<T>(String filename_needle = "") where T : class,new()
         {
             Type t = typeof(T);
 

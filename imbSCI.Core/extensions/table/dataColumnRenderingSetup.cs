@@ -37,7 +37,10 @@ namespace imbSCI.Core.extensions.table
     using imbSCI.Core.extensions.text;
     using imbSCI.Core.extensions.typeworks;
     using imbSCI.Core.math.aggregation;
+    using imbSCI.Core.math.range.frequency;
+    using imbSCI.Core.reporting.zone;
     using imbSCI.Core.style.color;
+    using imbSCI.Data;
     using imbSCI.Data.enums.fields;
     using System;
     using System.Collections.Generic;
@@ -45,22 +48,112 @@ namespace imbSCI.Core.extensions.table
     using System.Drawing;
     using System.Linq;
 
+
+    public class ColumnGroups : List<ColumnGroup>
+    {
+
+    }
+
+    public class ColumnGroup : List<DataColumn>
+    {
+        private String _name = "";
+
+        public ColumnGroup() { }
+        public String name
+        {
+            get
+            {
+
+                if (_name.isNullOrEmpty())
+                {
+                    foreach (DataColumn dc in this)
+                    {
+                        String gn = dc.GetGroup();
+                        if (!gn.isNullOrEmpty())
+                        {
+                            _name = gn;
+                        }
+                    }
+                }
+                return _name;
+            }
+            set { _name = value; }
+        }
+    }
+
     /// <summary>
     /// Extension controling properties of data column reporting
     /// </summary>
     public static class dataColumnRenderingSetup
     {
+
+        /// <summary>
+        /// Returns frequency counts on non-empty <see cref="templateFieldDataTable"/> column meta-setters for all columns in the table
+        /// </summary>
+        /// <param name="table">The table.</param>
+        /// <returns></returns>
+        public static frequencyCounter<templateFieldDataTable> GetColumnSetupStatistics(this DataTable table)
+        {
+            frequencyCounter<templateFieldDataTable> output = new frequencyCounter<templateFieldDataTable>();
+
+            foreach (DataColumn dc in table.Columns)
+            {
+                foreach (var k in dc.ExtendedProperties.Keys)
+                {
+                    if (k is templateFieldDataTable enumField)
+                    {
+                        if (!dc.ExtendedProperties[k].isNullOrEmpty())
+                        {
+                            output.Count(enumField);
+                        }
+                    }
+                }
+            }
+
+            return output;
+        }
+
+
+
+
+     
+        public static T GetField<T>(this DataColumn dc, templateFieldDataTable field, T defaultData=null) where T:class
+        {
+            if (!dc.ExtendedProperties.ContainsKey(field))
+            {
+                return defaultData;
+            } else if (dc.ExtendedProperties[field] is T properType) {
+                return properType;
+            } else {
+                return defaultData;
+            }
+            
+        }
+        public static DataColumn SetField<T>(this DataColumn dc, templateFieldDataTable field, T data)
+        {
+            if (dc.ExtendedProperties.ContainsKey(field))
+            {
+                dc.ExtendedProperties[field] = data;
+            } else
+            {
+                dc.ExtendedProperties.add(field, data);
+            }
+            
+            return dc;
+        }
+
+
         /// <summary>
         /// Gets the groups of columns - grouped by <see cref="SetGroup(DataColumn, string)"/>
         /// </summary>
         /// <param name="table">The table.</param>
         /// <returns></returns>
-        public static List<List<DataColumn>> getGroupsOfColumns(this DataTable table)
+        public static ColumnGroups getGroupsOfColumns(this DataTable table)
         {
             Dictionary<String, DataColumn> registry = new Dictionary<string, DataColumn>();
 
-            List<List<DataColumn>> groups = new List<List<DataColumn>>();
-            List<DataColumn> group = new List<DataColumn>();
+            ColumnGroups groups = new ColumnGroups();
+            ColumnGroup group = new ColumnGroup();
 
             Boolean startOfTheGroup = false;
             String lastKey = "";
@@ -79,7 +172,7 @@ namespace imbSCI.Core.extensions.table
                     {
                         groups.Add(group);
                     }
-                    group = new List<DataColumn>();
+                    group = new ColumnGroup();
                     startOfTheGroup = false;
                 }
 
@@ -174,11 +267,17 @@ namespace imbSCI.Core.extensions.table
         /// <returns></returns>
         public static String GetFormat(this DataColumn dc)
         {
-            if (!dc.ExtendedProperties.ContainsKey(templateFieldDataTable.col_format))
+            String output = "";
+            if (dc.ExtendedProperties.ContainsKey(imbAttributeName.reporting_valueformat))
             {
-                return default(String);
+                output = dc.ExtendedProperties[imbAttributeName.reporting_valueformat].toStringSafe();
             }
-            return dc.ExtendedProperties[templateFieldDataTable.col_format].toStringSafe();
+            if (dc.ExtendedProperties.ContainsKey(templateFieldDataTable.col_format))
+            {
+                output = dc.ExtendedProperties[templateFieldDataTable.col_format].toStringSafe();
+            }
+
+            return output;
         }
 
         /// <summary>
@@ -406,7 +505,12 @@ namespace imbSCI.Core.extensions.table
             {
                 settingsPropertyEntry spe = new settingsPropertyEntry(dc);
                 // if (col_spe.isHiddenInReport) dc.ExtendedProperties.add(imbAttributeName.reporting_hide, true, false);
-                dc.SetSPE(spe);
+
+                if (dc.Table.Rows.Count == 0)
+                {
+                    dc.SetSPE(spe);
+                }
+
                 return spe;
             }
             return dc.ExtendedProperties[templateFieldDataTable.col_spe] as settingsPropertyEntry;
@@ -428,6 +532,9 @@ namespace imbSCI.Core.extensions.table
             dc.SetTextColor(col_spe.textColor);
             dc.SetHeading(col_spe.displayName);
             dc.ColumnName = col_spe.name;
+            dc.SetAligment(col_spe.Alignment);
+
+            //templateFieldDataTable.col_alignment
             if (col_spe.type.isNullable())
             {
                 dc.DataType = typeof(Object);
@@ -436,6 +543,8 @@ namespace imbSCI.Core.extensions.table
             {
                 dc.DataType = col_spe.type;
             }
+            dc.SetValueType(col_spe.type);
+
             dc.SetFormat(col_spe.format);
             dc.SetLetter(col_spe.letter);
             dc.SetAggregation(col_spe.aggregation);
@@ -450,6 +559,75 @@ namespace imbSCI.Core.extensions.table
             //dc.ExtendedProperties.add(imbAttributeName.reporting_hide);
             return dc;
         }
+
+        public static textCursorZoneCorner GetAligmentByValueType(this DataColumn dc)
+        {
+            Type dataType = dc.DataType;
+
+            if ((dataType == typeof(Object)) || (dataType == typeof(String)))
+            {
+                dataType = dc.GetValueType();
+            }
+            //dc.GetValueType();
+
+
+            textCursorZoneCorner output = textCursorZoneCorner.none;
+
+            if (dataType.isNumber())
+            {
+                output = textCursorZoneCorner.Right;
+                //   ws.Cells[ex_row.Row, dc.Ordinal + 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
+            }
+            else if (dataType.IsEnum)
+            {
+                output = textCursorZoneCorner.Left;
+                //ws.Cells[ex_row.Row, dc.Ordinal + 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            }
+            else if (dataType.isBoolean())
+            {
+                output = textCursorZoneCorner.Right;
+                // ws.Cells[ex_row.Row, dc.Ordinal + 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            }
+            else
+            {
+                output = textCursorZoneCorner.Left;
+                // ws.Cells[ex_row.Row, dc.Ordinal + 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+            }
+
+            return output;
+        }
+
+        public static textCursorZoneCorner Aligment(this DataColumn dc, textCursorZoneCorner default_description)
+        {
+            if (!dc.ExtendedProperties.ContainsKey(templateFieldDataTable.col_alignment))
+            {
+                dc.ExtendedProperties.add(templateFieldDataTable.col_alignment, default_description);
+            }
+            return (textCursorZoneCorner)dc.ExtendedProperties[templateFieldDataTable.col_alignment];
+        }
+        public static textCursorZoneCorner GetAligment(this DataColumn dc)
+        {
+            textCursorZoneCorner output = textCursorZoneCorner.none;
+
+            if (dc.ExtendedProperties.ContainsKey(templateFieldDataTable.col_alignment))
+            {
+
+                output = (textCursorZoneCorner)dc.ExtendedProperties[templateFieldDataTable.col_alignment];
+            }
+
+            if (output == textCursorZoneCorner.none)
+            {
+                output = GetAligmentByValueType(dc);
+            }
+
+            return output;
+        }
+        public static DataColumn SetAligment(this DataColumn dc, textCursorZoneCorner description)
+        {
+            dc.ExtendedProperties.add(templateFieldDataTable.col_alignment, description);
+            return dc;
+        }
+
 
         /*
         public static DataColumn Importance(this DataColumn dc, dataPointImportance importance)
@@ -718,6 +896,22 @@ namespace imbSCI.Core.extensions.table
             dc.ExtendedProperties.add(templateFieldDataTable.col_hasTemplate, col_hasTemplate);
             return dc;
         }
+
+
+        public static Func<Object, String> GetHasFuncTemplate(this DataColumn dc)
+        {
+            return dc.ExtendedProperties[templateFieldDataTable.data_query] as Func<Object, String>;
+        }
+
+        public static DataColumn SetHasFuncTemplate(this DataColumn dc, Func<Object, String> funcTemplate)
+        {
+            if (funcTemplate != null) SetHasTemplate(dc, true);
+            dc.ExtendedProperties.add(templateFieldDataTable.data_query, funcTemplate);
+            return dc;
+        }
+
+
+
 
         /// <summary>
         /// Defines the letter/code associated with the table column

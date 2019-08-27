@@ -50,6 +50,8 @@ namespace imbSCI.Data.collection.nested
 
         private Object getByKeyLock = new Object();
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'List{T}' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'List{T}' that could not be resolved
         /// <summary>
         /// Gets the <see cref="List{T}"/> with the specified key.
         /// </summary>
@@ -59,6 +61,8 @@ namespace imbSCI.Data.collection.nested
         /// <param name="key">The key.</param>
         /// <returns></returns>
         public virtual T this[String key]
+#pragma warning restore CS1574 // XML comment has cref attribute 'List{T}' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'List{T}' that could not be resolved
         {
             get
             {

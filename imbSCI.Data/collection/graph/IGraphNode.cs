@@ -44,7 +44,7 @@ namespace imbSCI.Data.collection.graph
     /// <seealso cref="imbSCI.Data.interfaces.IObjectWithName" />
     /// <seealso cref="imbSCI.Data.interfaces.IObjectWithPathAndChildren" />
     /// <seealso cref="imbSCI.Data.interfaces.IObjectWithTreeView" />
-    public interface IGraphNode : IEnumerable, IObjectWithParent, IObjectWithPath, IObjectWithName, IObjectWithPathAndChildren, IObjectWithTreeView
+    public interface IGraphNode : IEnumerable, IObjectWithParent, IObjectWithPath, IObjectWithName, IObjectWithUID, IObjectWithPathAndChildren, IObjectWithTreeView
     {
         Boolean ContainsKey(String key);
 
@@ -65,12 +65,14 @@ namespace imbSCI.Data.collection.graph
         /// <returns>True if a child removed, false if no child matched by the key</returns>
         Boolean RemoveByKey(String key);
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'name' that could not be resolved
         /// <summary>
         /// Removes all children with matching <see cref="graphNode.name"/>
         /// </summary>
         /// <param name="keys">The keys to match children with</param>
         /// <returns>Number of child nodes matched and removed</returns>
         Int32 Remove(IEnumerable<String> keys);
+#pragma warning restore CS1574 // XML comment has cref attribute 'name' that could not be resolved
 
         /// <summary>
         /// Adds the specified <c>newChild</c>, if its name is not already occupied

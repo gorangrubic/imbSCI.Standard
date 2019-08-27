@@ -67,6 +67,90 @@ namespace imbSCI.Data
             return output;
         }
 
+        public static List<T> EnumToType<T>(this IEnumerable<Enum> enums)
+        {
+            List<T> output = new List<T>();
+            foreach (Enum e in enums)
+            {
+                T value = (T)Enum.ToObject(typeof(T), Convert.ToInt32(e));
+            }
+            return output;
+        }
+
+        public static List<Enum> TypeToEnum<T>(this IEnumerable<T> enums)
+        {
+            List<Enum> output = new List<Enum>();
+            var dict = getEnumDictionary<T>();
+            foreach (T e in enums)
+            {
+                output.Add(dict[e.ToString()]);
+            }
+            return output;
+        }
+
+        // public static Dictionary<T, Enum> getEnumDictionary<T>()
+        //{
+        //    Dictionary<T, Enum> output = new Dictionary<String, Enum>();
+
+        //    foreach (Enum en in Enum.GetValues(typeof(T)))
+        //    {
+        //        output.Add(en.ToString(),en);
+        //    }
+
+        //    return output;
+
+        //}
+
+        public static Dictionary<String, Enum> getEnumDictionary<T>()
+        {
+            Dictionary<String, Enum> output = new Dictionary<String, Enum>();
+
+            foreach (Enum en in Enum.GetValues(typeof(T)))
+            {
+                output.Add(en.ToString(),en);
+            }
+
+            return output;
+
+        }
+
+
+        public static List<T> getEnumList<T>()
+        {
+            List<T> output = new List<T>();
+
+            foreach (T en in Enum.GetValues(typeof(T)))
+            {
+                output.Add(en);
+            }
+
+            return output;
+
+        }
+        
+        
+        /// <summary>
+        /// Gets base flag enumeration values 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="flags">The flags.</param>
+        /// <returns></returns>
+        public static List<T> getBaseFlags<T>()
+        {
+            List<T> output = new List<T>();
+            List<T> allEnums = getEnumList<T>();
+
+            foreach (Enum en in Enum.GetValues(typeof(T)))
+            {
+                List<T> contains = getEnumListFromFlags<T>((Enum)en);
+                if (contains.Count == 1)
+                {
+                    output.AddRange(contains);
+                }
+            }
+            return output;
+        }
+
         /// <summary>
         /// Gets the enum values list from the same enum flags property
         /// </summary>

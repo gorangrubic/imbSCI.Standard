@@ -47,6 +47,7 @@ namespace imbSCI.Core.math.classificationMetrics
     /// <summary>
     /// Custom data entry, embedded in the report
     /// </summary>
+    [Serializable]
     public class reportExpandedDataPair
     {
         public reportExpandedDataPair() { }
@@ -60,6 +61,15 @@ namespace imbSCI.Core.math.classificationMetrics
         public String key { get; set; } = "";
         public String value { get; set; } = "";
         public String description { get; set; } = "";
+
+        public Boolean IsObjectValue { get
+            {
+                if (value.isNullOrEmpty()) return false;
+
+                if (value.StartsWith("<?xml")) return true;
+                return false;
+            }
+        }
 
         public void Merge(reportExpandedDataPair source)
         {

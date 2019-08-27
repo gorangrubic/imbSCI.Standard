@@ -42,6 +42,21 @@ namespace imbSCI.Core.reporting.template
     /// </summary>
     public class stringTemplatePlaceholder : stringTemplateBase, IObjectWithName
     {
+
+        public String GetTemplateForm(Boolean useDoubleForm)
+        {
+            if (useDoubleForm)
+            {
+                return stringTemplateTools.PLACEHOLDER_2ND_Start + name + stringTemplateTools.PLACEHOLDER_2ND_End;
+            }
+            else
+            {
+                return stringTemplateTools.PLACEHOLDER_Start + name + stringTemplateTools.PLACEHOLDER_End;
+            }
+
+        }
+
+
         #region --- key ------- string kljuc plejsholdera
 
         private String _key = "a";

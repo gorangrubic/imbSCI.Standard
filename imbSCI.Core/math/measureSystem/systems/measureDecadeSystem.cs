@@ -106,10 +106,12 @@ namespace imbSCI.Core.math.measureSystem.systems
 
         private Int32 _targetStringLength = 5;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'unitLevelQuality()' that could not be resolved
         /// <summary>
         /// Defines desired maximum string length used for <see cref="measure{TValue}.unitLevelQuality()"/> evaluation
         /// </summary>
         public Int32 targetStringLength
+#pragma warning restore CS1574 // XML comment has cref attribute 'unitLevelQuality()' that could not be resolved
         {
             get { return _targetStringLength; }
             set { _targetStringLength = value; }

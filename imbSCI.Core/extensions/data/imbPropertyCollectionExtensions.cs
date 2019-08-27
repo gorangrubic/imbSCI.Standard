@@ -49,6 +49,7 @@ namespace imbSCI.Core.extensions.data
     /// \ingroup_disabled ace_ext_datastructs
     public static class imbPropertyCollectionExtensions
     {
+#pragma warning disable CS1574 // XML comment has cref attribute 'Name' that could not be resolved
         /// <summary>
         /// From IEnumerable{Enum} makes <see cref="PropertyCollection" /> where Key is <see cref="Type.Name" /> and Value is the <see cref="Enum" /> or <see cref="Enum.ToString(string)" /> if <c>format</c> is specified
         /// </summary>
@@ -56,6 +57,7 @@ namespace imbSCI.Core.extensions.data
         /// <param name="format">The format for .ToString() conversion of the <see cref="Enum"/> value. If it is not null but <c>empty</c> string: the value will be <see cref="Enum.ToString()"/>.</param>
         /// <returns></returns>
         public static PropertyCollection toPropertyCollection(this IEnumerable<Enum> source, String format = null)
+#pragma warning restore CS1574 // XML comment has cref attribute 'Name' that could not be resolved
         {
             PropertyCollection output = new PropertyCollection();
 
@@ -95,6 +97,7 @@ namespace imbSCI.Core.extensions.data
             return output;
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'AppendData(PropertyCollection, PropertyCollection, existingDataMode)' that could not be resolved
         /// <summary>
         /// Copies all members of one collection to another. Use <c>AppendData</c> for smarter operations.
         /// </summary>
@@ -102,6 +105,7 @@ namespace imbSCI.Core.extensions.data
         /// <param name="target">Collection to copy into</param>
         /// <param name="source">Collection to copy from</param>
         public static void copyInto(this PropertyCollection target, PropertyCollection source)
+#pragma warning restore CS1574 // XML comment has cref attribute 'AppendData(PropertyCollection, PropertyCollection, existingDataMode)' that could not be resolved
         {
             foreach (Object k in source.Keys)
             {
@@ -662,6 +666,7 @@ namespace imbSCI.Core.extensions.data
 
         // -------------------------- ADD and APPEND
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'existingDataMode' that could not be resolved
         /// <summary>
         /// Appends the specified key and value accordint the specified <see cref="aceCommonTypes.enums.existingDataMode"/>. Returns TRUE if <c>newValueCandidate</c> was written as result of the <c>policy</c> specified.
         /// </summary>
@@ -671,6 +676,7 @@ namespace imbSCI.Core.extensions.data
         /// <param name="policy">The policy on handling existing entry for the <c>key</c> specified</param>
         /// <returns>FALSE if <c>newValueCandidate</c> was not written into <c>data</c> collection</returns>
         public static Boolean Append(this PropertyCollection data, Object key, Object newValueCandidate, existingDataMode policy)
+#pragma warning restore CS1574 // XML comment has cref attribute 'existingDataMode' that could not be resolved
         {
             if (newValueCandidate == null) return false;
             switch (policy)
@@ -1057,9 +1063,15 @@ namespace imbSCI.Core.extensions.data
 
             var spo = new settingsEntriesForObject(source);
 
+            foreach (var s in spo.spes)
+            {
+                //  output.Add(s.Value.pe);
+                output.Add(s.Key, s.Value.displayName, s.Value.name, s.Value.description, s.Value.unit, s.Value.letter);
+            }
+
             // DataTable dt = source.buildDataTable("Properties", false, true, doInherited, null);
 
-            return spo.pce;
+            return output;
         }
 
         /// <summary>

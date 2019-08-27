@@ -36,6 +36,7 @@ namespace imbSCI.Core.math.measureSystem
     using imbSCI.Data.primitives;
     using System;
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'measure{TValue}.String}'
     /// <summary>
     ///
     /// </summary>
@@ -43,6 +44,7 @@ namespace imbSCI.Core.math.measureSystem
     /// <seealso cref="System.ICloneable" />
     /// <seealso cref="IMeasure" />
     public class measureString : measure<string>, ICloneable, IMeasure
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'measure{TValue}.String}'
     {
         private coordinateXY _formatZone = new coordinateXY();
 

@@ -31,11 +31,17 @@ namespace imbSCI.Core.reporting.style.shot
 {
     using System.Collections.Generic;
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.Dictionary{System.String, aceCommonTypes.reporting.style.styleContainerShot}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// Collection of styleContainerShots
     /// </summary>
     /// <seealso cref="System.Collections.Generic.Dictionary{System.String, aceCommonTypes.reporting.style.styleContainerShot}" />
     public class styleContainerShotCollection : Dictionary<string, styleContainerShot>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.Dictionary{System.String, aceCommonTypes.reporting.style.styleContainerShot}'
     {
     }
 }

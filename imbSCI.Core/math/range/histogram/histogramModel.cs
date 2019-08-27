@@ -36,11 +36,15 @@ using System.Data;
 
 namespace imbSCI.Core.math.range.histogram
 {
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IEnumerable{imbSCI.Core.math.range.histogram.histogramModelBin}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// Splits sampled data into <see cref="bins"/> bins, with equal value span.
     /// </summary>
     /// <seealso cref="System.Collections.Generic.IEnumerable{imbSCI.Core.math.range.histogram.histogramModelBin}" />
     public class histogramModel : IEnumerable<histogramModelBin> // where T:class
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IEnumerable{imbSCI.Core.math.range.histogram.histogramModelBin}'
     {
         //  public Func<Object, double> valueSelector { get; set; }
 

@@ -34,21 +34,33 @@ namespace imbSCI.Core.reporting.format
     /// </summary>
     public enum reportAPI
     {
+#pragma warning disable CS1574 // XML comment has cref attribute 'builderForFlowDocument' that could not be resolved
         /// <summary>
         /// The imb reporting - API for <see cref="imbSCI.Core.Builders.render.builders.builderForFlowDocument"/>
         /// </summary>
         imbReporting,
+#pragma warning restore CS1574 // XML comment has cref attribute 'builderForFlowDocument' that could not be resolved
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'builderForHtml' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'builderForMarkdown' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'builderForText' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'builderForLog' that could not be resolved
         /// <summary>
         /// The text builder - API for <see cref="builderForText"/>, <see cref="imbACE.Core.core.builderForLog"/>,
         /// <see cref="builderForMarkdown"/>, <see cref="builderForHtml"/>
         /// </summary>
         textBuilder,
+#pragma warning restore CS1574 // XML comment has cref attribute 'builderForLog' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'builderForText' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'builderForMarkdown' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'builderForHtml' that could not be resolved
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'builderForTableDocument' that could not be resolved
         /// <summary>
         /// <see cref="imbSCI.Core.Builders.render.builders.builderForTableDocument"/>
         /// </summary>
         EEPlus,
+#pragma warning restore CS1574 // XML comment has cref attribute 'builderForTableDocument' that could not be resolved
 
         imbXmlHtml,
         imbMarkdown,

@@ -294,13 +294,16 @@ namespace imbSCI.DataComplex.data.modelRecords
             }
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'recordStart' that could not be resolved
         /// <summary>
         /// The moment of <see cref="recordStart"/> call.
         /// </summary>
         public DateTime timeStart { get; protected set; }
+#pragma warning restore CS1574 // XML comment has cref attribute 'recordStart' that could not be resolved
 
         private DateTime _timeFinish;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'recordFinish' that could not be resolved
         /// <summary>
         /// The moment of <see cref="recordFinish"/> call.
         /// </summary>
@@ -308,6 +311,7 @@ namespace imbSCI.DataComplex.data.modelRecords
         /// The time finish.
         /// </value>
         public DateTime timeFinish
+#pragma warning restore CS1574 // XML comment has cref attribute 'recordFinish' that could not be resolved
         {
             get
             {
@@ -504,10 +508,12 @@ namespace imbSCI.DataComplex.data.modelRecords
 
         protected abstract void _recordStartHandle();
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'dataCollectionExtendedList' that could not be resolved
         /// <summary>
         /// Override this method with instructions to update <see cref="dataCollectionExtendedList"/>
         /// </summary>
         public abstract void datasetBuildOnFinish();
+#pragma warning restore CS1574 // XML comment has cref attribute 'dataCollectionExtendedList' that could not be resolved
 
         /// <summary>
         /// Default dataset build - intended for mid-level class overload
@@ -570,12 +576,16 @@ namespace imbSCI.DataComplex.data.modelRecords
 
         private object FinishLock = new object();
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'aceObligationException' that could not be resolved
         /// <summary>
         /// Builds data sets --- calls <see cref="datasetBuildOnFinishDefault"/> and after that <see cref="datasetBuildOnFinish"/>
         /// </summary>
         /// <exception cref="aceCommonTypes.core.exceptions.dataException">DataSet is empty for record [" + instanceID + "] in test run [" + testRunStamp + "] - null - DataSet not populated</exception>
         /// <exception cref="aceCommonTypes.core.exceptions.aceObligationException"></exception>
         protected void _doOnRealFinish(bool callBuilds = false)
+#pragma warning restore CS1574 // XML comment has cref attribute 'aceObligationException' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
         {
             lock (FinishLock)
             {

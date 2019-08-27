@@ -64,10 +64,12 @@ namespace Svg
             get { return this._requiresSmoothRendering; }
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'SvgGraphicsElement' that could not be resolved
         /// <summary>
         /// Initializes a new instance of the <see cref="SvgGraphicsElement"/> class.
         /// </summary>
         public SvgVisualElement()
+#pragma warning restore CS1574 // XML comment has cref attribute 'SvgGraphicsElement' that could not be resolved
         {
             this._dirty = true;
             this._requiresSmoothRendering = false;

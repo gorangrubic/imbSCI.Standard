@@ -51,6 +51,9 @@ namespace imbSCI.Core.reporting.render.core
             set { _meta = value; }
         }
 
+
+
+
         private Int32 _count = 0;
 
         /// <summary>
@@ -117,7 +120,8 @@ namespace imbSCI.Core.reporting.render.core
         public tagBlock parent
         {
             get { return _parent; }
-            protected set {
+            protected set
+            {
                 if (value == this)
                 {
                     _parent = null;

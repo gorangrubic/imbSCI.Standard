@@ -32,11 +32,13 @@ namespace imbSCI.DataComplex.diagram.core
 {
     using imbSCI.DataComplex.diagram.enums;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'diagramElementBase' that could not be resolved
     /// <summary>
     /// Node that is part of the <see cref="diagramModel"/>
     /// </summary>
     /// <seealso cref="imbReportingCore.diagram.diagramElementBase" />
     public class diagramNode : diagramElementBase
+#pragma warning restore CS1574 // XML comment has cref attribute 'diagramElementBase' that could not be resolved
     {
         /// <summary>
         ///

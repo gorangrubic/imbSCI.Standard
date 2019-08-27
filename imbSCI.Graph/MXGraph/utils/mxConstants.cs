@@ -458,17 +458,25 @@ namespace imbSCI.Graph.MXGraph.utils
         /// </summary>
         public static string STYLE_IMAGE_FLIPV = "imageFlipV";
 
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag 'summary' does not match the start tag 'mxStencilShape'.'
         /// <summary>
         /// Defines the key for the horizontal stencil flip. This style is only used
         /// for <mxStencilShape>. Possible values are 0 and 1. Default is 0.
         /// </summary>
         public static String STYLE_STENCIL_FLIPH = "stencilFlipH";
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag 'summary' does not match the start tag 'mxStencilShape'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
 
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag 'summary' does not match the start tag 'mxStencilShape'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
         /// <summary>
         /// Defines the key for the vertical stencil flip. This style is only used
         /// for <mxStencilShape>. Possible values are 0 and 1. Default is 0.
         /// </summary>
         public static String STYLE_STENCIL_FLIPV = "stencilFlipV";
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag 'summary' does not match the start tag 'mxStencilShape'.'
 
         /// <summary>
         /// Defines the key for the noLabel style. If this is true then no

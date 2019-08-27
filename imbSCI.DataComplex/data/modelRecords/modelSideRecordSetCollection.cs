@@ -34,6 +34,10 @@ namespace imbSCI.DataComplex.data.modelRecords
     using System.Collections.Generic;
     using System.Linq;
 
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TSideInstance, System.Collections.Generic.List{TSideRecord}}}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// Collection used to store side records tracked by <see cref="modelRecordSummaryBase{TInstance, TSideInstance, TSideRecord}"/>
     /// </summary>
@@ -42,6 +46,10 @@ namespace imbSCI.DataComplex.data.modelRecords
     /// <seealso cref="aceCommonTypes.primitives.imbBindable" />
     /// <seealso cref="System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TSideInstance, System.Collections.Generic.List{TSideRecord}}}" />
     public class modelSideRecordSetCollection<TSideInstance, TSideRecord> : imbBindable, IEnumerable<KeyValuePair<TSideInstance, List<TSideRecord>>>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TSideInstance, System.Collections.Generic.List{TSideRecord}}}'
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     where TSideRecord : modelRecordBase, IModelRecord
     {
         private List<TSideInstance> _sideInstances = new List<TSideInstance>();

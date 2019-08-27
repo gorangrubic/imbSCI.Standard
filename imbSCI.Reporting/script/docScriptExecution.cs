@@ -60,12 +60,15 @@ namespace imbSCI.Reporting.script
     using System.Linq;
     using d = docScriptArguments;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// Complete context of docScript execution
     /// </summary>
     /// <seealso cref="imbSCI.Cores.primitives.imbBindable" />
     public abstract class docScriptExecution : docScriptExecutionBase
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     {
+#pragma warning disable CS1574 // XML comment has cref attribute 'execute(string, imbSCI.Core.reporting.format.reportOutputFormatName, PropertyCollection, string)' that could not be resolved
         /// <summary>
         /// Execution context with all resorces required internally.
         /// </summary>
@@ -78,6 +81,7 @@ namespace imbSCI.Reporting.script
         /// <param name="__script">The script - script with templated content</param>
         /// <param name="__data">The data - initial data</param>
         public docScriptExecution(string name, styleTheme __style, PropertyCollection __data, params ITextRender[] __renders) : base(name.add("_compile_log"), true)
+#pragma warning restore CS1574 // XML comment has cref attribute 'execute(string, imbSCI.Core.reporting.format.reportOutputFormatName, PropertyCollection, string)' that could not be resolved
         {
             List<ITextRender> renders = __renders.getFlatList<ITextRender>();
             setup(__style, __data, __renders);
@@ -568,6 +572,7 @@ namespace imbSCI.Reporting.script
             return appendType.none;
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'PropertyCollectionDictionary' that could not be resolved
         /// <summary>
         /// Resolves target into <see cref="imbSCI.Core.reporting.zone.selectRangeArea"/> where <c>target</c> can be: <see cref="styleShotTargetEnum"/>, <see cref="imbSCI.Core.reporting.zone.selectRangeArea"/> or string path for <see cref="imbSCI.Data.collection.PropertyCollectionDictionary"/>
         /// </summary>
@@ -578,6 +583,7 @@ namespace imbSCI.Reporting.script
         /// <seealso cref="imbSCI.Core.reporting.style.shot.IStyleInstruction"/>
         /// <seealso cref="imbSCI.Core.reporting.style.areaStyleInstruction"/>
         protected selectRangeArea resolveAreaForStyleShot(object target)
+#pragma warning restore CS1574 // XML comment has cref attribute 'PropertyCollectionDictionary' that could not be resolved
         {
             selectRangeArea output = null;
             if (target is styleShotTargetEnum)
@@ -633,6 +639,7 @@ namespace imbSCI.Reporting.script
             return output;
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'PropertyCollectionDictionary' that could not be resolved
         /// <summary>
         /// Resolve <see cref="styleShotTargetEnum"/> into string path for <c>metaContentRanges</c>
         /// </summary>
@@ -644,6 +651,7 @@ namespace imbSCI.Reporting.script
         /// <seealso cref="imbSCI.Data.collection.PropertyCollectionDictionary" />
         /// <seealso cref="imbSCI.Core.reporting.style.areaStyleInstructionStack" />
         protected string resolvePathForStyleShotArea(styleShotTargetEnum target)
+#pragma warning restore CS1574 // XML comment has cref attribute 'PropertyCollectionDictionary' that could not be resolved
         {
             if (target == styleShotTargetEnum.unknown) target = styleShotTargetEnum.thisAppend;
 

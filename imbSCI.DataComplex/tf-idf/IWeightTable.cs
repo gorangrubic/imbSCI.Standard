@@ -314,6 +314,7 @@ namespace imbSCI.DataComplex
         /// <returns></returns>
         List<IWeightTableTerm> GetCrossSection(IWeightTable secondTable, bool thisAgainstSecond = false);
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
         /// <summary>
         /// Loads term definitions from the specified DataTable, interpreting <c>termName_column</c> and <c>termAFreq_column</c>. Leave * to use export default column names.
         /// </summary>
@@ -326,6 +327,7 @@ namespace imbSCI.DataComplex
         /// or
         /// Column for TermAFreq not found! - null - AddExternalDataTable() failed - TermAFreq column not found in the input table</exception>
         int AddExternalDataTable(DataTable table, string termName_column = "*", string termAFreq_column = "*");
+#pragma warning restore CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
 
         /// <summary>
         /// Copies matching terms from external document&gt; adds new if have to, rise the abs frequency if exists

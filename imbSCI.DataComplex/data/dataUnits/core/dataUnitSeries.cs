@@ -139,6 +139,8 @@ namespace imbSCI.DataComplex.data.dataUnits.core
             return buildCustomDataTable(items, presenter, isPreview);
         }
 
+#pragma warning disable CS1723 // XML comment has cref attribute 'T' that refers to a type parameter
+#pragma warning disable CS1723 // XML comment has cref attribute 'T' that refers to a type parameter
         /// <summary>
         /// Gets the <see cref="T"/> with the specified iteration.
         /// </summary>
@@ -149,6 +151,8 @@ namespace imbSCI.DataComplex.data.dataUnits.core
         /// <returns></returns>
         /// <exception cref="System.ArgumentOutOfRangeException">iteration - Larger then timeseries</exception>
         public T this[int iteration]
+#pragma warning restore CS1723 // XML comment has cref attribute 'T' that refers to a type parameter
+#pragma warning restore CS1723 // XML comment has cref attribute 'T' that refers to a type parameter
         {
             get
             {

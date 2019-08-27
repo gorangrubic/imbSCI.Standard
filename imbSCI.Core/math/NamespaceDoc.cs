@@ -30,6 +30,7 @@
 namespace imbSCI.Core.math
 {
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'classificationReport' that could not be resolved
     /// <summary>
     /// Math, statistics and specialized helpers: <see cref="counter"/>, <see cref="md5"/>, <see cref="classificationReport"/>...
     /// </summary>
@@ -37,6 +38,7 @@ namespace imbSCI.Core.math
     /// Also covers: aggregation, classificaton performance metrics (confusion matrix), functions (signal generators), matrix procedural pattern generation, value range tools...
     /// </remarks>
     [System.Runtime.CompilerServices.CompilerGenerated]
+#pragma warning restore CS1574 // XML comment has cref attribute 'classificationReport' that could not be resolved
     class NamespaceDoc
     {
     }

@@ -87,6 +87,26 @@ namespace imbSCI.Data.collection.graph
 
         protected SortedList<String, graphWrapNode<TItem>> mychildren { get; set; } = new SortedList<string, graphWrapNode<TItem>>();
 
+        public List<T> GetChildren<T>() where T: graphWrapNode<TItem>
+        {
+            List<T> output = new List<T>();
+            foreach (var pair in mychildren)
+            {
+                output.Add(pair.Value as T);
+            }
+            return output;
+        }
+
+        public List<graphWrapNode<TItem>> GetChildren()
+        {
+            List<graphWrapNode<TItem>> output = new List<graphWrapNode<TItem>>();
+            foreach (var pair in mychildren)
+            {
+                output.Add(pair.Value);
+            }
+            return output;
+        }
+
         //private ConcurrentDictionary<String, graphWrapNode<TItem>> _children = new ConcurrentDictionary<String, graphWrapNode<TItem>>();
         ///// <summary>
         ///// Gets or sets the children.
@@ -220,6 +240,32 @@ namespace imbSCI.Data.collection.graph
         {
             return gr.item;
         }
+
+
+        /// <summary>
+        /// Adds the specified item and its children, after evaluated by the filter function 
+        /// </summary>
+        /// <param name="__item">The item.</param>
+        /// <param name="__selectChildren">The select children.</param>
+        /// <param name="__childrenFilter">The children filter.</param>
+        /// <returns></returns>
+        public virtual graphWrapNode<TItem> AddWithChildren(TItem __item, Func<TItem, IEnumerable<TItem>> __selectChildren, Func<TItem, Boolean> __childrenFilter)
+        {
+
+            var output = Add(__item);
+
+            IEnumerable<TItem> __children = __selectChildren(__item);
+            foreach (TItem __child in __children)
+            {
+                if (__childrenFilter(__child))
+                {
+                    output.AddWithChildren(__child, __selectChildren, __childrenFilter);
+                }
+            }
+
+            return output;
+        }
+
 
         /// <summary>
         /// Adds the specified item into graph structure

@@ -36,6 +36,7 @@ namespace imbSCI.Core.reporting.colors
     using System.Drawing;
     using System.Drawing.Drawing2D;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// ShotSet is one particular styling situation delivered by <c>acePaletteProvider</c> containing color, brush and gradient for each ShotResEnum member
     /// </summary>
@@ -44,6 +45,7 @@ namespace imbSCI.Core.reporting.colors
     /// </remarks>
     /// <seealso cref="aceCommonTypes.primitives.imbBindable" />
     public class acePaletteShot : IStyleInstruction
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     {
         /// <summary>
         /// Gets code name of the object. CodeName should be unique per each unique set of values of properties. In other words: if two instances of the same class have different CodeName that means values of their key properties are not same.

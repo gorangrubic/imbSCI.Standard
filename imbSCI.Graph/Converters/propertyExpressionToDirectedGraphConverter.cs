@@ -30,6 +30,7 @@
 //using System.Web.UI.WebControls;
 //using Accord;
 using imbSCI.Core.data;
+using imbSCI.Core.data.transfer;
 using imbSCI.Core.extensions.text;
 using imbSCI.Core.extensions.typeworks;
 using imbSCI.Core.math;

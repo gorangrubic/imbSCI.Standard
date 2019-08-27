@@ -28,6 +28,7 @@
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
 using imbSCI.Core.extensions.text;
+using imbSCI.Core.math.classificationMetrics;
 using System;
 using System.Xml.Serialization;
 
@@ -36,7 +37,7 @@ namespace imbSCI.Graph.DGML.core
     /// <summary>
     ///
     /// </summary>
-    public class Property
+    public class Property:IElementWithProporties
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Property"/> class.
@@ -76,6 +77,10 @@ namespace imbSCI.Graph.DGML.core
         public String DataType { get; set; } = "";
 
         public Boolean IsReference { get; set; } = false;
+
+
+        [XmlIgnore]
+        public reportExpandedData Properties { get; protected set; } = new reportExpandedData();
 
         [XmlIgnore]
         public Object Value { get; set; }

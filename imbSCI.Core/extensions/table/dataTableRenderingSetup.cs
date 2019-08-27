@@ -53,6 +53,17 @@ namespace imbSCI.Core.extensions.table
     /// </summary>
     public static class dataTableRenderingSetup
     {
+
+        //public static DataColumn GetDataColumn(this DataTable table, String needle)
+        //{
+        //    foreach (DataColumn dc in table.Columns)
+        //    {
+        //      //  dc.Caption
+        //    }
+
+        //}
+
+
         /// <summary>
         /// Sets the column width according to markdown rendering
         /// </summary>
@@ -216,7 +227,8 @@ namespace imbSCI.Core.extensions.table
         {
             if (!dc.ExtendedProperties.ContainsKey(templateFieldDataTable.shema_sourceinstance))
             {
-                dc.ExtendedProperties.add(templateFieldDataTable.shema_sourceinstance, default_shema_sourceinstance);
+                dc.SetClassType(default_shema_sourceinstance);
+                //dc.ExtendedProperties.add(templateFieldDataTable.shema_sourceinstance, default_shema_sourceinstance);
             }
             return dc.ExtendedProperties[templateFieldDataTable.shema_sourceinstance] as Type;
         }
@@ -232,7 +244,9 @@ namespace imbSCI.Core.extensions.table
 
         public static DataTable SetClassType(this DataTable dc, Type shema_sourceinstance)
         {
+            if (shema_sourceinstance == null) return dc;
             dc.ExtendedProperties.add(templateFieldDataTable.shema_sourceinstance, shema_sourceinstance);
+            dc.SetClassName(shema_sourceinstance.Name);
             return dc;
         }
 
@@ -802,6 +816,30 @@ namespace imbSCI.Core.extensions.table
         public static acePaletteRole GetColor(this DataTable table)
         {
             return table.ExtendedProperties.getProperEnum<acePaletteRole>(acePaletteRole.colorDefault, templateFieldStyling.color_paletteRole);
+        }
+
+        public static settingsMemberInfoEntry GetSME(this DataTable table)
+        {
+            settingsMemberInfoEntry sme = new settingsMemberInfoEntry();
+            sme.name = table.GetClassName();
+            sme.memberInfo = table.GetClassType();
+            sme.additionalInfo = table.GetExtraDesc();
+            sme.description = table.GetDescription();
+
+            
+            return sme;
+//            sme.categoryName = table.GetC
+        }
+
+        public static DataTable SetSME(this DataTable table, settingsMemberInfoEntry sme)
+        {
+            table.SetClassType(sme.memberInfo as Type);
+            table.SetClassName(sme.name);
+            table.SetDescription(sme.description);
+            
+            table.SetExtraDesc(sme.additionalInfo);
+            return table;
+            
         }
     }
 }

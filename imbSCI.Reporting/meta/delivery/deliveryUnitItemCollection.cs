@@ -38,12 +38,16 @@ namespace imbSCI.Reporting.meta.delivery
     using System.Collections.Generic;
     using System.IO;
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IEnumerable{imbSCI.Reporting.meta.delivery.deliveryUnitItem}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// Collection of <see cref="deliveryUnitItem"/>s associated to <see cref="deliveryUnit"/> definition
     /// </summary>
     /// <seealso cref="System.Collections.Generic.IEnumerable{imbSCI.Reporting.meta.delivery.deliveryUnitItem}" />
     /// <seealso cref="IDeliveryUnitItem"/>
     public class deliveryUnitItemCollection : IEnumerable<IDeliveryUnitItem>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IEnumerable{imbSCI.Reporting.meta.delivery.deliveryUnitItem}'
     {
         /// <summary>
         /// Determines whether the collection contains item with the same sourcefile path.

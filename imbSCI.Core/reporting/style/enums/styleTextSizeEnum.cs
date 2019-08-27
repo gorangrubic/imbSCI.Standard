@@ -29,12 +29,14 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Core.reporting.style.enums
 {
+#pragma warning disable CS1574 // XML comment has cref attribute 'styleTextSizeSet' that could not be resolved
     /// <summary>
     /// Enumeration to index position of <c>headingSizes</c> list at <c>styleTextSizeSet</c>
     /// </summary>
     /// <see cref="styleTextSizeSet"/>
     /// \ingroup_disabled report_ll_style
     public enum styleTextSizeEnum
+#pragma warning restore CS1574 // XML comment has cref attribute 'styleTextSizeSet' that could not be resolved
     {
         h1 = 0,
         h2 = 1,

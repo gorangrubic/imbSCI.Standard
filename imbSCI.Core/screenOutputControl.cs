@@ -47,6 +47,7 @@ namespace imbSCI.Core
             {
                 if (_logControl == null)
                 {
+
                     _logControl = new aceLogToConsoleControl();
                 }
                 return _logControl;

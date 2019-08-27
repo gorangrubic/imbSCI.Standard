@@ -81,6 +81,7 @@ namespace Svg
             }
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'Children' that could not be resolved
         /// <summary>
         /// Called by the underlying <see cref="SvgElement"/> when an element has been added to the
         /// <see cref="Children"/> collection.
@@ -88,17 +89,20 @@ namespace Svg
         /// <param name="child">The <see cref="SvgElement"/> that has been added.</param>
         /// <param name="index">An <see cref="int"/> representing the index where the element was added to the collection.</param>
         protected override void AddElement(SvgElement child, int index)
+#pragma warning restore CS1574 // XML comment has cref attribute 'Children' that could not be resolved
         {
             base.AddElement(child, index);
             this._pathDirty = true;
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'Children' that could not be resolved
         /// <summary>
         /// Called by the underlying <see cref="SvgElement"/> when an element has been removed from the
         /// <see cref="Children"/> collection.
         /// </summary>
         /// <param name="child">The <see cref="SvgElement"/> that has been removed.</param>
         protected override void RemoveElement(SvgElement child)
+#pragma warning restore CS1574 // XML comment has cref attribute 'Children' that could not be resolved
         {
             base.RemoveElement(child);
             this._pathDirty = true;

@@ -81,12 +81,14 @@ namespace imbSCI.Core.reporting.style.core
 
 #endif
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// Font descriptor with some extra data
     /// </summary>
     /// <seealso cref="aceCommonTypes.primitives.imbBindable" />
     /// \ingroup_disabled report_ll_style
     public class styleTextFont : imbBindable
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     {
         /// <summary>
         /// Single-font constructor

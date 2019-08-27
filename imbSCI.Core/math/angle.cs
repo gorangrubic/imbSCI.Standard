@@ -269,10 +269,18 @@ namespace imbSCI.Core.math
             degrees360 = FixAngle(degrees, Type.Degrees);
         }
 
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'The character(s) '3' cannot be used at this location.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'An identifier was expected.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'An identifier was expected.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'The character(s) '2' cannot be used at this location.'
         /// <summary>
         /// Copies Radians2pi to Radians, and Degrees360 to Degrees. (I.e. fixes radians to 0<2pi and degrees to 0<360)
         /// </summary>
         public void FixAngles()
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'The character(s) '2' cannot be used at this location.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'An identifier was expected.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'An identifier was expected.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'The character(s) '3' cannot be used at this location.'
         {
             updateFixedangles();
             Radians = Radians2pi; //this also calls Degrees

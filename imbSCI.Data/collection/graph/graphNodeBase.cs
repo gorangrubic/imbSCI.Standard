@@ -41,7 +41,7 @@ namespace imbSCI.Data.collection.graph
     /// <seealso cref="System.Collections.Generic.IEnumerable{imbSCI.Data.collection.graph.IGraphNode}" />
     /// <seealso cref="imbSCI.Data.interfaces.IObjectWithParent" />
     [Serializable]
-    public abstract class graphNodeBase : IObjectWithParent, IEnumerable<IGraphNode>
+    public abstract class graphNodeBase : IObjectWithParent, IEnumerable<IGraphNode>, IObjectWithUID
     {
         public const String defaultPathSeparator = "\\";
 
@@ -49,7 +49,7 @@ namespace imbSCI.Data.collection.graph
         private IGraphNode _parent;
 
         private String _name;
-        private String _pathSeparator = "";
+        protected String _pathSeparator = "";
 
         /// <summary>
         /// Adds the specified child.
@@ -152,20 +152,55 @@ namespace imbSCI.Data.collection.graph
         {
             get
             {
-                if (_pathSeparator != "") return _pathSeparator;
-
-                if (parent != null)
+                var head = this;
+                if (head.parent != null)
                 {
-                    //graphNode graphParent = (graphNode)parent;
-                    _pathSeparator = parent.pathSeparator;
-                    return _pathSeparator;
-                }
+                    head = root as graphNodeBase;
+                } 
+
+                if (head._pathSeparator != "") return head._pathSeparator;
 
                 return defaultPathSeparator;
+                
+                //if (parent != null)
+                //{
+                //    //graphNode graphParent = (graphNode)parent;
+                //    _pathSeparator = parent.pathSeparator;
+                //    return _pathSeparator;
+                //}
+
+
             }
             set
             {
-                _pathSeparator = value;
+                var head = this;
+                if (head.parent != null)
+                {
+                    head = root as graphNodeBase;
+                } 
+
+                head._pathSeparator = value;
+            }
+        }
+
+        public virtual String _PathRootPrefix { get; set; } = "";
+        
+        public String PathRootPrefix
+        {
+            get
+            {
+                if (this != root)
+                {
+                    if (root!=null)
+                    {
+                        if (root is graphNodeBase rootBase)
+                        {
+                            return rootBase._PathRootPrefix;
+                        }
+                    }
+                }
+                
+                return _PathRootPrefix;
             }
         }
 
@@ -178,7 +213,8 @@ namespace imbSCI.Data.collection.graph
             {
                 String output = name;
                 if (parent != null) return parent.path + pathSeparator + name;
-                return output;
+
+                return PathRootPrefix + output;
             }
         }
 
@@ -188,7 +224,7 @@ namespace imbSCI.Data.collection.graph
         /// <value>
         /// The root.
         /// </value>
-        public object root
+        public virtual object root
         {
             get
             {
@@ -207,6 +243,8 @@ namespace imbSCI.Data.collection.graph
                 return parent;
             }
         }
+
+        string IObjectWithUID.UID => path;
 
         /// <summary>
         /// Gets the child names.

@@ -34,7 +34,7 @@ using System.Linq;
 
 namespace imbSCI.Graph.FreeGraph
 {
-
+    [Serializable]
     public class freeGraphLinkRegistry
     {
         public freeGraphLinkRegistry()
@@ -306,6 +306,16 @@ namespace imbSCI.Graph.FreeGraph
                 }
             }
             return isRedundant;
+        }
+
+        public List<freeGraphLinkBase> GetAllLinks()
+        {
+            return linkDictionary.Values.ToList();
+        }
+
+        public IEnumerator<freeGraphLinkBase> EnumerateLinks()
+        {
+            return linkDictionary.Values.GetEnumerator();
         }
 
         protected Dictionary<String, List<freeGraphNodeBase>> linkedAtoBDictionary { get; set; } = new Dictionary<string, List<freeGraphNodeBase>>();

@@ -29,13 +29,11 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Core.math.range
 {
-    #region imbVeles using
 
     using imbSCI.Core.enums;
     using imbSCI.Data;
     using System;
 
-    #endregion imbVeles using
 
     /// <summary>
     /// Scaling scalar numbers

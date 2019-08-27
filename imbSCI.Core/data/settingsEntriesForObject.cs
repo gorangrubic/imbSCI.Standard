@@ -53,7 +53,7 @@ namespace imbSCI.Core.data
         private String _id;
 
         /// <summary>
-        ///
+        /// Identification string used for internal caching
         /// </summary>
         public String id
         {
@@ -102,11 +102,16 @@ namespace imbSCI.Core.data
             }
         }
 
-        /// <summary>
-        /// Generise meta model za prosledjeni tip
-        /// </summary>
-        /// <param name="target"></param>
-        public settingsEntriesForObject(Type type, Boolean includeCollectionItems)
+
+
+
+
+
+/// <summary>
+/// Generise meta model za prosledjeni tip
+/// </summary>
+/// <param name="target"></param>
+public settingsEntriesForObject(Type type, Boolean includeCollectionItems)
         {
             id = type.FullName + includeCollectionItems.ToString();
             targetType = type;

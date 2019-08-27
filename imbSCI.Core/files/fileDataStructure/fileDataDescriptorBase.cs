@@ -41,6 +41,7 @@ using System.Collections.Generic;
 
 namespace imbSCI.Core.files.fileDataStructure
 {
+    using imbSCI.Core.data.transfer;
     using System.IO;
     using System.Reflection;
 

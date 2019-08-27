@@ -27,6 +27,8 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using imbSCI.Data.collection.nested;
+using imbSCI.Data.interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,10 +36,282 @@ using System.Linq;
 namespace imbSCI.Data.collection.graph
 {
     /// <summary>
+    /// NIJE DOVRSENO
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <seealso cref="System.Collections.Generic.List{imbSCI.Data.collection.graph.graphNavigationIteration{T}}" />
+    public class graphNavigationResult<T> : List<graphNavigationIteration<T>>
+    {
+        protected Dictionary<T, graphNavigationThread<T>> threadsByStartNode { get; set; } = new Dictionary<T, graphNavigationThread<T>>();
+
+        public ListDictionaryBase<T, graphNavigationThread<T>> thradsByNode { get; set; } = new ListDictionaryBase<T, graphNavigationThread<T>>();
+
+        public graphNavigationResult(IEnumerable<T> startNodes, Boolean _includeStart)
+        {
+            foreach (T node in startNodes)
+            {
+                var thread = new graphNavigationThread<T>(node, _includeStart);
+                threadsByStartNode.Add(node, thread);
+            }
+        }
+
+        public void RunIteration()
+        {
+            foreach (var threadPair in threadsByStartNode)
+            {
+
+            }
+        }
+
+    }
+
+    public class graphNavigationThread<T>:List<graphNavigationIteration<T>>
+    {
+        public List<T> selected { get; set; } = new List<T>();
+
+        public T startNode { get; protected set; }
+
+        public graphNavigationThread(T _start, Boolean _includeStart)
+        {
+            startNode = _start;
+
+
+            graphNavigationIteration<T> iteration = new graphNavigationIteration<T>();
+
+            if (_includeStart)
+            {
+
+                iteration.Nodes.Add(_start);
+
+                selected.Add(_start);
+            }
+        }
+
+        public List<T> StartNewIteration()
+        {
+            var lastIteration = this.LastOrDefault();
+            List<T> toNavigate = new List<T>();
+
+            graphNavigationIteration<T> output = new graphNavigationIteration<T>();
+            if (lastIteration != null)
+            {
+                output.Iteration = lastIteration.Iteration++;
+                
+                foreach (T n in lastIteration.Nodes)
+                {
+                    if (!selected.Contains(n))
+                    {
+                        selected.Add(n);
+                        toNavigate.Add(n);
+                    } else
+                    {
+                        
+                    }
+                }
+            }
+            Add(output);
+            return toNavigate;
+        }
+
+        //public void RunIteration()
+        //{
+        //    foreach (var threadPair in threadsByStartNode)
+        //    {
+
+        //    }
+        //}
+    }
+
+    public class graphNavigationIteration<T>
+    {
+        public Int32 Iteration { get; set; } = 0;
+
+        public List<T> Nodes { get; set; } = new List<T>();
+
+        public graphNavigationIteration<T> StartNewIteration()
+        {
+            graphNavigationIteration<T> output = new graphNavigationIteration<T>();
+            output.Iteration = Iteration++;
+            return output;
+        }
+
+        public graphNavigationIteration()
+        {
+
+        }
+
+    }
+
+    public class graphNavigator<T>
+    {
+        public graphNavigator()
+        {
+
+        }
+
+        public List<T> Select(T node)
+        {
+            List<T> output = new List<T>();
+
+            if (ForwardSelector != null) output.AddRange(ForwardSelector(node));
+            if (BackwardSelector != null) output.AddRange(BackwardSelector(node));
+
+            return output;
+        }
+
+       
+
+        public graphNavigationIteration<T> RunIteration(graphNavigationThread<T> thread)
+        {
+            var lastIteration = thread.LastOrDefault();
+            Int32 i = 0;
+
+            graphNavigationIteration<T> newIteration = null;
+            List<T> toNavigate = null;
+            if (lastIteration == null)
+            {
+                lastIteration = new graphNavigationIteration<T>();
+                if (IncludeStartInResult)
+                {
+                    lastIteration.Nodes.Add(thread.startNode);
+                }
+                else
+                {
+                    lastIteration.Nodes.AddRange(Select(thread.startNode));
+                }
+                thread.Add(lastIteration);
+
+                
+            }
+
+            toNavigate = thread.StartNewIteration();
+
+            
+          /*
+                 
+
+                newIteration = lastIteration.StartNewIteration();
+
+                foreach (T node in lastIteration.Nodes)
+                {
+
+                }
+                
+            }
+
+            if (i == 0)
+            {
+               
+            }
+            */
+            lastIteration = newIteration;
+            return newIteration;
+        }
+
+        protected virtual void DeploySelectors(Func<T, List<T>> forwardSelector, Func<T, List<T>> backwardSelector)
+        {
+            ForwardSelector = forwardSelector;
+            BackwardSelector = backwardSelector;
+        }
+
+        protected virtual void Deploy(Int32 limit, Func<T, Boolean> continueNodeEvaluation = null, Func<T, Boolean> goalEvaluation = null)
+        {
+            IterationLimit = limit;
+            if (continueNodeEvaluation != null) ContinueNodeEvaluation = continueNodeEvaluation;
+            if (goalEvaluation != null) GoalEvaluation = goalEvaluation;
+            
+        }
+
+        //public virtual graphNavigationResult<T> Run(IEnumerable<T> startNode, Int32 limit, Func<T, Boolean> continueNodeEvaluation=null, Func<T, Boolean> goalEvaluation=null)
+        //{
+
+        //}
+
+        //public virtual graphNavigationResult<T> Run(T startNode, Int32 limit, Func<T, Boolean> continueNodeEvaluation=null, Func<T, Boolean> goalEvaluation=null)
+        //{
+
+        //}
+
+        public Int32 IterationLimit { get; set; } = 200;
+
+        public Func<T, Boolean> ContinueNodeEvaluation { get; set; }
+
+        public Func<T, Boolean> GoalEvaluation { get; set; }
+
+        protected virtual Func<T, List<T>> ForwardSelector { get; set; }
+
+        protected virtual Func<T, List<T>> BackwardSelector { get; set; }
+
+        public Boolean PreventCircularNavigation { get; set; } = true;
+
+        public Boolean IncludeStartInResult { get; set; } = true;
+
+    }
+
+
+    /// <summary>
     /// Extensions for <see cref="graphNode"/> , <see cref="graphWrapNode{TItem}"/> and other graphNode derivatives
     /// </summary>
     public static class graphTools
     {
+        /*
+         public static List<T> DetectLoopForward<T>(this T startNode, Int32 limit=50) where T : IGraphNode
+        {
+
+            List<T> known = new List<T>();
+
+            List<T> heads = new List<T>();
+
+            List<T> neW_heads = new List<T>();
+
+            while (heads.Any())
+            {
+                foreach (T h in heads)
+                {
+                    if (known.Contains(h))
+                    {
+
+                    }
+                }
+            }
+            
+        }
+
+        public static List<T> DetectLoopForward<T>(this T startNode, Int32 limit=50) where T : IGraphNode
+        {
+
+
+            List<List<T>> tracks = new List<List<T>>();
+
+            List<T> heads = new List<T>();
+
+            foreach (T c in startNode)
+            {
+                heads.Add(c);
+            }
+
+            for (int i = 0; i < heads.Count; i++)
+            {
+                if (i >= tracks.Count)
+                {
+                    tracks.Add(new List<T>());
+                }
+                tracks[i].Add()
+                heads[i]
+
+            }
+
+            List<T> neW_heads = new List<T>();
+
+            while (heads.Any())
+            {
+
+            }
+            
+        }
+        */
+
+
 
         /// <summary>
         /// Returns descendent nodes at specified <c>depthOffset</c>. For branches that end before the offset depth, the leaf node is part of output
@@ -122,48 +396,145 @@ namespace imbSCI.Data.collection.graph
             return head;
         }
 
+
+
+        public static TGraph GetSubgraph<TGraph>(this TGraph SourceNode, Boolean RemoveFromSource = true) where TGraph: class, IGraphNode, new()
+        {
+            String rootPath = SourceNode.path;
+            var allChildren = SourceNode.getAllChildrenInType<TGraph>(null,false, false, 1, 500, true);
+            var allPaths = allChildren.Select(x => x.path.removeStartsWith(rootPath));
+
+            TGraph output = BuildGraphFromPaths<TGraph>(allPaths, SourceNode.pathSeparator, true, false);
+            if (RemoveFromSource)
+            {
+                SourceNode.removeFromParent(); //.RemoveChildren(allPaths);
+            }
+            return output;
+        }
+
+        public static Int32 RemoveChildren<TGraph>(this TGraph node, IEnumerable<String> paths) where TGraph : class, IGraphNode
+        {
+            Int32 c = 0;
+            foreach (String p in paths)
+            {
+                if (node.RemoveChild<TGraph>(p))
+                {
+                    c++;
+                }
+            }
+            return c;
+        }
+
+        public static Boolean RemoveChild<TGraph>(this TGraph node, String path) where TGraph : class, IGraphNode
+        {
+            
+            var child = node.GetChildAtPath(path, node.pathSeparator, false);
+
+            if (child == null)
+            {
+                child = (node.root as TGraph).GetChildAtPath<TGraph>(path, node.pathSeparator, false);
+            }
+            if (child == null) return false;
+            child.removeFromParent();
+            return true;
+        }
+
+        /// <summary>
+        /// Builds the graph from items. Resulting graph nodes wrap the source items in <see cref="graphWrapNode{TItem}.item"/>
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TGraph">The type of the graph.</typeparam>
+        /// <param name="items">The items.</param>
+        /// <param name="path">The path.</param>
+        /// <param name="splitter">The splitter.</param>
+        /// <returns></returns>
+        public static TGraph BuildGraphFromItems<T, TGraph>(this IEnumerable<T> items, Func<T, String> path, String splitter = "") where T : class, IObjectWithName
+            where TGraph : graphWrapNode<T>, IGraphNode, new()
+        {
+            //TGraph parent = new TGraph(); //default(T);
+            //if (splitter == "") splitter = parent.pathSeparator;
+
+            //  var paths = items.Select(x => path(x)).ToList();
+
+            //   Boolean isApsolutePath = paths.Any(x => x.StartsWith(splitter));
+
+            if (items == null) return null;
+            if (items.Count() == 0) return null;
+
+            TGraph nodeCreated = null;
+
+            foreach (T item in items)
+            {
+                if (item != null)
+                {
+                    String p = path(item);
+
+                    nodeCreated = ConvertPathToGraph<TGraph>(null, p, false, splitter, true);
+                    nodeCreated.SetItem(item);
+                }
+            }
+            if (nodeCreated == null) return null;
+
+            return nodeCreated.root as TGraph;
+
+        }
+
         /// <summary>
         /// Builds the graph from paths. Created graph has artificial root node (outside first node of the paths)
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="inputList">The input list.</param>
-        /// <param name="splitter">The splitter.</param>
+        /// <param name="splitter">The splitter character like: / or . If not set, uses the <see cref="IGraphNode.pathSeparator"/>, set by type constructor</param>
+        /// <param name="isApsolutePath">if set to <c>true</c> [is apsolute path], starting with leading spliter, e.g.. /div[0]/span[1].</param>
+        /// <param name="returnHead">if set to <c>true</c> it will return the last created leaf, otherwise: the root node of the graph</param>
         /// <returns></returns>
-        public static T BuildGraphFromPaths<T>(this IEnumerable<String> inputList, String splitter = "") where T : IGraphNode, new()
+        public static T BuildGraphFromPaths<T>(this IEnumerable<String> inputList, String splitter = "", Boolean isApsolutePath = true, Boolean returnHead = true) where T : class, IGraphNode, new()
         {
-            if (splitter == "") splitter = System.IO.Path.DirectorySeparatorChar.ToString();
 
-            T parent = default(T);
+         //   T parent = new T(); //default(T);
+
+            if (splitter == "") splitter = System.IO.Path.DirectorySeparatorChar.ToString();
+            T n = null;
 
             foreach (String p in inputList)
             {
-                parent.ConvertPathToGraph<T>(p, true, splitter);
+                n = ConvertPathToGraph<T>(n, p, isApsolutePath, splitter, true);
+                if (n != null)
+                {
+                    n = n.root as T;
+                }
             }
 
-            return parent;
+            return n;
         }
 
         /// <summary>
-        /// Builds graph defined by <c>path</c> or selecte existing graphnode, as pointed by path
+        /// Builds graph defined by <c>path</c> or selecte existing graphnode, as pointed by path. Builds only one branch. Use <see cref="BuildGraphFromPaths{T}(IEnumerable{string}, string, bool, bool)"/> to construct complete graph from paths
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="parent">Parent graph.</param>
         /// <param name="path">Path to construct from.</param>
-        /// <param name="isAbsolutePath">if set to <c>true</c> [is absolute path].</param>
+        /// <param name="isAbsolutePath">if set to <c>true</c> [is absolute path] (that starts with leading /)</param>
         /// <param name="splitter">The splitter - by default: directory separator.</param>
         /// <param name="returnHead">if set to <c>true</c> if will return the created node</param>
         /// <returns>
         /// Leaf instance
         /// </returns>
-        public static T ConvertPathToGraph<T>(this T parent, String path, Boolean isAbsolutePath = true, String splitter = "", Boolean returnHead=true) where T : IGraphNode, new()
+        public static T ConvertPathToGraph<T>(this T parent, String path, Boolean isAbsolutePath = true, String splitter = "", Boolean returnHead = true) where T :  class, IGraphNode, new()
         {
             if (splitter == "") splitter = System.IO.Path.DirectorySeparatorChar.ToString();
 
             if (isAbsolutePath)
             {
-                if (!path.StartsWith(parent.path))
+                if (parent != null)
                 {
-                    return parent;
+                    if (!path.StartsWith(parent.path))
+                    {
+                        return parent;
+                    } else
+                    {
+                        path = path.removeStartsWith(parent.path);
+                    }
                 }
             }
 
@@ -196,12 +567,17 @@ namespace imbSCI.Data.collection.graph
                     }
                 }
             }
+            if (head == null)
+            {
+                return null;
+            }
             if (returnHead)
             {
                 return (T)head;
-            } else
+            }
+            else
             {
-                return parent;
+                return (T)head.root;
             }
         }
 
@@ -230,6 +606,52 @@ namespace imbSCI.Data.collection.graph
                 }
             }
             return output;
+        }
+
+        /// <summary>
+        /// Gets the first parent matching criteria.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source">The source.</param>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="skipSelf">if set to <c>true</c> if will not evaluate <c>source</c> node</param>
+        /// <param name="returnLastHead">if set to <c>true</c> it will return the node whose parent met the <c>criteria</c></param>
+        /// <returns></returns>
+        public static T GetFirstParent<T>(this T source, Func<T, Boolean> criteria, Boolean skipSelf=true, Boolean returnLastHead=false) where T : class, IGraphNode
+        {
+            T head = source;
+            T lastHead = source;
+            while (head != null)
+            {
+                Boolean eval = true;
+                
+
+                if (skipSelf)
+                {
+                    if (head == source) eval = false;
+                }
+                if (eval)
+                {
+                    if (head is T headT)
+                    {
+                        if (criteria(headT))
+                        {
+                            if (returnLastHead)
+                            {
+                                return lastHead;
+                            } else
+                            {
+                                return headT;
+                            }
+                            
+                        }
+                    }
+                }
+                lastHead = head;
+                head = head.parent as T;
+
+            }
+            return null;
         }
 
         /// <summary>
@@ -428,6 +850,65 @@ namespace imbSCI.Data.collection.graph
 
             return proposal;
         }
+
+
+        /// <summary>
+        /// Traverses forward (from target to leaf) until reaches: leaf, a junction or exceeds <c>stepLimit</c>
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <param name="stepLimit">The step limit.</param>
+        /// <returns></returns>
+        public static IGraphNode GetJunctionOrLeaf(this IGraphNode target, Int32 stepLimit=50)
+        {
+            IGraphNode head = target;
+            Boolean traverse = true;
+            Int32 i = 0;
+            while (traverse)
+            {
+                var childNames = head.getChildNames();
+                if (childNames.Count == 0)
+                {
+                    return head;
+                }
+                if (childNames.Count > 1)
+                {
+                    return head;
+                }
+                if (childNames.Count == 1)
+                {
+                    head = head[childNames.First()];
+                    i++;
+                }
+                if (i > stepLimit)
+                {
+                    traverse = false;
+                }
+            }
+            return head;
+        }
+
+
+        /// <summary>
+        /// Determines if from <c>target</c> to leaf, there are no junctions - but direct branch, leading to leaf
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <param name="stepLimit">The step limit.</param>
+        /// <returns>
+        ///   <c>true</c> if [is branch to leaf] [the specified step limit]; otherwise, <c>false</c>.
+        /// </returns>
+        public static Boolean IsBranchToLeaf(this IGraphNode target, Int32 stepLimit=50)
+        {
+            var result = target.GetJunctionOrLeaf(stepLimit);
+            var childNames = result.getChildNames();
+            if (childNames.Count == 0)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
+
 
         /// <summary>
         /// If the graph <c>target</c> has parent, it will move to its level (one level closer to the root)

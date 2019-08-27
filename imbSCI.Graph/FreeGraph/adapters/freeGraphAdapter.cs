@@ -121,14 +121,26 @@ namespace imbSCI.Graph.FreeGraph.adapters
         //}
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="freeGraphAdapter{TNodeA}"/> class, attaches the graph and assigns prefixes for IDs of nodes, according to type number
+        /// Initializes a new instance of the <see cref="freeGraphAdapter{TNodeA}" /> class, attaches the graph and assigns prefixes for IDs of nodes, according to type number
         /// </summary>
         /// <param name="_graph">The graph.</param>
-        /// <param name="prefixes">The prefixes.</param>
+        /// <param name="_source">Source collection.</param>
+        /// <param name="_mainPrefix">Main prefix for this type</param>
+        /// <param name="prefixes">Prefixes for types</param>
         public freeGraphAdapter(freeGraph _graph, freeGraphTypedNodesRegister _source, String _mainPrefix, String[] prefixes)
         {
             Deploy(_graph, _source, _mainPrefix, prefixes);
         }
+
+        ///// <summary>
+        ///// Initializes a new instance of the <see cref="freeGraphAdapter{TNode}"/> class.
+        ///// </summary>
+        ///// <param name="_mainPrefix">The main prefix.</param>
+        ///// <param name="prefixes">The prefixes.</param>
+        //public freeGraphAdapter(String _mainPrefix, String[] prefixes)
+        //{
+        //    Deploy(new freeGraph(), null, _mainPrefix, prefixes);
+        //}
 
         private void Deploy(freeGraph _graph, freeGraphTypedNodesRegister _source, String _mainPrefix, String[] prefixes)
         {

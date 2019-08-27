@@ -37,12 +37,18 @@ namespace imbSCI.Core.collection.checkLists
     using System.Collections.Generic;
     using System.Linq;
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{T, System.Boolean}}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// Instance check list
     /// </summary>
     /// <typeparam name="T">Any type of value or object</typeparam>
     /// <seealso cref="System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{T, System.Boolean}}" />
     public class instanceCheckList<T> : IEnumerable<KeyValuePair<T, bool>>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{T, System.Boolean}}'
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="instanceCheckList{T}"/> class.

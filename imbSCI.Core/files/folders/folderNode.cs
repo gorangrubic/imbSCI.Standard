@@ -63,6 +63,8 @@ namespace imbSCI.Core.files.folders
 
     //}
 
+        
+
     /// <summary>
     /// Subfolder in the <see cref="folderStructure"/>
     /// </summary>
@@ -162,7 +164,7 @@ namespace imbSCI.Core.files.folders
         }
 
         /// <summary>
-        /// Creates new folder node as subdirectory
+        /// Creates new folder node as subdirectory, or select existing. 
         /// </summary>
         /// <param name="nameEnum">The name enum.</param>
         /// <param name="__caption">The caption.</param>
@@ -224,7 +226,7 @@ namespace imbSCI.Core.files.folders
         private object addFolderLock = new object();
 
         /// <summary>
-        /// Adds new node or nodes to correspond to specified path or name. <c>pathOrName</c> can be path like: path1\\path2\\path3
+        /// Adds new node or nodes to correspond to specified path or name. Creates new folder node as subdirectory, or selects existing.  <c>pathOrName</c> can be path like: path1\\path2\\path3
         /// </summary>
         /// <remarks>
         /// If directory under specified path already exists, it will update its <see cref="caption"/> and <see cref="description"/> if these are empty, and return the existing node.
@@ -672,7 +674,7 @@ namespace imbSCI.Core.files.folders
                 }
                 else
                 {
-                    output.Add(files.First().FullName);
+                    output.Add(fi.FullName);
                 }
             }
 
@@ -705,7 +707,7 @@ namespace imbSCI.Core.files.folders
         //}
 
         /// <summary>
-        /// Finds a unique directory name, for new directory to be created
+        /// Finds a unique directory name, for new directory to be created (without actually creating it
         /// </summary>
         /// <param name="proposal">The proposal.</param>
         /// <returns></returns>
@@ -1123,7 +1125,9 @@ namespace imbSCI.Core.files.folders
             {
                 String readme_filename = readmeFileName;
                 String mpath = this.pathFor(readme_filename); //imbSciStringExtensions.add(path, readme_filename, "\\");
+
                 generateFolderReadme(notation).saveStringToFile(mpath);
+
                 var folderNodes = this.getAllChildrenInType<folderNode>();
                 foreach (folderNode ni in folderNodes)
                 {

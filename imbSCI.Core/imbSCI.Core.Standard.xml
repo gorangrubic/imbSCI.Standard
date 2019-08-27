@@ -2532,9 +2532,9 @@
             </summary>
         </member>
         <member name="P:imbSCI.Core.data.settingsEntriesForObject.id">
-             <summary>
-            
-             </summary>
+            <summary>
+            Identification string used for internal caching
+            </summary>
         </member>
         <member name="P:imbSCI.Core.data.settingsEntriesForObject.DisplayName">
             <summary>
@@ -2636,12 +2636,23 @@
             <remarks>The method will declare only <see cref="T:imbSCI.Core.data.settingsPropertyEntry"/>s, not the entries of other type</remarks>
             <returns></returns>
         </member>
+        <member name="M:imbSCI.Core.data.settingsEntriesForObjectExtensions.SetDataRow(System.Collections.Generic.IEnumerable{imbSCI.Core.data.settingsMemberInfoEntry},System.Data.DataTable,System.Object,System.Data.DataRow,System.Boolean)">
+            <summary>
+            Sets the data row.
+            </summary>
+            <param name="input">The input.</param>
+            <param name="table">The table.</param>
+            <param name="data">The data.</param>
+            <param name="dr">The dr.</param>
+            <param name="addRowBeforeEnd">if set to <c>true</c> [add row before end].</param>
+            <returns></returns>
+        </member>
         <member name="M:imbSCI.Core.data.settingsEntriesForObjectExtensions.GetDictionary(System.Collections.Generic.IEnumerable{imbSCI.Core.data.settingsMemberInfoEntry},System.Object,System.String)">
             <summary>
             Gets the dictionary of values, key = prefix + PropertyInfo.Name
             </summary>
             <param name="input">The input.</param>
-            <param name="data">The data.</param>
+            <param name="data">Data instance, to read value from</param>
             <param name="prefix">The prefix.</param>
             <returns></returns>
         </member>
@@ -2982,7 +2993,7 @@
         </member>
         <member name="T:imbSCI.Core.data.UniversalTypeProvider`1">
             <summary>
-            Provides types and instances for type names
+            Provides types and instances by type name.
             </summary>
             <typeparam name="TInterface">The type of the interface.</typeparam>
         </member>
@@ -3000,11 +3011,19 @@
             The namespace to scan.
             </value>
         </member>
+        <member name="P:imbSCI.Core.data.UniversalTypeProvider`1.ThrowExceptionOnNotFound">
+            <summary>
+            Gets or sets a value indicating whether to throw exception when a type not found when <see cref="M:imbSCI.Core.data.UniversalTypeProvider`1.GetInstance(System.String)"/> or <see cref="M:imbSCI.Core.data.UniversalTypeProvider`1.GetTypeByName(System.String)"/> is called.
+            </summary>
+            <value>
+              <c>true</c> if [throw exception on not found]; otherwise, <c>false</c>.
+            </value>
+        </member>
         <member name="M:imbSCI.Core.data.UniversalTypeProvider`1.#ctor(System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:imbSCI.Core.data.UniversalTypeProvider`1"/> class.
             </summary>
-            <param name="_namespaceToScan">The namespace to scan.</param>
+            <param name="_namespaceToScan">The namespace to scan. If not specified, it will scan namespace of {TInterface}.</param>
         </member>
         <member name="P:imbSCI.Core.data.UniversalTypeProvider`1.typeDictionary">
             <summary>
@@ -3015,15 +3034,17 @@
             <summary>
             Performs safe search within this provider
             </summary>
-            <param name="classname">The classname.</param>
-            <returns></returns>
+            <param name="classname">Name of type to get</param>
+            <returns>Type or Null if not found</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">classname - Specified class name [" + classname + "] was not found in type dictionary (count:" + typeDictionary.Count + ") created by scanning [" + namespaceToScan + "] namespace</exception>
         </member>
         <member name="M:imbSCI.Core.data.UniversalTypeProvider`1.GetInstance(System.String)">
             <summary>
             Gets new instance for the class name
             </summary>
-            <param name="classname">The classname.</param>
-            <returns></returns>
+            <param name="classname">Name of type to get instance of. Type must have parametarless constructor.</param>
+            <returns>Instance of class specified by <c>classname</c></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">classname - Specified class name [" + classname + "] was not found in type dictionary (count:" + typeDictionary.Count + ") created by scanning [" + namespaceToScan + "] namespace</exception>
         </member>
         <member name="T:imbSCI.Core.enums.existingDataMode">
             <summary>
@@ -6573,6 +6594,22 @@
             </summary>
             <param name="input">String to test</param>
             <returns>IsMatch against _select_isOrdinalNumber</returns>
+        </member>
+        <member name="F:imbSCI.Core.extensions.text.imbStringIsTests._select_isBankAccountNumber">
+            <summary>
+            Regex select BankAccountNumber : [\d]{3}-[\d]{15}
+            </summary>
+            <remarks>
+            <para>For text: example text</para>
+            <para>Selects: ex</para>
+            </remarks>
+        </member>
+        <member name="M:imbSCI.Core.extensions.text.imbStringIsTests.isBankAccountNumber(System.String)">
+            <summary>
+            Test if input matches [\d]{3}-[\d]{15}
+            </summary>
+            <param name="input">String to test</param>
+            <returns>Returns true if the string matches the bank account format, like: IsMatch against _select_isBankAccountNumber</returns>
         </member>
         <member name="P:imbSCI.Core.extensions.text.imbStringOperations.charsToIgnore_compareStrings">
             <summary>
@@ -10590,6 +10627,14 @@
             </summary>
             <seealso cref="!:System.Collections.Generic.List&lt;imbSCI.Core.math.classificationMetrics.reportExpandedDataPair&gt;" />
         </member>
+        <member name="M:imbSCI.Core.math.classificationMetrics.reportExpandedData.GetStringValue(System.String,System.String)">
+            <summary>
+            Gets the string value.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="defaultValue">If not found</param>
+            <returns></returns>
+        </member>
         <member name="M:imbSCI.Core.math.classificationMetrics.reportExpandedData.GetDictionary">
             <summary>
             Gets the dictionary of the data pairs
@@ -11405,7 +11450,7 @@
             <param name="propertyName">Name of the property.</param>
             <returns></returns>
         </member>
-        <member name="M:imbSCI.Core.math.measurement.MetricsBase.GetDictionary(System.Boolean,System.Boolean)">
+        <member name="M:imbSCI.Core.math.measurement.MetricsBase.GetDictionary(System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             Gets the dictionary.
             </summary>
@@ -11413,7 +11458,7 @@
             <param name="includeDoubles">if set to <c>true</c> [include doubles].</param>
             <returns></returns>
         </member>
-        <member name="M:imbSCI.Core.math.measurement.MetricsBase.GetVectors(System.Boolean,System.Boolean)">
+        <member name="M:imbSCI.Core.math.measurement.MetricsBase.GetVectors(System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             Gets list of integer and double properties
             </summary>
@@ -11421,7 +11466,7 @@
             <param name="includeDoubles">if set to <c>true</c> [include doubles].</param>
             <returns></returns>
         </member>
-        <member name="M:imbSCI.Core.math.measurement.MetricsBase.GetFields(System.Boolean,System.Boolean)">
+        <member name="M:imbSCI.Core.math.measurement.MetricsBase.GetFields(System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             Gets list of integer and double properties
             </summary>
@@ -12611,6 +12656,18 @@
             <summary>
             The double entries
             </summary>
+        </member>
+        <member name="T:imbSCI.Core.math.range.frequency.frequencyCounter`1">
+            <summary>
+            Counts instance frequencies 
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:imbSCI.Core.math.range.frequency.frequencyCounter`1.Any">
+            <summary>
+            Returns if any <see cref="M:imbSCI.Core.math.range.frequency.frequencyCounter`1.Count(`0)"/> call was made, i.e. if <see cref="P:imbSCI.Core.math.range.frequency.frequencyCounter`1.TotalFrequency"/> is above 0
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:imbSCI.Core.math.range.histogram.histogramModel">
             <summary>
@@ -15046,6 +15103,23 @@
         <member name="T:imbSCI.Core.reporting.lowLevelApi.imbStringHTMLExtensions">
             \ingroup_disabled report_ll
         </member>
+        <member name="M:imbSCI.Core.reporting.lowLevelApi.imbStringHTMLExtensions.htmlTable(System.Data.DataTable,System.String,System.Boolean)">
+            <summary>
+            DataTable to markdown convertor
+            </summary>
+            <param name="table"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.reporting.lowLevelApi.imbStringHTMLExtensions.HtmlList(System.Collections.IEnumerable,System.Boolean,System.Text.StringBuilder,System.Int32)">
+            <summary>
+            Creates list from collection of [strings, IEnumerable or Objects]
+            </summary>
+            <param name="list">IEnumerable may contain strings, IEnumerable or Object.toStringSafe()</param>
+            <param name="isOrderedList">Is numeric or button list</param>
+            <param name="sb">String builder</param>
+            <param name="level">What is current level of list</param>
+            <returns>Well formed markdown list</returns>
+        </member>
         <member name="T:imbSCI.Core.reporting.lowLevelApi.imbStringMarkdownExtensions">
             <summary>
             Markdown creation toolkit
@@ -15282,6 +15356,14 @@
             <value>
             The text builder.
             </value>
+        </member>
+        <member name="M:imbSCI.Core.reporting.render.builders.builderForGutenberg.AppendImage(System.String,System.String,System.String)">
+            <summary>
+            Appends the image tag/call.
+            </summary>
+            <param name="imageSrc">Source url/path of the image</param>
+            <param name="imageAltText">The image alt text.</param>
+            <param name="imageRef">Caption below the image</param>
         </member>
         <member name="M:imbSCI.Core.reporting.render.builders.builderForHtml.AppendCode(System.String,System.String)">
             <summary>
@@ -15574,6 +15656,11 @@
             </summary>
             <seealso cref="T:imbSCI.Core.reporting.render.core.imbStringBuilderBase" />
             <seealso cref="T:imbSCI.Core.reporting.render.ITextRender" />
+        </member>
+        <member name="T:imbSCI.Core.reporting.render.builders.ICodeRender">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:imbSCI.Core.reporting.render.config.builderSettings">
             <summary>
@@ -20288,6 +20375,11 @@
             TRUE if this area is closed, ready to be applied
             </summary>
         </member>
+        <member name="T:imbSCI.Core.reporting.zone.selectZone">
+            <summary>
+            Defines selection zone
+            </summary>
+        </member>
         <member name="F:imbSCI.Core.reporting.zone.selectZone.x">
             <summary>
             Horizontalna pozicija
@@ -20298,7 +20390,7 @@
             Vertikalna pozicija
             </summary>
         </member>
-        <member name="F:imbSCI.Core.reporting.zone.selectZone.weight">
+        <member name="F:imbSCI.Core.reporting.zone.selectZone.width">
             <summary>
             Sirina
             </summary>
@@ -22490,6 +22582,23 @@
             </summary>
             <param name="_line"></param>
             <param name="i"> </param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.syntax.generator.ClassGenerationExtensions.GetUsingForProperties(System.Collections.Generic.IEnumerable{System.Reflection.PropertyInfo},System.Collections.Generic.List{System.String})">
+            <summary>
+            Gets the using for properties.
+            </summary>
+            <param name="properties">The properties.</param>
+            <param name="output">The output.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Core.syntax.generator.ClassGenerationExtensions.GetUsingForFlags(imbSCI.Core.reporting.render.builders.PropertyAppendFlags,System.Boolean,System.Collections.Generic.List{System.String})">
+            <summary>
+            Gets the using for flags.
+            </summary>
+            <param name="flags">The flags.</param>
+            <param name="addBasic">if set to <c>true</c> [add basic].</param>
+            <param name="output">The output.</param>
             <returns></returns>
         </member>
         <member name="T:imbSCI.Core.syntax.NamespaceDoc">

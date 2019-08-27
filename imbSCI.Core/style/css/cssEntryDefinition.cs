@@ -27,10 +27,12 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using imbSCI.Core.style.color;
 using imbSCI.Data;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -73,26 +75,63 @@ namespace imbSCI.Core.style.css
             }
         }
 
+        public cssEntryDefinition CreateAlternative(cssSelectorEnum selector)
+        {
+            cssEntryDefinition output = new cssEntryDefinition();
+            output.name = name.add(selector.ToCSS(), " ");
+            return output;
+        }
+
+
+        /// <summary>
+        /// Sets the value to the property, returns self
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        public cssEntryDefinition Set(cssPropertyEnum key, Color value)
+        {
+            return Set(key.ToCSS(), value.ColorToHex());
+        }
+
+        public cssEntryDefinition Set(cssPropertyEnum key, Int32 value)
+        {
+            return Set(key.ToCSS(), value.ToString());
+        }
+
+        /// <summary>
+        /// Sets the value to the property, returns self
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        public cssEntryDefinition Set(cssPropertyEnum key, String value)
+        {
+            return Set(key.ToCSS(), value);
+        }
+
         /// <summary>
         /// Sets the specified key.
         /// </summary>
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
-        public void Set(String key, String value)
+        public cssEntryDefinition Set(String key, String value)
         {
-            if (value.isNullOrEmpty())
-            {
-                if (parameters.ContainsKey(key)) parameters.Remove(key);
-                return;
-            }
-            if (!parameters.ContainsKey(key))
-            {
-                parameters.Add(key, value);
-            }
-            else
-            {
-                parameters[key] = value;
-            }
+        if (value.isNullOrEmpty())
+        {
+            if (parameters.ContainsKey(key)) parameters.Remove(key);
+            return this;
+        }
+        if (!parameters.ContainsKey(key))
+        {
+            parameters.Add(key, value);
+        }
+        else
+        {
+            parameters[key] = value;
+        }
+
+        return this;
         }
 
         /// <summary>

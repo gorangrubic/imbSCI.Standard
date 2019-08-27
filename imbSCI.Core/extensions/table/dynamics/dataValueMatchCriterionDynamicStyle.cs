@@ -36,6 +36,7 @@ namespace imbSCI.Core.extensions.table.dynamics
     using System.Collections.Generic;
     using System.Data;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'dataTableDynamicStyleEntry' that could not be resolved
     /// <summary>
     /// Evaluates rows for exact value match
     /// </summary>
@@ -43,6 +44,7 @@ namespace imbSCI.Core.extensions.table.dynamics
     /// <typeparam name="TEnum">The type of enum to use when calling the style</typeparam>
     /// <seealso cref="imbSCI.Core.extensions.table.dataTableDynamicStyleEntry" />
     public class dataValueMatchCriterionDynamicStyle<TValueType, TEnum> : tableStyleDynamicRule
+#pragma warning restore CS1574 // XML comment has cref attribute 'dataTableDynamicStyleEntry' that could not be resolved
    where TValueType : IComparable
 
     {
@@ -77,6 +79,7 @@ namespace imbSCI.Core.extensions.table.dynamics
             matchlist.Add(match);
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'criteria' that could not be resolved
         /// <summary>
         /// Evaluates the <see cref="columnName"/> column of the <c>row</c> against <see cref="criteria"/>, if test is positive returns the style associated with <see cref="styleKey"/>
         /// </summary>
@@ -85,6 +88,7 @@ namespace imbSCI.Core.extensions.table.dynamics
         /// <param name="defaultStyle">The default style.</param>
         /// <returns></returns>
         public override tableStyleSetterResponse evaluate(DataRow row, DataTable table, dataTableStyleEntry defaultStyle)
+#pragma warning restore CS1574 // XML comment has cref attribute 'criteria' that could not be resolved
         {
             var tableReal = row.Table;
             if (tableReal == null) return new tableStyleSetterResponse(defaultStyle, this);

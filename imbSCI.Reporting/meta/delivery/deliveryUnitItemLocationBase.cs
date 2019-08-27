@@ -39,10 +39,12 @@ namespace imbSCI.Reporting.meta.delivery
         /// </summary>
         unknown,
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'directoryScope' that could not be resolved
         /// <summary>
         /// The local resource - item will be saved into current scope <see cref="imbSCI.Reporting.reporting.render.IRenderExecutionContext.directoryScope"/>
         /// </summary>
         localResource,
+#pragma warning restore CS1574 // XML comment has cref attribute 'directoryScope' that could not be resolved
 
         /// <summary>
         /// It is a resource shared within the current document (closest parent to the current logical scope)

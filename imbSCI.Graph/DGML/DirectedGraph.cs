@@ -27,9 +27,12 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using imbSCI.Core.data;
+using imbSCI.Core.data.descriptors;
 using imbSCI.Core.extensions.io;
 using imbSCI.Core.files;
 using imbSCI.Core.files.folders;
+using imbSCI.Core.math.classificationMetrics;
 using imbSCI.Data.enums;
 using imbSCI.Data.interfaces;
 using imbSCI.Graph.DGML.collections;
@@ -39,20 +42,27 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace imbSCI.Graph.DGML
 {
+
     [XmlRoot(Namespace = "http://schemas.microsoft.com/vs/2009/dgml",
      ElementName = "DirectedGraph",
      IsNullable = true)]
-    public class DirectedGraph : IObjectWithName
+    public class DirectedGraph : IObjectWithName, IXmlSerializable, IElementWithProporties, IFreeGraph
     {
         [XmlIgnore]
         public List<String> ConversionErrors { get; set; } = new List<string>();
 
         public DirectedGraph()
         {
+            Nodes = new NodeCollection(this);
+            Links = new LinkCollection(this);
+
+            PropertyDeclaration = new PropertyList();
         }
 
         /// <summary>
@@ -61,7 +71,7 @@ namespace imbSCI.Graph.DGML
         /// <value>
         /// The name.
         /// </value>
-        public string Id { get; set; }
+        public string Id { get; set; } = "DGML";
 
         /// <summary>
         /// Loads the specified path.
@@ -84,7 +94,7 @@ namespace imbSCI.Graph.DGML
         /// </summary>
         /// <param name="path">The path.</param>
         /// <param name="mode">The mode.</param>
-        public void Save(String path, getWritableFileMode mode = Data.enums.getWritableFileMode.overwrite)
+        public void Save(String path, getWritableFileMode mode = getWritableFileMode.overwrite)
         {
             if (!path.EndsWith(".dgml"))
             {
@@ -177,45 +187,232 @@ namespace imbSCI.Graph.DGML
             }
         }
 
-        /// <summary>
-        /// Gets the linked.
-        /// </summary>
-        /// <param name="node">The node.</param>
-        /// <param name="inverse">if set to <c>true</c> [inverse].</param>
-        /// <returns></returns>
-        public List<Node> GetLinked(Node node, Boolean inverse = false)
+        
+        public XmlSchema GetSchema()
         {
-            List<Node> output = new List<Node>();
-            foreach (Link lnks in Links.Where(x => x.Source == node.Id))
-            {
-                if (Nodes.Any(x => x.Id == lnks.Target))
-                {
-                    output.Add(Nodes.First(x => x.Id == lnks.Target));
-                    //T cNode = new T();
-                    //cNode.name = lnks.Target;
-                    //nodeNames.Add(lnks.Target);
-                    //newnext.Add(source.Nodes.First(x => x.Id == lnks.Target));
-
-                    //tNode.Add(cNode);
-                }
-            }
-            return output;
+            return null;
         }
 
-        public LinkCollection Links { get; set; } = new LinkCollection();
 
-        public NodeCollection Nodes { get; set; } = new NodeCollection();
+        public void ReadXml(XmlReader reader)
+        {
 
-        public PropertyList Properties { get; set; } = new PropertyList();
+            TypeXmlAttributes xmlInfo_graph = TypeDescriptorTools.GetXmlInfo(typeof(DirectedGraph));
+            TypeXmlAttributes xmlInfo_node = TypeDescriptorTools.GetXmlInfo(typeof(Node));
+            TypeXmlAttributes xmlInfo_link = TypeDescriptorTools.GetXmlInfo(typeof(Link));
+            TypeXmlAttributes xmlInfo_category = TypeDescriptorTools.GetXmlInfo(typeof(Category));
+            TypeXmlAttributes xmlInfo_property = TypeDescriptorTools.GetXmlInfo(typeof(Property));
 
+            
+
+            DirectedGraphXmlExtensions.ReadElementAttributes(this, reader, xmlInfo_graph);
+
+            reader.Read();
+
+            while(reader.Read())
+            {
+                switch (reader.NodeType)
+                {
+                    case XmlNodeType.Element:
+                        switch (reader.Name)
+                        {
+                            case nameof(Node):
+                                var tmpNode = new Node();
+                                tmpNode.ReadXml(reader, xmlInfo_node);
+                                Nodes.Add(tmpNode);
+                                break;
+                            case nameof(Link):
+                                var newLink = new Link();
+
+                                newLink.ReadXml(reader, xmlInfo_link);
+                                Links.Add(newLink);
+                                break;
+                            case nameof(Category):
+                                var newCategory = new Category();
+                                newCategory.ReadXml(reader, xmlInfo_category);
+                                Categories.Add(newCategory);
+                                break;
+                            case nameof(Property):
+                                var newProperty = new Property();
+                                newProperty.ReadXml(reader, xmlInfo_property);
+                                PropertyDeclaration.Add(newProperty);
+                                break;
+
+                            //case nameof(Nodes):
+                            //    do
+                            //    {
+                            //        var newNode = new Node();
+                            //        newNode.ReadXml(reader, xmlInfo_node);
+                            //        Nodes.Add(newNode);
+
+                            //    } while (reader.ReadToNextSibling(nameof(Node)));
+
+                            //    break;
+                            //case nameof(Links):
+                            //    do
+                            //    {
+                            //        var newLink = new Link();
+
+                            //        newLink.ReadXml(reader, xmlInfo_link);
+                            //        Links.Add(newLink);
+
+                            //    } while (reader.ReadToNextSibling(nameof(Link)));
+                            //    reader.ReadEndElement();
+                            //    break;
+                            //case nameof(Categories):
+                            //    do
+                            //    {
+                            //        var newCategory = new Category();
+                            //        newCategory.ReadXml(reader, xmlInfo_category);
+                            //        Categories.Add(newCategory);
+
+                            //    } while (reader.ReadToNextSibling(nameof(Category)));
+                            //    break;
+                            //case nameof(Properties):
+                            //    do
+                            //    {
+                            //        var newProperty = new Property();
+                            //        newProperty.ReadXml(reader, xmlInfo_property);
+                            //        PropertyDeclaration.Add(newProperty);
+
+                            //    } while (reader.ReadToNextSibling(nameof(Property)));
+
+                            //    break;
+                            default:
+
+                                break;
+                        }
+                        break;
+                    default:
+                    case XmlNodeType.Text:
+                        break;
+                    case XmlNodeType.CDATA:
+                        break;
+                    case XmlNodeType.ProcessingInstruction:
+                        break;
+                    case XmlNodeType.Comment:
+                        break;
+                    case XmlNodeType.XmlDeclaration:
+                        break;
+                    case XmlNodeType.Document:
+                        break;
+                    case XmlNodeType.DocumentType:
+                        break;
+                    case XmlNodeType.EntityReference:
+                        break;
+                    case XmlNodeType.EndElement:
+                        break;
+                }
+            }
+
+            //reader.ReadStartElement(nameof(Nodes));
+            
+            //reader.ReadEndElement();
+
+
+            //reader.ReadStartElement(nameof(Links));
+           
+
+            //reader.
+            //reader.ReadStartElement(nameof(Categories));
+            
+            //reader.ReadEndElement();
+
+            //reader.ReadStartElement(nameof(Properties));
+          
+            //reader.ReadEndElement();
+
+        }
+
+        public void WriteXml(XmlWriter writer)
+        {
+
+            TypeXmlAttributes xmlInfo_graph = TypeDescriptorTools.GetXmlInfo(typeof(DirectedGraph));
+            TypeXmlAttributes xmlInfo_node = TypeDescriptorTools.GetXmlInfo(typeof(Node));
+            TypeXmlAttributes xmlInfo_link = TypeDescriptorTools.GetXmlInfo(typeof(Link));
+            TypeXmlAttributes xmlInfo_category = TypeDescriptorTools.GetXmlInfo(typeof(Category));
+            TypeXmlAttributes xmlInfo_property = TypeDescriptorTools.GetXmlInfo(typeof(Property));
+
+            
+            
+
+          //  writer.WriteStartDocument();
+
+            //writer.WriteStartElement(nameof(DirectedGraph));
+
+                this.WriteElementAttributes(writer, xmlInfo_graph);
+
+                writer.WriteStartElement(nameof(Nodes));
+                foreach (Node n in Nodes)
+                {
+                    n.WriteXml(writer, xmlInfo_node);
+                }
+                writer.WriteEndElement();
+
+                writer.WriteStartElement(nameof(Links));
+                foreach (Link n in Links)
+                {
+                    n.WriteXml(writer, xmlInfo_link);
+                }
+                writer.WriteEndElement();
+
+                writer.WriteStartElement(nameof(Categories));
+                foreach (Category n in Categories)
+                {
+                    n.WriteXml(writer, xmlInfo_category);
+                }
+                writer.WriteEndElement();
+
+                writer.WriteStartElement(nameof(Properties));
+                foreach (Property n in PropertyDeclaration)
+                {
+                    n.WriteXml(writer, xmlInfo_property);
+                }
+                writer.WriteEndElement();
+
+         //   writer.WriteEndElement();
+
+         //   writer.WriteEndDocument();
+        }
+
+        /// <summary>
+        /// Gets or sets the links.
+        /// </summary>
+        /// <value>
+        /// The links.
+        /// </value>
+        [XmlIgnore]
+        public LinkCollection Links { get; set; } 
+
+        /// <summary>
+        /// Gets or sets the nodes.
+        /// </summary>
+        /// <value>
+        /// The nodes.
+        /// </value>
+        [XmlIgnore]
+        public NodeCollection Nodes { get; set; } 
+
+       
+
+        /// <summary>
+        /// Declaration of properties
+        /// </summary>
+        /// <value>
+        /// The properties.
+        /// </value>
+        public PropertyList PropertyDeclaration { get; set; } = new PropertyList();
+
+        [XmlIgnore]
         public CategoryCollection Categories { get; set; } = new CategoryCollection();
-        //    string IObjectWithName.name {
-        //        get {
-        //            return Title; }
-        //        set
-        //        {
-        //            Title = value;
-        //        }
-        //    }
+
+        [XmlIgnore]
+        public reportExpandedData Properties { get; set; } = new reportExpandedData();
+
+        IEnumerable<IFreeGraphNode> IFreeGraph.Nodes => Nodes;
+
+        IEnumerable<IFreeGraphLink> IFreeGraph.Links => Links;
+
+        string IObjectWithUID.UID => Id;
     }
 }

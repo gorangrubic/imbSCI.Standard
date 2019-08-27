@@ -1,0 +1,100 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Don-t forget to modify Assembly info and Package info! -->
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net45;net40</TargetFrameworks>
+    <ApplicationIcon>imbSCI.ico</ApplicationIcon>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>imbSCI.DataExtraction</PackageId>
+    <Version>1.0.218</Version>
+    <Title>imbSCI.DataExtraction</Title>
+    <Summary></Summary>
+    <PackageIconUrl>http://doc.veles.rs/imbACE.ico</PackageIconUrl>
+    <PackageProjectUrl>http://blog.veles.rs/</PackageProjectUrl>
+    <PackageLicenseUrl>http://doc.veles.rs/LICENCE.txt</PackageLicenseUrl>
+    <Copyright>Copyright ©  2019</Copyright>
+    <Description>Library for data extraction for heterogenic sources</Description>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageReleaseNotes>
+    </PackageReleaseNotes>
+    <PackageTags></PackageTags>
+    <RepositoryUrl>https://github.com/</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <Authors></Authors>
+    <Company></Company>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
+    <Product>imbSCI.DataExtraction</Product>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+
+  <PropertyGroup>
+    <DefineConstants>FORCE_UNIMETACONSTRUCTOR</DefineConstants>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
+    <DefineConstants>NETCORE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net40'">
+    <DefineConstants>NET40</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net45'">
+    <DefineConstants>NET45</DefineConstants>
+  </PropertyGroup>
+
+  <!-- The node below enables XML documentation build, in all build (Debug,Release) configurations-->
+  <PropertyGroup>
+    <DocumentationFile>G:\imbVelesOpenSource\imbSCI.Standard\imbSCI.DataExtraction\imbSCI.DataExtraction.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.0" />
+    <PackageReference Include="imbNLP.Transliteration" Version="0.2.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\imbSCI.Reporting\imbSCI.Reporting.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <WarningLevel>1</WarningLevel>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <PrimaryVersionType>AssemblyVersionAttribute</PrimaryVersionType>
+    <ShouldCreateLogs>False</ShouldCreateLogs>
+    <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
+    <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
+    <UpdateAssemblyFileVersion>True</UpdateAssemblyFileVersion>
+    <UpdateAssemblyInfoVersion>True</UpdateAssemblyInfoVersion>
+    <AssemblyVersionSettings>None.None.None.IncrementOnDemand</AssemblyVersionSettings>
+    <AssemblyFileVersionSettings>None.None.None.IncrementOnDemand</AssemblyFileVersionSettings>
+    <AssemblyInfoVersionSettings>None.None.None.IncrementOnDemand</AssemblyInfoVersionSettings>
+    <UpdatePackageVersion>True</UpdatePackageVersion>
+    <PackageVersionSettings>AssemblyVersion.IncrementWithAutoReset.None</PackageVersionSettings>
+    <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
+    <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
+  </PropertyGroup>
+
+  <!-- Uncomment the block below to enable "Automatic Version 1" Extension, to update Package version on each build> -->
+  <!-- Notice: The extension is 3rd party product (btw. it is free), you have to download it from the Microsoft Visual Studio Market -->
+  <!--
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <UpdatePackageVersion>True</UpdatePackageVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <UpdatePackageVersion>True</UpdatePackageVersion>
+  </PropertyGroup>
+-->
+
+  <!-- Uncomment the node below to enable automatic copying of the .nupkg file to local NuGet repository, on each package build. 
+Set the repository location by DestinationFolder attribute-->
+  <!-- 
+  <Target Name="CopyPackage" AfterTargets="Pack">
+    <Copy SourceFiles="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" DestinationFolder="G:\imbVelesOpenSource\LocalNuGet\imbVelesSecondGeneration\" />
+  </Target>
+-->
+
+</Project>

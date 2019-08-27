@@ -32,11 +32,17 @@ namespace imbSCI.Data.collection.math
     using System;
     using System.Collections.Generic;
 
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.List{System.Collections.Generic.List{System.Int32}}'
     /// <summary>
     /// 2D matrix of integer values, where Y is not preset but contains stacked values. Thread-safe version
     /// </summary>
     /// <seealso cref="System.Collections.Generic.List{System.Collections.Generic.List{System.Int32}}" />
     public class aceInt2DStackedMatrix : List<List<Int32>>
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.List{System.Collections.Generic.List{System.Int32}}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     {
         /// <summary>
         /// Constructor for serialization, do not use directly

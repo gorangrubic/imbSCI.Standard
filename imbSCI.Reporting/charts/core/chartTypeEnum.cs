@@ -47,6 +47,7 @@ namespace imbSCI.Reporting.charts.core
         stepchart = 32,
         bar = 64,
         gauge = 128,
-        pie
+        pie,
+        timeseries
     }
 }

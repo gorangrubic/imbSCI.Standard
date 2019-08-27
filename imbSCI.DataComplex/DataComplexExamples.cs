@@ -1,4 +1,5 @@
 ﻿using imbSCI.Core.attributes;
+using imbSCI.Core.data.diagnostics;
 using imbSCI.Core.enums;
 using imbSCI.Core.extensions.text;
 using imbSCI.Core.style.color;

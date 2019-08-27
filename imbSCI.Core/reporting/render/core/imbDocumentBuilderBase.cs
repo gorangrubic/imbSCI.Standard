@@ -348,6 +348,7 @@ namespace imbSCI.Core.reporting.render.core
         /// \ingroup_disabled renderapi_service
         object ITextRender.getDocument() => this.getDocument();
 
+#pragma warning disable CS1066 // The default value specified for parameter 'format' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
         /// <summary>
         /// Adds new page, drives cursor to upper-left corner
         /// </summary>
@@ -359,6 +360,7 @@ namespace imbSCI.Core.reporting.render.core
         /// </returns>
         /// \ingroup_disabled renderapi_service
         object ITextRender.addPage(string name, bool scopeToNew, getWritableFileMode mode, reportOutputFormatName format = reportOutputFormatName.none)
+#pragma warning restore CS1066 // The default value specified for parameter 'format' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
         {
             return addPage(name, scopeToNew, mode);
         }

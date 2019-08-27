@@ -33,6 +33,10 @@ namespace imbSCI.Data.collection.nested
     using System.Collections;
     using System.Collections.Generic;
 
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag 'para' does not match the start tag 'see'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag 'para' does not match the start tag 'paga'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'remarks'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag 'remarks' does not match the start tag 'para'.'
     /// <summary>
     /// Two dimensional collection where categories (X or the first axis) and options (Y or the second axis) are <see cref="Enum"/> types.
     /// </summary>
@@ -44,6 +48,10 @@ namespace imbSCI.Data.collection.nested
     /// <typeparam name="TI">Enum type that enumerates particular options</typeparam>
     /// <typeparam name="TIV">The class of value to be stored in this collection</typeparam>
     public class imbCollectionNestedEnum<TC, TI, TIV> : Dictionary<TC, Dictionary<TI, TIV>>
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag 'remarks' does not match the start tag 'para'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'remarks'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag 'para' does not match the start tag 'paga'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag 'para' does not match the start tag 'see'.'
     {
         public imbCollectionNestedEnum()
         {

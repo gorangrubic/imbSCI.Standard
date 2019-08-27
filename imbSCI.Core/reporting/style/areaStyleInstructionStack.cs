@@ -37,11 +37,15 @@ namespace imbSCI.Core.reporting.style
     using System.Collections.Generic;
     using System.Linq;
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.Stack{aceCommonTypes.reporting.style.areaStyleInstruction}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// Area Style Instruction stack - waiting for executin
     /// </summary>
     /// <seealso cref="System.Collections.Generic.Stack{aceCommonTypes.reporting.style.areaStyleInstruction}" />
     public class areaStyleInstructionStack : Stack<areaStyleInstruction>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.Stack{aceCommonTypes.reporting.style.areaStyleInstruction}'
     {
         public areaStyleInstruction Add(IStyleInstruction shot, selectRangeArea area)
         {

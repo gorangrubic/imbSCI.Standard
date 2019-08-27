@@ -27,6 +27,7 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using imbSCI.Core.math;
 using System;
 using System.Drawing;
 
@@ -69,6 +70,13 @@ namespace imbSCI.Core.style.color
             return output;
         }
 
+        private float CheckRange(float Value, float minValue=0, float maxValue=1)
+        {
+            if (Value < minValue) Value = minValue;
+            if (Value > maxValue) Value = maxValue;
+            return Value;
+        }
+
         public void DeployValues()
         {
             var output = this;
@@ -78,12 +86,10 @@ namespace imbSCI.Core.style.color
             }
             H = H % 360;
 
-            S = Math.Min(S, 1);
-            V = Math.Min(V, 1);
-            A = Math.Min(A, 1);
-            S = Math.Max(S, 0);
-            V = Math.Max(V, 0);
-            A = Math.Max(A, 0);
+
+            S = CheckRange(S);
+            V = CheckRange(V);
+            A = CheckRange(A);
         }
 
         public static ColorHSVPoint operator +(ColorHSVPoint a, ColorHSVPoint b)
@@ -156,14 +162,17 @@ namespace imbSCI.Core.style.color
 
         public Color GetColor()
         {
-            var hsl = new HSLColor(H / 360, S, V);
-
-            return hsl;
+            var hsl = new HSLColor(H.GetRatio(360), S, V);
+            Color c = hsl;
+            
+            return c;
         }
 
         public void SetHexColor(String hex)
         {
-            SetColor(ColorWorks.GetColor(hex)); //  aceColorConverts.getColorFromHex(hex));
+            Color c = ColorWorks.GetColor(hex);
+
+            SetColor(c); //  aceColorConverts.getColorFromHex(hex));
         }
 
         public void SetColor(Color color)
@@ -174,12 +183,37 @@ namespace imbSCI.Core.style.color
             H = Convert.ToInt32(hsl.hue * 360);
             S = Convert.ToSingle(hsl.saturation);
             V = Convert.ToSingle(hsl.luminosity);
-            A = color.A;
-        }
 
+            A = color.A/255;
+        }
+        /// <summary>
+        /// Hue - from 0 to 360
+        /// </summary>
+        /// <value>
+        /// The h.
+        /// </value>
         public Int32 H { get; set; }
+
+        /// <summary>
+        /// Saturation - from 0 to 1
+        /// </summary>
+        /// <value>
+        /// The s.
+        /// </value>
         public float S { get; set; }
+        /// <summary>
+        /// Brightness - from 0 to 1
+        /// </summary>
+        /// <value>
+        /// The v.
+        /// </value>
         public float V { get; set; }
+        /// <summary>
+        /// Alpha - from 0 to 1
+        /// </summary>
+        /// <value>
+        /// a.
+        /// </value>
         public float A { get; set; } = 1;
     }
 }

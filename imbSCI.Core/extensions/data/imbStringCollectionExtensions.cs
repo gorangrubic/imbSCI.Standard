@@ -156,6 +156,7 @@ namespace imbSCI.Core.extensions.data
             return true;
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'aceGeneralException' that could not be resolved
         /// <summary>
         /// Adds the <c>value</c> into <see cref="IDictionary"/> under first valid key specified with <c>first</c> and <c>orThese</c> parameters. Returns key value that was finally applied.
         /// </summary>
@@ -166,6 +167,7 @@ namespace imbSCI.Core.extensions.data
         /// <returns></returns>
         /// <exception cref="aceCommonTypes.core.exceptions.aceGeneralException">None of these argument is value - null - AddFirstOr(first, ... orThese others)</exception>
         public static String AddFirstOr<T>(this IDictionary<String, T> target, String first, T value, params String[] orThese)
+#pragma warning restore CS1574 // XML comment has cref attribute 'aceGeneralException' that could not be resolved
         {
             List<String> candidates = new List<String>();
             // orThese.getFlatList<String>();

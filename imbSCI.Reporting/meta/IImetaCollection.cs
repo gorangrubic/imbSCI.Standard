@@ -44,6 +44,7 @@ namespace imbSCI.Reporting.meta
         /// </summary>
         void Sort();
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'aceReportException' that could not be resolved
         /// <summary>
         /// Discovers the common parent or sets the one provided in arguments
         /// </summary>
@@ -51,6 +52,7 @@ namespace imbSCI.Reporting.meta
         /// <returns></returns>
         /// <exception cref="aceReportException">Can't discover the parent when the collection is empty!! - null - discoverCommonParent exception</exception>
         IMetaContentNested discoverCommonParent(IMetaContentNested __parent = null);
+#pragma warning restore CS1574 // XML comment has cref attribute 'aceReportException' that could not be resolved
 
         /// <summary>
         /// Method to register new page in collection - you must get new instance from parent object

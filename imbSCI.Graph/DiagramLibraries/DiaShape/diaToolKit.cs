@@ -169,12 +169,12 @@ namespace imbSCI.Graph.DiagramLibraries.DiaShape
                 //    }
                 //}
 
-                //String p = outputFolder.pathFor("overview.svg", Data.enums.getWritableFileMode.newOrExisting);
+                //String p = outputFolder.pathFor("overview.svg", getWritableFileMode.newOrExisting);
                 //File.WriteAllText(p, svgDoc.GetXML());
 
                 //if (options.HasFlag(diaToolKitOperationEnum.generateOverviewSVG))
                 //{
-                //    p = outputFolder.pathFor("overview.png", Data.enums.getWritableFileMode.newOrExisting);
+                //    p = outputFolder.pathFor("overview.png", getWritableFileMode.newOrExisting);
                 //    svgDoc.Draw().Save(p, p.GetImageFormatByExtension());
 
                 //}

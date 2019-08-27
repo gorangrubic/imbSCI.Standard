@@ -38,11 +38,13 @@ namespace imbSCI.Core.math.measureSystem
     using imbSCI.Core.math.range;
     using System;
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'measure{TValue}.Decimal}'
     /// <summary>
     /// base implementation of measure based on <see cref="decimal"/> value
     /// </summary>
     /// <seealso cref="measure{TValue}.Decimal}" />
     public abstract class measureDecimal : measure<decimal>
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'measure{TValue}.Decimal}'
     {
         public measureDecimal(measureRoleEnum role, measureSystemsEnum system, decimal defaultValue, decimal defaultBaseValue, decadeLevel level)
         {

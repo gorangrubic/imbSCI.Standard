@@ -27,6 +27,7 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using imbSCI.Graph.DGML;
 using System;
 
 namespace imbSCI.Graph.FreeGraph
@@ -35,7 +36,7 @@ namespace imbSCI.Graph.FreeGraph
     /// Basic object describing node-to-node relationship in the <see cref="freeGraph"/>,used by the <see cref="freeGraph"/> model internally
     /// </summary>
     [Serializable]
-    public class freeGraphLinkBase
+    public class freeGraphLinkBase: IFreeGraphLink
     {
         public freeGraphLinkBase()
         {
@@ -80,6 +81,12 @@ namespace imbSCI.Graph.FreeGraph
         /// The link label.
         /// </value>
         public String linkLabel { get; set; } = "";
+
+        string IFreeGraphLink.Label => linkLabel;
+
+        string IFreeGraphLink.Source => nodeNameA;
+
+        string IFreeGraphLink.Target => nodeNameB;
 
         public freeGraphLinkBase GetClone()
         {

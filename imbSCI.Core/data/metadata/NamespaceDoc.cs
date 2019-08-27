@@ -29,6 +29,7 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Core.data.metadata
 {
+#pragma warning disable CS1574 // XML comment has cref attribute 'remarks' that could not be resolved
     /// <summary>
     /// <para>XML comments, assembly reflection data and other member description structures</para>
     /// </summary>
@@ -57,6 +58,7 @@ namespace imbSCI.Core.data.metadata
     /// </remarks>
     /// <seealso cref="remarks" />
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+#pragma warning restore CS1574 // XML comment has cref attribute 'remarks' that could not be resolved
     internal class NamespaceDoc
     {
     }

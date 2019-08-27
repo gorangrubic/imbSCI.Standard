@@ -58,6 +58,8 @@ namespace imbSCI.Core.math.measurement
             doAutoScan();
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'IMeasure' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'IMeasure' that could not be resolved
         /// <summary>
         /// Gets the <see cref="aceCommonTypes.interfaces.IMeasure"/> with the specified path.
         /// </summary>
@@ -67,6 +69,8 @@ namespace imbSCI.Core.math.measurement
         /// <param name="path">The path.</param>
         /// <returns></returns>
         public IMeasure this[String path]
+#pragma warning restore CS1574 // XML comment has cref attribute 'IMeasure' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'IMeasure' that could not be resolved
         {
             get
             {
@@ -92,6 +96,8 @@ namespace imbSCI.Core.math.measurement
             }
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'IMeasure' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'IMeasure' that could not be resolved
         /// <summary>
         /// Gets the <see cref="aceCommonTypes.interfaces.IMeasure"/> with the specified group.
         /// </summary>
@@ -102,6 +108,8 @@ namespace imbSCI.Core.math.measurement
         /// <param name="key">The key.</param>
         /// <returns></returns>
         public IMeasure this[String group, String key]
+#pragma warning restore CS1574 // XML comment has cref attribute 'IMeasure' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'IMeasure' that could not be resolved
         {
             get
             {

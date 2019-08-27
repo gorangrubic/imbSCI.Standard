@@ -38,11 +38,13 @@ namespace imbSCI.Reporting.exceptions
     using imbSCI.Reporting.script;
     using System;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'aceReportException' that could not be resolved
     /// <summary>
     ///
     /// </summary>
     /// <seealso cref="imbSCI.Cores.core.exceptions.aceReportException" />
     public class aceReportException : dataException
+#pragma warning restore CS1574 // XML comment has cref attribute 'aceReportException' that could not be resolved
     {
         public aceReportException(string message, aceReportExceptionType type = aceReportExceptionType.composeScriptError, Exception innerEx = null) : base(message, innerEx, null, "Reporting:" + type.ToString())
         {

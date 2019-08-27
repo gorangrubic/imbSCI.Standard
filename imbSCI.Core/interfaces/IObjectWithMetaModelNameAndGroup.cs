@@ -27,6 +27,8 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using imbSCI.Core.files.folders;
+
 namespace imbSCI.Core.interfaces
 {
     public interface IObjectWithMetaModelNameAndGroup

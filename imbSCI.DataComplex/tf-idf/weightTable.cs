@@ -123,11 +123,13 @@ namespace imbSCI.DataComplex
         {
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'weightTable' that could not be resolved
         /// <summary>
         /// Initializes a new instance of the <see cref="weightTable"/> class.
         /// </summary>
         /// <param name="__parent">The parent.</param>
         public weightTable(IWeightTableSet __parent, string __name)
+#pragma warning restore CS1574 // XML comment has cref attribute 'weightTable' that could not be resolved
         {
             parent = __parent;
             name = __name;
@@ -153,6 +155,7 @@ namespace imbSCI.DataComplex
         /// </summary>
         protected ConcurrentDictionary<string, int> termsAFreq { get; set; } = new ConcurrentDictionary<string, int>();
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
         /// <summary>
         /// Builds the frequency table shema
         /// </summary>
@@ -161,6 +164,7 @@ namespace imbSCI.DataComplex
         /// <returns></returns>
         /// <exception cref="aceCommonTypes.core.exceptions.dataException">Table name selection failed into stackoverflow - null - Table autoname failed [" + i.ToString() + "]</exception>
         protected DataTable buildFrequencyTable(string documentName, DataSet tableDataSet = null)
+#pragma warning restore CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
         {
             if (documentName.isNullOrEmpty()) documentName = name;
 

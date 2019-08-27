@@ -43,6 +43,38 @@ namespace imbSCI.Graph.FreeGraph
     /// </summary>
     public static class freeGraphExtensions
     {
+        public static freeGraph GetGraphSection(this freeGraph source, List<String> node_names, String name, String description="")
+        {
+            var nodes = source.GetNodes(node_names);
+
+            freeGraph output = new freeGraph()
+            {
+                name = name,
+                description = description
+            };
+
+            foreach (var node in nodes)
+            {
+                output.AddNode(node.name, node.weight, node.type);
+            }
+
+            foreach (var node in nodes)
+            {
+                var links = source.GetLinks(node.name, true, false, 1);
+                foreach (var link in links)
+                {
+                    if (node_names.Contains(link.nodeB.name))
+                    {
+                        output.AddLink(node.name, link.nodeB.name, link.linkBase.weight, link.linkBase.type);
+                    }
+                }
+            }
+
+            return output;
+        }
+
+
+
         public static aceRelationMatrix<String, String, Int32> GetIDMatrix(this freeGraph graph, Int32 scoreFactor)
         {
 
@@ -167,7 +199,7 @@ namespace imbSCI.Graph.FreeGraph
         /// </summary>
         /// <param name="graph">The graph that is probed.</param>
         /// <param name="pingSources">The ping sources - nodes to start ping expansion from.</param>
-        /// <param name="bothDirections">if set to <c>true</c> if will expand trough both backward and forward links</param>
+        /// <param name="bothDirections">if set to <c>true</c> if will expand trough both backward and forward links. Otherwise propagates forward</param>
         /// <param name="pingType">Type of the ping operation</param>
         /// <param name="pingLimit">The ping limit - after which the expansion will stop.</param>
         /// <returns>Value according to specified <c>pingType</c> or 0 on failure</returns>
@@ -268,7 +300,7 @@ namespace imbSCI.Graph.FreeGraph
         /// <param name="graph">The graph.</param>
         /// <param name="filepath">The filepath.</param>
         /// <param name="mode">The mode.</param>
-        public static void Save<T>(this T graph, String filepath, getWritableFileMode mode = imbSCI.Data.enums.getWritableFileMode.overwrite) where T : freeGraph, new()
+        public static void Save<T>(this T graph, String filepath, getWritableFileMode mode = getWritableFileMode.overwrite) where T : freeGraph, new()
         {
             if (!Path.HasExtension(filepath))
             {

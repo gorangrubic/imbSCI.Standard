@@ -37,11 +37,13 @@ namespace imbSCI.Core.collection
     using System.Collections;
     using System.Collections.Generic;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// Collection of <see cref="imbSCI.Core.collection.PropertyCollectionExtended"/> instances, with its own name and description
     /// </summary>
     /// <seealso cref="aceCommonTypes.primitives.imbBindable" />
     public class PropertyCollectionExtendedList : IObjectWithNameAndDescription, IEnumerable, IEnumerable<KeyValuePair<string, PropertyCollectionExtended>>
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     {
         /// <summary>
         /// Name for this instance

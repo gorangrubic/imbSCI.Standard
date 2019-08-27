@@ -95,6 +95,59 @@ namespace imbSCI.Core.style.css
             }
         }
 
+        public cssEntryDefinition AddVariation(cssEntryDefinition from, cssSelectorEnum selector)
+        {
+            cssEntryDefinition output = from.CreateAlternative(selector);
+            Set(output, cssEntryPolicy.merge);
+
+            return this[output.name];
+            
+        }
+
+
+        public cssEntryDefinition AddIDEntry(String id)
+        {
+            return GetOrAdd(id.ensureStartsWith("#"));
+        }
+
+        public cssEntryDefinition AddTagEntry(htmlTagEnum tagName)
+        {
+            return GetOrAdd(tagName.ToString());
+        }
+
+        /// <summary>
+        /// Creates a class entry
+        /// 
+        /// </summary>
+        /// <param name="cssClassName">Name of the CSS class.</param>
+        /// <returns></returns>
+        public cssEntryDefinition AddClassEntry(String cssClassName)
+        {
+            return GetOrAdd(cssClassName.ensureStartsWith("."));
+        }
+
+        public cssEntryDefinition GetOrAdd(String name)
+        {
+
+            if (name.isNullOrEmpty()) return null;
+
+            if (name.Contains(","))
+            {
+                name = name.SplitSmart(",", "", true, true).First();
+            }
+
+            if (!items.ContainsKey(name))
+            {
+                cssEntryDefinition entry = new cssEntryDefinition()
+                {
+                    name = name
+                };
+                items.Add(name, entry);
+            }
+
+            return items[name];
+        }
+
         /// <summary>
         /// Gets css entry definition for item with <c>name</c>. Name may have class or id prefix: . or #. If it has multiple names, separated by comma: it will select the first
         /// </summary>
@@ -150,9 +203,9 @@ namespace imbSCI.Core.style.css
         /// <summary>
         /// Sets the specified name.
         /// </summary>
-        /// <param name="name">The name.</param>
-        /// <param name="attributeName">Name of the attribute.</param>
-        /// <param name="value">The value.</param>
+        /// <param name="name">Name of the entry.</param>
+        /// <param name="attributeName">Property (or attribute) of the entry</param>
+        /// <param name="value">Value</param>
         public void Set(String name, String attributeName, String value)
         {
             cssEntryDefinition entry = Get(name);
@@ -188,6 +241,12 @@ namespace imbSCI.Core.style.css
             return Load(p, policy);
         }
 
+        /// <summary>
+        /// Loads the file.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="policy">The policy.</param>
+        /// <returns></returns>
         public static cssCollection LoadFile(String path, cssEntryPolicy policy = cssEntryPolicy.replace)
         {
             cssCollection output = new cssCollection();
@@ -195,6 +254,13 @@ namespace imbSCI.Core.style.css
             return output;
         }
 
+        /// <summary>
+        /// Loads the file.
+        /// </summary>
+        /// <param name="folder">The folder.</param>
+        /// <param name="filename">The filename.</param>
+        /// <param name="policy">The policy.</param>
+        /// <returns></returns>
         public static cssCollection LoadFile(folderNode folder, String filename, cssEntryPolicy policy = cssEntryPolicy.replace)
         {
             cssCollection output = new cssCollection();

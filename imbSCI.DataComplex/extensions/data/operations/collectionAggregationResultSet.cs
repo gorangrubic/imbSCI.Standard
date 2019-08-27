@@ -33,12 +33,18 @@ namespace imbSCI.DataComplex.extensions.data.operations
     using System;
     using System.Collections.Generic;
 
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.Dictionary{System.String, aceCommonTypes.extensions.data.collectionAggregationResult{T}}'
     /// <summary>
     ///
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="System.Collections.Generic.Dictionary{System.String, aceCommonTypes.extensions.data.collectionAggregationResult{T}}" />
     public class collectionAggregationResultSet<T> : Dictionary<string, collectionAggregationResult<T>> where T : class, new()
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.Dictionary{System.String, aceCommonTypes.extensions.data.collectionAggregationResult{T}}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     {
         public Type recordType
         {

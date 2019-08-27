@@ -38,7 +38,10 @@ using System.Xml;
 
 namespace imbSCI.Core.files.folders
 {
-public class SerializedXMLFile
+    /// <summary>
+    /// Wrapper for loaded XML file
+    /// </summary>
+    public class SerializedXMLFile
     {
 
         public SerializedXMLFile()
@@ -46,6 +49,11 @@ public class SerializedXMLFile
 
         }
 
+        /// <summary>
+        /// Loads XML from the specified path.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <returns></returns>
         public static SerializedXMLFile Load(String path)
         {
 

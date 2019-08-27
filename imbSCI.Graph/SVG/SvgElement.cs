@@ -1,3 +1,4 @@
+using imbSCI.Graph.SVG;
 using Svg.Transforms;
 using System;
 using System.ComponentModel;
@@ -70,10 +71,12 @@ namespace Svg
             remove { this.Events.RemoveHandler(_loadEventKey, value); }
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'SvgElements' that could not be resolved
         /// <summary>
         /// Gets a collection of all child <see cref="SvgElements"/>.
         /// </summary>
         public virtual SvgElementCollection Children
+#pragma warning restore CS1574 // XML comment has cref attribute 'SvgElements' that could not be resolved
         {
             get { return this._children; }
         }
@@ -323,11 +326,38 @@ namespace Svg
                 {
                     object propertyValue = attr.Property.GetValue(this);
 
+
+
                     if (propertyValue != null)
                     {
-                        string value = (string)attr.Property.Converter.ConvertTo(propertyValue, typeof(string));
+                        string value = "";
 
-                        writer.WriteAttributeString(attr.Attribute.Name, attr.Attribute.NameSpace, value);
+                        switch (propertyValue.GetType().Name)
+                        {
+                            case nameof(SvgColourServer):
+                                if (propertyValue is SvgColourServer propColour)
+                                {
+                                    value = imbSCI.Core.style.color.ColorWorks.ColorToHex(propColour.Colour);
+                                }
+                                break;
+                            default:
+                                value = (string)attr.Property.Converter.ConvertTo(propertyValue, typeof(string));
+                                break;
+                        }
+
+                        
+                        if (writer is SvgWriter svgWriter)
+                        {
+                            if (svgWriter.removeNamespacePrefix)
+                            {
+                                 writer.WriteAttributeString(attr.Attribute.Name, value);
+                            }
+                        } else
+                        {
+                             writer.WriteAttributeString(attr.Attribute.Name, attr.Attribute.NameSpace, value);
+                        }
+                        
+                       
                     }
                 }
             }
@@ -335,6 +365,7 @@ namespace Svg
 
         protected virtual void Write(XmlWriter writer)
         {
+            
             if (this.ElementName != String.Empty)
             {
                 this.WriteStartElement(writer);

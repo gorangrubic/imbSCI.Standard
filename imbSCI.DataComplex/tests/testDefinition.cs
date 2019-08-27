@@ -39,13 +39,11 @@ namespace imbSCI.DataComplex.tests
 {
     using imbSCI.Data.enums.fields;
 
-    #region imbVELES USING
 
     using System.ComponentModel;
     using System.Data;
     using System.Globalization;
 
-    #endregion imbVELES USING
 
     /// <summary>
     /// 2013c: LowLevel resurs
@@ -97,7 +95,6 @@ namespace imbSCI.DataComplex.tests
             description = __description;
         }
 
-        #region --- testFinishTime ------- Span between test start time and test finished call
 
         private DateTime _testFinishTime;
 
@@ -117,9 +114,7 @@ namespace imbSCI.DataComplex.tests
             }
         }
 
-        #endregion --- testFinishTime ------- Span between test start time and test finished call
 
-        #region --- testStartTime ------- Time at test start
 
         private DateTime _testStartTime;
 
@@ -139,9 +134,7 @@ namespace imbSCI.DataComplex.tests
             }
         }
 
-        #endregion --- testStartTime ------- Time at test start
 
-        #region -----------  description  -------  [Opis testa - opciono]
 
         private String _description = ""; // = new String();
 
@@ -164,9 +157,7 @@ namespace imbSCI.DataComplex.tests
             }
         }
 
-        #endregion -----------  description  -------  [Opis testa - opciono]
 
-        #region -----------  caption  -------  [Naslov testa koji se izvrsava]
 
         private String _caption = "Test"; // = new String();
 
@@ -189,9 +180,7 @@ namespace imbSCI.DataComplex.tests
             }
         }
 
-        #endregion -----------  caption  -------  [Naslov testa koji se izvrsava]
 
-        #region -----------  versionCount  -------  [Brojac koja je po redu verzija testa izvrsena]
 
         private Int32 _versionCount = 1; // = new Int32();
 
@@ -214,9 +203,7 @@ namespace imbSCI.DataComplex.tests
             }
         }
 
-        #endregion -----------  versionCount  -------  [Brojac koja je po redu verzija testa izvrsena]
 
-        #region -----------  currentRunStamp  -------  [Trenutan RunStamp]
 
         private String _currentRunStamp = ""; // = new String();
 
@@ -239,7 +226,6 @@ namespace imbSCI.DataComplex.tests
             }
         }
 
-        #endregion -----------  currentRunStamp  -------  [Trenutan RunStamp]
 
         /// <summary>
         /// Thread safe test finished update call
@@ -260,7 +246,6 @@ namespace imbSCI.DataComplex.tests
             throw new NotImplementedException();
         }
 
-        #region --- status ------- Status of this test
 
         private testStatus _status = testStatus.wait;
 
@@ -280,7 +265,6 @@ namespace imbSCI.DataComplex.tests
             }
         }
 
-        #endregion --- status ------- Status of this test
 
         /// <summary>
         /// Generise RunStamp prema prosledjenim podesavanjima - sobijen stamp postavlja u currentRunStamp i vraca dobijenu vrednost

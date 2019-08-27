@@ -1,0 +1,2572 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>imbSCI.DataExtraction</name>
+    </assembly>
+    <members>
+        <member name="P:imbSCI.DataExtraction.Analyzers.Clustersters.DocumentCluster.weight">
+            <summary>
+            Represents average similarity
+            </summary>
+            <value>
+            The weight.
+            </value>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Analyzers.Clustersters.DocumentCluster.type">
+            <summary>
+            0 - not clustered, 1 - a cluster
+            </summary>
+            <value>
+            The type.
+            </value>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Clustersters.DocumentClusterAnalizer.ConvertToSourceCollections(imbSCI.DataExtraction.Analyzers.Clustersters.DocumentClusterCollection,System.Collections.Generic.Dictionary{HtmlAgilityPack.HtmlNode,imbSCI.DataExtraction.Tools.HtmlSourceAndUrl})">
+            <summary>
+            Stores document sources for each cluster
+            </summary>
+            <param name="clusters">The clusters.</param>
+            <param name="documentNodeDictionary">The document node dictionary.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Clustersters.DocumentClusterAnalizer.GetClustersByTarget(imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityResult,System.String,imbSCI.Core.reporting.render.ITextRender)">
+            <summary>
+            Gets the clusters by target.
+            </summary>
+            <param name="result">The result.</param>
+            <param name="collectionName">Name of the collection.</param>
+            <param name="output">The output.</param>
+            <param name="scoreSelector">The score selector.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Clustersters.DocumentClusterAnalizer.GetClusters(imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityResult,System.String,System.Func{imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityResultPair,System.Double},System.Double)">
+            <summary>
+            Gets cluster collection
+            </summary>
+            <param name="collectionName">Name for the collection.</param>
+            <param name="result">The result.</param>
+            <param name="scoreSelector">The score selector.</param>
+            <returns></returns>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Analyzers.Clustersters.DocumentClusterSettings.ExclusiveClusterMembership">
+            <summary>
+            If true - document can be assigned only to one cluster, not more
+            </summary>
+            <value>
+              <c>true</c> if [exclusive cluster membership]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.DataPointMapper.MergeEntriesToDataPoints(System.Collections.Generic.List{imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionaryEntry},imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionaryAnalysis)">
+            <summary>
+            Merges the entries to data points.
+            </summary>
+            <param name="entries">The entries.</param>
+            <param name="input">The input.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.DataPointMapper.GetDataPointPairs(imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionaryAnalysis)">
+            <summary>
+            Gets the data point pairs: Junction method
+            </summary>
+            <param name="input">The input.</param>
+            <param name="ChildrenCountTrigger">The children count trigger.</param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Analyzers.DataPointMapperResult">
+            <summary>
+            Set of mapping blocks
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Data.ContentChunkCollection.BuildChunkRootsGraph">
+            <summary>
+            Builds graph with chunk root nodes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Analyzers.Data.InputNodeDictionary.DefaultInputTypesToWatch">
+            <summary>
+            static and autoinitiated object
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Analyzers.Data.InputNodeDictionary.DefaultTagsToWatch">
+            <summary>
+            static and autoinitiated object
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionary.DefaultTagsToIgnore">
+            <summary>
+            static and autoinitiated object
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionary.DefaultXPathMatchToRemove">
+            <summary>
+            static and autoinitiated object
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionaryAnalysis`1.CompareHtmlNodes``1(System.Collections.Generic.IEnumerable{HtmlAgilityPack.HtmlNode},imbSCI.DataExtraction.Analyzers.Data.NodeDictionaryAnalysisSettings)">
+            <summary>
+            Compares given HTML nodes.
+            </summary>
+            <param name="nodes">The nodes.</param>
+            <param name="leafSelectionXPath">The leaf selection x path.</param>
+            <returns></returns>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionaryAnalysis`1.PresenceScoreByXPath">
+            <summary>
+            Score is computed as: XPath frequency / top frequency
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionaryAnalysis`1.CountXPathAndHash(System.String,System.String)">
+            <summary>
+            Returns TRUE if XPath was already known
+            </summary>
+            <param name="xpath">The xpath.</param>
+            <param name="hash">The hash.</param>
+            <returns></returns>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionaryAnalysis`1.DifferenceByXPath">
+            <summary>
+            How many times same XPath had different hash, in the collection
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionaryEntry.Presence">
+            <summary>
+            Rate at which the node is <see cref="F:imbSCI.DataExtraction.Analyzers.Data.NodeInTemplateRole.Permanent"/>. Value 1 means that the node was found on each document in the training set - value leaning to 0 means that node is optional, found on few pages
+            </summary>
+            <value>
+            The presence.
+            </value>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionaryEntry.Equals(imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionaryEntry)">
+            <summary>
+            Indicates whether the current object is equal to another object by comparing <see cref="P:imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionaryEntry.ContentHash"/>
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>
+            true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionaryEntryNGram.Equals(imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionaryEntryNGram)">
+            <summary>
+            Equals by <see cref="P:imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionaryEntry.ContentHash"/>
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>
+            true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
+            </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionaryTools.BreakBlocksByRecordDimensions(System.Collections.Generic.IEnumerable{imbSCI.DataExtraction.Analyzers.Templates.DataPointMapBlock})" -->
+        <member name="P:imbSCI.DataExtraction.Analyzers.Data.NodeDictionary.TagSelectorRegex">
+            <summary>
+            static and autoinitiated object
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Data.NodeDictionary.GetFirstSignificantParentByNodeName(HtmlAgilityPack.HtmlNode,System.Double)">
+            <summary>
+            Gets the first name of the significant parent by node.
+            </summary>
+            <param name="node">The node.</param>
+            <param name="significanceLevel">The significance level: rade of occurence, less value more significant/rare the tag is.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Data.NodeGraph.GetCurrentInfo">
+            <summary>
+            Gets information on current state of the graph
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Data.NodeGraph.CloneByItems">
+            <summary>
+            Clones the graph using nodes with <see cref="T:imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionaryEntry"/> items set
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Data.StructureFingerPrint.CommonFingerPrint(System.Collections.Generic.IEnumerable{imbSCI.DataExtraction.Analyzers.Data.StructureFingerPrint})">
+            <summary>
+            Returns common finger print
+            </summary>
+            <param name="input">The input.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Data.StructureFingerPrint.EvaluateTotal(HtmlAgilityPack.HtmlNode)">
+            <summary>
+            Evaluates finger print xpaths. If only one fails, returns false;
+            </summary>
+            <param name="document">The document.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Data.StructureFingerPrint.Evaluate(HtmlAgilityPack.HtmlNode)">
+            <summary>
+            Returns rate and which the document fits the fingerprint
+            </summary>
+            <param name="document">The document.</param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Analyzers.Data.UrlAnalysis">
+            <summary>
+            Finds common prefix and sufix in URLs
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Data.UrlAnalysis.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.DataExtraction.Analyzers.Data.UrlAnalysis"/> class.
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Data.UrlAnalysis.ToString">
+            <summary>
+            Returns Format String: CommonPrefix{0}CommonSufix
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Data.UrlAnalysis.IsSet">
+            <summary>
+            Determines whether this instance is configured
+            </summary>
+            <returns>
+              <c>true</c> if this instance is set; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Data.UrlAnalysis.GetVariable(System.String)">
+            <summary>
+            Extracts the variable part of URL
+            </summary>
+            <param name="url">The URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Data.UrlAnalysis.IsMatch(System.String)">
+            <summary>
+            Determines whether the specified URL is match 
+            </summary>
+            <param name="url">The URL.</param>
+            <returns>
+              <c>true</c> if the specified URL is match; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Data.UrlAnalysis.Analyze(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Analyzes the specified URL list.
+            </summary>
+            <param name="urlList">The URL list.</param>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Analyzers.Data.UrlAnalysis.IsInvariable">
+            <summary>
+            Gets a value indicating whether this instance has no variable part of the url
+            </summary>
+            <value>
+              <c>true</c> if this instance is invariable; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Analyzers.Data.UrlAnalysis.CommonPrefix">
+            <summary>
+            Gets or sets the common prefix.
+            </summary>
+            <value>
+            The common prefix.
+            </value>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Analyzers.Data.UrlAnalysis.CommonSufix">
+            <summary>
+            Gets or sets the common sufix.
+            </summary>
+            <value>
+            The common sufix.
+            </value>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Analyzers.Data.UrlQueryData.queryRegex">
+            <summary>
+            static and autoinitiated object
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityAnalizer">
+            <summary>
+            Performs similarity computation for collection of HTML documents (or nodes)
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityAnalizer.#ctor(imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilaritySettings)">
+            <summary>
+            Prepares the analyser
+            </summary>
+            <param name="_settings">The settings.</param>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityAnalizer.Prepare(System.Collections.Generic.IEnumerable{HtmlAgilityPack.HtmlNode},System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            Builds <see cref="T:imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionary"/> and <see cref="T:imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionaryEntryNGram"/>s for each document, to allow performance optimization 
+            </summary>
+            <param name="documents">The documents.</param>
+            <param name="leafSelectXPath">The leaf select x path, leave blank to use from settings, <see cref="P:imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilaritySettings.XPathToSelectLeafs"/></param>
+            <param name="tagsToIgnore">The tags to ignore, leave unspecified to use from settings, <see cref="P:imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilaritySettings.TagsToIgnore"/>.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityAnalizer.ComputeSimilarity(HtmlAgilityPack.HtmlNode,HtmlAgilityPack.HtmlNode)">
+            <summary>
+            Computes the similarity between two items. If you have to compare more than two documents, use <see cref="M:imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityAnalizer.Prepare(System.Collections.Generic.IEnumerable{HtmlAgilityPack.HtmlNode},System.String,System.Collections.Generic.List{System.String})"/> and <see cref="M:imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityAnalizer.ComputeSimilarity(HtmlAgilityPack.HtmlNode,HtmlAgilityPack.HtmlNode,imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityResult)"/> methods for greater performances
+            </summary>
+            <param name="documentA">The document a.</param>
+            <param name="documentB">The document b.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityAnalizer.ComputeSimilarity(HtmlAgilityPack.HtmlNode,HtmlAgilityPack.HtmlNode,imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityResult)">
+            <summary>
+            Computes similarity for two documents, that are part of result's inner collections
+            </summary>
+            <param name="documentA">The document a.</param>
+            <param name="documentB">The document b.</param>
+            <param name="result">The result object, previously created with <see cref="M:imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityAnalizer.Prepare(System.Collections.Generic.IEnumerable{HtmlAgilityPack.HtmlNode},System.String,System.Collections.Generic.List{System.String})"/></param>
+            <returns>Result for these two documents</returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityAnalizer.ComputeSimilarity(imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityResult,imbSCI.Core.reporting.render.ITextRender,System.Collections.Generic.List{HtmlAgilityPack.HtmlNode})">
+            <summary>
+            Computes the similarity for the result object
+            </summary>
+            <param name="result">The result object, previously created with <see cref="M:imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityAnalizer.Prepare(System.Collections.Generic.IEnumerable{HtmlAgilityPack.HtmlNode},System.String,System.Collections.Generic.List{System.String})" /></param>
+            <param name="output">The output.</param>
+            <param name="documents">Optional: select subset of documents to be analysed. These must be within <see cref="!:result" /> inner collections</param>
+            <returns>
+            The same result object specified in parameters
+            </returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityResult.PublishDataSet(System.Collections.Generic.Dictionary{HtmlAgilityPack.HtmlNode,imbSCI.DataExtraction.Tools.HtmlSourceAndUrl},System.Collections.Generic.List{HtmlAgilityPack.HtmlNode})">
+            <summary>
+            Publishes the data set.
+            </summary>
+            <param name="documentNodeDictionary">The document node dictionary.</param>
+            <param name="reportOn">The report on.</param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityResultPair">
+            <summary>
+            Similarity result for two documents
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilaritySettings.XPathToSelectLeafs">
+            <summary>
+            XPath to be used for leaf node selection (or any node selection in customized method). Leave blank for default, <see cref="P:imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionary.DefaultNodeSelectionXPath"/>
+            </summary>
+            <value>
+            The x path to select leafs.
+            </value>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilaritySettings.TagsToIgnore">
+            <summary>
+            HTML tag names (case is ignored) to exclude form leaf analysis. Leave empty for default, <see cref="P:imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionary.DefaultTagsToIgnore"/>
+            </summary>
+            <value>
+            The tags to ignore.
+            </value>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityTools">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityTools.GetSelectorList(imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityScoreEnum)">
+            <summary>
+            Gets the selector.
+            </summary>
+            <param name="scoreSource">The score source.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityTools.GetSelector(imbSCI.DataExtraction.Analyzers.Similarity.DocumentSimilarityScoreEnum)">
+            <summary>
+            Gets the selector.
+            </summary>
+            <param name="scoreSource">The score source.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.similarity.ItemCluster`1.Remove(`0)">
+            <summary>
+            Removes the specified item from cluster
+            </summary>
+            <param name="item">The item.</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:imbSCI.DataExtraction.Analyzers.Similarity.similarity.ItemClusterCollection`1.NewCluster``1(System.String)" -->
+        <member name="P:imbSCI.DataExtraction.Analyzers.Similarity.similarity.ItemClusterCollection`1.Count">
+            <summary>
+            Number of clusters (without the null cluster)
+            </summary>
+            <value>
+            The count.
+            </value>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.similarity.ItemClusterCollection`1.RemoveEmptyClusters">
+            <summary>
+            Removes empty clusters
+            </summary>
+            <returns>Number of removed clusters</returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.similarity.ItemClusterCollection`1.GetItemToClusterAssociations``1">
+            <summary>
+            Gets the item to cluster associations.
+            </summary>
+            <typeparam name="TCluster">The type of the cluster.</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.similarity.ItemClusterCollection`1.GetClusters``1(System.Boolean)">
+            <summary>
+            Gets the clusters of specified type
+            </summary>
+            <typeparam name="TCluster">The type of the cluster.</typeparam>
+            <param name="includeNullCluster">if set to <c>true</c> [include null cluster].</param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Analyzers.Similarity.similarity.nGramForObjects`1">
+            <summary>
+            n-gram structure when sets of objects are compared for similarity
+            </summary>
+            <typeparam name="T"></typeparam>
+            <seealso cref="T:System.Collections.Generic.List`1" />
+            <seealso cref="!:System.IEquatable&lt;imbSCI.Core.math.similarity.nGramForObjects&lt;T&gt;&gt;" />
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.similarity.nGramForObjects`1.Equals(imbSCI.DataExtraction.Analyzers.Similarity.similarity.nGramForObjects{`0})">
+            <summary>
+            Equals by <see cref="!:LeafNodeDictionaryEntry.ContentHash"/>
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>
+            true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
+            </returns>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Analyzers.Similarity.similarity.nGramsModeEnum">
+            <summary>
+            Mode of word decomposition
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Analyzers.Similarity.similarity.nGramsModeEnum.overlap">
+            <summary>
+            The overlap mode: e.g. for "category", N=2 it will produce: ca, at, te, eg, go, or, ry
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Analyzers.Similarity.similarity.nGramsModeEnum.ordinal">
+            <summary>
+            The ordinal mode: e.g. for "category", N=2 it will produce: ca, te, go, ry
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Analyzers.Similarity.similarity.nGramsSimilarityEquationEnum">
+            <summary>
+            Equation to use for word to word similarity assesment
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Analyzers.Similarity.similarity.nGramsSimilarityEquationEnum.JaccardIndex">
+            <summary>
+            The Jaccard Index: <see cref="!:wordAnalysisTools.GetJaccardIndex(List&lt;string&gt;, List&lt;string&gt;)"/>
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Analyzers.Similarity.similarity.nGramsSimilarityEquationEnum.DiceCoefficient">
+            <summary>
+            The dice coefficient: <see cref="!:wordAnalysisTools.GetDiceCoefficient(List&lt;string&gt;, List&lt;string&gt;)"/>
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Analyzers.Similarity.similarity.nGramsSimilarityEquationEnum.continualOverlapRatio">
+            <summary>
+            The get continual overlap ratio: <see cref="!:wordAnalysisTools.GetContinualOverlapRatio(List&lt;string&gt;, List&lt;string&gt;)"/>
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Analyzers.Similarity.similarity.nGramsSimilarityEquationEnum.KunchevaIndex">
+            <summary>
+            The kuncheva index
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.similarity.setAnalysisExtensions.GetSimilarity``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.List{``0}},imbSCI.DataExtraction.Analyzers.Similarity.similarity.nGramsSimilarityEquationEnum)">
+            <summary>
+            Gets the similarity.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sets">The sets.</param>
+            <param name="equationEnum">The equation enum.</param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Analyzers.Similarity.similarity.setAnalysisTools`1">
+            <summary>
+            Static methods for word similarity computation (works with any string)
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Analyzers.Similarity.similarity.setAnalysisTools`1.CustomIsEqual">
+            <summary>
+            Custom function to test equality
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.similarity.setAnalysisTools`1.GetSimilarity(System.Collections.Generic.List{`0},System.Collections.Generic.List{`0},imbSCI.DataExtraction.Analyzers.Similarity.similarity.nGramsSimilarityEquationEnum)">
+            <summary>
+            Computes word similarity
+            </summary>
+            <param name="wordA">The word a.</param>
+            <param name="wordB">The word b.</param>
+            <param name="equationEnum">The equation enum.</param>
+            <param name="nGramSize">Size of the n gram.</param>
+            <param name="nGramMode">The n gram mode.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.similarity.setAnalysisTools`1.GetKunchevaIndex(System.Collections.Generic.List{`0},System.Collections.Generic.List{`0},System.Int32)">
+            <summary>
+            Ratio describes % of uninteruppted n-grams overlap. Example:  "elektromotorni", "motorski" = 5 / 14
+            </summary>
+            <param name="ngrams_A">The ngrams a.</param>
+            <param name="ngrams_b">The ngrams b.</param>
+            <param name="datasetSize">Size of the dataset.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.similarity.setAnalysisTools`1.GetContinualOverlapRatio(System.Collections.Generic.List{`0},System.Collections.Generic.List{`0})">
+            <summary>
+            Ratio describes % of uninteruppted n-grams overlap. Example:  "elektromotorni", "motorski" = 5 / 14
+            </summary>
+            <param name="ngrams_A">The ngrams a.</param>
+            <param name="ngrams_b">The ngrams b.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.similarity.setAnalysisTools`1.getContinualOverlapR(System.Collections.Generic.List{`0},System.Collections.Generic.List{`0})">
+            <summary>
+            Gets the continual overlap r.
+            </summary>
+            <param name="A">a.</param>
+            <param name="B">The b.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.similarity.setAnalysisTools`1.GetJaccardIndex(System.Collections.Generic.List{`0},System.Collections.Generic.List{`0})">
+            <summary>
+            Gets the index of the Jaccard index: number of common ngrams divided by number of total unique ngrams
+            </summary>
+            <param name="ngrams_A">The ngrams a.</param>
+            <param name="ngrams_B">The ngrams b.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.similarity.setAnalysisTools`1.GetDiceCoefficient(System.Collections.Generic.List{`0},System.Collections.Generic.List{`0})">
+            <summary>
+            Gets the index of the Dice coefficient: number of common ngrams divided by number of n-grams in both sets
+            </summary>
+            <param name="ngrams_A">The ngrams a.</param>
+            <param name="ngrams_B">The ngrams b.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.similarity.setAnalysisTools`1.getNGramSet``1(System.Collections.Generic.List{`0},System.Int32,imbSCI.DataExtraction.Analyzers.Similarity.similarity.nGramsModeEnum)">
+            <summary>
+            Breaks the specified sequence of items into n-gram chunks
+            </summary>
+            <param name="items">The items.</param>
+            <param name="N">The n.</param>
+            <param name="mode">The mode.</param>
+            <returns></returns>
+            <exception cref="T:System.Exception">Unexpected Case</exception>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Similarity.similarity.setAnalysisTools`1.getNGrams(System.Collections.Generic.List{System.Collections.Generic.List{`0}},System.Int32,imbSCI.DataExtraction.Analyzers.Similarity.similarity.nGramsModeEnum)">
+            <summary>
+            Breaks the specified sequence into <c>N</c>-gram sub sequences
+            </summary>
+            <param name="sets">The sets.</param>
+            <param name="N">Size of N-grams, e.g. for bigrams: N=2</param>
+            <param name="mode">The slicing mode</param>
+            <returns>
+            Set of NGrams
+            </returns>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Analyzers.Similarity.similarity.SimilarityResultPair`1">
+            <summary>
+            Base structure for similarity computation pair
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Analyzers.Structure.JunctionGraphMetrics`1">
+            <summary>
+            Utility class to analyse graph junctions (nodes with more than one child)
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Structure.JunctionGraphMetrics`1.GetJunctionBlocks(System.Int32,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Gets sets of graph nodes (<see cref="T:imbSCI.DataExtraction.Analyzers.Structure.JunctionPoint`1"/>) with same junction signature (sequence of child names)
+            </summary>
+            <param name="MinFrequency">The minimum frequency - minimal number of same-child-count occurances, before signature comparison</param>
+            <param name="MinJunctionSize">Minimal number of child nodes - size of the junction.</param>
+            <param name="DescendingByFreq">Result set will be given i descending order by frequency</param>
+            <param name="TrimTemplateItems">The <see cref="!:RecordTemplate"/> in <see cref="P:imbSCI.DataExtraction.Analyzers.Structure.JunctionPoint`1.Template"/> will contain <see cref="!:RecordTemplateItem"/>s targeting only first-level child, not leafs</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapBlock.SetLabels(System.Collections.Generic.List{HtmlAgilityPack.HtmlNode})">
+            <summary>
+            Sets the labels.
+            </summary>
+            <param name="node">The node.</param>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapBlock.SetRelativeXPaths">
+            <summary>
+            Sets the relative x paths.
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapBlock.SetAbsoluteXPaths">
+            <summary>
+            Sets the absolute x paths.
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapBlockDetectionFlags.maximizeBlockSize">
+            <summary>
+            Greedy approach
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapBlockDetectionFlags.maximizeDataRelatness">
+            <summary>
+            Results in more blacks with less data points, that are more related 
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapBlockDetectionFlags.BreakByDimensions">
+            <summary>
+            It will split blocks to separate single-column and multi-column data points
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapBlockDetectionFlags.AllowAsimetricMultiColumnDataPoints">
+            <summary>
+            The allow asimetric multi column data points: may contain inuequal number of static (labels) and dynamic (variables) properties
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapBlockDetectionFlags.AllowMultiColumnDataPoints">
+            <summary>
+            Allows multi column data points, having two or more entries wrappet in parent entry
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapEntry">
+            <summary>
+            Defines a data point
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapEntry.GetNumberOfDimensions(System.Boolean)">
+            <summary>
+            Gets the number of dimensions.
+            </summary>
+            <param name="withoutLabels">if set to <c>true</c> [without labels].</param>
+            <returns></returns>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapEntry.Properties">
+            <summary>
+            Subproperties
+            </summary>
+            <value>
+            The columns.
+            </value>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapEntry.SetLeaf(imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionaryEntry,System.Boolean)">
+            <summary>
+            Deploys the DataPoint by graph leaf
+            </summary>
+            <param name="leaf">The leaf.</param>
+            <param name="isDynamic">if set to <c>true</c> [is dynamic].</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapEntry.SetLabel(HtmlAgilityPack.HtmlNode,imbSCI.DataExtraction.Analyzers.Templates.DataPointMapBlock)">
+            <summary>
+            Sets the label.
+            </summary>
+            <param name="node">The node.</param>
+            <param name="block">The block.</param>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapEntry.DisplayName">
+            <summary>
+            Gets or sets the display name.
+            </summary>
+            <value>
+            The display name.
+            </value>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapEntry.value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapEntry.DataPointXPathRoot">
+            <summary>
+            Common root of <see cref="P:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapEntry.LabelXPathRelative"/> and <see cref="P:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapEntry.DataXPathRelative"/>
+            </summary>
+            <value>
+            The data point x path root.
+            </value>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapEntry.LabelXPathRelative">
+            <summary>
+            LabelX path, relative to <see cref="P:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapEntry.DataPointXPathRoot"/>
+            </summary>
+            <value>
+            The label x path relative.
+            </value>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapEntry.DataXPathRelative">
+            <summary>
+            Gets or sets the data x path relative.
+            </summary>
+            <value>
+            The data x path relative.
+            </value>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Analyzers.Templates.XPathValueSet">
+            <summary>
+            Single XPath data pointer
+            </summary>
+            <seealso cref="!:System.Collections.Generic.List&lt;imbSCI.DataExtraction.Analyzers.Data.XPathValueSet&gt;" />
+        </member>
+        <member name="T:imbSCI.DataExtraction.Analyzers.Templates.XPathValueSetForRecord">
+            <summary>
+            Value getter/setter for one block, or row
+            </summary>
+            <seealso cref="!:System.Collections.Generic.List&lt;imbSCI.DataExtraction.Analyzers.Data.XPathValueSet&gt;" />
+        </member>
+        <member name="T:imbSCI.DataExtraction.Analyzers.Templates.XPathValueSetForRecordCollection">
+            <summary>
+            Value setters/getters for collection of blocks
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Extractors.Core.HtmlExtractorBase.UseUniversalConstructors">
+            <summary>
+            Gets or sets a value indicating whether extractor should use the universal meta table constructor. <see cref="P:imbSCI.DataExtraction.Extractors.Core.HtmlExtractorBase.universalMetaTableConstructor"/>
+            </summary>
+            <value>
+              <c>true</c> if [use universal constructors]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Extractors.Core.HtmlExtractorBase.PrepareAndConstruct(imbSCI.DataExtraction.Extractors.Task.TableExtractionTask,System.Collections.Generic.List{imbSCI.DataExtraction.Extractors.Task.TableExtractionChain})">
+            <summary>
+            Prepares the and construct.
+            </summary>
+            <param name="task">The task.</param>
+            <param name="output">The output.</param>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Extractors.DataPointMapExtractor">
+            <summary>
+            Uses <see cref="T:imbSCI.DataExtraction.Analyzers.Templates.DataPointMapBlock"/>s to extract information
+            </summary>
+            <seealso cref="T:imbSCI.DataExtraction.Extractors.Core.HtmlExtractorBase" />
+        </member>
+        <member name="P:imbSCI.DataExtraction.Extractors.Data.HtmlNodeValueExtractionSettings.DefaultNoDataWillcads">
+            <summary>
+            static and autoinitiated object
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Extractors.Detectors.ChunkContentCandidateCollection.ScoreAndSort">
+            <summary>
+            Computes scores and sorts the collection using <see cref="M:imbSCI.DataExtraction.Extractors.Detectors.ChunkDetectorTools.Compare(imbSCI.DataExtraction.Extractors.Detectors.ChunkContentCandidate,imbSCI.DataExtraction.Extractors.Detectors.ChunkContentCandidate)"/> method
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Extractors.Detectors.ChunkDetectorCollection">
+            <summary>
+            Collection of ChunkDetectors, used to detect content blocks with data to extract
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Extractors.Detectors.ChunkDetectorCollection.Detectors">
+            <summary>
+            Gets or sets the detectors.
+            </summary>
+            <value>
+            The detectors.
+            </value>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Extractors.Detectors.ChunkDetectorTools">
+            <summary>
+            Static helper class 
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Extractors.Detectors.ChunkDetectorTools.ChunkDetectorProvider">
+            <summary>
+            static and autoinitiated object
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Extractors.DLTagExtractor.Construct(imbSCI.DataExtraction.SourceData.SourceTable,imbSCI.DataExtraction.Extractors.Task.TableExtractionTask)">
+            <summary>
+            Constructs the specified source table.
+            </summary>
+            <param name="sourceTable">The source table.</param>
+            <param name="task">The task.</param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Extractors.TableDivExtractor">
+            <summary>
+            Extracts data from div table
+            </summary>
+            <seealso cref="!:imbSCI.DataExtraction.MetaExtractor.HtmlExtractorBase" />
+        </member>
+        <member name="T:imbSCI.DataExtraction.Extractors.TableTagExtractor">
+            <summary>
+            Extracts data from regular table tag
+            </summary>
+            <seealso cref="!:imbSCI.DataExtraction.MetaExtractor.HtmlExtractorBase" />
+        </member>
+        <member name="P:imbSCI.DataExtraction.Extractors.Task.TableExtractionChain.authorInfo">
+            <summary>
+            static and autoinitiated object
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Extractors.Task.TableExtractionTask.WriteScoreReporter(imbSCI.Core.files.folders.folderNode)">
+            <summary>
+            Saves file with task execution information
+            </summary>
+            <param name="folder">The folder.</param>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Extractors.Task.TableExtractionTask.multiNodePolicy">
+            <summary>
+            How the task should be performed when more than one HtmlNode was selected by <see cref="P:imbSCI.DataExtraction.Extractors.Task.TableExtractionTask.Query"/>
+            </summary>
+            <value>
+            The multi node policy.
+            </value>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Extractors.Task.TableExtractionTask.Query">
+            <summary>
+            Gets or sets the query.
+            </summary>
+            <value>
+            The query.
+            </value>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Extractors.Task.TableExtractionTask.tableDescription">
+            public MetaTableSchema tableSchema { get; set; }
+        </member>
+        <member name="P:imbSCI.DataExtraction.Extractors.Task.TableExtractionTask.resultTableNamePrefix">
+            <summary>
+            Name prefix - to be used for output table name
+            </summary>
+            <value>
+            The result table name prefix.
+            </value>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Extractors.Task.TableExtractionTaskScore">
+            <summary>
+            Non-production analytics of extraction task results
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Extractors.Task.TableExtractionTaskScore.LastEntry">
+             <summary>
+            Entry before the current
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Extractors.Task.TaskPropertyEntry.Meta">
+            <summary>
+            Reference to meta table property instance
+            </summary>
+            <value>
+            The meta.
+            </value>
+        </member>
+        <member name="M:imbSCI.DataExtraction.MetaEntities.MetaEntity.GetSetter(System.String)">
+            <summary>
+            Gets the setter.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <returns>Found setter or null if no setter found</returns>
+        </member>
+        <member name="T:imbSCI.DataExtraction.MetaEntities.MetaEntityItemSelection">
+            <summary>
+            Helper class that keeps record on currently selected member of MetaEntityNamespace graph
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.MetaEntities.MetaEntityItemSelection.ToString">
+            <summary>
+            Returns path to selected MetaEntity item
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.MetaEntities.MetaEntityTools.CollectRelevantClasses(imbSCI.DataExtraction.MetaEntities.MetaEntityClass,imbSCI.DataExtraction.MetaEntities.MetaEntityNamespaceCollection,System.Boolean)">
+            <summary>
+            Collects all classes from properties and their 
+            </summary>
+            <param name="rootClass">The root class.</param>
+            <param name="namespaces">The namespaces.</param>
+            <param name="includeSelf">if set to <c>true</c> [include self].</param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.DataExtraction.MetaTables.Constructors.UniversalMetaTableConstructor">
+            <summary>
+            Standard MetaTable constructor, used by <see cref="T:imbSCI.DataExtraction.Extractors.Core.IHtmlExtractor"/>s by default
+            </summary>
+            <seealso cref="T:imbSCI.DataExtraction.MetaTables.Constructors.MetaTableConstructorBase" />
+        </member>
+        <member name="M:imbSCI.DataExtraction.MetaTables.Constructors.UniversalMetaTableConstructor.MakeSliceTest(imbSCI.DataExtraction.SourceData.SourceTable,imbSCI.DataExtraction.MetaTables.Descriptors.SourceTableSliceType,System.Int32)">
+            <summary>
+            Performs a test on 
+            </summary>
+            <param name="sourceTable">The source table.</param>
+            <param name="type">The type.</param>
+            <param name="i">The i.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.MetaTables.Constructors.UniversalMetaTableConstructor.Construct(imbSCI.DataExtraction.SourceData.SourceTable,imbSCI.DataExtraction.Extractors.Task.TableExtractionTask,imbSCI.Core.reporting.render.ITextRender)">
+            <summary>
+            Constructs MetaTable from the source data
+            </summary>
+            <param name="sourceTable">The source table.</param>
+            <param name="task">The task.</param>
+            <param name="logger">The logger.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.MetaTables.Core.MetaTable.SetEntries(imbSCI.DataExtraction.SourceData.SourceTable)">
+            <summary>
+            Transforms the scraped content (<see cref="T:imbSCI.DataExtraction.SourceData.SourceTable"/>) into entries
+            </summary>
+            <param name="source">The source.</param>
+        </member>
+        <member name="M:imbSCI.DataExtraction.MetaTables.Core.MetaTable.RefineSchema(imbSCI.DataExtraction.SourceData.Analysis.CellContentAnalysis)">
+            <summary>
+            Allows <see cref="!:schema"/> upgrade after additional analysis of the stored <see cref="P:imbSCI.DataExtraction.MetaTables.Core.MetaTable.entries"/>. This should be called after <see cref="M:imbSCI.DataExtraction.MetaTables.Core.MetaTable.SetEntries(imbSCI.DataExtraction.SourceData.SourceTable)"/>. 
+            </summary>
+            <param name="analyser">Content analyser to be used</param>
+        </member>
+        <member name="T:imbSCI.DataExtraction.MetaTables.Core.MetaTableProperty">
+            <summary>
+            Extracted data point, property 
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.MetaTables.Core.MetaTableProperty.Learn(imbSCI.DataExtraction.MetaTables.Core.MetaTableProperty)">
+            <summary>
+            Learns formatting data from source
+            </summary>
+            <param name="source">The source.</param>
+        </member>
+        <member name="F:imbSCI.DataExtraction.MetaTables.Descriptors.MetaTableInterpretation.singleEntity">
+            <summary>
+            The single entity: table rows contain property identifier and property value. Primary column identifies property, the other sets the value
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.MetaTables.Descriptors.MetaTableInterpretation.multiEntities">
+            <summary>
+            The multi entities: each table row contains data on separate entity, columns represent properties of the entities
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.MetaTables.Descriptors.MetaTableInterpretation.triplets">
+            <summary>
+            The triplets: property names are hidden, table describes data triplets: [0,y] -> [x,y] -> [x,0]
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.MetaTables.Descriptors.MetaTableFormatType.vertical">
+            <summary>
+            Entries are in columns, properties are in rows
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.MetaTables.Descriptors.MetaTableFormatType.horizontal">
+            <summary>
+            The horizontal: properties are in columns, entries are in rows
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.MetaTables.Descriptors.MetaTablePropertyAliasEntry.aliasPropertyNames">
+            <summary>
+            Gets or sets the alias property names.
+            </summary>
+            <value>
+            The alias property names.
+            </value>
+        </member>
+        <member name="M:imbSCI.DataExtraction.MetaTables.Descriptors.MetaTablePropertyAliasList.AddEntries(System.String)">
+            <summary>
+            Adds the entries specified in input string. Returns created entries
+            </summary>
+            <param name="multiLineAliasList">The multi line alias list.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.MetaTables.Descriptors.MetaTablePropertyAliasList.AddEntry(System.String)">
+            <summary>
+            Adds entry from string input. Returns newly created entry or null if no entry created
+            </summary>
+            <param name="commaSeparatedAlias">The comma separated alias.</param>
+            <returns></returns>
+        </member>
+        <member name="P:imbSCI.DataExtraction.MetaTables.Descriptors.SourceTableSliceTestAggregation.Count">
+            <summary>
+            Number of <see cref="T:imbSCI.DataExtraction.MetaTables.Descriptors.SourceTableSliceTest"/> aggregated
+            </summary>
+            <value>
+            The input count.
+            </value>
+        </member>
+        <member name="F:imbSCI.DataExtraction.NodeQuery.Enums.NodeQueryPredicateOperand.AND">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.NodeQuery.Enums.NodeQueryResultOperand.APPEND">
+            <summary>
+            Result of this query will be appended to previous result
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.NodeQuery.Enums.NodeQueryResultOperand.REMOVE">
+            <summary>
+            Any node in the result of this query that has same XPath will be removed from previous result
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.NodeQuery.Enums.NodeQueryResultOperand.OVERLAP">
+            <summary>
+            Only nodes (from previous and current result) with the same XPaths will exist in resulting collection
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.NodeQuery.Enums.NodeQueryResultOperand.DIFFERENCE">
+            <summary>
+            The resulting collection will contain only nodes that are distict for previous and current result
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.NodeQuery.Enums.NodeQueryResultOperand.SET">
+            <summary>
+            Result node collection from second operand becomes the resulting collection. Overwrites existing nodes
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.NodeQuery.Enums.NodeQueryType.xpath">
+            <summary>
+            Performs XPath selection
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.NodeQuery.Enums.NodeQueryType.urlRegex">
+            <summary>
+            Regex over URL
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.NodeQuery.Enums.NodeQueryType.cssSelector">
+            <summary>
+            Uses CSS selector
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.NodeQuery.Enums.NodeQueryType.consoleJS">
+            <summary>
+            JS query selector like: document.querySelector('body > div > div.dx-datagrid-headers.dx-datagrid-content.dx-datagrid-nowrap')
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.NodeQuery.Enums.NodeQueryType.indexSelection">
+            <summary>
+            Simple query, selecting items by index ranges, specified like: 0-3,5,7 (this will select nodes at indexes: 0,1,2,3,5,7). Index out-of-range is allowed.
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.NodeQuery.Evaluators.NodeQueryEvaluatorBase.SetLogger(imbSCI.Core.reporting.render.ITextRender)">
+            <summary>
+            Sets default evaluation logger
+            </summary>
+            <param name="_logger">The logger.</param>
+        </member>
+        <member name="P:imbSCI.DataExtraction.NodeQuery.NodeQueryDefinition.query">
+            <summary>
+            Selector to select the feature
+            </summary>
+            <value>
+            The x path selector.
+            </value>
+        </member>
+        <member name="P:imbSCI.DataExtraction.NodeQuery.NodeQueryDefinition.groupQueries">
+            <summary>
+            Gets or sets the subqueries -- <see cref="P:imbSCI.DataExtraction.NodeQuery.NodeQueryDefinition.query"/> will be ignored if any query definition is set here,
+            </summary>
+            <value>
+            The subqueries.
+            </value>
+        </member>
+        <member name="T:imbSCI.DataExtraction.NodeQuery.NodeQueryEvaluators">
+            <summary>
+            Set of query evaluators, for <see cref="T:imbSCI.DataExtraction.NodeQuery.Enums.NodeQueryType"/>s
+            </summary>
+            <seealso cref="!:System.Collections.Generic.Dictionary&lt;imbSCI.DataExtraction.NodeQuery.NodeQueryType, imbSCI.DataExtraction.NodeQuery.INodeQueryEvaluator&gt;" />
+        </member>
+        <member name="M:imbSCI.DataExtraction.NodeQuery.NodeQueryEvaluators.SetLogger(imbSCI.Core.reporting.render.ITextRender)">
+            <summary>
+            Sets default evaluation logger
+            </summary>
+            <param name="_logger">The logger.</param>
+        </member>
+        <member name="M:imbSCI.DataExtraction.NodeQuery.NodeQueryEvaluators.GetStandardEvaluators">
+            <summary>
+            Gets standard evaluators.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.NodeQuery.NodeQueryEvaluators.Evaluate(imbSCI.DataExtraction.NodeQuery.NodeQueryCollection,imbSCI.DataExtraction.NodeQuery.NodeQueryEvaluationContext)">
+            <summary>
+            Evaluates the specified queries.
+            </summary>
+            <param name="queries">The queries.</param>
+            <param name="context">The context.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.NodeQuery.NodeQueryEvaluators.Evaluate(imbSCI.DataExtraction.NodeQuery.NodeQueryDefinition,imbSCI.DataExtraction.NodeQuery.NodeQueryEvaluationContext)">
+            <summary>
+            Evaluates the specified query.
+            </summary>
+            <param name="query">The query.</param>
+            <param name="context">The context.</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">query - This evaluator collection have no support for query type [" + query.queryType.ToString() + "]</exception>
+        </member>
+        <member name="F:imbSCI.DataExtraction.NodeQuery.NodeQueryRelation.parallel">
+            <summary>
+            The parallel: query will process the same set of nodes like previous query 
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.NodeQuery.NodeQueryRelation.serial">
+            <summary>
+            The serial: query will process result of previous query
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.NodeQuery.NodeQueryResult">
+            <summary>
+            Result of Node query execution
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.SourceData.Analysis.CellContentAnalysis">
+            <summary>
+            Performs content analysis for the source table
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.SourceData.Analysis.CellContentAnalysis.MakeSliceTest(imbSCI.DataExtraction.SourceData.SourceTable,imbSCI.DataExtraction.MetaTables.Descriptors.SourceTableSliceType,System.Int32)">
+            <summary>
+            Performs a test on 
+            </summary>
+            <param name="sourceTable">The source table.</param>
+            <param name="type">The type.</param>
+            <param name="i">The i.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.SourceData.Analysis.CellContentAnalysis.GetDescription(imbSCI.DataExtraction.SourceData.SourceTable)">
+            <summary>
+            Gets the description.
+            </summary>
+            <param name="table">The table.</param>
+            <returns></returns>
+        </member>
+        <member name="F:imbSCI.DataExtraction.SourceData.Analysis.CellContentAnalysis._select_FORMAT_BANKACCOUNTNUMBER">
+            <summary>
+            Regex select FORMAT_BANKACCOUNTNUMBER : \A([\d]{3})\-?([\d]{0,8})\-?([\d]{2})\Z
+            </summary>
+            <remarks>
+            <para>For text: example text</para>
+            <para>Selects: ex</para>
+            </remarks>
+        </member>
+        <member name="M:imbSCI.DataExtraction.SourceData.Analysis.CellContentAnalysis.DetermineContentType(System.String,System.Boolean)">
+            <summary>
+            Determines type of the content.
+            </summary>
+            <param name="cellValue">The cell value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.SourceData.Analysis.CellContentStats.Assign(imbSCI.DataExtraction.SourceData.Analysis.CellContentInfo)">
+            <summary>
+            Processes the specified information point
+            </summary>
+            <param name="info">The information on cell content</param>
+        </member>
+        <member name="P:imbSCI.DataExtraction.SourceData.Analysis.CellContentStats.measuredTypes">
+            <summary>
+            static and autoinitiated object
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.SourceData.Analysis.CellContentStats.Equals(imbSCI.DataExtraction.SourceData.Analysis.CellContentStats)">
+            <summary>
+            Indicates whether the content type frequencies are the same
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>
+            true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
+            </returns>
+        </member>
+        <member name="T:imbSCI.DataExtraction.SourceData.SourceTable">
+            <summary>
+            Temporary table data structure to store raw data loaded from XML or HTML source
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.SourceData.SourceTable.Height">
+            <summary>
+            Number of rows
+            </summary>
+            <value>
+            The height.
+            </value>
+        </member>
+        <member name="P:imbSCI.DataExtraction.SourceData.SourceTable.Width">
+            <summary>
+            Number of cells per row
+            </summary>
+            <value>
+            The width.
+            </value>
+        </member>
+        <member name="P:imbSCI.DataExtraction.SourceData.SourceTable.Item(System.Int32,System.Int32)">
+            <summary>
+            Gets the <see cref="T:imbSCI.DataExtraction.SourceData.SourceTableCell"/> at specified row <c>y</c> and column <c>x</c>
+            </summary>
+            <value>
+            The <see cref="T:imbSCI.DataExtraction.SourceData.SourceTableCell"/>.
+            </value>
+            <param name="x">Column index</param>
+            <param name="y">Row index</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.SourceData.SourceTable.GetCell(System.Int32,System.Int32)">
+            <summary>
+            Gets cell at given coordinates. If cell does not exist, returns null
+            </summary>
+            <param name="x">The x.</param>
+            <param name="y">The y.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.SourceData.SourceTable.GetContentCells(System.Boolean)">
+            <summary>
+            Gets the content cells.
+            </summary>
+            <param name="ByColumns">if set to <c>true</c> [by columns].</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.SourceData.SourceTable.GetValue``1(System.Int32,System.Int32)">
+            <summary>
+            Gets the value. If cell does not exist, returns default value for {T}
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="x">The x - index of column</param>
+            <param name="y">The y - index of row</param>
+            <returns></returns>
+        </member>
+        <member name="P:imbSCI.DataExtraction.SourceData.SourceTable.Cells">
+            <summary>
+            y,x matrix: [row][column]
+            </summary>
+            <value>
+            The cells.
+            </value>
+        </member>
+        <member name="M:imbSCI.DataExtraction.SourceData.SourceTable.GetDataTable">
+            <summary>
+            Gets simple datatable output, for diagnostic purposes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.SourceData.SourceTable.Save(System.String)">
+            <summary>
+            Saves the specified filepath.
+            </summary>
+            <param name="filepath">The filepath.</param>
+        </member>
+        <member name="F:imbSCI.DataExtraction.SourceData.SourceTableCase.verticalOrientation">
+            <summary>
+            The vertical orientation: variableHeight,stableWidth
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.SourceData.SourceTableCase.horizontalOrientation">
+            <summary>
+            The horizontal orientation: stableHeight, variableWidth
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.SourceData.SourceTableCell">
+            <summary>
+            Data cell in source table
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.SourceData.SourceTableCell.SourceValueString">
+            <summary>
+            Gets or sets the source value string (XML, HTML, JSON... or whatever was the source for this cell) - inner XML
+            </summary>
+            <value>
+            The source value string.
+            </value>
+        </member>
+        <member name="T:imbSCI.DataExtraction.SourceData.SourceTableDescriptionAggregation">
+            <summary>
+            Utility class for <see cref="T:imbSCI.DataExtraction.SourceData.SourceTable"/> content analysis
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.SourceData.SourceTableDescriptionAggregation.IsSameSize(imbSCI.DataExtraction.SourceData.SourceTableDescriptionAggregation)">
+            <summary>
+            Determines whether [is same size] [the specified other].
+            </summary>
+            <param name="other">The other.</param>
+            <returns>
+              <c>true</c> if [is same size] [the specified other]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="P:imbSCI.DataExtraction.SourceData.SourceTableDescriptionAggregation.Count">
+            <summary>
+            Number of <see cref="T:imbSCI.DataExtraction.SourceData.SourceTableDescription"/> instances processed in this aggregation
+            </summary>
+            <value>
+            The count.
+            </value>
+        </member>
+        <member name="T:imbSCI.DataExtraction.SourceData.SpanTransformationRule">
+            <summary>
+            <see cref="T:imbSCI.DataExtraction.SourceData.TaskSelectionSpan"/> creation rule
+            </summary>
+            <seealso cref="T:imbSCI.Data.interfaces.IObjectWithName" />
+        </member>
+        <member name="T:imbSCI.DataExtraction.SourceData.SpanTransformationRuleSet">
+            <summary>
+            Set of <see cref="T:imbSCI.DataExtraction.SourceData.SpanTransformationRule"/>s
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.SourceData.SpanTransformationRuleSet.Add(System.String)">
+            <summary>
+            Creates new <see cref="T:imbSCI.DataExtraction.SourceData.SpanTransformationRule"/>
+            </summary>
+            <param name="name">The name.</param>
+            <returns></returns>
+        </member>
+        <member name="P:imbSCI.DataExtraction.SourceData.SpanTransformationRuleSet.items">
+            <summary>
+            Rules confained in this set
+            </summary>
+            <value>
+            The items.
+            </value>
+        </member>
+        <member name="T:imbSCI.DataExtraction.SourceData.TaskSelectionSpan">
+            <summary>
+            Sequence of <see cref="T:imbSCI.DataExtraction.Extractors.Task.TableExtractionTask"/>s that will be transformed into single task
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.SourceData.TaskSelectionSpanCollection">
+            <summary>
+            Collection of <see cref="T:imbSCI.DataExtraction.SourceData.TaskSelectionSpan"/>s
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.TextExtraction.textRetriveEngine">
+            <summary>
+            Mehanizam za preuzimanje cistog teksta iz HTML-a
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.TextExtraction.textRetriveEngine.checkNode(System.Xml.XPath.XPathNavigator,imbSCI.DataExtraction.TextExtraction.textRetriveSetup)">
+            <summary>
+            Proverava da li je prosledjeni node u saglasju sa podesavanjima
+            </summary>
+            <param name="source"></param>
+            <param name="settings"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.TextExtraction.textRetriveEngine.retriveText(System.Xml.XPath.XPathNavigator,imbSCI.DataExtraction.TextExtraction.textRetriveSetup)">
+            <summary>
+            2014c> novi mehanizam za tekstualnu reprezentaciju ucitanog dokumenta
+            </summary>
+            <param name="source"></param>
+            <param name="settings"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.TextExtraction.textRetriveEngine.deploySpacing(System.String,System.Xml.XPath.XPathNavigator,imbSCI.DataExtraction.TextExtraction.textRetriveSetup)">
+            <summary>
+            Primenjuje podesavanja spejsinga - simulacija HTML strukture
+            </summary>
+            <param name="insert"></param>
+            <param name="parentTag"></param>
+            <param name="settings"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.TextExtraction.textRetriveEngine.retriveText(System.Xml.XmlNode,imbSCI.DataExtraction.TextExtraction.textRetriveSetup)">
+            <summary>
+            2013A> GLAVNI mehaniza za preuzimanje TXT reprezentacije XmlNoda *podr�ani i multilevel
+            </summary>
+            <param name="source"></param>
+            <param name="settings"></param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.DataExtraction.TextExtraction.textRetriveSetup">
+            <summary>
+            Podešavanja vezana za vađenje teksta iz XmlNode-a, odnosno iz HTML-a
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.insertNewLine">
+            <summary>
+            Da li da ubaci dodatni newLine posle svakog taga
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.divExtractMode">
+            <summary>
+            Rezim obrade za
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.spanExtractMode">
+            <summary>
+            Rezim obrade za
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.aExtractMode">
+            <summary>
+            Rezim obrade za
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.liExtractMode">
+            <summary>
+            Rezim obrade za
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.luExtractMode">
+            <summary>
+            Rezim obrade za
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.tdExtractMode">
+            <summary>
+            Rezim obrade za
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.trExtractMode">
+            <summary>
+            Rezim obrade za
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.pExtractMode">
+            <summary>
+            Rezim obrade za
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.headingExtractMode">
+            <summary>
+            Rezim obrade za
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.commentExtractMode">
+            <summary>
+            Rezim obrade za
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.tableExtractMode">
+            <summary>
+            Kako se ponasa kada naleti na TABLE tag - obrada
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.metaSpaceExtractMode">
+            <summary>
+            Rezim obrade za
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.metaExtractMode">
+            <summary>
+            Rezim obrade za
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.linksExtractMode">
+            <summary>
+            Koje vrednosti iz linka prikazuje u extraktu :: Rezim obrade za
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.inlineSpace">
+            <summary>
+            Koliko da odmakne kada je inline opcija
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.doExportScripts">
+            <summary>
+            Da li text export sadrži SCRIPT tagove?
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.doExportStyles">
+            <summary>
+            Da li da izvozi definicije stilova
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.doExportTitle">
+            <summary>
+            Da li na pocetku da prikaze TITLE
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.doExportComments">
+            <summary>
+            Da li izvozi komentare
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.doCompressNewLines">
+            <summary>
+            Da li da kompresuje nove linije? svako pojavljivanje 3 nl za redom pretvara u 2nl
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.doRetrieveChildren">
+            <summary>
+            Da li vraca text i za child nodove
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.doHtmlCleanUp">
+            <summary>
+            Da li da ocisti HTML nakon izvlacenja sadrzaja?
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TextExtraction.textRetriveSetup.doCyrToLatTransliteration">
+            <summary>
+            Da li da izvrsi transliteraciju iz Cyr u Lat
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.TextExtraction.textRetrive_structure">
+            <summary>
+            Kako se pona�a prema: div, span, li, ul, headings, td, tr
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.TextExtraction.textRetrive_structure.normal">
+            <summary>
+            prepi�e vrednost i lupi enter
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.TextExtraction.textRetrive_structure.newLine">
+            <summary>
+            doda jo� jedan newLine gore i dole
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.TextExtraction.textRetrive_structure.spaceInline">
+            <summary>
+            Ostane u liniji, samo doda space
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Tools.ExtractorTools">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Tools.ExtractorTools.regexWords">
+            <summary>
+            static and autoinitiated object
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Tools.ExtractorTools.descriptionTagPriorityList">
+            <summary>
+            static and autoinitiated object
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Tools.ExtractorTools.headingTagPriorityList">
+            <summary>
+            static and autoinitiated object
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Tools.ExtractorTools.SelectHeading(HtmlAgilityPack.HtmlNode,System.Int32,System.Int32)">
+            <summary>
+            Selects a heading node
+            </summary>
+            <param name="node">The node.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Tools.ExtractorTools.GetCommonPathRoot(System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            Returns common path, shared between all <c>paths</c>
+            </summary>
+            <param name="paths">The paths.</param>
+            <param name="delimiter">The delimiter.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Tools.ExtractorTools.GetCommonStringRoot(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Gets the common string root.
+            </summary>
+            <param name="paths">The paths.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Tools.ExtractorTools.SetSettingsFromData(imbSCI.DataExtraction.Extractors.Core.IHtmlExtractor,imbSCI.Core.math.classificationMetrics.reportExpandedData)">
+            <summary>
+            Sets the settings from data.
+            </summary>
+            <param name="Extractor">The extractor.</param>
+            <param name="settings">The settings.</param>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Tools.ExtractorTools.GetSettingsFromExtractor(imbSCI.DataExtraction.Extractors.Core.IHtmlExtractor)">
+            <summary>
+            Gets the settings from extractor.
+            </summary>
+            <param name="Extractor">The extractor.</param>
+            <returns></returns>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Tools.ExtractorTools._select_isASCIILetters">
+            <summary>
+            Regex select ASCIILetters : ([a-zA-Z]+)
+            </summary>
+            <remarks>
+            <para>For text: example text</para>
+            <para>Selects: ex</para>
+            </remarks>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Tools.ExtractorTools.isASCIILetters(System.String)">
+            <summary>
+            Test if input matches ([a-zA-Z]+)
+            </summary>
+            <param name="input">String to test</param>
+            <returns>IsMatch against _select_isASCIILetters</returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Tools.ExtractorTools.ValueCleanUp(System.String,System.Boolean)">
+            <summary>
+            Cleans string value extracted from HTML/XML.
+            </summary>
+            <param name="input">The input.</param>
+            <param name="preserveNewLines">if set to <c>true</c> [preserve new lines].</param>
+            <returns></returns>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Tools.ExtractorTools.HtmlExtractorProvider">
+            <summary>
+            Type provider for Document ScoreModel factors
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Tools.HtmlReduction.HtmlDocumentReductionTool">
+            <summary>
+            Performs HTML document reduction, dataset page count and contectivity reduction
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Tools.HtmlReduction.HtmlDocumentReductionTool.ReduceDocument(System.String)">
+            <summary>
+            Reduces the document.
+            </summary>
+            <param name="htmlInput">The HTML input.</param>
+            <param name="settings">The settings.</param>
+            <param name="logger">The logger.</param>
+            <returns></returns>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Tools.HtmlSourceAndUrl.filepath">
+            <summary>
+            Local filesystem location (if any)
+            </summary>
+            <value>
+            The filepath.
+            </value>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Tools.HtmlSourceAndUrlCollection.Count">
+            <summary>
+            Number of items, including all subcollections
+            </summary>
+            <value>
+            The count.
+            </value>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Tools.HtmlSourceAndUrlCollection.GetAllItems">
+            <summary>
+            Gets all items - including the subcollection treee
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Tools.HtmlSourceTools.Save(imbSCI.DataExtraction.Tools.HtmlSourceAndUrl,imbSCI.Core.files.folders.folderNode,System.String)">
+            <summary>
+            Saves the specified item
+            </summary>
+            <param name="item">The item.</param>
+            <param name="folder">The folder.</param>
+            <param name="filename">The filename.</param>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Tools.HtmlSourceTools.GetDocumentNodeDictionary(System.Collections.Generic.IEnumerable{imbSCI.DataExtraction.Tools.HtmlSourceAndUrl})">
+            <summary>
+            Sources indexed by root node of their documents
+            </summary>
+            <param name="sources">The sources.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Tools.HtmlSourceTools.LoadAll(imbSCI.Core.files.folders.folderNode,System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Loads all items from folder
+            </summary>
+            <param name="folder">The folder.</param>
+            <param name="filename">The filename.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Tools.HtmlSourceTools.Load(System.String,imbSCI.DataExtraction.Tools.HtmlSourceAndUrl)">
+            <summary>
+            Loads HTML or URL information from specified filepath, and stores to <c>output</c>
+            </summary>
+            <param name="filepath">The filepath.</param>
+            <param name="output">The output.</param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Tools.XPathSelectors.XPathSelector">
+            <summary>
+            Utility class for finding optimal XPath query
+            </summary>
+            <seealso cref="T:imbSCI.DataExtraction.Tools.XPathSelectors.XPathSelectorItem" />
+        </member>
+        <member name="M:imbSCI.DataExtraction.Tools.XPathSelectors.XPathSelector.ToString">
+            <summary>
+            Renders XPath selector
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Tools.XPathSelectors.XPathSelectorItem.RenderAttributeSelector">
+            <summary>
+            Renders square bracket part of XPath query, like: [@href='' and @target='_blank']
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Tools.XPathSelectors.XPathSelectorTools">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Tools.XPathSelectors.XPathSelectorTools.FindSelector(HtmlAgilityPack.HtmlNode,System.Int32,System.Int32)">
+            <summary>
+            Finds the selector.
+            </summary>
+            <param name="node">The node.</param>
+            <param name="targetCount">The target count.</param>
+            <param name="i_max">The i maximum.</param>
+            <returns></returns>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Tools.XPathTools._select_XPathNodeName">
+            <summary>
+            Regex select XPathNodeName : ([a-zA-Z]+)
+            </summary>
+            <remarks>
+            <para>For text: example text</para>
+            <para>Selects: ex</para>
+            </remarks>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Tools.XPathTools.GetFirstParent(HtmlAgilityPack.HtmlNode,System.Func{HtmlAgilityPack.HtmlNode,System.Boolean},System.Boolean,System.Int32)">
+            <summary>
+            Gets the first parent meeting specified criteria
+            </summary>
+            <param name="node">The node.</param>
+            <param name="criteria">The criteria.</param>
+            <param name="skipSelf">if set to <c>true</c> [skip self].</param>
+            <param name="i_limit">The i limit.</param>
+            <returns>null if no parent matched</returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Tools.XPathTools.GetFirstBranchingNode(imbSCI.Data.collection.graph.graphWrapNode{imbSCI.DataExtraction.Analyzers.Data.LeafNodeDictionaryEntry},System.Collections.Generic.List{System.String})">
+            <summary>
+            Gets the first branching node, starting from root to leafs. Returns the first branching node (with name other then specified in <c>NodeNameToSkip</c> or leaf (if reached) 
+            </summary>
+            <param name="graph">The graph.</param>
+            <param name="NodeNameToSkip">The node name to skip.</param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.DataExtraction.TypeEntities.ModelElementRelationDictionary`2">
+            <summary>
+            Initiated dictionary
+            </summary>
+            <typeparam name="TA">The type of a.</typeparam>
+            <typeparam name="TB">The type of the b.</typeparam>
+        </member>
+        <member name="T:imbSCI.DataExtraction.TypeEntities.TypedObjectProvider">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:imbSCI.Data.interfaces.IObjectWithName" />
+        </member>
+        <member name="M:imbSCI.DataExtraction.TypeEntities.TypedObjectWorkshop.ObjectFromMetaEntity(imbSCI.DataExtraction.MetaEntities.MetaEntity,System.Object,imbSCI.DataExtraction.TypeEntities.TypedObjectProvider)">
+            <summary>
+            Objects from meta entity.
+            </summary>
+            <param name="entity">The entity.</param>
+            <param name="output">The output.</param>
+            <param name="provider">The provider.</param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.DataExtraction.TypeEntities.TypePropertyMap">
+            <summary>
+            Instanced property map, ready  for data objects construction
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.TypeEntities.TypePropertyMap.TypeUIDProperty">
+            <summary>
+            If set - it will enable objects synchronization via UID value
+            </summary>
+            <value>
+            The type uid property.
+            </value>
+        </member>
+        <member name="M:imbSCI.DataExtraction.TypeEntities.TypePropertyMap.SetObjectByMetaEntitySetters(imbSCI.DataExtraction.MetaEntities.MetaEntity,System.Object,System.Boolean)">
+            <summary>
+            Sets values from <see cref="P:imbSCI.DataExtraction.MetaEntities.MetaEntity.Setters"/> items of <c>MetaEntity</c>
+            </summary>
+            <param name="entity">The entity.</param>
+            <param name="existing">The existing.</param>
+            <param name="OverwriteExisting">if set to <c>true</c> [overwrite existing].</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.TypeEntities.TypePropertyMap.SetObjectByMetaEntry(imbSCI.DataExtraction.MetaTables.Core.MetaTableEntry,imbSCI.DataExtraction.MetaTables.Core.MetaTable,System.Object,System.Boolean)">
+            <summary>
+            Sets the object by entry from MetaTable
+            </summary>
+            <param name="entry">The entry.</param>
+            <param name="input">The input.</param>
+            <param name="existing">The existing.</param>
+            <param name="OverwriteExisting">if set to <c>true</c> [overwrite existing].</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.TypeEntities.TypePropertyMap.SetObjectByMetaEntry``1(imbSCI.DataExtraction.MetaTables.Core.MetaTableEntry,``0,System.Boolean)">
+            <summary>
+            Sets the object by meta entry.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entry">The entry.</param>
+            <param name="existing">The existing.</param>
+            <param name="OverwriteExisting">if set to <c>true</c> [overwrite existing].</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.TypeEntities.TypePropertyMap.GetObjectByUID``1(System.Collections.Generic.List{``0})">
+            <summary>
+            Maps input objects into UID based dictionary
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="input">The input.</param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.DataExtraction.TypeEntities.TypePropertyMapDefinitionItem">
+            <summary>
+            Type Property link definition
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Validation.TaskValidation.TaskValidationResultCollection.FinalizeValidation">
+            <summary>
+            Finalizes the validation, clears task score data
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.collectionTestMode.all">
+            <summary>
+            Svi moraju da budu TRUE
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.collectionTestMode.any">
+            <summary>
+            Samo jedan mora da bude TRUE
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Xml.collectRelatives">
+            <summary>
+            Načini prikupljanja relativnih nodova
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.collectRelatives.endNodes">
+            <summary>
+            Samo krajnje nodove vraća
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.collectRelatives.upToLevel">
+            <summary>
+            Nodove do određenog nivoa
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.collectRelatives.downToLevel">
+            <summary>
+            Nodove od kraja u nazad
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.collectRelatives.onLevel">
+            <summary>
+            Nodove na određenom nivou
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.collectRelatives.childs">
+            <summary>
+            Direktnu decu
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.collectRelatives.brothers">
+            <summary>
+            Bratske nodove (isti parent)
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.collectRelatives.parentNodes">
+            <summary>
+            Roditelje do određene dubine
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.collectRelatives.relatives">
+            <summary>
+            Sve rođake u nazad do određene dubine
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Xml.enums.imbCharSets">
+            <summary>
+            Setovi karaktera koji se koriste za obradu stringa
+            [prevazidjeno]
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Xml.enums.imbNodeValueSource">
+            <summary>
+            Koji podatak vadi iz XML Nodea
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.enums.imbNodeValueSource.tagName">
+            <summary>
+            Ime HTML taga
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.enums.imbNodeValueSource.innerText">
+            <summary>
+            Unutra�nji tekst
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.enums.imbNodeValueSource.outerText">
+            <summary>
+            Spolja�nji tekst
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.enums.imbNodeValueSource.allInnerText">
+            <summary>
+            Sav tekst iz nodea
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.enums.imbNodeValueSource.attLine">
+            <summary>
+            Linija sa atributima
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.enums.imbNodeValueSource.JSON">
+            <summary>
+            Konvertuje u JSON objekat
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.enums.imbNodeValueSource.MPS">
+            <summary>
+            Konvertuje u MPS zapis
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Xml.enums.indexOps">
+            <summary>
+            Operacije pomoću Liste indeksa
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.enums.indexOps.pass">
+            <summary>
+            Vraća samo one koji su indeksirani
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.enums.indexOps.remove">
+            <summary>
+            Vraća samo one koji nisu indeksirani
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Xml.enums.queryEngine">
+            <summary>
+            Odabir engine-a za vr�enje upita
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Xml.imbAdvancedXPath">
+            <summary>
+            imbVeles napredni xPath mehanizam (2013a)
+            </summary>
+            <remarks>
+            Nema upotrebu u novijem queryXPath mehanizmu (2014)
+            </remarks>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbAdvancedXPath.xPathExecute(System.String,System.Xml.XPath.IXPathNavigable,imbSCI.DataExtraction.Xml.imbNamespaceSetup,imbSCI.DataExtraction.Xml.enums.queryEngine)">
+            <summary>
+            2014c: glavni poziv za izvrsavanje xPath upita nad izvorom - ne vrsi lokalizaciju putanje
+            </summary>
+            <param name="xPath"></param>
+            <param name="source"></param>
+            <param name="ns"></param>
+            <param name="engine"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbAdvancedXPath.xPathExecution(System.String,System.Xml.XmlNode,imbSCI.DataExtraction.Xml.imbNamespaceSetup,imbSCI.DataExtraction.Xml.enums.queryEngine,System.Boolean,System.Int32)">
+            <summary>
+            2013a: Vrši xPath upit i vraća onaj element koji je definisan u Index parametru.
+            </summary>
+            <param name="xPath"></param>
+            <param name="source"></param>
+            <param name="nsSetup"></param>
+            <param name="engine"></param>
+            <param name="trimPathWithSource"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbAdvancedXPath.xPathExecution(System.String,System.Xml.XmlNode,imbSCI.DataExtraction.Xml.imbNamespaceSetup,imbSCI.DataExtraction.Xml.enums.queryEngine,System.Boolean)">
+            <summary>
+            GLAVNI MEHANIZAM - low-level
+            </summary>
+            <param name="xPath"></param>
+            <param name="source"></param>
+            <param name="nsSetup"></param>
+            <param name="engine"></param>
+            <param name="report"></param>
+            <returns></returns>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Xml.imbNamespaceSetup.namespaceManager">
+            <summary>
+            XmlNamespace
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Xml.imbNamespaceSetup.nsPrefix">
+            <summary>
+            Prefix za namespace
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Xml.imbNamespaceSetup.nsSourceUrl">
+            <summary>
+            Putanja za dati namespace
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Xml.imbStringIndexWorks">
+            <summary>
+            Indeksne operacije nad stringom
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbStringIndexWorks.extendKeys``1(``0,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            2014C> prosiruje listu kljuceva za varijante
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="input"></param>
+            <param name="lowLetters"></param>
+            <param name="capLetters"></param>
+            <param name="removeDouble"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbStringIndexWorks.imbMembersToStringLine(System.Collections.Generic.IEnumerable{System.Object},System.Int32,System.String,System.String,System.String,System.Boolean,System.String,System.String)">
+            <summary>
+            Sve "clanove" objekata u nizu dodaje. Ako je limit -1, onda nema limita. Ako je displayProperty "" onda prikazuje sam objekat prikazuje sa .ToString().
+            </summary>
+            <param name="input">Niz objekata</param>
+            <param name="limit">Koliko članova najviše da prikaže? Ako je limit -1, onda nema limita. Ako prekine niz koristiće endSufix na kraju</param>
+            <param name="displayProperty">Koji property da prikaže od selektovanog objekta. Podržane su putanje (prop1.prop2.prop3), ako je "" onda će prikazati sam objekat preko .ToString()</param>
+            <param name="spliter">Znak ili string koji stavlja između elemenata niza</param>
+            <param name="endSufix">Znak ili string koji stavlja ako prekine niz usled prekoračenja Limita</param>
+            <param name="eachItemPrefix">Dodaje ispred svakog itema</param>
+            <param name="eachItemSufix">Dodaje posle svakog itema</param>
+            <returns>Sređen string</returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbStringIndexWorks.imbGetFirstValue(System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            Vraća prvu vrednost u listi strigova - može se doradi i na univerzalni nivo
+            </summary>
+            <param name="input"></param>
+            <param name="def"></param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Xml.imbXmlCommonTools">
+            <summary>
+            Klasa za osnovne operacije nad xmlNode objektima
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.imbToList(System.Xml.XmlNodeList)">
+            <summary>
+            Konvertuje XmlNodeList u List XmlNode
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.getMPSRows(System.Collections.Generic.List{System.Xml.XmlNode},System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Vraca listu MPS redova
+            </summary>
+            <param name="source"></param>
+            <param name="pathOfParent">Path prefix</param>
+            <param name="ignoreAttributes"></param>
+            <param name="ignoreChild"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.getMPSRow(System.Xml.XmlNode,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Vraca kompletan MPS row na osnovu prosledjenog XmlNodea
+            </summary>
+            <param name="source"></param>
+            <param name="pathOfParent">Path prefix</param>
+            <param name="ignoreAttributes"></param>
+            <param name="ignoreChild"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.getMPSRow(System.Collections.Generic.List{System.Xml.XmlNode},System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Vraca kompletan MPS row na osnovu prosledjenog XmlNodea
+            </summary>
+            <param name="source"></param>
+            <param name="pathOfParent">Path prefix</param>
+            <param name="ignoreAttributes"></param>
+            <param name="ignoreChild"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.getMPSLine(System.Xml.XmlNode,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Vraca MPS line za jedan node - bez row wrappera
+            </summary>
+            <param name="source"></param>
+            <param name="pathOfParent">Path prefix</param>
+            <param name="ignoreAttributes"></param>
+            <param name="ignoreChild"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.getNodeValueUniversal(System.Xml.XPath.IXPathNavigable,System.String,System.Boolean)">
+            <summary>
+            Metod vraca vrednost za node - prema @dataSource name iz #nodeValueSource# ili prema istoimenom atributu ako nema @
+            </summary>
+            <param name="source"></param>
+            <param name="dataSource"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.getNodeValues(System.Collections.Generic.IEnumerable{System.Xml.XmlNode},imbSCI.DataExtraction.Xml.enums.imbNodeValueSource,System.String)">
+            <summary>
+            Vraća string sa NodeValue vrednostima za svaki XmlNode iz liste
+            </summary>
+            <param name="source">Izvor</param>
+            <param name="dataSource">Koji podatak se koristi</param>
+            <param name="nodeSufix">Opcioni dodatak na kraju svakog nodea</param>
+            <returns>String sa svim vrednostima</returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.getNodeDataSourceMulti(System.Xml.XPath.IXPathNavigable,System.String,System.Boolean)">
+            <summary>
+            2013a: U dataSourceTemplate popunjava podatke na osnovu zadatih dataSource-a
+            </summary>
+            <param name="source"></param>
+            <param name="dataSourceTemplate">Ako ne nadje podatak ostavice datasource poziv</param>
+            <param name="leaveDataSourceMark">Da li da ostavi data source mark u slucaju da ne postoji atribut</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.getNodeDataSourceAutomatic(System.Xml.XPath.IXPathNavigable,System.Boolean)">
+            <summary>
+            2013a: vraća reprezentativnu vrednost grane u skladu sa njenom definicijom !
+            Ovo je low level i treba koristiti textRetriveEngine
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.getNodeDataSourceValue(System.Xml.XPath.IXPathNavigable,imbSCI.DataExtraction.Xml.enums.imbNodeValueSource,System.Boolean)">
+            <summary>
+            Izvlaci String value iz xmlNode-a prema zadatom dataSource-u. Ako nije pronadjen dataSource, onda pretpostavlja da je rec o atributu
+            </summary>
+            <param name="source">Node iz kojeg vadi podatak</param>
+            <param name="dataSource">Koji podatak vadi</param>
+            <param name="leaveDataSourceMark">Da li ispisuje odakle je uzeta vrednost</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.getNodeDataSourceValue(System.Xml.XPath.IXPathNavigable,System.String,System.Boolean)">
+            <summary>
+            Izvlaci String value iz xmlNode-a prema zadatom dataSource-u. Ako nije pronadjen dataSource, onda pretpostavlja da je rec o atributu
+            </summary>
+            <param name="source">Node iz kojeg vadi podatak</param>
+            <param name="dataSource">Koji podatak vadi</param>
+            <param name="leaveDataSourceMark">Da li ispisuje odakle je uzeta vrednost</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.getAttributeValue(System.Xml.XmlNode,System.String)">
+            <summary>
+            Vraca vrednost attributa
+            </summary>
+            <param name="source"></param>
+            <param name="attributeName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.getAttributeValue(System.Xml.XPath.XPathNavigator,System.String)">
+            <summary>
+            Vraca vrednost attributa
+            </summary>
+            <param name="source"></param>
+            <param name="attributeName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.getAttributeLine(System.Xml.XmlNode)">
+            <summary>
+            Vraca liniju atributa
+            </summary>
+            <param name="node"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.getSubnodeString(System.Xml.XmlNode)">
+            <summary>
+            Prikuplja sav vidljiv tekst iz nodea -
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.convertXml(System.Xml.XmlDocument)">
+            <summary>
+            Konvertuje XmlDocument u XPathDocument
+            </summary>
+            <param name="input">XmlDocument izvor</param>
+            <returns>XPathDocument</returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.compareAttributeValue(System.Xml.XmlNode,System.String,System.String,imbSCI.Core.extensions.text.stringMatchPolicy,imbSCI.DataExtraction.Xml.collectionTestMode)">
+            <summary>
+            Testira da li se u prosledjenom nodeu poklapa bar jedna vrednost attributa
+            </summary>
+            <param name="source">Node koji se testira</param>
+            <param name="attributeNames">DList spisak atributa ili @dataSource</param>
+            <param name="attributeValues">DList spisak vrednosti za svaki od atributa - redosled je bitan</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.compareAttributeValue(System.Xml.XmlNode,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},imbSCI.Core.extensions.text.stringMatchPolicy,imbSCI.DataExtraction.Xml.collectionTestMode)">
+            <summary>
+            Testira da li se u prosledjenom nodeu poklapa bar jedna vrednost attributa
+            </summary>
+            <param name="source">Node koji se testira</param>
+            <param name="attNames">Lista imena atributa / odnosno specijalnih oznaka za izvor podatka</param>
+            <param name="attValues">Lista vrednosti za svaki od imena atributa - prema istom redosledu</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.filterNodeList(System.Collections.Generic.List{System.Xml.XmlNode},System.String,System.String,imbSCI.Core.extensions.text.stringMatchPolicy,imbSCI.DataExtraction.Xml.collectionTestMode,System.Boolean)">
+            <summary>
+            Filtriranje liste XML nodova na osnovu zadate liste ključnih reči i vrednosti
+            </summary>
+            <param name="output">Lista XMLNodes koju će filtrirati komanda </param>
+            <param name="attributeNames">MultiOps spisak izvora vrednosti - imena atributa odnosno specijalne oznake</param>
+            <param name="attributeValues">MultiOps spisak vrednsoti za svaki od imena atributa / izvora. Redosled je važan.</param>
+            <param name="matchPolicy">Vrsta testa vrednosti</param>
+            <param name="testMode">Kriterijum za ceo skup</param>
+            <param name="isInverted">Da li da koristi inverzni kriterijum</param>
+            <returns>Filtirana lista</returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.filterNodeList(System.Collections.Generic.List{System.Xml.XmlNode},System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},imbSCI.Core.extensions.text.stringMatchPolicy,imbSCI.DataExtraction.Xml.collectionTestMode,System.Boolean)">
+            <summary>
+            Filtriranje liste XML nodova na osnovu zadate liste ključnih reči i vrednosti
+            </summary>
+            <param name="output">Lista XMLNodes koju će filtrirati komanda </param>
+            <param name="attributeNames">Lista imena atributa odnosno specijalne oznake</param>
+            <param name="attributeValues">Lista vrednosti svaki od imena atributa / izvora. Redosled je važan.</param>
+            <param name="matchPolicy">Vrsta testa vrednosti</param>
+            <param name="testMode">Kriterijum za ceo skup</param>
+            <param name="isInverted">Da li da koristi inverzni kriterijum</param>
+            <returns>Filtirana lista</returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.filterNodeList(System.String,System.Collections.Generic.List{System.Xml.XmlNode})">
+            <summary>
+            Vraca listu XmlNode-a koja odgovara definiciji indeksa
+            </summary>
+            <param name="indexes">Definicija indexa u string formatu</param>
+            <param name="input">Ulazna lista</param>
+            <returns>Filtriranu listu</returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.filterNodeList(System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Xml.XmlNode})">
+            <summary>
+            Vraca listu XmlNode-a prema datom spisku indeksa
+            </summary>
+            <param name="indexes">Lista indeksa</param>
+            <param name="input">Ulazna lista</param>
+            <returns>Filtrirana lista</returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.FindNamespacePrefix(System.Xml.XmlNamespaceManager)">
+            <summary>
+            Pronalazi namespace prefix
+            </summary>
+            <param name="nsManager"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.FindLocalXPath(System.Xml.XmlNode,System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <summary>
+            Pronalazi lokalni XPath
+            </summary>
+            <param name="node"></param>
+            <param name="parentNode"></param>
+            <param name="nsManager"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.FindXPath(System.Xml.XmlNode,System.String)">
+            <summary>
+            Vraca xPath
+            </summary>
+            <param name="node"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.getXPathName(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <summary>
+            Vraća samo sopstveni XPath element, odnosno ime XML nodea
+            </summary>
+            <param name="node"></param>
+            <param name="ns"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.FindXPath(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <summary>
+            Vraca XPath putanju prosledjenog nodea
+            </summary>
+            <param name="node"></param>
+            <param name="nsManager"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlCommonTools.FindAllXPaths(System.Xml.XmlNode,imbSCI.DataExtraction.Xml.imbNamespaceSetup,System.String,System.Boolean)">
+            <summary>
+            Vraca spisak svih xPathova - PREVAZIDJENO JER POSTOJI EFIKASNIJI METOD PREKO END NODE-a i XPatha
+            </summary>
+            <param name="node">Parent xmlNode</param>
+            <param name="nsManager">Menadžer za namespace</param>
+            <param name="prefixToTrim">Od svake putanje može odseći određeni prefiks</param>
+            <param name="toDefaultList">Rezultat da bude u DefaultList / Preset list formatu</param>
+            <returns>Spisak svih xPath putanja</returns>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.imbXmlExtendedTools.useXPathOptimization">
+            <summary>
+            Da li da koristi XPath tamo gde je moguce
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlExtendedTools.makeNodeByxPath(System.Xml.XmlDocument,System.Xml.XmlNode,System.String,System.Xml.XmlNode,imbSCI.DataExtraction.Xml.imbNamespaceSetup)">
+            <summary>
+            Osigurava da prosledjeni XmlDocument ima element za dati xPath i vraća referencu prema poslednjem XmlNode-u koji je kreiran
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlExtendedTools.getOuterXml(System.Collections.Generic.List{System.Xml.XmlNode})">
+            <summary>
+            Vraća OuterXml String od liste
+            </summary>
+            <param name="source">Node lista koju konvertuje</param>
+            <returns>String cele liste</returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlExtendedTools.collectChildren(System.Collections.Generic.List{System.Xml.XmlNode},System.String,System.Int32)">
+            <summary>
+            Vraća listu XmlNode-a u skladu sa kriterijumima
+            </summary>
+            <param name="source">Node lista od koje kreće</param>
+            <param name="collectMode">Način na koji prikuplja</param>
+            <param name="level">Koliko nivoa u dubinu (opciono)</param>
+            <returns>Lista XmlNode-a koji su u određenom odnosu sa Source</returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlExtendedTools.collectChildren(System.Collections.Generic.List{System.Xml.XmlNode},imbSCI.DataExtraction.Xml.collectRelatives,System.Int32)">
+            <summary>
+            Vraća listu XmlNode-a u skladu sa kriterijumima
+            </summary>
+            <param name="source">Node lista od koje kreće</param>
+            <param name="collectMode">Način na koji prikuplja</param>
+            <param name="level">Koliko nivoa u dubinu (opciono)</param>
+            <returns>Lista XmlNode-a koji su u određenom odnosu sa Source</returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlExtendedTools.collectChildren(System.Xml.XmlNode,imbSCI.DataExtraction.Xml.collectRelatives,System.Int32)">
+            <summary>
+            Vraća listu XmlNode-a u skladu sa kriterijumima
+            </summary>
+            <param name="source">Node od kojeg kreće</param>
+            <param name="collectMode">Način na koji prikuplja</param>
+            <param name="level">Koliko nivoa u dubinu (opciono)</param>
+            <returns>Lista XmlNode-a koji su u određenom odnosu sa Source</returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlExtendedTools.collectChildren(System.Xml.XmlNode,System.String,System.Int32)">
+            <summary>
+            Vraća listu XmlNode-a u skladu sa kriterijumima
+            </summary>
+            <param name="source">Node od kojeg kreće</param>
+            <param name="collectMode">Način na koji prikuplja</param>
+            <param name="level">Koliko nivoa u dubinu (opciono)</param>
+            <returns>Lista XmlNode-a koji su u određenom odnosu sa Source</returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlExtendedTools.getChildren(System.Collections.Generic.List{System.Xml.XmlNode},System.Int32,System.Int32,System.Boolean,System.Int32)">
+            <summary>
+            Vraća decu nodea u skladu sa parametrima
+            </summary>
+            <param name="nd">Source xmlNode lista</param>
+            <param name="l">Trenutna dubina - zbog rekurzivnog pozivanja</param>
+            <param name="depth">Nivo do kojeg se ide - relativno je na startLevel</param>
+            <param name="isAdditive">Da li dodaje ili samo prosleđuje</param>
+            <param name="startLevel">Od kog nivoa počinje da skuplja - koristi se za selektovanje "od kraja"</param>
+            <return>Lista child nodea</return>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlExtendedTools.getChildren(System.Xml.XmlNode,System.Int32,System.Int32,System.Boolean,System.Int32)">
+            <summary>
+            Vraća decu nodea u skladu sa parametrima
+            </summary>
+            <param name="nd">Source xmlNode</param>
+            <param name="l">Trenutna dubina - zbog rekurzivnog pozivanja</param>
+            <param name="depth">Nivo do kojeg se ide - relativno je na startLevel</param>
+            <param name="isAdditive">Da li dodaje ili samo prosleđuje</param>
+            <param name="startLevel">Od kog nivoa počinje da skuplja - koristi se za selektovanje "od kraja"</param>
+            <return>Lista child nodea</return>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Xml.imbXmlMultiMapping">
+            <summary>
+            Operacije sa multi mapama
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlMultiMapping.executeMultiMap(System.String,System.Xml.XmlNamespaceManager,System.String,System.Xml.XmlNode,System.Collections.ObjectModel.ObservableCollection{imbSCI.DataExtraction.Xml.imbxPathMultiMapPair},imbSCI.DataExtraction.Xml.enums.imbNodeValueSource)">
+            <summary>
+            Izvršava MultiMap modul
+            </summary>
+            <param name="rootCell">Polje u koje je root za upisivanje vrednosti</param>
+            <param name="contextForModules"></param>
+            <param name="xPathPrefix"></param>
+            <param name="source"></param>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Xml.imbXmlXPathTools">
+            <summary>
+            Posebne alatke za debug i izvršavanje XPath tool-a
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Xml.imbXmlXPathTools.defaultSource">
+            <summary>
+            Podrazumevani source za xPath query - kada je prosledjeni source null
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlXPathTools.makeXPathForAllNodes(System.Collections.Generic.ICollection{System.String},System.Boolean,System.String,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            Pravi XPath koji ce selektovati sve nodove sa spiska
+            </summary>
+            <param name="keys">Nazivi nodova (tagova) koje treba selektovati</param>
+            <param name="count">Samo da prebroji nodove</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlXPathTools.makeDebugMessage(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Pravi DEBUG poruku u skladu sa podešavanjima
+            </summary>
+            <param name="xPath"></param>
+            <param name="sourceXPath"></param>
+            <param name="finalPath"></param>
+            <param name="result"></param>
+            <param name="resCount"></param>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlXPathTools.queryXPath(System.String,System.Xml.XmlNamespaceManager,System.Xml.XmlNode,System.Boolean)">
+            <summary>
+            Izvršava xPath query i konvertuje rezultat u listu - OVO JE ISPRAVNI MEHANIZAM
+            </summary>
+            <param name="xPath"></param>
+            <param name="nsManager"></param>
+            <param name="source"></param>
+            <param name="trimPathWithSource">SA TRUE RADI DOBRO</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlXPathTools.queryXPath(System.Xml.XPath.IXPathNavigable,System.String,System.Xml.XmlNamespaceManager)">
+            <summary>
+            2014> izvrsava upit nad bilo kojim IXPathNavigable objektom
+            </summary>
+            <param name="source"></param>
+            <param name="xPath"></param>
+            <param name="nsManager"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlXPathTools.queryXPathStr(System.String,System.Xml.XmlNamespaceManager,System.Xml.XmlNode,System.Boolean,imbSCI.DataExtraction.Xml.enums.imbNodeValueSource)">
+            <summary>
+            Vraca podatak a ne node
+            </summary>
+            <param name="xPath"></param>
+            <param name="nsManager"></param>
+            <param name="source"></param>
+            <param name="trimPathWithSource"></param>
+            <param name="valueSource"></param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlXPathTools.queryXPathObj(System.String,System.Xml.XmlNamespaceManager,System.Xml.XmlNode,System.Boolean)">
+            <summary>
+            Glavna XPath Funkcija
+            </summary>
+            <param name="xPath">XPathInstrukcija</param>
+            <param name="nsManager">NameSpace manager, ako ostane Null koristiće default</param>
+            <param name="source">XmlNode od kojeg kreće izvršavanje</param>
+            <param name="trimPathWithSource">Da li da od xPath instrukcije oduzme source putanju? Ostaviti Ne ako je već lokalizovano</param>
+            <returns>XmlNode ili neki drugi objekat - u zavisnosti od upita</returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.imbXmlXPathTools.xPathDiagSelect(System.Collections.Generic.List{System.String},System.Xml.XmlNamespaceManager,System.Xml.XmlNode)">
+            <summary>
+            Izvrsava xPath uz dijagnostiku
+            </summary>
+            <param name="xPaths"></param>
+            <param name="mng"></param>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Xml.imbxPathMultiMapPair">
+            <summary>
+            Jedan par lokalnog xPath-a i lokalnog cellPath-a
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Xml.imbxPathMultiMapPair.cellPath">
+            <summary>
+            Lokalna putanja ka imbReportCell koji treba da primi podatak
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Xml.imbxPathMultiMapPair.xPath">
+            <summary>
+            Lokalni xPath koji treba da "selektuje" podatak
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Xml.IxPathQuerySourceProvider">
+            <summary>
+            xPathQuery koji moze da razmenjuje izvor podataka
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Xml.query.imbXPathQuery">
+            <summary>
+            2014c> Collection item: imbXPathQuery, part of imbXPathQueryCollection
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.query.imbXPathQuery.#ctor(System.String,System.Xml.XmlNode)">
+            <summary>
+            Instanciranje novog querija -- za dat xpath
+            </summary>
+            <param name="__xPath"></param>
+            <param name="__input"></param>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Xml.query.imbXPathQuery.xPath">
+            <summary>
+            komanda koja je pozivana
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Xml.query.imbXPathQuery.report">
+            <summary>
+            Report line
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Xml.query.imbXPathQuery.xmlNode">
+            <summary>
+            XmlNode koji je dosao kao odgovor
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Xml.query.imbXPathQueryCollection">
+            <summary>
+            Kolekcija sa rezultatima -
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.query.imbXPathQueryCollection.isExecutedOkText">
+            <summary>
+            Da li je uspeo upit
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.query.imbXPathQueryCollection.getFirstNode">
+            <summary>
+            Vraca prvi node ako postoji
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Xml.query.imbXPathQueryCollection.isExecutedOk">
+            <summary>
+            da li je upit uspesno izvrsen
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Xml.query.xPathQueryCache">
+            <summary>
+            2014c>Kesirani podaci xPath Queryija
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.query.xPathQueryCache.#ctor(System.Xml.XPath.IXPathNavigable,System.Collections.Generic.ICollection{System.String},System.Boolean,System.Boolean)">
+            <summary>
+            Pravi xPath za selektovanje svih kljuceva
+            </summary>
+            <param name="__source"></param>
+            <param name="__keysForXpath"></param>
+            <param name="count"></param>
+            <param name="extendVariations"></param>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.query.xPathQueryCache.#ctor(System.String,System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Pravi proizvoljan query
+            </summary>
+            <param name="__xPath"></param>
+            <param name="__source"></param>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.query.xPathQueryCache.#ctor(System.String)">
+            <summary>
+            samo snima upit
+            </summary>
+            <param name="__xPath"></param>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Xml.query.xPathQueryCache.xPath">
+            <summary>
+            komanda XPath upita
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.query.xPathQueryCache.basic(System.String,System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Osnovno izvrsavanje kverija
+            </summary>
+            <param name="__xPath"></param>
+            <param name="__source"></param>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Xml.query.xPathQueryCacheExtended">
+            <summary>
+            Metode za IxPathQuerySourceProvider
+            </summary>
+        </member>
+        <member name="M:imbSCI.DataExtraction.Xml.query.xPathQueryCacheExtended.connectToSource(imbSCI.DataExtraction.Xml.IxPathQuerySourceProvider,System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            povezuje se sa novim izvorom - ako se prefix razlikuje regenerise i upit
+            </summary>
+            <param name="__source"></param>
+            <param name="target">todo: describe target parameter on connectToSource</param>
+        </member>
+        <member name="P:imbSCI.DataExtraction.Xml.query.xPathQueryCollection.xmlNamespace">
+            <summary>
+            podesavanja za namespace
+            </summary>
+        </member>
+        <member name="T:imbSCI.DataExtraction.Xml.xpathDebugMode">
+            <summary>
+            Mod xpath Debug mehanizma
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.xpathDebugMode.disabled">
+            <summary>
+            Ne obaveštava o izvršavanju xPath-a
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.xpathDebugMode.onNullResult">
+            <summary>
+            Obaveštava samo ako je Null Result
+            </summary>
+        </member>
+        <member name="F:imbSCI.DataExtraction.Xml.xpathDebugMode.fullDebug">
+            <summary>
+            Obaveštava u svakom slučaju
+            </summary>
+        </member>
+    </members>
+</doc>

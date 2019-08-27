@@ -28,6 +28,7 @@
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
 using imbSCI.Data.interfaces;
+using imbSCI.Graph.DGML;
 using System;
 using System.Xml.Serialization;
 
@@ -38,7 +39,7 @@ namespace imbSCI.Graph.FreeGraph
     /// </summary>
     /// <seealso cref="imbSCI.Data.interfaces.IObjectWithName" />
     [Serializable]
-    public class freeGraphNodeBase : IObjectWithName
+    public class freeGraphNodeBase : IObjectWithName, IFreeGraphNode, IObjectWithUID
     {
         public freeGraphNodeBase()
         {
@@ -73,5 +74,11 @@ namespace imbSCI.Graph.FreeGraph
         /// </value>
         [XmlIgnore]
         public Double distance { get; set; } = 1;
+
+      //  string IFreeGraphNode.Id => name;
+
+        //string IFreeGraphNode.name => name;
+
+        string IObjectWithUID.UID => name;
     }
 }

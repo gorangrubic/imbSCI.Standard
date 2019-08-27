@@ -34,10 +34,12 @@ namespace imbSCI.DataComplex.data.modelRecords
     /// </summary>
     public enum modelRecordStateEnum
     {
+#pragma warning disable CS1574 // XML comment has cref attribute 'recordStart' that could not be resolved
         /// <summary>
         /// Not started: the record is still unactive, waiting for <see cref="modelRecordParentBase.recordStart"/> call
         /// </summary>
         notStarted,
+#pragma warning restore CS1574 // XML comment has cref attribute 'recordStart' that could not be resolved
 
         /// <summary>
         /// Started: the record is running.

@@ -712,6 +712,8 @@ namespace imbSCI.Graph.MXGraph.canvas
             strokewidth = GetString(desc, "strokewidth", "1");
         }
 
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag 'summary' does not match the start tag 'state'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
         /// <summary>
         /// Gets the attribute for the given name from the given node. If the attribute
         /// does not exist then the text content of the node is evaluated and if it is
@@ -723,6 +725,8 @@ namespace imbSCI.Graph.MXGraph.canvas
         /// <param name="state"></param>
         /// <returns></returns>
         public string EvaluateAttribute(XmlElement elt, string attribute,
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag 'summary' does not match the start tag 'state'.'
                 mxCellState state)
         {
             string result = elt.GetAttribute(attribute);

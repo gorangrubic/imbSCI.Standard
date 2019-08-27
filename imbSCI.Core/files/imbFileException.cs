@@ -27,13 +27,15 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using imbSCI.Core.extensions.typeworks;
 using imbSCI.Core.files.fileDataStructure;
 using imbSCI.Core.files.folders;
 using System;
+using System.IO;
 
 namespace imbSCI.Core.files
 {
-    /// <summary>
+/// <summary>
     /// Exception related to this namespace
     /// </summary>
     /// <seealso cref="System.Exception" />
@@ -43,6 +45,7 @@ namespace imbSCI.Core.files
         public String relatedPath { get; set; }
         public folderNode relatedFolder { get; set; }
 
+       
         public imbFileException(String message, Exception ex, folderNode folder = null, String path = null, IFileDataStructure dataStructure = null) : base(message, ex)
         {
             relatedDataStructure = dataStructure;

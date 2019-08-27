@@ -40,12 +40,18 @@ namespace imbSCI.DataComplex
     using System.Data;
     using System.Linq;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'IWeightTable' that could not be resolved
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'aceCommonTypes.data.tables.objectTable{aceCommonTypes.collection.tf_idf.weightTableTermCompiled}'
     /// <summary>
     /// Precompiled version of a <see cref="weightTable{TWeightTableTerm}"/>
     /// </summary>
     /// <seealso cref="aceCommonTypes.data.tables.objectTable{aceCommonTypes.collection.tf_idf.weightTableTermCompiled}" />
     /// <seealso cref="aceCommonTypes.collection.tf_idf.IWeightTable" />
     public class weightTableCompiled : objectTable<weightTableTermCompiled>, IWeightTable
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'aceCommonTypes.data.tables.objectTable{aceCommonTypes.collection.tf_idf.weightTableTermCompiled}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1574 // XML comment has cref attribute 'IWeightTable' that could not be resolved
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="weightTableCompiled"/> class.

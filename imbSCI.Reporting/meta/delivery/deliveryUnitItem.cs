@@ -300,10 +300,12 @@ namespace imbSCI.Reporting.meta.delivery
             outputpath = new filepath(__outputFilename);
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'directoryRoot' that could not be resolved
         /// <summary>
         /// The output file path - relative to deliveryInstance output path: <see cref="imbSCI.Reporting.reporting.render.IRenderExecutionContext.directoryRoot"/>, may include subfolders, filename template and extension
         /// </summary>
         public filepath outputpath { get; protected set; } = new filepath();
+#pragma warning restore CS1574 // XML comment has cref attribute 'directoryRoot' that could not be resolved
 
         /// <summary>
         /// The input file/folder path - relative to <see cref="Directory.GetCurrentDirectory"/>

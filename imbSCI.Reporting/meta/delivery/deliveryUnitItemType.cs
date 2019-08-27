@@ -66,10 +66,12 @@ namespace imbSCI.Reporting.meta.delivery
         /// </summary>
         supportFolder,
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'data' that could not be resolved
         /// <summary>
         /// It is an external source of data to be included inside <see cref="imbSCI.Reporting.reporting.render.IRenderExecutionContext.data" /> collection for template application
         /// </summary>
         dataSource,
+#pragma warning restore CS1574 // XML comment has cref attribute 'data' that could not be resolved
 
         /// <summary>
         /// The item is actually automatically generated output

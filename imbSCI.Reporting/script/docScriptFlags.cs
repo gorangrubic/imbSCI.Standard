@@ -50,15 +50,19 @@ namespace imbSCI.Reporting.script
         /// </summary>
         allowFailedInstructions = 16,
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'executePrepare(meta.documentSet.metaDocumentSet, string, PropertyCollection)' that could not be resolved
         /// <summary>
         /// The disable global collection call on <see cref="deliveryInstance.executePrepare(meta.documentSet.metaDocumentSet, string, PropertyCollection)"/>
         /// </summary>
         disableGlobalCollection = 32,
+#pragma warning restore CS1574 // XML comment has cref attribute 'executePrepare(meta.documentSet.metaDocumentSet, string, PropertyCollection)' that could not be resolved
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'x_scopeAutoCreate(IObjectWithPathAndChildSelector)' that could not be resolved
         /// <summary>
         /// It will allow AppendDataFields call on newScope when <see cref="deliveryInstance.x_scopeAutoCreate(IObjectWithPathAndChildSelector)"/> performed
         /// </summary>
         enableLocalCollection = 64,
+#pragma warning restore CS1574 // XML comment has cref attribute 'x_scopeAutoCreate(IObjectWithPathAndChildSelector)' that could not be resolved
 
         useDataDictionaryForLocalData = 128,
     }

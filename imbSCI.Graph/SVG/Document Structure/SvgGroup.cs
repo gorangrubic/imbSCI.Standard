@@ -23,11 +23,13 @@ namespace Svg
             set { this.Attributes["Fill"] = value; }
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'GraphicsPath' that could not be resolved
         /// <summary>
         /// Gets the <see cref="GraphicsPath"/> for this element.
         /// </summary>
         /// <value></value>
         public override System.Drawing.Drawing2D.GraphicsPath Path
+#pragma warning restore CS1574 // XML comment has cref attribute 'GraphicsPath' that could not be resolved
         {
             get { return null; }
         }

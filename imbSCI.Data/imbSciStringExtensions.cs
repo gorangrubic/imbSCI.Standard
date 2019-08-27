@@ -31,9 +31,11 @@
 namespace imbSCI.Data
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// Proširenja operacija nad stringovima
@@ -122,6 +124,50 @@ namespace imbSCI.Data
             return output;
         }
 
+
+        private static Regex selectNumber { get; set; } = new Regex("([\\d-\\+\\.]+)");
+
+        /// <summary>
+        /// Splits the input string into list of Int32. It is tolerant on spaces, letters and other format polution
+        /// </summary>
+        /// <param name="input">Comma (or other separator, if specified) separated list of integers</param>
+        /// <param name="separator">The separator - string that delimits the values</param>
+        /// <param name="defaultValues">The default values - list to return if no values were extracted from the input string.</param>
+        /// <returns></returns>
+        public static List<Int32> SplitSmartToInt32(this String input, String separator = ",", List<Int32> defaultValues = null)
+        {
+            List<Int32> output = new List<Int32>();
+
+            if (!input.isNullOrEmpty())
+            {
+                List<string> values = input.SplitSmart(separator, "", true, true);
+
+
+                foreach (String vl in values)
+                {
+                    var mach = selectNumber.Match(vl);
+                    if (mach.Success)
+                    {
+                        if (mach.Groups.Count > 0)
+                        {
+                            String input_str = mach.Groups[0].Value;
+                            Int32 input_int = Int32.Parse(input_str);
+                            output.Add(input_int);
+                        }
+                    }
+                }
+            }
+            if (!output.Any())
+            {
+                if (defaultValues != null) return defaultValues;
+            }
+
+            return output;
+
+        }
+
+
+
         /// <summary>
         /// Splits the string or if no needle found in the string it returs <c>target</c> string
         /// </summary>
@@ -149,11 +195,11 @@ namespace imbSCI.Data
             {
                 if (removeEmptyResults)
                 {
-                    output.AddRange(target.Split(needle.ToCharArray(), StringSplitOptions.RemoveEmptyEntries));
+                    output.AddRange(target.Split(new String[] { needle }, StringSplitOptions.RemoveEmptyEntries));
                 }
                 else
                 {
-                    output.AddRange(target.Split(needle.ToCharArray(), StringSplitOptions.None));
+                    output.AddRange(target.Split(new String[] { needle }, StringSplitOptions.None));
                 }
             }
 
@@ -210,10 +256,26 @@ namespace imbSCI.Data
             return false;
         }
 
+        /// <summary>
+        /// Determines whether object is null or "empty". Works for strings and IEnumerables
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns>
+        ///   <c>true</c> if [is null or empty] [the specified input]; otherwise, <c>false</c>.
+        /// </returns>
         public static Boolean isNullOrEmpty(this Object input)
         {
             if (input == null) return true;
             if (input == "") return true;
+            if (input is IEnumerable inputEnumerable)
+            {
+                foreach (var e in inputEnumerable)
+                {
+                    return false;
+                }
+                return true;
+            }
+
             return false;
         }
 

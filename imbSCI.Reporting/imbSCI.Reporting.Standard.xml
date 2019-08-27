@@ -4,14 +4,40 @@
         <name>imbSCI.Reporting</name>
     </assembly>
     <members>
-        <member name="M:imbSCI.Reporting.charts.chartTools.buildChart(imbSCI.Reporting.charts.core.chartTypeEnum,imbSCI.Reporting.charts.core.chartFeatures,System.Data.DataTable,imbSCI.Reporting.charts.core.chartSizeEnum,imbSCI.Reporting.charts.core.chartTypeEnum)">
+        <member name="T:imbSCI.Reporting.charts.C3WordPressChartBuilder">
             <summary>
-            Builds the chart string for <c>C3js</c> rendering
+            Builder for C3 charts for Gutenberg shortcode block in WordPress page-post content
+            </summary>
+        </member>
+        <member name="P:imbSCI.Reporting.charts.C3WordPressChartBuilder.shortcodeTool">
+            <summary>
+            Gets or sets the shortcode tool.
+            </summary>
+            <value>
+            The shortcode tool.
+            </value>
+        </member>
+        <member name="M:imbSCI.Reporting.charts.C3WordPressChartBuilder.BuildChart(imbSCI.Reporting.charts.core.chartTypeEnum,imbSCI.Reporting.charts.core.chartFeatures,System.Data.DataTable,imbSCI.Reporting.charts.core.chartSizeEnum,imbSCI.Reporting.charts.core.chartTypeEnum)">
+            <summary>
+            Builds the chart.
             </summary>
             <param name="chartType">Type of the chart.</param>
             <param name="features">The features.</param>
             <param name="data">The data.</param>
+            <param name="size">The size.</param>
             <param name="typesForSeries">The types for series.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Reporting.charts.chartTools.buildChart(imbSCI.Reporting.charts.core.chartTypeEnum,imbSCI.Reporting.charts.core.chartFeatures,System.Data.DataTable,imbSCI.Reporting.charts.core.chartSizeEnum,imbSCI.Reporting.charts.core.chartTypeEnum,System.String)">
+            <summary>
+            Builds the chart string for <c>C3js</c> rendering
+            </summary>
+            <param name="chartType">Type of chart to create.</param>
+            <param name="features">Used features</param>
+            <param name="data">Data table</param>
+            <param name="size">The size.</param>
+            <param name="typesForSeries">The types for series.</param>
+            <param name="obj_id">The object identifier.</param>
             <returns></returns>
         </member>
         <member name="M:imbSCI.Reporting.charts.chartTools.buildDataInsertHorizontaly(System.Data.DataTable)">
@@ -44,9 +70,61 @@
             imbControl property templates tipa Dictionary{chartTypeEnum, String}
             </summary>
         </member>
+        <member name="F:imbSCI.Reporting.charts.core.chartFeatures.withoutHtml">
+            <summary>
+            The generated C3 code will be only JavaScript part
+            </summary>
+        </member>
+        <member name="F:imbSCI.Reporting.charts.core.chartFeatures.bindto">
+            <summary>
+            DEPRICATED
+            </summary>
+        </member>
+        <member name="F:imbSCI.Reporting.charts.core.chartFeatures.transposeTable">
+            <summary>
+            it will transpose (rotate columns and rows) table, to show data horizontally
+            </summary>
+        </member>
         <member name="F:imbSCI.Reporting.charts.core.chartTypeEnum.none">
             <summary>
             The donut: prsten-krug izdeljen na procente
+            </summary>
+        </member>
+        <member name="T:imbSCI.Reporting.charts.ShortcodeJSInsertTool">
+            <summary>
+            Generates shortcode content for WordPress
+            </summary>
+            <remarks>
+            This should be used with proper WordPress plugin for created shortcode. The plugin has to Base64 decode shortcode content. See below PHP example for proper WP plugin
+            </remarks>
+            <code>
+            function jschart_shortcode( $atts, $content = null ) {
+            $a = shortcode_atts(array(
+                'id' => 'element_id'), $atts );
+             $js = base64_decode($a['js']);
+            
+            return '&lt;div id="' .$a['id']. '" >&lt;/div>&lt;script>'.$js.'&lt;/script>';
+            }
+            add_shortcode( 'jschart', 'jschart_shortcode' );
+            </code>
+        </member>
+        <member name="M:imbSCI.Reporting.charts.ShortcodeJSInsertTool.Create(System.String,System.String,imbSCI.Core.math.classificationMetrics.reportExpandedData)">
+            <summary>
+            Creates WordPress shortcode code to embedd the specified js content. 
+            </summary>
+            <param name="js_content">JavaScript content to be enbedded. If the string contains {0}, it will be replaced with <c>custom_id</c></param>
+            <param name="custom_id">DIV identifier, the custom value. Leave empty to have automatically assigned unique ID for created DIV</param>
+            <param name="extendedAttributes">Optional pair of additional shortcode attributes</param>
+            <returns>WP shortcode code. If <see cref="P:imbSCI.Reporting.charts.ShortcodeJSInsertTool.UseGutenbergContainerBlock"/> it will be wrapped in given gutenberg container, <see cref="P:imbSCI.Reporting.charts.ShortcodeJSInsertTool.GutenbergContainerBlock"/></returns>
+        </member>
+        <member name="P:imbSCI.Reporting.charts.WordPressChartTool.chartTemplate">
+            <summary>
+            static and autoinitiated object
+            </summary>
+        </member>
+        <member name="P:imbSCI.Reporting.charts.WordPressKoplasChartTool.chartTemplate">
+            <summary>
+            static and autoinitiated object
             </summary>
         </member>
         <member name="T:imbSCI.Reporting.config.imbSCIReportingConfig">
@@ -5931,6 +6009,82 @@
             <summary>
             Use default if exists
             </summary>
+        </member>
+        <member name="P:imbSCI.Reporting.wordpress.blocks.prototype.MultiItemContentBlockBase.itemTemplate">
+            <summary>
+            Template for a item
+            </summary>
+            <value>
+            The item template.
+            </value>
+        </member>
+        <member name="M:imbSCI.Reporting.wordpress.blocks.prototype.ReportContentBlockBase.Deploy">
+            <summary>
+            Initializes template strings and other settings
+            </summary>
+        </member>
+        <member name="M:imbSCI.Reporting.wordpress.blocks.prototype.ReportContentBlockBase.IsTemplateSet(System.String,System.Int32)">
+            <summary>
+            Determines whether given template string is ready for consumption
+            </summary>
+            <param name="template">The template.</param>
+            <param name="numberOfPlaceholders">Required number of <see cref="M:System.String.Format(System.String,System.Object)"/> placeholders. Leave it zero to skip the placeholder check</param>
+            <returns>
+              <c>true</c> if [is template set] [the specified template]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:imbSCI.Reporting.wordpress.environment.permalinkStructure">
+            <summary>
+            Permalink generator - used to predict link of a document in the final deployement
+            </summary>
+        </member>
+        <member name="M:imbSCI.Reporting.wordpress.environment.permalinkStructure.GetPermalink(imbSCI.Reporting.wordpress.reportDocument,System.DateTime,System.Collections.Generic.Dictionary{imbSCI.Reporting.wordpress.environment.permalinkStructure.permalinkElements,System.String})">
+            <summary>
+            Gets the permalink.
+            </summary>
+            <param name="document">The document.</param>
+            <param name="date">The date.</param>
+            <param name="extraData">The extra data.</param>
+            <returns></returns>
+        </member>
+        <member name="P:imbSCI.Reporting.wordpress.reportDocument.deployement_id">
+            <summary>
+            Universal identifier assigned during report deployement/publication
+            </summary>
+            <value>
+            The deployement identifier.
+            </value>
+        </member>
+        <member name="P:imbSCI.Reporting.wordpress.reportDocument.LinkLabel">
+            <summary>
+            Overrides <c>Title</c> when used for inbound link rendering 
+            </summary>
+            <value>
+            The link label.
+            </value>
+        </member>
+        <member name="P:imbSCI.Reporting.wordpress.reportDocument.name">
+            <summary>
+            Alias of <see cref="P:imbSCI.Reporting.wordpress.reportDocument.Title"/>
+            </summary>
+        </member>
+        <member name="M:imbSCI.Reporting.wordpress.reportDocumentTools.GetCategories(imbSCI.Reporting.wordpress.reportDocument,System.Boolean,System.Boolean)">
+            <summary>
+            Gets the categories> from leaf to root
+            </summary>
+            <param name="document">The document.</param>
+            <param name="skipSelf">if set to <c>true</c> [skip self].</param>
+            <param name="allowRootDocument">if set to <c>true</c> [allow root document].</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Reporting.wordpress.reportDocumentTools.GetCategory(imbSCI.Reporting.wordpress.reportDocument,System.Boolean,System.Boolean)">
+            <summary>
+            Gets the category.
+            </summary>
+            <param name="document">The document.</param>
+            <param name="skipSelf">in case <c>document</c> is a category, if set to <c>true</c> it will not include it into consideration</param>
+            <param name="allowRootDocument">if set to <c>true</c> [allow root document].</param>
+            <returns></returns>
         </member>
     </members>
 </doc>

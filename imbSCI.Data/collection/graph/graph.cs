@@ -33,12 +33,14 @@ namespace imbSCI.Data.collection.graph
 {
     using System;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'graphWrapgraphWrapNode{TItem}' that could not be resolved
     /// <summary>
     /// Universal wrapped-graph-tree structure - the class of the root element in a graph-tree structure
     /// </summary>
     /// <typeparam name="TItem">The type of the item.</typeparam>
     /// <seealso cref="graphWrapgraphWrapNode{TItem}" />
     [Serializable]
+#pragma warning restore CS1574 // XML comment has cref attribute 'graphWrapgraphWrapNode{TItem}' that could not be resolved
     public class graph<TItem> : graphWrapNode<TItem> where TItem : IObjectWithName
     {
         public graph(TItem __item) : base(__item, null)

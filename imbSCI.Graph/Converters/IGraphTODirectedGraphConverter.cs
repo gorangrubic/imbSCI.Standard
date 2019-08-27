@@ -46,6 +46,7 @@ namespace imbSCI.Graph.Converters
 
                 IGraphNode child = ch;
                 var gn = output.Nodes.AddNode(GetNodeID(child), GetNodeLabel(child));
+                gn.Label = GetNodeLabel(child);
                 var tid = GetTypeID(child);
                 Double w = GetNodeWeight(child);
                 gn.Category = styleCase.Categories.AddOrGetCategory(tid.ToString(), "", "").Id;
@@ -64,7 +65,8 @@ namespace imbSCI.Graph.Converters
                     IGraphNode child = ch;
                     if ((parent != null) && (child != null))
                     {
-                        var tmp = GetLink(parent, child);
+                        Link tmp = GetLink(parent, child);
+                        tmp.Label = GetLinkLabel(parent, child);
                         var l_tid = GetTypeID(child);
                         Double l_w = GetLinkWeight(parent, child);
                         output.Links.Add(tmp);
@@ -103,7 +105,8 @@ namespace imbSCI.Graph.Converters
         public override string GetNodeID(IGraphNode node)
         {
             if (node == null) return "null";
-            return node.name;
+
+            return node.path;
         }
 
         public override double GetNodeWeight(IGraphNode node)

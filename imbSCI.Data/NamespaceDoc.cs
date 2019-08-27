@@ -29,6 +29,20 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Data
 {
+#pragma warning disable CS1580 // Invalid type for parameter IEnumerable{interfaces.IObjectWithPathAndChildren} in XML comment cref attribute: 'imbSCI.Data.imbGraphExtensions.getDeepest(IEnumerable{interfaces.IObjectWithPathAndChildren}, int)'
+#pragma warning disable CS1574 // XML comment has cref attribute 'getFilterOut(IEnumerable{interfaces.IObjectWithPathAndChildren}, System.Text.RegularExpressions.Regex, System.Text.RegularExpressions.Regex)' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'Type' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'getDeepest(IEnumerable{interfaces.IObjectWithPathAndChildren}, int)' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'Type' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'Enum' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'Regex' that could not be resolved
+#pragma warning disable CS1580 // Invalid type for parameter Enum in XML comment cref attribute: 'imbSCI.Data.imbSciEnumExtensions.getEnumListFromFlags(Enum)'
+#pragma warning disable CS1574 // XML comment has cref attribute 'getEnumListFromFlags(Enum)' that could not be resolved
+#pragma warning disable CS1580 // Invalid type for parameter IEnumerable{interfaces.IObjectWithPathAndChildren} in XML comment cref attribute: 'imbSCI.Data.imbGraphExtensions.getFilterOut(IEnumerable{interfaces.IObjectWithPathAndChildren}, System.Text.RegularExpressions.Regex, System.Text.RegularExpressions.Regex)'
+#pragma warning disable CS1574 // XML comment has cref attribute 'graph' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbPathExtensions' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'String' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'getPathTo(interfaces.IObjectWithPathAndChildSelector, interfaces.IObjectWithPathAndChildSelector)' that could not be resolved
     /// <summary>
     /// The namespace provides the core layer of shared: enumerations, interfaces and extensions as well as a number of thread-safe collections and data structures.
     /// </summary>
@@ -79,6 +93,20 @@ namespace imbSCI.Data
     /// <see cref="imbSCI.Data.collection.nested.aceEnumDictionarySet2D{TEnum, TD1Key, TD2Key, TValue}"/>
     /// </seealso>
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+#pragma warning restore CS1574 // XML comment has cref attribute 'getPathTo(interfaces.IObjectWithPathAndChildSelector, interfaces.IObjectWithPathAndChildSelector)' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'String' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbPathExtensions' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'graph' that could not be resolved
+#pragma warning restore CS1580 // Invalid type for parameter IEnumerable{interfaces.IObjectWithPathAndChildren} in XML comment cref attribute: 'imbSCI.Data.imbGraphExtensions.getFilterOut(IEnumerable{interfaces.IObjectWithPathAndChildren}, System.Text.RegularExpressions.Regex, System.Text.RegularExpressions.Regex)'
+#pragma warning restore CS1574 // XML comment has cref attribute 'getEnumListFromFlags(Enum)' that could not be resolved
+#pragma warning restore CS1580 // Invalid type for parameter Enum in XML comment cref attribute: 'imbSCI.Data.imbSciEnumExtensions.getEnumListFromFlags(Enum)'
+#pragma warning restore CS1574 // XML comment has cref attribute 'Regex' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'Enum' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'Type' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'getDeepest(IEnumerable{interfaces.IObjectWithPathAndChildren}, int)' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'Type' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'getFilterOut(IEnumerable{interfaces.IObjectWithPathAndChildren}, System.Text.RegularExpressions.Regex, System.Text.RegularExpressions.Regex)' that could not be resolved
+#pragma warning restore CS1580 // Invalid type for parameter IEnumerable{interfaces.IObjectWithPathAndChildren} in XML comment cref attribute: 'imbSCI.Data.imbGraphExtensions.getDeepest(IEnumerable{interfaces.IObjectWithPathAndChildren}, int)'
     internal class NamespaceDoc
     {
     }

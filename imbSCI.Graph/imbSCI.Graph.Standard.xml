@@ -695,7 +695,7 @@
             <param name="path">The path.</param>
             <returns></returns>
         </member>
-        <member name="M:imbSCI.Graph.DGML.DirectedGraph.Save(System.String,imbSCI.Data.enums.getWritableFileMode)">
+        <member name="M:imbSCI.Graph.DGML.DirectedGraph.Save(System.String,getWritableFileMode)">
             <summary>
             Saves the specified path.
             </summary>
@@ -2164,7 +2164,7 @@
             <param name="pingLimit">The ping limit - after which the expansion will stop.</param>
             <returns>Value according to specified <c>pingType</c> or 0 on failure</returns>
         </member>
-        <member name="M:imbSCI.Graph.FreeGraph.freeGraphExtensions.Save``1(``0,System.String,imbSCI.Data.enums.getWritableFileMode)">
+        <member name="M:imbSCI.Graph.FreeGraph.freeGraphExtensions.Save``1(``0,System.String,getWritableFileMode)">
             <summary>
             Saves the specified filepath.
             </summary>

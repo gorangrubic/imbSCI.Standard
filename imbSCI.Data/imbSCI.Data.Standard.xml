@@ -251,7 +251,7 @@
         </member>
         <member name="T:imbSCI.Data.collection.graph.graphAnalysisPair">
             <summary>
-            Analytical entry, describing relation ship between version of the same node, in two different graphs
+            Analytical entry, describing relationship between versions of the same node, in two different graphs
             </summary>
         </member>
         <member name="M:imbSCI.Data.collection.graph.graphAnalysisPair.#ctor">
@@ -914,6 +914,13 @@
             The overwrite on same name: when changing parent of the <see cref="T:imbSCI.Data.collection.graph.graphNode"/>, it will replace any existing node with the same name
             </summary>
         </member>
+        <member name="T:imbSCI.Data.collection.graph.graphNavigationResult`1">
+            <summary>
+            NIJE DOVRSENO
+            </summary>
+            <typeparam name="T"></typeparam>
+            <seealso cref="!:System.Collections.Generic.List&lt;imbSCI.Data.collection.graph.graphNavigationIteration&lt;T&gt;&gt;" />
+        </member>
         <member name="T:imbSCI.Data.collection.graph.graphTools">
             <summary>
             Extensions for <see cref="T:imbSCI.Data.collection.graph.graphNode"/> , <see cref="T:imbSCI.Data.collection.graph.graphWrapNode`1"/> and other graphNode derivatives
@@ -941,23 +948,36 @@
             Child at path or parent (if no path segment could be matched)
             </returns>
         </member>
-        <member name="M:imbSCI.Data.collection.graph.graphTools.BuildGraphFromPaths``1(System.Collections.Generic.IEnumerable{System.String},System.String)">
+        <member name="M:imbSCI.Data.collection.graph.graphTools.BuildGraphFromItems``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.String},System.String)">
+            <summary>
+            Builds the graph from items. Resulting graph nodes wrap the source items in <see cref="P:imbSCI.Data.collection.graph.graphWrapNode`1.item"/>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TGraph">The type of the graph.</typeparam>
+            <param name="items">The items.</param>
+            <param name="path">The path.</param>
+            <param name="splitter">The splitter.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Data.collection.graph.graphTools.BuildGraphFromPaths``1(System.Collections.Generic.IEnumerable{System.String},System.String,System.Boolean,System.Boolean)">
             <summary>
             Builds the graph from paths. Created graph has artificial root node (outside first node of the paths)
             </summary>
             <typeparam name="T"></typeparam>
             <param name="inputList">The input list.</param>
-            <param name="splitter">The splitter.</param>
+            <param name="splitter">The splitter character like: / or . If not set, uses the <see cref="P:imbSCI.Data.collection.graph.IGraphNode.pathSeparator"/>, set by type constructor</param>
+            <param name="isApsolutePath">if set to <c>true</c> [is apsolute path], starting with leading spliter, e.g.. /div[0]/span[1].</param>
+            <param name="returnHead">if set to <c>true</c> it will return the last created leaf, otherwise: the root node of the graph</param>
             <returns></returns>
         </member>
         <member name="M:imbSCI.Data.collection.graph.graphTools.ConvertPathToGraph``1(``0,System.String,System.Boolean,System.String,System.Boolean)">
             <summary>
-            Builds graph defined by <c>path</c> or selecte existing graphnode, as pointed by path
+            Builds graph defined by <c>path</c> or selecte existing graphnode, as pointed by path. Builds only one branch. Use <see cref="M:imbSCI.Data.collection.graph.graphTools.BuildGraphFromPaths``1(System.Collections.Generic.IEnumerable{System.String},System.String,System.Boolean,System.Boolean)"/> to construct complete graph from paths
             </summary>
             <typeparam name="T"></typeparam>
             <param name="parent">Parent graph.</param>
             <param name="path">Path to construct from.</param>
-            <param name="isAbsolutePath">if set to <c>true</c> [is absolute path].</param>
+            <param name="isAbsolutePath">if set to <c>true</c> [is absolute path] (that starts with leading /)</param>
             <param name="splitter">The splitter - by default: directory separator.</param>
             <param name="returnHead">if set to <c>true</c> if will return the created node</param>
             <returns>
@@ -971,6 +991,17 @@
             <typeparam name="T"></typeparam>
             <param name="source">The source.</param>
             <param name="keepRootsFromSource">if set to <c>true</c>: the output will also contain any root (node without parent) node from the specified source collection.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Data.collection.graph.graphTools.GetFirstParent``1(``0,System.Func{``0,System.Boolean},System.Boolean,System.Boolean)">
+            <summary>
+            Gets the first parent matching criteria.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source">The source.</param>
+            <param name="criteria">The criteria.</param>
+            <param name="skipSelf">if set to <c>true</c> if will not evaluate <c>source</c> node</param>
+            <param name="returnLastHead">if set to <c>true</c> it will return the node whose parent met the <c>criteria</c></param>
             <returns></returns>
         </member>
         <member name="M:imbSCI.Data.collection.graph.graphTools.GetNodeSetWithLeafs``1(``0,System.Collections.Generic.List{System.String},System.Int32)">
@@ -1016,6 +1047,24 @@
             <param name="addNumberSufixForFirst">if set to <c>true</c> it adds number sufix even if it is the first child with proposed name</param>
             <returns>
             Unique name for new child in format: <c>proposal</c>001 up to <c>limit</c>
+            </returns>
+        </member>
+        <member name="M:imbSCI.Data.collection.graph.graphTools.GetJunctionOrLeaf(imbSCI.Data.collection.graph.IGraphNode,System.Int32)">
+            <summary>
+            Traverses forward (from target to leaf) until reaches: leaf, a junction or exceeds <c>stepLimit</c>
+            </summary>
+            <param name="target">The target.</param>
+            <param name="stepLimit">The step limit.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Data.collection.graph.graphTools.IsBranchToLeaf(imbSCI.Data.collection.graph.IGraphNode,System.Int32)">
+            <summary>
+            Determines if from <c>target</c> to leaf, there are no junctions - but direct branch, leading to leaf
+            </summary>
+            <param name="target">The target.</param>
+            <param name="stepLimit">The step limit.</param>
+            <returns>
+              <c>true</c> if [is branch to leaf] [the specified step limit]; otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="M:imbSCI.Data.collection.graph.graphTools.RetreatToParent(imbSCI.Data.collection.graph.IGraphNode,imbSCI.Data.collection.graph.graphOperationFlag)">
@@ -1095,6 +1144,15 @@
             <summary>
             Referenca prema parent objektu
             </summary>
+        </member>
+        <member name="M:imbSCI.Data.collection.graph.graphWrapNode`1.AddWithChildren(`0,System.Func{`0,System.Collections.Generic.IEnumerable{`0}},System.Func{`0,System.Boolean})">
+            <summary>
+            Adds the specified item and its children, after evaluated by the filter function 
+            </summary>
+            <param name="__item">The item.</param>
+            <param name="__selectChildren">The select children.</param>
+            <param name="__childrenFilter">The children filter.</param>
+            <returns></returns>
         </member>
         <member name="M:imbSCI.Data.collection.graph.graphWrapNode`1.Add(`0)">
             <summary>
@@ -2057,6 +2115,34 @@
             Konstruktor
             </summary>
             <param name="defaultToString">Da li da upiše ime enuma kao podrazumevanu vrednost polja ili da ostane prazan string</param>
+        </member>
+        <member name="T:imbSCI.Data.collection.nested.ListDictionaryBase`2">
+            <summary>
+            Dictionary with List{TItem} instances for {TKey}. 
+            </summary>
+            <typeparam name="TKey">The type of the key.</typeparam>
+            <typeparam name="TItem">The type of the item.</typeparam>
+        </member>
+        <member name="P:imbSCI.Data.collection.nested.ListDictionaryBase`2.dictionary">
+            <summary>
+            Dictionary keeping all List instances 
+            </summary>
+        </member>
+        <member name="M:imbSCI.Data.collection.nested.ListDictionaryBase`2.RemoveEmptyLists">
+            <summary>
+            Removes all entries having no {TItem}s in its list.
+            </summary>
+            <returns>List of removed keys</returns>
+        </member>
+        <member name="P:imbSCI.Data.collection.nested.ListDictionaryBase`2.Item(`0)">
+            <summary>
+            Gets the <see cref="T:System.Collections.Generic.List`1"/> under the specified key. It will autocreate List{TItem} under specified <c>key</c> if not existing. Thread-safe.
+            </summary>
+            <value>
+            The <see cref="T:System.Collections.Generic.List`1"/>.
+            </value>
+            <param name="key">The key.</param>
+            <returns></returns>
         </member>
         <member name="T:imbSCI.Data.collection.nested.NamespaceDoc">
             <summary>
@@ -3085,6 +3171,22 @@
             
              </summary>
         </member>
+        <member name="P:imbSCI.Data.data.text.IRegexMarker.test">
+            <summary>
+            Gets or sets the test.
+            </summary>
+            <value>
+            The test.
+            </value>
+        </member>
+        <member name="M:imbSCI.Data.data.text.regexFormatMarker`1.#ctor(System.String,`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:imbSCI.Data.data.text.regexMarker`1"/> class.
+            </summary>
+            <param name="_format">String format, e.g.: "-.{0}.-"</param>
+            <param name="_regexInsert">Insert to be placed in the format - e.g.: "([\w]+)" to have "-.([\w]+).-" regex selecting parameter in "-.{0}.-" format</param>
+            <param name="__m">The m.</param>
+        </member>
         <member name="T:imbSCI.Data.data.text.regexMarker`1">
              <summary>
             
@@ -3097,6 +3199,13 @@
             </summary>
             <param name="regex">The regex.</param>
             <param name="__m">The m.</param>
+        </member>
+        <member name="M:imbSCI.Data.data.text.regexMarker`1.replacementGenerator(System.Text.RegularExpressions.Match)">
+            <summary>
+            Generates the replacement string for the specified Regex Match
+            </summary>
+            <param name="m">The m.</param>
+            <returns></returns>
         </member>
         <member name="P:imbSCI.Data.data.text.regexMarker`1.test">
             <summary>
@@ -3114,34 +3223,26 @@
             The marker.
             </value>
         </member>
-        <member name="T:imbSCI.Data.data.text.regexMarkerCollection`1">
+        <member name="T:imbSCI.Data.data.text.regexMarkerCollection">
             <summary>
             Collection of Regex markers
             </summary>
             <typeparam name="T"></typeparam>
-            <seealso cref="!:System.Collections.Generic.Dictionary&lt;T, aceCommonTypes.data.text.regexMarker&lt;T&gt;&gt;" />
         </member>
-        <member name="M:imbSCI.Data.data.text.regexMarkerCollection`1.replacementGenerator(System.Text.RegularExpressions.Match)">
-            <summary>
-            Generates the replacement string for the specified Regex Match
-            </summary>
-            <param name="m">The m.</param>
-            <returns></returns>
-        </member>
-        <member name="M:imbSCI.Data.data.text.regexMarkerCollection`1.Add(imbSCI.Data.data.text.regexMarker{`0})">
+        <member name="M:imbSCI.Data.data.text.regexMarkerCollection.Add(imbSCI.Data.data.text.IRegexMarker)">
             <summary>
             Adds new marker rule
             </summary>
             <param name="item">The item.</param>
         </member>
-        <member name="F:imbSCI.Data.data.text.regexMarkerCollection`1.defaultMarker">
+        <member name="F:imbSCI.Data.data.text.regexMarkerCollection.defaultMarker">
             <summary>
             The default marker to be applied to the unmatched parts of the text
             </summary>
         </member>
-        <member name="M:imbSCI.Data.data.text.regexMarkerCollection`1.process(System.String)">
+        <member name="M:imbSCI.Data.data.text.regexMarkerCollection.process(System.String)">
             <summary>
-            Processes the specified text input into <see cref="T:imbSCI.Data.data.text.regexMarkerResultCollection`1"/>
+            Processes the specified text input into <see cref="!:regexMarkerResultCollection&lt;T&gt;"/>
             </summary>
             <param name="input">The input text to be parsed</param>
             <returns>Collection with matched results</returns>
@@ -3237,25 +3338,24 @@
             <param name="m">The m.</param>
             <param name="__marker">The marker.</param>
         </member>
-        <member name="T:imbSCI.Data.data.text.regexMarkerResultCollection`1">
+        <member name="T:imbSCI.Data.data.text.regexMarkerResultCollection">
             <summary>
-            Single dimension marked map - the results created with <see cref="T:imbSCI.Data.data.text.regexMarkerCollection`1"/>
+            Single dimension marked map - the results created with <see cref="!:regexMarkerCollection&lt;T&gt;"/>
             </summary>
-            <typeparam name="T"></typeparam>
         </member>
-        <member name="M:imbSCI.Data.data.text.regexMarkerResultCollection`1.GetByOrder">
+        <member name="M:imbSCI.Data.data.text.regexMarkerResultCollection.GetByOrder">
             <summary>
             Gets the marker results by order of appearance -- taking only first layer
             </summary>
             <returns></returns>
         </member>
-        <member name="P:imbSCI.Data.data.text.regexMarkerResultCollection`1.byMarker">
+        <member name="P:imbSCI.Data.data.text.regexMarkerResultCollection.byMarker">
             <summary> Dictionary set by marker rule</summary>
         </member>
-        <member name="P:imbSCI.Data.data.text.regexMarkerResultCollection`1.byAllocation">
+        <member name="P:imbSCI.Data.data.text.regexMarkerResultCollection.byAllocation">
             <summary> Indexed by allocation </summary>
         </member>
-        <member name="P:imbSCI.Data.data.text.regexMarkerResultCollection`1.length">
+        <member name="P:imbSCI.Data.data.text.regexMarkerResultCollection.length">
             <summary>
             Length of the complete result collection
             </summary>
@@ -3263,7 +3363,7 @@
             The length.
             </value>
         </member>
-        <member name="F:imbSCI.Data.data.text.regexMarkerResultCollection`1.defaultMarker">
+        <member name="F:imbSCI.Data.data.text.regexMarkerResultCollection.defaultMarker">
             <summary>
             Default marker to apply
             </summary>
@@ -4774,7 +4874,7 @@
         </member>
         <member name="F:imbSCI.Data.enums.getWritableFileMode.autoRenameExistingOnOtherDate">
             <summary>
-            The automatic rename the existing file if it was created on another date
+            Existing file will be renamed to have creation date as sufix. If such backup copy already exists, the backup will be overwriten with this one
             </summary>
         </member>
         <member name="F:imbSCI.Data.enums.getWritableFileMode.autoRenameExistingToOld">
@@ -5082,10 +5182,12 @@
             <summary>
             Returns common part of the path - the root that both paths are sharing
             </summary>
-            <param name="xPathA"></param>
-            <param name="xPathB"></param>
-            \ingroup_disabled ace_ext_xpath_highlight
+            <param name="xPathA">The x path a.</param>
+            <param name="xPathB">The x path b.</param>
+            <param name="includeAbsolute">if set to <c>true</c> [include absolute].</param>
+            <param name="splitter">The splitter.</param>
             <returns></returns>
+            \ingroup_disabled ace_ext_xpath_highlight
         </member>
         <member name="M:imbSCI.Data.extensions.data.imbPathExtensions.removeCommonRoot(System.String,System.String,System.Boolean,System.String)">
             <summary>
@@ -5303,6 +5405,24 @@
             <param name="nameFilter">The name filter.</param>
             <returns></returns>
         </member>
+        <member name="M:imbSCI.Data.imbSciDataExtensions.IsNullOrEmpty``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            Determines whether is null or empty enumerable (imbSCI)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="item">The item.</param>
+            <returns>
+              <c>true</c> if [is null or empty] [the specified item]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:imbSCI.Data.imbSciDataExtensions.GetCrossSection``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.IList{``0}})">
+            <summary>
+            Gets the cross section.
+            </summary>
+            <typeparam name="TItem">The type of the item.</typeparam>
+            <param name="others">The others.</param>
+            <returns></returns>
+        </member>
         <member name="M:imbSCI.Data.imbSciDataExtensions.GetCrossSection``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IList{``0}[])">
             <summary>
             Gets the cross section: only items that are in common to all collections
@@ -5347,6 +5467,14 @@
             <returns>List of detected enums</returns>
             <exception cref="T:System.ArgumentException">Type must be Enum! T = " + enumType.Name</exception>
         </member>
+        <member name="M:imbSCI.Data.imbSciEnumExtensions.getBaseFlags``1">
+            <summary>
+            Gets base flag enumeration values 
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="flags">The flags.</param>
+            <returns></returns>
+        </member>
         <member name="M:imbSCI.Data.imbSciEnumExtensions.getEnumListFromFlags``1(System.Enum)">
             <summary>
             Gets the enum values list from the same enum flags property
@@ -5383,6 +5511,15 @@
             <param name="needle">The needle.</param>
             <returns>List with one (if no <c>needle</c> found, original string) or two strings (if <c>needle</c> found, left and right substrings</returns>
         </member>
+        <member name="M:imbSCI.Data.imbSciStringExtensions.SplitSmartToInt32(System.String,System.String,System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Splits the input string into list of Int32. It is tolerant on spaces, letters and other format polution
+            </summary>
+            <param name="input">Comma (or other separator, if specified) separated list of integers</param>
+            <param name="separator">The separator - string that delimits the values</param>
+            <param name="defaultValues">The default values - list to return if no values were extracted from the input string.</param>
+            <returns></returns>
+        </member>
         <member name="M:imbSCI.Data.imbSciStringExtensions.SplitSmart(System.String,System.String,System.String,System.Boolean,System.Boolean)">
             <summary>
             Splits the string or if no needle found in the string it returs <c>target</c> string
@@ -5402,6 +5539,15 @@
             </summary>
             <param name="input"></param>
             <returns></returns>
+        </member>
+        <member name="M:imbSCI.Data.imbSciStringExtensions.isNullOrEmpty(System.Object)">
+            <summary>
+            Determines whether object is null or "empty". Works for strings and IEnumerables
+            </summary>
+            <param name="input">The input.</param>
+            <returns>
+              <c>true</c> if [is null or empty] [the specified input]; otherwise, <c>false</c>.
+            </returns>
         </member>
         <member name="M:imbSCI.Data.imbSciStringExtensions.removeStartsWith(System.String,System.String)">
             <summary>

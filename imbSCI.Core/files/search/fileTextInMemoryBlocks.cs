@@ -39,11 +39,15 @@ namespace imbSCI.Core.files.search
     using System.Collections;
     using System.IO;
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IEnumerable{imbSCI.Core.files.search.fileTextInMemoryBlockUnit}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// Internally used collection of text blocks <see cref="fileTextInMemoryBlockUnit"/>.
     /// </summary>
     /// <seealso cref="System.Collections.Generic.IEnumerable{imbSCI.Core.files.search.fileTextInMemoryBlockUnit}" />
     public class fileTextInMemoryBlocks : IEnumerable<fileTextInMemoryBlockUnit>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IEnumerable{imbSCI.Core.files.search.fileTextInMemoryBlockUnit}'
     {
         private Int32 _blockSize;
 

@@ -29,10 +29,12 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Core.files.fileDataStructure
 {
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
     /// <summary>
     /// <para>File Data Structures are data structures that are stored in multi-file & multi-subdirectory form</para>
     /// </summary>
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
     internal class NamespaceDoc
     {
     }

@@ -162,6 +162,8 @@ namespace imbSCI.Data.collection.math
             }
         }
 
+#pragma warning disable CS1723 // XML comment has cref attribute 'TRelation' that refers to a type parameter
+#pragma warning disable CS1723 // XML comment has cref attribute 'TRelation' that refers to a type parameter
         /// <summary>
         /// Gets or sets the <see cref="TRelation"/> with the specified xi.
         /// </summary>
@@ -172,6 +174,8 @@ namespace imbSCI.Data.collection.math
         /// <param name="yi">The yi.</param>
         /// <returns></returns>
         public TRelation this[TXAxis xi, TYAxis yi]
+#pragma warning restore CS1723 // XML comment has cref attribute 'TRelation' that refers to a type parameter
+#pragma warning restore CS1723 // XML comment has cref attribute 'TRelation' that refers to a type parameter
         {
             get
             {

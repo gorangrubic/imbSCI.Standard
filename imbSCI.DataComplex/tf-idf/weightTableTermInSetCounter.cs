@@ -33,6 +33,10 @@ namespace imbSCI.DataComplex
     using System.Collections.Generic;
     using System.Linq;
 
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'aceCommonTypes.collection.nested.aceDictionary2D{aceCommonTypes.collection.tf_idf.IWeightTableTerm, aceCommonTypes.collection.tf_idf.IWeightTable, System.Int32}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// Counter - helper class keeping record of the term ocurrences
     /// </summary>
@@ -40,6 +44,10 @@ namespace imbSCI.DataComplex
     /// <typeparam name="TWeightTable">The type of the weight table.</typeparam>
     /// <seealso cref="aceCommonTypes.collection.nested.aceDictionary2D{aceCommonTypes.collection.tf_idf.IWeightTableTerm, aceCommonTypes.collection.tf_idf.IWeightTable, System.Int32}" />
     public class weightTableTermInSetCounter<TWeightTableTerm, TWeightTable> : aceDictionary2D<IWeightTableTerm, IWeightTable, int>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'aceCommonTypes.collection.nested.aceDictionary2D{aceCommonTypes.collection.tf_idf.IWeightTableTerm, aceCommonTypes.collection.tf_idf.IWeightTable, System.Int32}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
         where TWeightTable : IWeightTable
         where TWeightTableTerm : IWeightTableTerm
     {

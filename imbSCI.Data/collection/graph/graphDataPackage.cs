@@ -34,6 +34,10 @@ namespace imbSCI.Data.collection.graph
     using System;
     using System.Collections.Generic;
 
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'imbSCI.Data.data.package.dataPackage{TItem, aceCommonTypes.collection.nested.graphWrapNode{TItem}}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'imbSCI.Data.data.package.dataPackage{TItem, imbSCI.Data.collection.graph.graphWrapNode{TItem}}'
     /// <summary>
     /// XML Serializable container for <see cref="graphWrapNode{TItem}" /> structure. Use <see cref="Store(graphWrapNode{TItem}, string)" /> to add node into package.
     /// </summary>
@@ -41,6 +45,10 @@ namespace imbSCI.Data.collection.graph
     /// <seealso cref="imbSCI.Data.data.package.dataPackage{TItem, imbSCI.Data.collection.graph.graphWrapNode{TItem}}" />
     /// <seealso cref="imbSCI.Data.data.package.dataPackage{TItem, aceCommonTypes.collection.nested.graphWrapNode{TItem}}" />
     public class graphDataPackage<TItem> : dataPackage<TItem, graphWrapNode<TItem>> where TItem : class, IObjectWithName, new()
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'imbSCI.Data.data.package.dataPackage{TItem, imbSCI.Data.collection.graph.graphWrapNode{TItem}}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'imbSCI.Data.data.package.dataPackage{TItem, aceCommonTypes.collection.nested.graphWrapNode{TItem}}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="graphDataPackage{TItem}"/> class.

@@ -27,7 +27,10 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using imbSCI.Core.data;
+using imbSCI.Data.interfaces;
 using System;
+using System.Xml;
 
 namespace imbSCI.Graph.DGML.core
 {
@@ -35,7 +38,7 @@ namespace imbSCI.Graph.DGML.core
     ///
     /// </summary>
     /// <seealso cref="imbSCI.Graph.DGML.core.GraphNodeElement" />
-    public class Node : GraphNodeElement, IGraphElement
+    public class Node : GraphNodeElement, IGraphElement, IFreeGraphNode
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Node"/> class.
@@ -53,6 +56,10 @@ namespace imbSCI.Graph.DGML.core
             Id = label.GetIDFromLabel();
             Label = label;
         }
+
+        string IObjectWithUID.UID => Id;
+
+
 
         //public Link AddLinkTo(Node target)
         //{

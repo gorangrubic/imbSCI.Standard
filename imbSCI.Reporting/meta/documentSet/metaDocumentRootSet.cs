@@ -117,6 +117,7 @@ namespace imbSCI.Reporting.meta.documentSet
             return this;
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'aceReportException' that could not be resolved
         /// <summary>
         /// Regs the path.
         /// </summary>
@@ -128,6 +129,7 @@ namespace imbSCI.Reporting.meta.documentSet
         /// null - null - regPath issue
         /// </exception>
         public void regPath(IMetaContentNested metaItem, bool theParentRegMoment)
+#pragma warning restore CS1574 // XML comment has cref attribute 'aceReportException' that could not be resolved
         {
             reportElementLevel level = metaItem.elementLevel;
             if (regPathCache[level].ContainsKey(metaItem.path))

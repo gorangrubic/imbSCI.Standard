@@ -47,6 +47,12 @@ namespace imbSCI.Core.math.measureSystem.core
     using System.Collections.Generic;
     using System.ComponentModel;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'IValueWithFormat' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'IValueWithRoleInfo' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'IValueWithToString' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'IValueWithImportanceInfo' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'IAceMathMeasure' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'IValueWithUnitInfo' that could not be resolved
     /// <summary>
     ///
     /// </summary>
@@ -59,6 +65,12 @@ namespace imbSCI.Core.math.measureSystem.core
     /// <seealso cref="aceCommonTypes.interfaces.IValueWithToString" />
     /// <seealso cref="aceCommonTypes.interfaces.IValueWithUnitInfo" />
     public abstract class measure<TValue> : measureBase, IAceMathMeasure, IMeasureBasic where TValue : IComparable
+#pragma warning restore CS1574 // XML comment has cref attribute 'IValueWithUnitInfo' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'IAceMathMeasure' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'IValueWithImportanceInfo' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'IValueWithToString' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'IValueWithRoleInfo' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'IValueWithFormat' that could not be resolved
     {
         private measureOperandList _calculateTasks = new measureOperandList();
 

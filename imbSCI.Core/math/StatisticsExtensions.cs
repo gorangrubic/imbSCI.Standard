@@ -37,11 +37,14 @@ namespace imbSCI.Core.math
 
 
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'Numerics' that could not be resolved
     /// <summary>
     /// Entropy, and some wrappers to <see cref="MathNet.Numerics"/>
     /// </summary>
     public static class StatisticsExtensions
+#pragma warning restore CS1574 // XML comment has cref attribute 'Numerics' that could not be resolved
     {
+#pragma warning disable CS1574 // XML comment has cref attribute 'Statistics' that could not be resolved
         /// <summary>
         /// Gets the statistics - <see cref="MathNet.Numerics.Statistics"/>
         /// </summary>
@@ -49,9 +52,24 @@ namespace imbSCI.Core.math
         /// <param name="increasedAccuricy">if set to <c>true</c> [increased accuricy].</param>
         /// <returns></returns>
         public static DescriptiveStatistics GetStatistics(this IEnumerable<Double> rFreqs, Boolean increasedAccuricy = false)
+#pragma warning restore CS1574 // XML comment has cref attribute 'Statistics' that could not be resolved
         {
             if (!rFreqs.Any()) return new DescriptiveStatistics(new Double[] { }, false);
             return new DescriptiveStatistics(rFreqs, increasedAccuricy);
+        }
+
+        public static Double GetRMS(this IEnumerable<Double> input)
+        {
+            Double sum = 0;
+
+            foreach (Double d in input)
+            {
+                sum += Math.Pow(d, 2);
+            }
+
+            sum = sum / input.Count();
+
+            return Math.Sqrt(sum);
         }
 
 
@@ -121,6 +139,7 @@ namespace imbSCI.Core.math
 
         //public static Double GetMeanValue()
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'Statistics' that could not be resolved
         /// <summary>
         /// Gets the standard deviation - just a wrapper <see cref="MathNet.Numerics.Statistics"/>
         /// </summary>
@@ -128,6 +147,7 @@ namespace imbSCI.Core.math
         /// <param name="isSample">if set to <c>true</c> [population].</param>
         /// <returns></returns>
         public static Double GetStdDeviation(this IEnumerable<Double> rFreqs, Boolean isSample = true)
+#pragma warning restore CS1574 // XML comment has cref attribute 'Statistics' that could not be resolved
         {
             return Math.Sqrt(GetVariance(rFreqs, isSample));
             //if (!rFreqs.Any()) return 0;

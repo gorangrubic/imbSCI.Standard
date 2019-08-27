@@ -44,10 +44,12 @@ namespace imbSCI.DataComplex.data.modelRecords
         /// </summary>
         modelRecordCommonData = 2,
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'AppendDataFields(imbSCI.Data.collection.PropertyCollectionExtended)' that could not be resolved
         /// <summary>
         /// Data from <see cref="imbACE.Core.core.builderForLog.AppendDataFields(imbSCI.Data.collection.PropertyCollectionExtended)"/> : log size statistics and exceptions detected
         /// </summary>
         modelRecordLogData = 4,
+#pragma warning restore CS1574 // XML comment has cref attribute 'AppendDataFields(imbSCI.Data.collection.PropertyCollectionExtended)' that could not be resolved
 
         /// <summary>
         /// The model record instance data

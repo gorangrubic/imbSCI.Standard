@@ -877,5 +877,32 @@ namespace imbSCI.Core.extensions.text
             if (String.IsNullOrEmpty(input)) return false;
             return _select_isOrdinalNumber.IsMatch(input);
         }
+
+
+
+
+        /// <summary>
+        /// Regex select BankAccountNumber : [\d]{3}-[\d]{15}
+        /// </summary>
+        /// <remarks>
+        /// <para>For text: example text</para>
+        /// <para>Selects: ex</para>
+        /// </remarks>
+        public static Regex _select_isBankAccountNumber = new Regex(@"[\d]{3}-[\d]{15}", RegexOptions.Compiled);
+
+        /// <summary>
+        /// Test if input matches [\d]{3}-[\d]{15}
+        /// </summary>
+        /// <param name="input">String to test</param>
+        /// <returns>Returns true if the string matches the bank account format, like: IsMatch against _select_isBankAccountNumber</returns>
+        public static Boolean isBankAccountNumber(this String input)
+        {
+            if (String.IsNullOrEmpty(input)) return false;
+            return _select_isBankAccountNumber.IsMatch(input);
+        }
+
+
+
+
     }
 }

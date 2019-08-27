@@ -35,11 +35,13 @@ namespace imbSCI.DataComplex.data.dataUnits.core
     using System;
     using System.Collections.Generic;
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'imbSCI.DataComplex.special.instanceCountCollection{T}.String}'
     /// <summary>
     /// Monitors for change in the associated Row
     /// </summary>
     /// <seealso cref="imbSCI.DataComplex.special.instanceCountCollection{T}.String}" />
     public class dataUnitRowMonitoring : instanceCountCollection<string>
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'imbSCI.DataComplex.special.instanceCountCollection{T}.String}'
     {
         /// <summary>
         /// Checks if data were received on every property

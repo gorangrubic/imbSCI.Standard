@@ -31,11 +31,13 @@ using imbSCI.Data.interfaces;
 
 namespace imbSCI.Core.reporting.style.shot
 {
+#pragma warning disable CS1574 // XML comment has cref attribute 'IGetCodeName' that could not be resolved
     /// <summary>
     /// Object that is part or complete instance <c>styleShot</c> instruction - or meant to be used as styling definer
     /// </summary>
     /// <seealso cref="aceCommonTypes.interfaces.IGetCodeName" />
     public interface IStyleInstruction : IGetCodeName
+#pragma warning restore CS1574 // XML comment has cref attribute 'IGetCodeName' that could not be resolved
     {
     }
 }

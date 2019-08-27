@@ -65,6 +65,7 @@ namespace imbSCI.Reporting.meta.delivery
             return defaultOrLastResult;
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'getChildByPath(IObjectWithChildSelector, string)' that could not be resolved
         /// <summary>
         /// Adds new <see cref="metaContentCriteriaTrigger"/> match rule and its operator
         /// </summary>
@@ -75,6 +76,7 @@ namespace imbSCI.Reporting.meta.delivery
         /// <param name="element">The element instance to test against</param>
         /// <returns></returns>
         public metaContentCriteriaTrigger AddCriteria(metaContentTriggerOperator opera, metaModelTargetEnum pathMatchRule = metaModelTargetEnum.scope, string pathCriteria = null, Type metaElementTypeToMatch = null, reportElementLevel level = reportElementLevel.none, IMetaContentNested element = null)
+#pragma warning restore CS1574 // XML comment has cref attribute 'getChildByPath(IObjectWithChildSelector, string)' that could not be resolved
         {
             metaContentCriteriaTrigger trigger = new metaContentCriteriaTrigger();
             trigger.pathMatch = pathCriteria;

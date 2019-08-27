@@ -153,6 +153,8 @@ namespace imbSCI.DataComplex.special
             return true;
         }
 
+#pragma warning disable CS1658 // ) expected. See also error CS1026.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'Add(instanceCountCollection{T}'
         /// <summary>
         /// Iterative way of pipeing. Use <see cref="Add(instanceCountCollection{T}"/> if possible
         /// </summary>
@@ -161,6 +163,8 @@ namespace imbSCI.DataComplex.special
         /// <param name="value">The value.</param>
         /// <returns></returns>
         public bool Add(T item, string sourceID, int value = 1)
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'Add(instanceCountCollection{T}'
+#pragma warning restore CS1658 // ) expected. See also error CS1026.
         {
             if (lockedSourceIds.Contains(sourceID)) return false;
 

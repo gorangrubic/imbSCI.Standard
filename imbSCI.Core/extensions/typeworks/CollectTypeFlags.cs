@@ -59,5 +59,7 @@ namespace imbSCI.Core.extensions.typeworks
         ofAllAssemblies = 1 << 22,
 
         includeNonImbAssemblies = 1 << 30,
+
+        ofTypeProperties = 1 << 31
     }
 }

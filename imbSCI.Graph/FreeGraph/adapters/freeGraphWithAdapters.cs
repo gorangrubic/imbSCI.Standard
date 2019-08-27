@@ -20,7 +20,7 @@ namespace imbSCI.Graph.FreeGraph.adapters
         /// <value>
         /// The register.
         /// </value>
-        public freeGraphTypedNodesRegister register { get; protected set; } = new freeGraphTypedNodesRegister();
+        protected freeGraphTypedNodesRegister register { get; set; } = new freeGraphTypedNodesRegister();
 
         /// <summary>
         /// Gets or sets the adapters.
@@ -28,7 +28,7 @@ namespace imbSCI.Graph.FreeGraph.adapters
         /// <value>
         /// The adapters.
         /// </value>
-        public Dictionary<Type, IFreeGraphAdapter> adapters { get; protected set; } = new Dictionary<Type, IFreeGraphAdapter>();
+        protected Dictionary<Type, IFreeGraphAdapter> adapters { get; set; } = new Dictionary<Type, IFreeGraphAdapter>();
 
         /// <summary>
         /// Graph that describes relations between instances
@@ -36,7 +36,7 @@ namespace imbSCI.Graph.FreeGraph.adapters
         /// <value>
         /// The graph.
         /// </value>
-        public freeGraph graph { get; protected set; } = new freeGraph();
+        public freeGraph graph { get; set; } = new freeGraph();
 
         /// <summary>
         /// Creates instance of adapter and registers it to the <see cref="adapters"/> dictionary. Use this from constructor of the class inheriting this.

@@ -39,18 +39,14 @@ namespace imbSCI.DataComplex.tables
     using imbSCI.Core.files;
     using imbSCI.Core.files.folders;
     using imbSCI.Core.reporting;
-    using imbSCI.Core.reporting.style.core;
-    using imbSCI.Core.reporting.style.enums;
-    using imbSCI.Core.reporting.style.shot;
-    using imbSCI.Core.reporting.zone;
     using imbSCI.Data.enums;
     using imbSCI.Data.enums.reporting;
     using imbSCI.DataComplex.converters;
     using imbSCI.DataComplex.extensions.data.formats;
     using imbSCI.DataComplex.extensions.data.operations;
     using imbSCI.DataComplex.extensions.data.schema;
+    using imbSCI.DataComplex.tables.extensions;
     using OfficeOpenXml;
-    using OfficeOpenXml.Style;
     using OfficeOpenXml.Style.XmlAccess;
     using System;
     using System.Collections.Generic;
@@ -83,7 +79,7 @@ namespace imbSCI.DataComplex.tables
                 {
 
 
-                    converter.ConvertToFile(pair.Value, folder, pair.Value.TableName);
+                    converter.ConvertToFile(pair.Value, folder, pair.Value.TableName, DataTableConverterASCIISettings.GetCommaSeparatedValues());
                 }
             }
 
@@ -159,184 +155,6 @@ namespace imbSCI.DataComplex.tables
             return output;
         }
 
-        /// <summary>
-        /// Sets the style.
-        /// </summary>
-        /// <param name="ExcelStyle">The excel style.</param>
-        /// <param name="styleEntry">The style entry.</param>
-        public static void SetStyle(this ExcelStyle Style, dataTableStyleEntry styleEntry, Boolean isEven = false)
-        {
-            Style.Font.SetStyle(styleEntry.Text);
-            //Style.TextRotation = styleEntry.Text.ro2
-
-            if (isEven)
-            {
-                Style.Fill.SetStyle(styleEntry.Background);
-            }
-            else
-            {
-                Style.Fill.SetStyle(styleEntry.BackgroundAlt);
-            }
-            Style.SetStyle(styleEntry.Cell);
-        }
-
-        /// <summary>
-        /// Sets the style.
-        /// </summary>
-        /// <param name="Fill">The fill.</param>
-        /// <param name="styleEntry">The style entry.</param>
-        public static void SetStyle(this ExcelFill Fill, styleSurfaceColor styleEntry)
-        {
-            if (styleEntry != null)
-            {
-                Fill.PatternType = (ExcelFillStyle)styleEntry.FillType;
-                Fill.BackgroundColor.SetColor(styleEntry.Color);
-                Fill.BackgroundColor.Tint = new decimal(styleEntry.Tint);
-            }
-        }
-
-        public static void SetStyle(this ExcelRow row, dataTableStyleEntry style, Boolean isEven = false)
-        {
-            if (style != null)
-            {
-                if (style?.Cell?.minSize?.height == null)
-                {
-                    return;
-                }
-                row.Height = style.Cell.minSize.height;
-                row.StyleName = style.key.ToString();
-                row.Style.SetStyle(style, isEven);
-            }
-        }
-
-        public static void SetStyle(this ExcelStyle Style, styleFourSide side)
-        {
-            if (side != null)
-            {
-                Style.SetStyle(side.top);
-                Style.SetStyle(side.bottom);
-                Style.SetStyle(side.left);
-                Style.SetStyle(side.right);
-            }
-        }
-
-        /// <summary>
-        /// Sets the style.
-        /// </summary>
-        /// <param name="Style">The style.</param>
-        /// <param name="side">The side.</param>
-        public static void SetStyle(this ExcelStyle Style, styleSide side)
-        {
-            ExcelBorderItem bri = null;
-            switch (side.direction)
-            {
-                case styleSideDirection.bottom:
-                    bri = Style.Border.Bottom;
-                    break;
-
-                case styleSideDirection.left:
-                    bri = Style.Border.Left;
-                    break;
-
-                case styleSideDirection.right:
-                    bri = Style.Border.Right;
-                    break;
-
-                case styleSideDirection.top:
-                    bri = Style.Border.Top;
-                    break;
-            }
-
-            if (side.type != styleBorderType.unknown)
-            {
-                bri.Style = (ExcelBorderStyle)side.type.ToInt32();
-                if (bri.Style != ExcelBorderStyle.None) bri.Color.SetColor(side.borderColorStatic);
-            }
-        }
-
-        /// <summary>
-        /// Sets the style.
-        /// </summary>
-        /// <param name="Style">The style.</param>
-        /// <param name="styleEntry">The style entry.</param>
-        public static void SetStyle(this ExcelStyle Style, styleContainerShot styleEntry)
-        {
-            Style.WrapText = styleEntry.doWrapText;
-            Style.SetStyle(styleEntry.sizeAndBorder);
-
-            switch (styleEntry.aligment)
-            {
-                case Core.reporting.zone.textCursorZoneCorner.Bottom:
-                    Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Bottom;
-                    Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-                    break;
-
-                case textCursorZoneCorner.center:
-                    Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
-                    Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-                    break;
-
-                case textCursorZoneCorner.default_corner:
-                    Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
-                    Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-                    break;
-
-                case textCursorZoneCorner.DownLeft:
-                    Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Bottom;
-                    Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
-                    break;
-
-                case textCursorZoneCorner.DownRight:
-                    Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Bottom;
-                    Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Right;
-                    break;
-
-                case textCursorZoneCorner.Left:
-                    Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
-                    Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
-                    break;
-
-                case textCursorZoneCorner.none:
-                    break;
-
-                case textCursorZoneCorner.Right:
-                    Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Right;
-                    Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
-                    break;
-
-                case textCursorZoneCorner.Top:
-                    Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Top;
-                    Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-                    break;
-
-                case textCursorZoneCorner.UpLeft:
-                    Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Top;
-                    Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
-                    break;
-
-                case textCursorZoneCorner.UpRight:
-                    Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Top;
-                    Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Right;
-                    break;
-
-                default:
-                    break;
-            }
-
-            Style.ShrinkToFit = styleEntry.doSizedownContent;
-        }
-
-        public static void SetStyle(this ExcelFont Font, styleTextFontSingle styleEntry)
-        {
-            Font.Name = styleEntry.FontName.ToString();
-            Font.Color.SetColor(styleEntry.Color);
-
-            Font.Bold = styleEntry.Style.HasFlag(styleTextTypeEnum.bold);
-            Font.Italic = styleEntry.Style.HasFlag(styleTextTypeEnum.italic);
-            Font.Strike = styleEntry.Style.HasFlag(styleTextTypeEnum.striketrough);
-            Font.UnderLine = styleEntry.Style.HasFlag(styleTextTypeEnum.underline);
-            Font.Size = styleEntry.FontSize;
-        }
 
         //public static DataTable RenderLegend(this DataTable host)
         //{
@@ -393,34 +211,6 @@ namespace imbSCI.DataComplex.tables
         //    return legend;
         //}
 
-        /// <summary>
-        /// Checks if data type is allowed for the DataTable
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns></returns>
-        public static bool checkIfDataTypeIsAllowed(this Type type)
-        {
-            if (type == typeof(bool)) return true;
-            if (type == typeof(byte)) return true;
-            if (type == typeof(byte[])) return true;
-            if (type == typeof(char)) return true;
-            if (type == typeof(DateTime)) return true;
-            if (type == typeof(decimal)) return true;
-            if (type == typeof(double)) return true;
-            if (type == typeof(Guid)) return true;
-            if (type == typeof(short)) return true;
-            if (type == typeof(int)) return true;
-            if (type == typeof(long)) return true;
-            if (type == typeof(sbyte)) return true;
-            if (type == typeof(float)) return true;
-            if (type == typeof(string)) return true;
-            if (type == typeof(TimeSpan)) return true;
-            if (type == typeof(ushort)) return true;
-            if (type == typeof(uint)) return true;
-            if (type == typeof(ulong)) return true;
-
-            return false;
-        }
 
         /// <summary>
         /// Renders pivoted table
@@ -471,6 +261,48 @@ namespace imbSCI.DataComplex.tables
             }
 
             return legend;
+        }
+
+         /// <summary>
+        /// Gets the report and save.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="folder">The folder.</param>
+        /// <param name="notation">The notation.</param>
+        /// <param name="filenamePrefix">The filename prefix.</param>
+        /// <param name="disablePrimaryKey">if set to <c>true</c> [disable primary key].</param>
+        /// <param name="allowAsyncCall">if set to <c>true</c> [allow asynchronous call].</param>
+        /// <returns></returns>
+        public static DataSetForStatistics GetReportAndSave(this IEnumerable<DataTable> source, folderNode folder, aceAuthorNotation notation = null, string filenamePrefix = "", bool disablePrimaryKey = true, Boolean allowAsyncCall = false)
+        {
+
+            DataSet ds_source = new DataSet(filenamePrefix);
+
+            String table_name_proposal = "";
+
+            foreach (var dt in source)
+            {
+                if (dt != null)
+                {
+                    table_name_proposal = dt.TableName;
+                    Int32 c = 0;
+                    while (ds_source.Tables.Contains(table_name_proposal))
+                    {
+                        c++;
+                        table_name_proposal = dt.TableName + c.ToString();
+
+                    }
+                    dt.TableName = table_name_proposal;
+                    ds_source.Tables.Add(dt);
+                }
+            }
+            if (ds_source.Tables.Count == 0) return null;
+
+            DataSetForStatistics output = GetReportVersion(ds_source, disablePrimaryKey);
+
+            output.Save(folder, notation, filenamePrefix);
+
+            return output;
         }
 
         /// <summary>

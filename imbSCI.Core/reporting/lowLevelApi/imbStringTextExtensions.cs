@@ -124,22 +124,28 @@ namespace imbSCI.Core.reporting.lowLevelApi
         /// <returns></returns>
         public static string textTable(this DataTable table, Int32 columnTabWidth = 4)
         {
-            String output = "";
-            String tab = tb.Repeat(columnTabWidth);
+            String output = "|";
+            String tab = "    ".Repeat(columnTabWidth);
+            String column_subline = "|";
+            String column_subline_tab = "-".Repeat(tab.Length);
 
             foreach (DataColumn dc in table.Columns)
             {
                 output = imbSciStringExtensions.add(output, imbSciStringExtensions.add(dc.Caption, tab, ""), "|");
+                column_subline = column_subline.add(column_subline_tab, "|");
             }
-            output = imbSciStringExtensions.add(output, nl, "");
-            output = imbSciStringExtensions.add(output, nl, "");
+
+            output = output + Environment.NewLine + column_subline + Environment.NewLine;
+
+
             foreach (DataRow dr in table.Rows)
             {
                 foreach (DataColumn dc in table.Columns)
                 {
                     String content = dr[dc].toStringSafe("");
-                    output = imbSciStringExtensions.add(imbSciStringExtensions.add(output, content + tab, "|"), Environment.NewLine, "");
+                    output = output.add(content + tab, "|"); 
                 }
+                output = output + Environment.NewLine;
             }
 
             return output;

@@ -44,10 +44,12 @@ namespace imbSCI.Data.extensions.data
         /// <summary>
         /// Returns common part of the path - the root that both paths are sharing
         /// </summary>
-        /// <param name="xPathA"></param>
-        /// <param name="xPathB"></param>
-        /// \ingroup_disabled ace_ext_xpath_highlight
+        /// <param name="xPathA">The x path a.</param>
+        /// <param name="xPathB">The x path b.</param>
+        /// <param name="includeAbsolute">if set to <c>true</c> [include absolute].</param>
+        /// <param name="splitter">The splitter.</param>
         /// <returns></returns>
+        /// \ingroup_disabled ace_ext_xpath_highlight
         public static String getCommonRoot(this String xPathA, String xPathB, Boolean includeAbsolute = false, String splitter = "")
         {
             String output = "";

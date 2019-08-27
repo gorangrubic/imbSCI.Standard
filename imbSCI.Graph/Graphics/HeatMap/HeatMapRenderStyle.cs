@@ -20,6 +20,14 @@ namespace imbSCI.Graph.Graphics.HeatMap
 
         public Color BaseColor { get; set; } = Color.Black;
 
+        public Color LowColor { get; set; } = Color.Black;
+
+        public Color HighColor { get; set; } = Color.LightGray;
+
+        public Double MinOpacity { get; set; } = 0.2;
+
+        public Double MaxOpacity { get; set; } = 1;
+
         [XmlIgnore]
         public styleTextFontSingle axisText { get; set; } = new styleTextFontSingle();
 
@@ -58,7 +66,7 @@ namespace imbSCI.Graph.Graphics.HeatMap
             fieldContainer.aligment = textCursorZoneCorner.center;
             fieldContainer.minSize = new styleSize(fieldWidth, fieldHeight);
             fieldContainer.numberFormat = valueFormat;
-            fieldContainer.sizeAndBorder.setup(1, 1, Color.White, 3, styleBorderType.Thick, styleSideDirection.bottom, styleSideDirection.top, styleSideDirection.left, styleSideDirection.right);
+            fieldContainer.sizeAndBorder.setup(1, 1, Color.Gray, 3, styleBorderType.Thick, styleSideDirection.bottom, styleSideDirection.top, styleSideDirection.left, styleSideDirection.right);
         }
     }
 }

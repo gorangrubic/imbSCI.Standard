@@ -29,12 +29,14 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Core.reporting
 {
+    using System;
     using System.ComponentModel;
 
     /// <summary>
     ///
     /// </summary>
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
+    [Serializable]
     public abstract class imbReportingBindable : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

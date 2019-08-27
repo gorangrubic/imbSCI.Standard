@@ -33,11 +33,17 @@ namespace imbSCI.Core.math.measureSystem.systems
     using System;
     using System.Collections.Generic;
 
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.Dictionary{System.String, aceCommonTypes.math.measureSystem.measureDecadeSystem}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// measure system registry
     /// </summary>
     /// <seealso cref="System.Collections.Generic.Dictionary{System.String, aceCommonTypes.math.measureSystem.measureDecadeSystem}" />
     public class measureDecadeSystemRegistry : Dictionary<string, measureDecadeSystem>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.Dictionary{System.String, aceCommonTypes.math.measureSystem.measureDecadeSystem}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     {
         /// <summary>
         /// Adds the specified system.

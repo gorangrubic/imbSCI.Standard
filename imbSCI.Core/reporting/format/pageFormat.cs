@@ -34,12 +34,14 @@ namespace imbSCI.Core.reporting.format
     using imbSCI.Data.data;
     using System.Drawing;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// Describes formatring of an page
     /// </summary>
     /// <seealso cref="aceCommonTypes.primitives.imbBindable" />
     /// <seealso cref="cursorZoneExecutionSettings"/>
     public class pageFormat : imbBindable
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     {
         private acePaletteRole _mainColor = acePaletteRole.colorA;
 

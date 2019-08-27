@@ -32,6 +32,8 @@ namespace imbSCI.Core.math.range.matrix
     using imbSCI.Core.collection;
     using imbSCI.Core.extensions.io;
     using imbSCI.Core.extensions.table;
+    using imbSCI.Core.extensions.text;
+    using imbSCI.Core.extensions.typeworks;
     using imbSCI.Core.math;
 
     //using imbSCI.Data.collection.nested;
@@ -47,6 +49,52 @@ namespace imbSCI.Core.math.range.matrix
     /// <seealso cref="System.Collections.Generic.List{System.Collections.Generic.List{System.Double}}" />
     public class HeatMapModel : List<List<Double>>
     {
+
+        /// <summary>
+        /// Sets from data table.
+        /// </summary>
+        /// <param name="table">The table.</param>
+        public void SetFromDataTable(DataTable table) 
+        {
+            DataColumn yKeyColumn = null;
+            foreach (DataColumn column in table.Columns)
+            {
+                if (yKeyColumn == null)
+                {
+                    yKeyColumn = column;
+                }
+                else
+                {
+                    xKeys.Add(column.ColumnName);
+                }
+            }
+
+            foreach (DataRow row in table.Rows)
+            {
+
+                var yKey = row[yKeyColumn].toStringSafe();
+                yKeys.Add(yKey);
+
+            }
+
+            Deploy();
+
+            foreach (DataRow row in table.Rows)
+            {
+                var yKey = row[yKeyColumn].toStringSafe();
+                foreach (DataColumn column in table.Columns)
+                {
+                    if (yKeyColumn == column)
+                    {
+
+                    }
+                    else
+                    {
+                        this[column.ColumnName, yKey] = (Double)row[column].imbConvertValueSafe(typeof(Double));
+                    }
+                }
+            }
+        }
 
         public DataTable GetDataTable(String name, String description)
         {
@@ -106,6 +154,12 @@ namespace imbSCI.Core.math.range.matrix
         {
         }
 
+
+        public HeatMapModel(DataTable table)
+        {
+            SetFromDataTable(table);
+        }
+
         /// <summary>
         /// Gets or sets the artificial maximum.
         /// </summary>
@@ -146,6 +200,8 @@ namespace imbSCI.Core.math.range.matrix
         /// <param name="rows">The rows.</param>
         public void Deploy(IEnumerable<String> columns, IEnumerable<String> rows)
         {
+
+
             foreach (String col in columns)
             {
                 xKeys.Add(col);
@@ -156,10 +212,20 @@ namespace imbSCI.Core.math.range.matrix
                 yKeys.Add(col);
             }
 
-            foreach (String col in columns)
+            Deploy();
+        }
+
+        /// <summary>
+        /// Deploys cells using previously set <see cref="xKeys"/>  and <see cref="yKeys"/>
+        /// </summary>
+        public void Deploy()
+        {
+            Clear();
+
+            foreach (String col in xKeys)
             {
                 var cl = new List<double>();
-                foreach (String row in rows)
+                foreach (String row in yKeys)
                 {
                     cl.Add(0);
                 }
@@ -270,6 +336,20 @@ namespace imbSCI.Core.math.range.matrix
 
                 this[_x, _y] = value;
             }
+        }
+
+        public void SetFrom(List<List<Double>> input)
+        {
+            Int32 y_limit = Math.Min(yKeys.Count, input.Count);
+            for (int i = 0; i < y_limit; i++)
+            {
+                Int32 x_limit = Math.Min(xKeys.Count, input[i].Count);
+                for (int y = 0; y < x_limit; y++)
+                {
+                    this[i, y] = input[i][y];
+                }
+            }
+
         }
 
         /// <summary>
@@ -424,7 +504,7 @@ namespace imbSCI.Core.math.range.matrix
         /// <summary>
         /// Sets the ranger
         /// </summary>
-        public void DetectMinMax()
+        public rangeFinder DetectMinMax()
         {
             ranger = new rangeFinder();
 
@@ -436,6 +516,8 @@ namespace imbSCI.Core.math.range.matrix
                     ranger.Learn(this[x][y]);
                 }
             }
+
+            return ranger;
         }
     }
 }

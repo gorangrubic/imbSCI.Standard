@@ -1,6 +1,7 @@
 using imbSCI.Core.files;
 using imbSCI.Core.files.folders;
 using imbSCI.Data;
+using imbSCI.Data.enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -128,7 +129,7 @@ namespace imbSCI.Graph.DiagramLibraries.DiaShape
         public String Save(folderNode folder, String filename, String description = "")
         {
             filename = filename.ensureEndsWith(".sheet");
-            String path = folder.pathFor(filename, Data.enums.getWritableFileMode.newOrExisting, description, true);
+            String path = folder.pathFor(filename, getWritableFileMode.newOrExisting, description, true);
 
             objectSerialization.saveObjectToXML(this, path);
             return path;

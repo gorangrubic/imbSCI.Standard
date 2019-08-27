@@ -34,11 +34,19 @@ namespace imbSCI.Core.files.search
 {
     using System.Collections;
 
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String, imbSCI.Core.files.search.fileTextOperater}}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// Collection of <see cref="fileTextOperater"/> instances, used when multiple files should be searched
     /// </summary>
     /// <seealso cref="System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String, imbSCI.Core.files.search.fileTextOperater}}" />
     public class fileTextOperaterMulti : IEnumerable<KeyValuePair<String, fileTextOperater>>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String, imbSCI.Core.files.search.fileTextOperater}}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     {
         /// <summary>
         /// Populates it self with <see cref="fileTextOperater"/>s for each file path specified in the <c>filepaths</c> argument

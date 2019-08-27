@@ -4,10 +4,12 @@ using System.ComponentModel;
 
 namespace Svg
 {
+#pragma warning disable CS1574 // XML comment has cref attribute 'SvgUnits' that could not be resolved
     /// <summary>
     /// Represents a list of <see cref="SvgUnits"/>.
     /// </summary>
     [TypeConverter(typeof(SvgUnitCollectionConverter))]
+#pragma warning restore CS1574 // XML comment has cref attribute 'SvgUnits' that could not be resolved
     public class SvgUnitCollection : List<SvgUnit>
     {
     }

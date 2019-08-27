@@ -162,11 +162,15 @@ namespace imbSCI.Graph.MXGraph.io
             return elements[id];
         }
 
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag 'summary' does not match the start tag 'elements'.'
         /// <summary>
         /// Adds the given element to <elements> if it has an ID.
         /// </summary>
         /// <param name="node">Node to be added.</param>
         protected void AddElement(XmlNode node)
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag 'summary' does not match the start tag 'elements'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
         {
             if (node is XmlElement)
             {

@@ -38,35 +38,47 @@ namespace imbSCI.Data.enums.fields
         color_base,
         color_path,
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'styleTextRotationEnum' that could not be resolved
         /// <summary>
         /// The text rotation - <see cref="aceCommonTypes.reporting.style.enums.styleTextRotationEnum"/>
         /// </summary>
         text_rotation,
+#pragma warning restore CS1574 // XML comment has cref attribute 'styleTextRotationEnum' that could not be resolved
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'printVertical' that could not be resolved
         /// <summary>
         /// The text vertical aligment - <see cref="aceCommonTypes.zone.printVertical"/>
         /// </summary>
         text_verticalAligment,
+#pragma warning restore CS1574 // XML comment has cref attribute 'printVertical' that could not be resolved
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'printHorizontal' that could not be resolved
         /// <summary>
         /// The text horizontal aligment <see cref="aceCommonTypes.zone.printHorizontal"/>
         /// </summary>
         text_horizontalAligment,
+#pragma warning restore CS1574 // XML comment has cref attribute 'printHorizontal' that could not be resolved
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'textCursorZoneCorner' that could not be resolved
         /// <summary>
         /// The aligment - <see cref="aceCommonTypes.zone.textCursorZoneCorner"/> expected or string: "top", "center" "bottom"
         /// </summary>
         text_aligment,
+#pragma warning restore CS1574 // XML comment has cref attribute 'textCursorZoneCorner' that could not be resolved
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'acePaletteRole' that could not be resolved
         /// <summary>
         /// The color palette role - <see cref="aceCommonTypes.colors.acePaletteRole"/>
         /// </summary>
         color_paletteRole,
+#pragma warning restore CS1574 // XML comment has cref attribute 'acePaletteRole' that could not be resolved
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'acePaletteVariationRole' that could not be resolved
         /// <summary>
         /// The color variation role - <see cref="aceCommonTypes.colors.acePaletteVariationRole"/>
         /// </summary>
         color_variationRole,
+#pragma warning restore CS1574 // XML comment has cref attribute 'acePaletteVariationRole' that could not be resolved
 
         color_variationAdjustment,
         render_isHidden,

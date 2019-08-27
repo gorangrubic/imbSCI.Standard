@@ -41,6 +41,7 @@ namespace imbSCI.Core.reporting.style.core
     using System.ComponentModel;
     using System.Drawing;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// Complex settings four style
     /// </summary>
@@ -49,6 +50,7 @@ namespace imbSCI.Core.reporting.style.core
     /// </remarks>
     /// <seealso cref="aceCommonTypes.primitives.imbBindable" />
     public class styleFourSide : dataBindableBase
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     {
         private appendType _type;
 

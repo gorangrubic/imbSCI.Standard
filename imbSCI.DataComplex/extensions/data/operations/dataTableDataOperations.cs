@@ -32,13 +32,14 @@ namespace imbSCI.DataComplex.extensions.data.operations
     using imbSCI.Core.extensions.data;
     using imbSCI.Core.extensions.io;
     using imbSCI.Core.extensions.table;
+    using imbSCI.Core.extensions.text;
     using imbSCI.Core.extensions.typeworks;
     using imbSCI.Core.math;
     using imbSCI.Core.math.aggregation;
     using imbSCI.Core.reporting;
     using imbSCI.Data;
     using imbSCI.Data.collection.nested;
-    using imbSCI.DataComplex.extensions.data.schema;
+    using imbSCI.Data.enums.fields;
     using imbSCI.DataComplex.tables;
     using System;
     using System.Collections.Generic;
@@ -178,6 +179,334 @@ namespace imbSCI.DataComplex.extensions.data.operations
                 dataset.Tables.Add(table);
             }
             return dataset;
+        }
+
+        public static List<templateFieldDataTable> GetMetaDataFieldsExistingInAllColumns(this DataTable table)
+        {
+            List<templateFieldDataTable> output = new List<templateFieldDataTable>();
+            foreach (templateFieldDataTable field in Enum.GetValues(typeof(templateFieldDataTable)))
+            {
+                output.Add(field);
+            }
+
+            Dictionary<templateFieldDataTable, Object> values = new Dictionary<templateFieldDataTable, object>();
+
+            List<templateFieldDataTable> haveDifferentValues = new List<templateFieldDataTable>();
+
+            foreach (DataColumn dc in table.Columns)
+            {
+                List<templateFieldDataTable> newOutput = output.ToList();
+
+                foreach (var field in output)
+                {
+                    if (!dc.ExtendedProperties.ContainsKey(field))
+                    {
+                        newOutput.Remove(field);
+                    }
+                    else
+                    {
+                        if (values.ContainsKey(field))
+                        {
+                            if (dc.ExtendedProperties[field] != values[field])
+                            {
+                                if (!haveDifferentValues.Contains(field)) haveDifferentValues.Add(field);
+                            }
+                        }
+                        else
+                        {
+                            values.Add(field, dc.ExtendedProperties[field]);
+                        }
+                    }
+                }
+                output = newOutput;
+
+            }
+
+
+            List<templateFieldDataTable> final = new List<templateFieldDataTable>();
+
+            foreach (var f in output)
+            {
+                if (haveDifferentValues.Contains(f)) final.Add(f);
+            }
+
+
+            return final;
+        }
+
+
+
+        /// <summary>
+        /// Creates Legend for a data table
+        /// </summary>
+        /// <param name="table">The table.</param>
+        /// <param name="columns">The columns.</param>
+        /// <returns></returns>
+        public static DataTable GetLegendDataTable(this DataTable table, List<templateFieldDataTable> columns = null)
+        {
+            if (columns == null)
+            {
+                columns = new List<templateFieldDataTable>();
+
+                columns.AddUnique(templateFieldDataTable.col_caption);
+                columns.AddUnique(templateFieldDataTable.col_desc);
+                var cln = table.GetMetaDataFieldsExistingInAllColumns();
+
+                foreach (var c in cln)
+                {
+                    columns.AddUnique(c);
+                }
+
+
+            }
+
+            DataTable output = new DataTable();
+            output.SetTitle(table.GetTitle() + " Legend");
+
+            output.SetDescription("Description of " + table.GetTitle() + "columns");
+
+            foreach (var c in columns)
+            {
+                DataColumn dc = output.Columns.Add(c.ToString(), typeof(String));
+
+                String cn = c.ToString();
+                switch (c)
+                {
+
+                    case templateFieldDataTable.col_caption:
+                        dc.SetHeading("Name");
+                        break;
+                    case templateFieldDataTable.col_desc:
+                        dc.SetHeading("Description");
+                        break;
+                    case templateFieldDataTable.col_letter:
+                        dc.SetHeading("Letter");
+                        break;
+                    case templateFieldDataTable.col_unit:
+                        dc.SetHeading("Unit");
+                        break;
+                    default:
+                        dc.SetHeading(cn.removeStartsWith("col_").imbTitleCamelOperation(true));
+                        break;
+                }
+            }
+
+            /*
+            DataRow hdr = output.NewRow();
+
+            foreach (var c in columns)
+            {
+                String cn = c.ToString();
+                switch (c)
+                {
+
+                    case templateFieldDataTable.col_caption:
+                        hdr[cn] = "Name"; // source_dc.GetHeading();
+                        break;
+                    case templateFieldDataTable.col_desc:
+                        hdr[cn] = "Description"; // source_dc.GetDesc();
+                        break;
+                    case templateFieldDataTable.col_letter:
+                        hdr[cn] = "Code"; // source_dc.GetLetter();
+                        break;
+                    case templateFieldDataTable.col_unit:
+                        hdr[cn] = "Unit"; // source_dc.GetUnit();
+                        break;
+                }
+            }
+            */
+            //  output.Rows.Add(hdr);
+
+
+            /*
+            DataColumn column_name = output.Columns.Add(nameof(templateFieldDataTable.col_caption), typeof(String));
+
+            DataColumn column_description = output.Columns.Add(nameof(templateFieldDataTable.col_desc), typeof(String));
+
+            DataColumn column_unit = output.Columns.Add(nameof(templateFieldDataTable.col_unit), typeof(String));
+
+            DataColumn column_letter = output.Columns.Add(nameof(templateFieldDataTable.col_letter), typeof(String));
+            */
+
+            foreach (DataColumn source_dc in table.Columns)
+            {
+                DataRow dr = output.NewRow();
+
+                foreach (var c in columns)
+                {
+                    String cn = c.ToString();
+                    switch (c)
+                    {
+
+                        case templateFieldDataTable.col_caption:
+                            dr[cn] = source_dc.GetHeading();
+                            break;
+                        case templateFieldDataTable.col_desc:
+                            dr[cn] = source_dc.GetDesc();
+                            break;
+                        case templateFieldDataTable.col_letter:
+                            dr[cn] = source_dc.GetLetter();
+                            break;
+                        case templateFieldDataTable.col_unit:
+                            dr[cn] = source_dc.GetUnit();
+                            break;
+                    }
+                }
+
+                output.Rows.Add(dr);
+
+            }
+
+            return output;
+
+        }
+
+        /// <summary>
+        /// Gets a table version, without rows having default field value for all columns, except ones specified in <c>columnsToIgnore</c>
+        /// </summary>
+        /// <param name="table">The table.</param>
+        /// <param name="columnsToIgnore">The columns to ignore.</param>
+        /// <returns></returns>
+        public static DataTable GetTableVersionWithoutEmptyRows(this DataTable table, List<String> columnsToIgnore, Boolean ignoreStringColumns = false)
+        {
+            DataTable output = table.GetClonedShema<DataTable>();
+            Dictionary<String, Object> defaultValues = new Dictionary<String, Object>();
+            if (columnsToIgnore == null) columnsToIgnore = new List<string>();
+            foreach (DataColumn dc in table.Columns)
+            {
+                Type dcvt = dc.GetValueType();
+                defaultValues.Add(dc.ColumnName, dcvt.GetDefaultValue());
+                if (dcvt == typeof(String)) columnsToIgnore.Add(dc.ColumnName);
+
+            }
+
+
+            foreach (DataRow dr in table.Rows)
+            {
+                Dictionary<String, Object> rowValues = new Dictionary<String, Object>();
+                Boolean copyRow = false;
+                foreach (DataColumn dc in table.Columns)
+                {
+                    if (!columnsToIgnore.Contains(dc.ColumnName))
+                    {
+                        Object vl = dr[dc.ColumnName];
+                        if (vl != defaultValues[dc.ColumnName])
+                        {
+                            copyRow = true;
+                            break;
+
+                        }
+                    }
+                    else
+                    {
+
+                    }
+
+                }
+                if (copyRow)
+                {
+                    var ndr = output.NewRow();
+
+                    foreach (DataColumn dc in table.Columns)
+                    {
+                        ndr[dc.ColumnName] = dr[dc.ColumnName];
+                    }
+
+
+                    output.Rows.Add(ndr);
+                }
+            }
+            return output;
+        }
+
+
+        public static DataTable GetTableVersionWithoutEmptyColumns(this DataTable table, List<String> columnsToAddAnyway, Boolean addStringColumnsAnyway = false)
+        {
+
+            List<DataColumn> ColumnsToAdd = new List<DataColumn>();
+            if (columnsToAddAnyway == null) columnsToAddAnyway = new List<string>();
+            //  foreach (DataColumn dc in table.Columns) ColumnsToRemove.Add(dc);
+
+
+            foreach (DataColumn dc in table.Columns)
+            {
+                if (addStringColumnsAnyway)
+                {
+                    if (dc.GetValueType() == typeof(String))
+                    {
+                        ColumnsToAdd.Add(dc);
+                        continue;
+                    }
+                }
+
+                if (columnsToAddAnyway.Contains(dc.ColumnName))
+                {
+                    ColumnsToAdd.Add(dc);
+                }
+            }
+
+            foreach (DataColumn dc in table.Columns)
+            {
+                if (ColumnsToAdd.Contains(dc)) continue;
+                Object defaultValue = dc.GetValueType().GetDefaultValue();
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
+                    DataRow nr = table.Rows[i];
+                    if (nr[dc] != defaultValue)
+                    {
+                        ColumnsToAdd.Add(dc);
+                    }
+                    break;
+                }
+            }
+
+
+            DataTable output = table.GetSubColumnTable(-1, ColumnsToAdd.Select(x => x.ColumnName).ToArray());
+            return output;
+        }
+
+
+        /// <summary>
+        /// Gets table with limited number of rows and with selected column groups. Params alias for <see cref="GetSubColumnTable(DataTable, int, string[])"/>
+        /// </summary>
+        /// <param name="table">The table.</param>
+        /// <param name="rowsLimit">The rows limit. -1 to disable row limit.</param>
+        /// <returns></returns>
+        public static DataTable GetSubColumnTableByParams(this DataTable table, Int32 rowsLimit, params String[] columnGroups)
+        {
+            return GetSubColumnTable(table, rowsLimit, columnGroups);
+        }
+
+        /// <summary>
+        /// Gets table with limited number of rows and with selected column groups
+        /// </summary>
+        /// <param name="table">The table.</param>
+        /// <param name="rowsLimit">The rows limit. -1 to disable row limit.</param>
+        /// <returns></returns>
+        public static DataTable GetSubColumnTable(this DataTable table, Int32 rowsLimit, String[] columnGroups)
+        {
+            DataTable output = table.GetClonedShema<DataTable>(true, columnGroups);
+            if (rowsLimit < 1) rowsLimit = table.Rows.Count;
+            int rc = Math.Min(table.Rows.Count, rowsLimit);
+            // IEnumerable<DataRow> rows = table.AsEnumerable().Take(rowsLimit);
+            output.SetTitle(table.GetTitle().add("[" + rc.ToString() + "]", " "));
+            output.SetDescription(table.GetDescription().add("Excerpt with [" + rc.ToString() + "] rows from of the original table with [" + table.Rows.Count + ".", " "));
+            // output.SetAggregationAspect(dataPointAggregationAspect.subSetOfRows);
+
+            int c = 0;
+            for (int i = 0; i < rc; i++)
+            {
+                DataRow nr = output.NewRow();
+
+                foreach (DataColumn dc in output.Columns)
+                {
+                    nr[dc] = table.Rows[i][dc.ColumnName];
+                }
+
+                output.Rows.Add(nr);
+            }
+
+            return output;
         }
 
         /// <summary>

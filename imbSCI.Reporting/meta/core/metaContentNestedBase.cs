@@ -177,6 +177,9 @@ namespace imbSCI.Reporting.meta.core
             return output;
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'getChildByPath(IObjectWithChildSelector, string)' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'metaModelTargetEnum' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'metaModelTargetEnum' that could not be resolved
         /// <summary>
         /// Resolves <see cref="imbSCI.Reporting.reporting.style.enums.metaModelTargetEnum" /> against <c>metaContent</c> DOM
         /// </summary>
@@ -189,6 +192,9 @@ namespace imbSCI.Reporting.meta.core
         /// <exception cref="System.ArgumentOutOfRangeException"></exception>
         /// <seealso cref="imbSCI.Data.extensions.data.imbPathExtensions.getChildByPath(IObjectWithChildSelector, string)" />
         public virtual List<IMetaContentNested> resolve(metaModelTargetEnum target, string needle = "", IMetaContentNested output = null)
+#pragma warning restore CS1574 // XML comment has cref attribute 'metaModelTargetEnum' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'metaModelTargetEnum' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'getChildByPath(IObjectWithChildSelector, string)' that could not be resolved
         {
             bool addDefault = false;
 

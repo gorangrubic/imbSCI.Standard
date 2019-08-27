@@ -31,6 +31,10 @@ namespace imbSCI.Core.attributes
 {
     using System.Runtime.CompilerServices;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'DescriptionAttribute' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'CategoryAttribute' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'DisplayNameAttribute' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'tables' that could not be resolved
     /// <summary>
     /// <para>Extensive Scientific Data annotation-purpose tools.</para>
     /// </summary>
@@ -79,6 +83,10 @@ namespace imbSCI.Core.attributes
     /// <seealso cref="imbAttribute" />
     /// <seealso cref="imbAttributeName" />
     [CompilerGenerated]
+#pragma warning restore CS1574 // XML comment has cref attribute 'tables' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'DisplayNameAttribute' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'CategoryAttribute' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'DescriptionAttribute' that could not be resolved
     internal class NamespaceDoc
     {
     }

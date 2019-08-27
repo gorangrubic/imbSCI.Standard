@@ -47,12 +47,14 @@ namespace imbSCI.Core.reporting.colors
 
     #endregion imbVeles using
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// Color and palette cache and constructor
     /// </summary>
     /// \ingroup_disabled report_ll
     /// <seealso cref="aceCommonTypes.primitives.imbBindable" />
     public class aceColorPaletteManager : imbBindable
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     {
         // private static aceColorPaletteForTypes _paletteLibrary = new aceColorPaletteForTypes();
 

@@ -31,11 +31,13 @@ using imbSCI.Data.data;
 
 namespace imbSCI.Core.reporting.zone
 {
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// Settings about behaviour of cursor inside a zone
     /// </summary>
     /// <seealso cref="aceCommonTypes.primitives.imbBindable" />
     public class cursorZoneExecutionSettings : imbBindable
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     {
         #region --- zoneChangeOnNewDocument ------- zone to be applied upod entering or creating new document
 

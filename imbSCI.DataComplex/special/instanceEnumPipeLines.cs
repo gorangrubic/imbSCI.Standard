@@ -38,6 +38,7 @@ namespace imbSCI.DataComplex.special
     using System.Collections.Generic;
     using System.Data;
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'aceEnumDictionary{TEnum,TObject}.primitives.instanceCountPipeLine{T}}'
     /// <summary>
     /// Pipe-chain of instance counters with sourceID locking mechanism.
     /// </summary>
@@ -45,6 +46,7 @@ namespace imbSCI.DataComplex.special
     /// <typeparam name="TEnum">The type of the enum.</typeparam>
     /// <seealso cref="aceEnumDictionary{TEnum,TObject}.primitives.instanceCountPipeLine{T}}" />
     public class instanceEnumPipeLines<T, TEnum> : aceEnumDictionary<TEnum, instanceCountPipeLine<T>> where T : class
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'aceEnumDictionary{TEnum,TObject}.primitives.instanceCountPipeLine{T}}'
     {
         /// <summary> </summary>
         public bool propagationPaused { get; protected set; } = false;

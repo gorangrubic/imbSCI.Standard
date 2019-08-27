@@ -167,6 +167,8 @@ namespace imbSCI.Data.collection
         /// </returns>
         public bool Remove(T item) => items.Remove(item);
 
+#pragma warning disable CS1723 // XML comment has cref attribute 'T' that refers to a type parameter
+#pragma warning disable CS1723 // XML comment has cref attribute 'T' that refers to a type parameter
         /// <summary>
         /// Gets or sets the <see cref="T"/> with the specified key.
         /// </summary>
@@ -176,6 +178,8 @@ namespace imbSCI.Data.collection
         /// <param name="key">The key.</param>
         /// <returns></returns>
         public T this[Int32 key]
+#pragma warning restore CS1723 // XML comment has cref attribute 'T' that refers to a type parameter
+#pragma warning restore CS1723 // XML comment has cref attribute 'T' that refers to a type parameter
         {
             get
             {

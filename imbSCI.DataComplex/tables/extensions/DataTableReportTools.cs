@@ -30,10 +30,12 @@
 namespace imbSCI.DataComplex.tables.extensions
 {
     using imbSCI.Core.extensions.data;
+    using imbSCI.Core.extensions.table.style;
     using imbSCI.Data.enums.fields;
     using imbSCI.DataComplex.extensions.data.modify;
+    using OfficeOpenXml.Style;
+    using System;
     using System.Data;
-
     public static class DataTableReportTools
     {
         /// <summary>

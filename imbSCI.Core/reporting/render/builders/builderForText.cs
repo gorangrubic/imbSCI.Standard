@@ -35,13 +35,19 @@ namespace imbSCI.Core.reporting.render.builders
     using imbSCI.Core.reporting.zone;
     using imbSCI.Data.enums;
     using imbSCI.Data.enums.appends;
+    using System;
     using System.IO;
+
+
+
+
 
     /// <summary>
     /// Builder for text output
     /// </summary>
     /// <seealso cref="imbStringBuilderBase" />
     /// <seealso cref="ITextRender" />
+    [Serializable]
     public class builderForText : imbStringBuilderBase, ITextRender
     {
         public override converterBase converter

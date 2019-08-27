@@ -49,10 +49,12 @@ namespace imbSCI.Graph.Converters.tools
         /// </summary>
         colorGradient = 8,
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'ExplicitColor' that could not be resolved
         /// <summary>
         /// Takes Category's <see cref="Category.ExplicitColor"/> as base color (ColorA) of <see cref="ColorGradient"/> and applies rules of the gradient
         /// </summary>
         explicitColorViaGradient = 16
+#pragma warning restore CS1574 // XML comment has cref attribute 'ExplicitColor' that could not be resolved
     }
 
     /// <summary>

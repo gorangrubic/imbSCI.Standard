@@ -1,42 +1,38 @@
-using imbSCI.Core.extensions.table;
 using imbSCI.Core.files.folders;
-using imbSCI.Data;
 using imbSCI.DataComplex.converters.core;
 using System;
 using System.Data;
-using System.IO;
-using System.Text;
 
 namespace imbSCI.DataComplex.converters
 {
     public class DataTableConverterAlphaPlot : ConverterBase<DataTable, String, DataTableConverterAlphaPlotSettings>
     {
-        public override DataTable Convert(string input)
+        public override DataTable Convert(string input, DataTableConverterAlphaPlotSettings settings)
         {
             throw new NotImplementedException();
         }
 
-        public override string Convert(DataTable input)
+        public override string Convert(DataTable input, DataTableConverterAlphaPlotSettings settings)
         {
             throw new NotImplementedException();
         }
 
-        public override DataTable ConvertFromFile(folderNode folder, string filepath)
+        public override DataTable ConvertFromFile(folderNode folder, string filepath, DataTableConverterAlphaPlotSettings settings)
         {
             throw new NotImplementedException();
         }
 
-        public override DataTable ConvertFromFile(string filepath)
+        public override DataTable ConvertFromFile(string filepath, DataTableConverterAlphaPlotSettings settings)
         {
             throw new NotImplementedException();
         }
 
-        public override string ConvertToFile(DataTable input, folderNode folder, string filepath)
+        public override string ConvertToFile(DataTable input, folderNode folder, string filepath, DataTableConverterAlphaPlotSettings settings)
         {
             throw new NotImplementedException();
         }
 
-        public override string ConvertToFile(DataTable input, string filepath)
+        public override string ConvertToFile(DataTable input, string filepath, DataTableConverterAlphaPlotSettings settings)
         {
             throw new NotImplementedException();
         }

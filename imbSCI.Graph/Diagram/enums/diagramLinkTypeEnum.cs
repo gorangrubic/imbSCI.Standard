@@ -28,26 +28,39 @@
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace imbSCI.Graph.Diagram.enums
 {
     /// <summary>
     /// Type of link between nodes
     /// </summary>
+    [Flags]
     public enum diagramLinkTypeEnum
     {
+        none=0,
+
         /// <summary>
         /// The normal line
         /// </summary>
-        normal,
+        normal=1,
 
         /// <summary>
         /// The dotted line
         /// </summary>
-        dotted,
+        dotted=2,
 
         /// <summary>
         /// The thick line
         /// </summary>
-        thick
+        thick=4,
+
+        outbound=8,
+
+        inbound=16,
+
+        bothDirections = inbound | outbound,
+
+        normalOutbound=normal|outbound
     }
 }

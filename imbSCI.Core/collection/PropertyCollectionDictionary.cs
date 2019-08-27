@@ -32,11 +32,13 @@ namespace imbSCI.Core.collection
     using System;
     using System.Data;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// PropertyCollection dataset by unique name (path)
     /// </summary>
     /// <seealso cref="aceCommonTypes.primitives.imbBindable" />
     public class PropertyCollectionDictionary : resourceDictionaryBase<PropertyCollection>
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     {
         public PropertyCollection get(String path)
         {

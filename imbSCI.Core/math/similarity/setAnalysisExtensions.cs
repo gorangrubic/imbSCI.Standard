@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace imbSCI.Core.math.similarity
 {
+
     public static class setAnalysisExtensions
     {
 
@@ -36,14 +37,16 @@ namespace imbSCI.Core.math.similarity
             {
                 case nGramsSimilarityEquationEnum.continualOverlapRatio:
                 case nGramsSimilarityEquationEnum.DiceCoefficient:
-                    s = 1;
+                    Double division = 0;
                     for (int i = 0; i < l - 1; i++)
                     {
                         for (int j = i + 1; j < l; j++)
                         {
-                            s = s * GetSimilarity<T>(setList[i], setList[j], equationEnum);
+                            s += GetSimilarity<T>(setList[i], setList[j], equationEnum);
+                            division++;
                         }
                     }
+                    s = s / division;
                     break;
                 case nGramsSimilarityEquationEnum.JaccardIndex:
                     for (int i = 0; i < l - 1; i++)
@@ -57,7 +60,7 @@ namespace imbSCI.Core.math.similarity
                     return s * k;
                     break;
                 case nGramsSimilarityEquationEnum.KunchevaIndex:
-                    s = 1;
+                    s = 0;
                     setAnalysisTools<T> tool = new setAnalysisTools<T>();
                     List<T> completeDataset = new List<T>();
                     foreach (List<T> subset in setList)
@@ -72,7 +75,7 @@ namespace imbSCI.Core.math.similarity
 
                     foreach (var pair in pairs)
                     {
-                        s = s * tool.GetKunchevaIndex(pair[0], pair[1], n_n);
+                        s += tool.GetKunchevaIndex(pair[0], pair[1], n_n);
                     }
 
                     s = s.GetRatio(pairs.Count);

@@ -29,6 +29,8 @@
 // ------------------------------------------------------------------------------------------------------------------
 using imbSCI.Graph.DGML.core;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace imbSCI.Graph.DGML.collections
 {
@@ -38,8 +40,81 @@ namespace imbSCI.Graph.DGML.collections
     /// <seealso cref="imbSCI.Graph.DGML.collections.GraphElementCollection{imbSCI.Graph.DGML.core.Link}" />
     public class LinkCollection : GraphElementCollection<Link>
     {
-        public LinkCollection()
+        
+        public LinkCollection(DirectedGraph graph):base(graph)
         {
+        }
+
+        /// <summary>
+        /// Gets links related to the node with specified <c>nodeA_id</c>
+        /// </summary>
+        /// <param name="nodeA_id">The node a identifier.</param>
+        /// <param name="AtoB">if set to <c>true</c> returns all outbound links</param>
+        /// <param name="BtoA">if set to <c>true</c> returns all inbound links</param>
+        /// <returns></returns>
+        public List<Link> GetLinks(String nodeA_id, Boolean AtoB=true, Boolean BtoA=false)
+        {
+            List<Link> output = new List<Link>();
+
+            if (AtoB) output.AddRange(this.Where(x => x.Source.Equals(nodeA_id)));
+
+            if (BtoA) output.AddRange(this.Where(x => x.Target.Equals(nodeA_id)));
+
+            return output;
+
+            //.ToList();
+        }
+
+        public Link AddOrGetLink(String nodeA, String nodeB)
+        {
+            var NodeA = Graph.Nodes.AddOrGet(nodeA);
+            var NodeB = Graph.Nodes.AddOrGet(nodeB);
+
+            Link a = this.FirstOrDefault(x => (x.Source == nodeA) && (x.Target == nodeB));
+            if (a==null)
+            {
+                 Link l = new Link();
+                l.Source = nodeA;
+                l.Target = nodeB;
+                Add(l);
+                a = l;
+            } else
+            {
+               // if (returnOnlyNewNodes) a = null;
+            }
+            return a;
+        }
+
+        public List<Link> AddOrGetLinks(String nodeA, IEnumerable<String> nodeBs, Boolean returnOnlyNewNodes=true)
+        {
+            var NodeA = Graph.Nodes.AddOrGet(nodeA);
+
+            List<Link> output = new List<Link>();
+            foreach (String nodeB in nodeBs)
+            {
+                
+                var NodeB = Graph.Nodes.AddOrGet(nodeB);
+
+                Link a = this.FirstOrDefault(x => (x.Source == nodeA) && (x.Target == nodeB));
+                if (a==null)
+                {
+                     Link l = new Link();
+                    l.Source = nodeA;
+                    l.Target = nodeB;
+                    Add(l);
+                    a = l;
+                     output.Add(a);
+                } else
+                {
+                    if (!returnOnlyNewNodes)
+                    {
+                        output.Add(a);
+                    }
+                }
+                
+            }
+
+            return output;
         }
 
         /// <summary>

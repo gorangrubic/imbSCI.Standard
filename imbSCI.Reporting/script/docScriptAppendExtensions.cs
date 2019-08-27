@@ -66,6 +66,7 @@ namespace imbSCI.Reporting.script
             return title.getCleanFilepath().getCleanPropertyName().Replace(" ", "").ToLower();
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'aceReportException' that could not be resolved
         /// <summary>
         /// Appends the macro simple table.
         /// </summary>
@@ -75,6 +76,7 @@ namespace imbSCI.Reporting.script
         /// <returns></returns>
         /// <exception cref="imbSCI.Cores.core.exceptions.aceReportException">Can't append table with 0 columns, 0 rows and without title - null - Macro: DataTable block failed</exception>
         public static DataTable AppendMacroSimpleTable(this ITextAppendContentExtended script, DataTable source, bool throwException = true, macroOptions options = macroOptions.common)
+#pragma warning restore CS1574 // XML comment has cref attribute 'aceReportException' that could not be resolved
         {
             if (!source.validateTable())
             {

@@ -387,6 +387,7 @@ namespace imbSCI.DataComplex.tables
             return LoadFailed;
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'getWritableFileMode' that could not be resolved
         /// <summary>
         /// Saves the table on specified path. According to <see cref="aceCommonTypes.enums.getWritableFileMode"/> mode selected
         /// </summary>
@@ -394,6 +395,7 @@ namespace imbSCI.DataComplex.tables
         /// <param name="mode">The mode.</param>
         /// <returns></returns>
         public virtual bool SaveAs(string path, getWritableFileMode mode = getWritableFileMode.newOrExisting)
+#pragma warning restore CS1574 // XML comment has cref attribute 'getWritableFileMode' that could not be resolved
         {
             info = path.getWritableFile(mode);
 
@@ -415,6 +417,7 @@ namespace imbSCI.DataComplex.tables
 
         private object SaveLinkedLock = new object();
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
         /// <summary>
         /// Updates the base.
         /// </summary>
@@ -422,6 +425,7 @@ namespace imbSCI.DataComplex.tables
         /// <param name="key">The key.</param>
         /// <exception cref="aceCommonTypes.core.exceptions.dataException">Instance [" + key + "] wasn't found in the instance collection - null - objectTableBase.UpdateBase() instance not found</exception>
         protected virtual void UpdateBase(object item, string key = null)
+#pragma warning restore CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
         {
             if (key.isNullOrEmpty()) key = GetKeyValue(item);
 
@@ -526,12 +530,14 @@ namespace imbSCI.DataComplex.tables
             return clone;
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
         /// <summary>
         /// Saves this instance. Returns <c>true</c> on success
         /// </summary>
         /// <returns>TRUE if saved sucessfully</returns>
         /// <exception cref="aceCommonTypes.core.exceptions.dataException">Can't just call Save() when no FileInfo instance ever set - null - Save() failed, call SaveAs() first</exception>
         public virtual bool Save(getWritableFileMode mode = getWritableFileMode.newOrExisting)
+#pragma warning restore CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
         {
             if (info != null)
             {

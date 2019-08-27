@@ -4,8 +4,9 @@ namespace imbSCI.Data.collection.graph
 {
     using System.Xml.Serialization;
 
+
     /// <summary>
-    /// Analytical entry, describing relation ship between version of the same node, in two different graphs
+    /// Analytical entry, describing relationship between versions of the same node, in two different graphs
     /// </summary>
     public class graphAnalysisPair
     {

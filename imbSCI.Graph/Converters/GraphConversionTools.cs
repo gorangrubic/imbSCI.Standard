@@ -28,6 +28,7 @@
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
 using imbSCI.Core.data;
+using imbSCI.Core.data.transfer;
 using imbSCI.Data.collection.graph;
 using imbSCI.Graph.DGML;
 using imbSCI.Graph.DGML.core;
@@ -198,6 +199,7 @@ namespace imbSCI.Graph.Converters
                 if (_DefaultGraphToDGMLConverterInstance == null)
                 {
                     _DefaultGraphToDGMLConverterInstance = new graphToDirectedGraphConverterBasic();
+
                 }
                 return _DefaultGraphToDGMLConverterInstance;
             }

@@ -37,12 +37,14 @@ namespace imbSCI.Core.reporting.style
     using System.Collections.Generic;
     using System.Linq;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// Set of <see cref="IStyleInstruction"/>s and <see cref="selectRangeArea"/>s to be applied.
     /// </summary>
     /// <remarks>Each instruction is applied to each area. <c>pathList</c> is checked before execution - areas are updated witht his list </remarks>
     /// <seealso cref="aceCommonTypes.primitives.imbBindable" />
     public class areaStyleInstruction : imbBindable
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="areaStyleInstruction"/> class.

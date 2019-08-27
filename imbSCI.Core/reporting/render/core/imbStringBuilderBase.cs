@@ -80,6 +80,7 @@ namespace imbSCI.Core.reporting.render.core
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="TG"></typeparam>
+    [Serializable]
     public abstract class imbStringBuilderBase : imbReportingBindable, ITabLevelControler, IStringBuilderLengths, IConsoleControl
     {
         /// <summary>
@@ -1297,6 +1298,9 @@ namespace imbSCI.Core.reporting.render.core
 
         #endregion --- closeTagFormat ------- format template for tag closing
 
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag 'remarks' does not match the start tag 'para'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'para'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'remarks'.'
         /// <summary>
         /// Merges content scoped by area
         /// </summary>
@@ -1311,6 +1315,9 @@ namespace imbSCI.Core.reporting.render.core
         /// <returns>Merged content</returns>
         ///  \ingroup_disabled renderapi_append
         public virtual Object merge(selectRangeArea areaToMerge)
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'remarks'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'para'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag 'remarks' does not match the start tag 'para'.'
         {
             var lines = contentElements.GetRange(areaToMerge.y, areaToMerge.height);
 
@@ -1471,12 +1478,14 @@ namespace imbSCI.Core.reporting.render.core
             //sb.AppendLine(linePrefix + tabInsert + "---");
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'validateTable()' that could not be resolved
         /// <summary>
         /// Renders DataTable
         /// </summary>
         /// <param name="table">The table.</param>
         /// <param name="doThrowException">if set to <c>true</c> it will throw an exception on <see cref="validateTable()"/> return false.</param>
         public virtual void AppendTable(DataTable table, bool doThrowException = true)
+#pragma warning restore CS1574 // XML comment has cref attribute 'validateTable()' that could not be resolved
         {
             if (table.validateTable())
             {

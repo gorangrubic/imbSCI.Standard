@@ -6,11 +6,15 @@ using System.Text.RegularExpressions;
 
 namespace imbSCI.Graph.Graphics.SvgAPI.Core
 {
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.List{imbSCI.Graph.Graphics.SvgAPI.Core.ISVGInlineArgument}'
     /// <summary>
     /// Inline arguments
     /// </summary>
     /// <seealso cref="System.Collections.Generic.List{imbSCI.Graph.Graphics.SvgAPI.Core.ISVGInlineArgument}" />
     public class SVGInlineArguments : List<ISVGInlineArgument>
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.List{imbSCI.Graph.Graphics.SvgAPI.Core.ISVGInlineArgument}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     {
         //  public static Regex REGEX_ARGUMENTSELECT = new Regex(@"(\w{1}[\d\s,\.]*");
 

@@ -1,5 +1,6 @@
 using imbSCI.Core.files.folders;
 using imbSCI.Data;
+using imbSCI.Data.enums;
 using imbSCI.Graph.Graphics.SvgAPI.Containers;
 using imbSCI.Graph.Graphics.SvgAPI.Core;
 using System;
@@ -10,11 +11,13 @@ using System.Xml.Serialization;
 
 namespace imbSCI.Graph.Graphics.SvgAPI
 {
+#pragma warning disable CS1574 // XML comment has cref attribute 'svgContainerElement' that could not be resolved
     /// <summary>
     /// imbSCI.Graph SVG document model
     /// </summary>
     /// <seealso cref="imbSCI.Graph.Graphics.SvgAPI.svgContainerElement" />
     public class svgDocument : svgContainerElement
+#pragma warning restore CS1574 // XML comment has cref attribute 'svgContainerElement' that could not be resolved
     {
         public svgDocument()
         {
@@ -68,7 +71,7 @@ namespace imbSCI.Graph.Graphics.SvgAPI
         public void Save(folderNode folder, String filename, String description = "", Boolean formatString = false)
         {
             filename = filename.add("svg", ".");
-            String p = folder.pathFor(filename, Data.enums.getWritableFileMode.overwrite, description, true);
+            String p = folder.pathFor(filename, getWritableFileMode.overwrite, description, true);
             Save(p, formatString);
         }
 

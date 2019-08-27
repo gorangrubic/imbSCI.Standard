@@ -38,11 +38,17 @@ namespace imbSCI.DataComplex.special
     using System.Linq;
     using System.Text;
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'aceCommonTypes.collection.special.translationTable{System.String, System.String}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// Text simple replace-based translation table - dictionary
     /// </summary>
     /// <seealso cref="aceCommonTypes.collection.special.translationTable{System.String, System.String}" />
     [Serializable]
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'aceCommonTypes.collection.special.translationTable{System.String, System.String}'
     public class translationTextTable : translationTable<string, string>
     {
         /// <summary>
@@ -109,11 +115,13 @@ namespace imbSCI.DataComplex.special
             }
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'Load(string)' that could not be resolved
         /// <summary>
         /// Clears all entries, optionally clears the associated file (via <see cref="Load(string)"/> or <see cref="Save(string)"/> methods)
         /// </summary>
         /// <param name="clearFile">if set to <c>true</c> [clear file].</param>
         public void Clear(bool clearFile = false)
+#pragma warning restore CS1574 // XML comment has cref attribute 'Load(string)' that could not be resolved
         {
             byKeys.Clear();
             byValues.Clear();
@@ -157,12 +165,14 @@ namespace imbSCI.DataComplex.special
             loger.log("Coding twins completly loaded: " + LoadCount);
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
         /// <summary>
         /// Appends the file with the entries of the table
         /// </summary>
         /// <param name="filepath">The filepath.</param>
         /// <exception cref="aceCommonTypes.core.exceptions.dataException">The source file was never defined - cant use save without filepath - null - Save() failed, no filepath</exception>
         public void Append(string filepath = null)
+#pragma warning restore CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
         {
             if (sourceFile == null)
             {
@@ -176,12 +186,14 @@ namespace imbSCI.DataComplex.special
             sourceFile.Save();
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
         /// <summary>
         /// Saves the table to the specified filepath, overwriting the file content
         /// </summary>
         /// <param name="filepath">The filepath.</param>
         /// <exception cref="aceCommonTypes.core.exceptions.dataException">The source file was never defined - cant use save without filepath - null - Save() failed, no filepath</exception>
         public void Save(string filepath = null)
+#pragma warning restore CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
         {
             if (sourceFile == null)
             {

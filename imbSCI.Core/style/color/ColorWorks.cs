@@ -35,6 +35,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace imbSCI.Core.style.color
@@ -331,23 +332,7 @@ namespace imbSCI.Core.style.color
                 throw ax;
             }
 
-            /*
-
-            if (hex.Length < 5) {
-                a = (byte)(Convert.ToUInt32(hex.Substring(0, 1), 8));
-                r = (byte)(Convert.ToUInt32(hex.Substring(1, 2), 8));
-                g = (byte)(Convert.ToUInt32(hex.Substring(3, 4), 8));
-                b = (byte)(Convert.ToUInt32(hex.Substring(4, 5), 8));
-
-                c = Color.FromArgb(a, r, g, b);
-            } else {
-                a = (byte)(Convert.ToUInt32(hex.Substring(0, 2), 16));
-                r = (byte)(Convert.ToUInt32(hex.Substring(2, 2), 16));
-                g = (byte)(Convert.ToUInt32(hex.Substring(4, 2), 16));
-                b = (byte)(Convert.ToUInt32(hex.Substring(6, 2), 16));
-            }
-
-           */
+          
 
             if (vals.Count() > 3)
             {
@@ -358,6 +343,7 @@ namespace imbSCI.Core.style.color
             }
             else if (vals.Count() == 3)
             {
+                a = 255;
                 //a = vals[0];
                 r = vals[0];
                 g = vals[1];
@@ -372,10 +358,86 @@ namespace imbSCI.Core.style.color
             return c;
         }
 
-        public static String ColorToHex(this Color actColor)
-
+        public static String FormatHexColorTo(this String hexCode, ColorHexFormats format = ColorHexFormats.ARGB)
         {
-            return actColor.ToString(); //"#" + IntToHex(actColor.R, 2) + IntToHex(actColor.G, 2) + IntToHex(actColor.B, 2);
+            Color c = GetColor(hexCode);
+            return c.ColorToHex(format);
         }
+
+        /// <summary>
+        /// Gets the color version with alpha.
+        /// </summary>
+        /// <param name="BaseColor">Color of the base.</param>
+        /// <param name="alpha">Alpha value, from 0 to 255</param>
+        /// <returns></returns>
+        public static Color GetColorVersionWithAlpha(this Color BaseColor, Int32 alpha)
+        {
+            if (alpha > 256) alpha = alpha % 255;
+           // Int32 Alpha = Convert.ToInt32(alpha * (Double)255);
+            return Color.FromArgb(alpha, BaseColor);
+        }
+
+        /// <summary>
+        /// Gets the color version with alpha.
+        /// </summary>
+        /// <param name="BaseColor">Color of the base.</param>
+        /// <param name="alpha">Alpha value, from 0 to 1</param>
+        /// <returns></returns>
+        public static Color GetColorVersionWithAlpha(this Color BaseColor, Double alpha)
+        {
+            if (alpha > 1) alpha = alpha % 1;
+            Int32 Alpha = Convert.ToInt32(alpha * (Double)255);
+            return Color.FromArgb(Alpha, BaseColor);
+        }
+
+
+        /// <summary>
+        /// Converts color to hex code
+        /// </summary>
+        /// <param name="actColor">Color of the act.</param>
+        /// <param name="format">The format.</param>
+        /// <param name="includeSharpPrefix">if set to <c>true</c> it will include # prefix.</param>
+        /// <returns></returns>
+        public static String ColorToHex(this Color actColor, ColorHexFormats format = ColorHexFormats.ARGB, Boolean includeSharpPrefix = true)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            if (includeSharpPrefix)
+            {
+                sb.Append("#");
+            }
+
+            Char[] format_chars = format.ToString().ToCharArray();
+            foreach (char ch in format_chars)
+            {
+                switch (ch)
+                {
+                    case 'A':
+                        sb.Append(actColor.A.ToString("X2")); // IntToHex(actColor.R, 2));
+                        break;
+                    case 'R':
+                        sb.Append(actColor.R.ToString("X2"));
+                        break;
+                    case 'G':
+                        sb.Append(actColor.G.ToString("X2"));
+                        break;
+                    case 'B':
+                        sb.Append(actColor.B.ToString("X2"));
+                        break;
+                    default:
+                        break;
+                }
+                
+            }
+
+            return sb.ToString(); //"#" +  + IntToHex(actColor.G, 2) + IntToHex(actColor.B, 2);
+        }
+    }
+
+    public enum ColorHexFormats
+    {
+        ARGB,
+        RGBA,
+        RGB
     }
 }

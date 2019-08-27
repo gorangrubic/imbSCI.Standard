@@ -632,7 +632,8 @@ namespace imbSCI.Core.extensions.io
                             FileInfo exfi = new FileInfo(output);
                             if (exfi.CreationTime.Date != DateTime.Now.Date)
                             {
-                                existing = existing.addUniqueSufix("_" + exfi.CreationTime.ToString("MM-dd"));
+                                existing = existing + "_" + exfi.CreationTime.ToString("MM-dd");
+                                File.Delete(existing);
                                 File.Copy(output, existing);
                                 try
                                 {

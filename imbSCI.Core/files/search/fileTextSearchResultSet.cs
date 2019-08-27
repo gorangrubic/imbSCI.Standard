@@ -35,11 +35,15 @@ namespace imbSCI.Core.files.search
 {
     using System.Collections;
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IEnumerable{imbACE.Core.files.search.fileTextSearchResult}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// Set of results for IEnumerable query
     /// </summary>
     /// <seealso cref="System.Collections.Generic.IEnumerable{imbACE.Core.files.search.fileTextSearchResult}" />
     public class fileTextSearchResultSet : IEnumerable<fileTextSearchResult>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IEnumerable{imbACE.Core.files.search.fileTextSearchResult}'
     {
         protected fileTextSearchResultSet()
         {

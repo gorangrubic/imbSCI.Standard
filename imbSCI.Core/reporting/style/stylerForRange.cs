@@ -283,6 +283,7 @@ namespace imbSCI.Core.reporting.style
         //    return output;
         //}
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'appendType' that could not be resolved
         /// <summary>
         /// Provides complete <see cref="styleShotSet"/> according to x,y coordinates and desired <see cref="aceCommonTypes.enums.appendType"/>.
         /// </summary>
@@ -291,6 +292,7 @@ namespace imbSCI.Core.reporting.style
         /// <param name="type">If <c>appendType.none</c> it will automatically find the best match</param>
         /// <returns></returns>
         public styleShotSet getStyleShot(Int32 x, Int32 y, appendType type = appendType.none)
+#pragma warning restore CS1574 // XML comment has cref attribute 'appendType' that could not be resolved
         {
             cursorVariatorState currentState = state(x, y);
 

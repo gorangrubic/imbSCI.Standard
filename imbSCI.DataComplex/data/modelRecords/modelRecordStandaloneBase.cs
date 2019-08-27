@@ -33,6 +33,7 @@ namespace imbSCI.DataComplex.data.modelRecords
     using imbSCI.Core.reporting;
     using imbSCI.Data.interfaces;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'IAutosaveEnabled' that could not be resolved
     /// <summary>
     /// Model for Record that is allowed to be started and finished with direct call, have no childen -- use it for the end nodes
     /// </summary>
@@ -45,6 +46,7 @@ namespace imbSCI.DataComplex.data.modelRecords
     /// <seealso cref="imbSCI.Core.interfaces.ILogable" />
     /// <seealso cref="IConsoleControl" />
     public abstract class modelRecordStandaloneBase<TInstance> : modelRecordBase, IAppendDataFields, IAppendDataFieldsExtended, IModelStandaloneRecord<TInstance>, IAutosaveEnabled, ILogable, IConsoleControl
+#pragma warning restore CS1574 // XML comment has cref attribute 'IAutosaveEnabled' that could not be resolved
         where TInstance : class, IObjectWithName, IObjectWithDescription, IObjectWithNameAndDescription
     {
         /// <summary>
@@ -90,14 +92,18 @@ namespace imbSCI.DataComplex.data.modelRecords
             }
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute '_recordStart' that could not be resolved
         /// <summary>
         /// Records the start. Make sure to call <see cref="_recordStart"/> at beginning of the method
         /// </summary>
         public abstract void recordStart(string __testRunStamp, string __instanceID, params object[] resources);
+#pragma warning restore CS1574 // XML comment has cref attribute '_recordStart' that could not be resolved
 
+#pragma warning disable CS1574 // XML comment has cref attribute '_recordFinish' that could not be resolved
         /// <summary>
         /// Records the finish. Make sure to call <see cref="_recordFinish"/> at the end of the method
         /// </summary>
         public abstract void recordFinish(params object[] resources);
+#pragma warning restore CS1574 // XML comment has cref attribute '_recordFinish' that could not be resolved
     }
 }

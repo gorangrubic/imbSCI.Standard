@@ -37,6 +37,7 @@ namespace imbSCI.Reporting.meta.render
     using System.Data;
     using System.Linq;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     ///
     /// </summary>
@@ -44,6 +45,7 @@ namespace imbSCI.Reporting.meta.render
     /// <seealso cref="imbSCI.Cores.primitives.imbBindable" />
     /// \ingroup_disabled report_cm_render
     public sealed class metaStyleComposer<T> : imbBindable where T : ITextRender, new()
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     {
         public void AppendColor(aceColorPalette paleta, stringTemplate template, PropertyCollection data)
         {

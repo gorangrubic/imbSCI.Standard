@@ -347,6 +347,7 @@ namespace imbSCI.Core.collection
             entries.Remove(key);
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'overwriteExistingIfEmptyOrNull' that could not be resolved
         /// <summary>
         /// Adds the range. When <c>skipExisting</c> booleans are <c>true</c> it applies <see cref="aceCommonTypes.enums.existingDataMode.overwriteExistingIfEmptyOrNull"/> for smarter data gathering
         /// </summary>
@@ -355,6 +356,7 @@ namespace imbSCI.Core.collection
         /// <param name="skipExistingMeta">if set to <c>true</c> it will keep existing <c>PropertyEntry</c> when overlapped with source</param>
         /// <param name="strictMetaKeyMatch">If set to <c>true</c> it will not introduce new columns into data set. If <c>false</c> it will upgrade data set with not existing columns found at <c>source</c></param>
         public void AddRange(PropertyCollectionExtended source, Boolean skipExistingValues, Boolean skipExistingMeta, Boolean strictMetaKeyMatch)
+#pragma warning restore CS1574 // XML comment has cref attribute 'overwriteExistingIfEmptyOrNull' that could not be resolved
         {
             foreach (KeyValuePair<Object, PropertyEntry> pePair in source.entries)
             {
@@ -455,12 +457,14 @@ namespace imbSCI.Core.collection
             if (!__symbol.isNullOrEmpty()) pe.add(PropertyEntryColumn.role_symbol, __symbol, skipExisting); // = __symbol;
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'isKeyValueColumn(imbSCI.Data.collection.PropertyEntryColumn)' that could not be resolved
         /// <summary>
         /// Get all non value (<see cref="aceCommonTypes.extensions.data.PropertyEntryColumnExtensions.isKeyValueColumn(imbSCI.Data.collection.PropertyEntryColumn)"/> columns into <see cref="PropertyCollection"/>
         /// </summary>
         /// <param name="key">The key.</param>
         /// <returns></returns>
         public PropertyCollection GetMetaForKey(Object key)
+#pragma warning restore CS1574 // XML comment has cref attribute 'isKeyValueColumn(imbSCI.Data.collection.PropertyEntryColumn)' that could not be resolved
         {
             var pe = entries[key];
             Object input = null;

@@ -13,6 +13,104 @@ namespace imbSCI.Core.math.similarity
     public class setAnalysisTools<T> where T : IEquatable<T>
     {
 
+        /// <summary>
+        /// Custom function to test equality
+        /// </summary>
+        public Func<T, T, Boolean> CustomIsEqual;
+
+        protected Boolean AddUniqueElement(List<T> target, T needle)
+        {
+            
+            Boolean doAdd = true;
+            for (int i = 0; i < target.Count; i++)
+            {
+                if (EqualTest(target[i], needle))
+                {
+                    doAdd = false;
+                    break;
+                }
+            }
+
+            if (doAdd)
+            {
+                target.Add(needle);
+            }
+
+            return doAdd;
+        }
+
+        protected List<T> GetJoinElements(IEnumerable<T> e_target, IEnumerable<T> e_needle)
+        {
+            List<T> output = new List<T>();
+            List<T> target = e_target.ToList();
+            List<T> needle = e_needle.ToList();
+
+            foreach (T n in needle)
+            {
+                AddUniqueElement(target, n);
+            }
+            return output;
+        }
+
+
+        protected List<T> GetCommonElements(IEnumerable<T> e_target, IEnumerable<T> e_needle)
+        {
+            List<T> output = new List<T>();
+            List<T> target = e_target.ToList();
+            List<T> needle = e_needle.ToList();
+
+            for (int i = 0; i < target.Count; i++)
+            {
+                T inTarget = target[i];
+
+                Int32 matchIndex = -1;
+                for (int y = 0; y < needle.Count; y++)
+                {
+                    T inNeedle = needle[y];
+                    if (EqualTest(inTarget, inNeedle))
+                    {
+                        matchIndex = y;
+                        output.Add(inTarget);
+                        break;
+                    }
+                }
+                if (matchIndex > -1)
+                {
+                    needle.RemoveAt(matchIndex);
+                }
+
+            }
+
+            return output;
+        }
+
+        protected Int32 CountContains(IEnumerable<T> e_target, IEnumerable<T> e_needle)
+        {
+            return GetCommonElements(e_target, e_needle).Count();
+        }
+
+        protected Boolean Contains(IEnumerable<T> target, T needle)
+        {
+            foreach (T inTarget in target)
+            {
+                if (EqualTest(inTarget, needle))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        protected Boolean EqualTest(T target, T needle)
+        {
+            if (CustomIsEqual == null)
+            {
+                return target.Equals(needle);
+            } else
+            {
+                return CustomIsEqual(target, needle);
+            }
+        }
 
         /// <summary>
         /// Computes word similarity
@@ -54,6 +152,7 @@ namespace imbSCI.Core.math.similarity
         /// </summary>
         /// <param name="ngrams_A">The ngrams a.</param>
         /// <param name="ngrams_b">The ngrams b.</param>
+        /// <param name="datasetSize">Size of the dataset.</param>
         /// <returns></returns>
         public Double GetKunchevaIndex(List<T> ngrams_A, List<T> ngrams_b, Int32 datasetSize = 0)
         {
@@ -61,13 +160,11 @@ namespace imbSCI.Core.math.similarity
 
             if (n_n == 0)
             {
-                List<T> dataset = new List<T>();
-                dataset.AddRange(ngrams_A);
-                dataset.AddRange(ngrams_b, true);
+                List<T> dataset = GetJoinElements(ngrams_A, ngrams_b);
                 n_n = dataset.Count;
             }
 
-            Int32 common = ngrams_A.Count(x => ngrams_b.Contains(x));
+            Int32 common = CountContains(ngrams_A, ngrams_b); // ngrams_A.Count(x => Contains(ngrams_b, x)); // ngrams_b.Contains(x));
 
             Int32 k_n = ngrams_A.Count;
 
@@ -104,7 +201,7 @@ namespace imbSCI.Core.math.similarity
             Int32 start = 0;
             for (int a_i = 0; a_i < A.Count; a_i++)
             {
-                if (A[a_i].Equals(B.First()))
+                if (EqualTest(A[a_i], B.First()))
                 {
                     start = a_i;
                     synced = true;
@@ -117,7 +214,7 @@ namespace imbSCI.Core.math.similarity
             {
                 for (int i = start; i < Math.Min(A.Count, B.Count); i++)
                 {
-                    if (A[i].Equals(B[i]))
+                    if (EqualTest(A[i], B[i]))
                     {
                         cc++;
                     }
@@ -135,16 +232,14 @@ namespace imbSCI.Core.math.similarity
         /// Gets the index of the Jaccard index: number of common ngrams divided by number of total unique ngrams
         /// </summary>
         /// <param name="ngrams_A">The ngrams a.</param>
-        /// <param name="ngrams_b">The ngrams b.</param>
+        /// <param name="ngrams_B">The ngrams b.</param>
         /// <returns></returns>
-        public Double GetJaccardIndex(List<T> ngrams_A, List<T> ngrams_b)
+        public Double GetJaccardIndex(List<T> ngrams_A, List<T> ngrams_B)
         {
-            List<T> allNGrams = new List<T>();
+            List<T> allNGrams = GetJoinElements(ngrams_A, ngrams_B);
 
-            Int32 common = ngrams_A.Count(x => ngrams_b.Contains(x));
+            Int32 common = CountContains(ngrams_A, ngrams_B); // ngrams_A.Count(x => Contains(ngrams_b, x)); // ngrams_b.Contains(x));
 
-            allNGrams.AddRange(ngrams_A);
-            allNGrams.AddRange(ngrams_b, true);
 
             return common.GetRatio(allNGrams.Count);
         }
@@ -153,43 +248,92 @@ namespace imbSCI.Core.math.similarity
         /// Gets the index of the Dice coefficient: number of common ngrams divided by number of n-grams in both sets
         /// </summary>
         /// <param name="ngrams_A">The ngrams a.</param>
-        /// <param name="ngrams_b">The ngrams b.</param>
+        /// <param name="ngrams_B">The ngrams b.</param>
         /// <returns></returns>
-        public Double GetDiceCoefficient(List<T> ngrams_A, List<T> ngrams_b)
+        public Double GetDiceCoefficient(List<T> ngrams_A, List<T> ngrams_B)
         {
-            Int32 common = ngrams_A.Count(x => ngrams_b.Contains(x)) * 2;
+            Int32 common = CountContains(ngrams_A, ngrams_B) * 2; //.Count(x => Contains(ngrams_B, x)) * 2;
 
-            return common.GetRatio(ngrams_A.Count + ngrams_b.Count);
+            return common.GetRatio(ngrams_A.Count + ngrams_B.Count);
         }
 
-        ///// <summary>
-        ///// Gets descriptive line about n-grams deconstruction of the specified word
-        ///// </summary>
-        ///// <param name="word">The word to be splitted into n-grams</param>
-        ///// <param name="N">Size of N-grams, e.g. for bigrams: N=2</param>
-        ///// <param name="mode">The slicing mode</param>
-        ///// <returns>Line used for debugging </returns>
-        //public String getNGramsDescriptiveLine(String word, Int32 N = 2, nGramsModeEnum mode = nGramsModeEnum.overlap)
-        //{
-        //    List<T> ngrams = getNGrams(word, N, mode);
+        public static List<String> getStringNGramSet(String item, Int32 N = 2, nGramsModeEnum mode = nGramsModeEnum.overlap) 
+        {
+            
+            var charSets = setAnalysisTools<Char>.getNGramSet<List<Char>>(item.ToCharArray().ToList(), N, mode);
 
-        //    String line = "[" + word + "] (" + mode.ToString() + ", N=" + N + ") => ";
+            List<String> ngrams = new List<string>();
+            foreach (List<char> charSet in charSets)
+            {
+                ngrams.Add(String.Concat(charSet));
+                
+            }
+            return ngrams;
+        }
 
-        //    foreach (String ng in ngrams)
-        //    {
-        //        line = line.add(ng, ", ");
-        //    }
+            /// <summary>
+            /// Breaks the specified sequence of items into n-gram chunks
+            /// </summary>
+            /// <param name="items">The items.</param>
+            /// <param name="N">The n.</param>
+            /// <param name="mode">The mode.</param>
+            /// <returns></returns>
+            /// <exception cref="Exception">Unexpected Case</exception>
+            public static List<TNGram> getNGramSet<TNGram>(List<T> items, Int32 N = 2, nGramsModeEnum mode = nGramsModeEnum.overlap) where TNGram:List<T>, new()
+        {
+            List<TNGram> output = new List<TNGram>();
 
-        //    return line;
-        //}
+            Int32 step = 1;
+            Int32 remnant = 0;
+            switch (mode)
+            {
+                case nGramsModeEnum.overlap:
+                    {
+                        step = 1;
+                        remnant = 1;
+                        break;
+                    }
+                case nGramsModeEnum.ordinal:
+                    {
+                        step = N;
+                        remnant = 0;
+                        break;
+                    }
+
+                default:
+                    throw new Exception("Unexpected Case");
+            }
+
+            if (items.Count <= N)
+            {
+                TNGram nGram = new TNGram();
+                nGram.AddRange(items);
+                output.Add(nGram);
+                return output;
+            }
+
+            for (int i = 0; i < items.Count; i = i + step)
+            {
+                Int32 len = Math.Min(N, items.Count - i);
+                if (len > remnant)
+                {
+                     TNGram nGram = new TNGram();
+                    nGram.AddRange(items.GetRange(i, len));
+                    output.Add(nGram);
+                }
+            }
+            return output;
+        }
 
         /// <summary>
-        /// Breaks the specified word into <c>N</c>-grams
+        /// Breaks the specified sequence into <c>N</c>-gram sub sequences
         /// </summary>
-        /// <param name="word">The word to be splitted into n-grams</param>
+        /// <param name="sets">The sets.</param>
         /// <param name="N">Size of N-grams, e.g. for bigrams: N=2</param>
         /// <param name="mode">The slicing mode</param>
-        /// <returns>Set of NGrams</returns>
+        /// <returns>
+        /// Set of NGrams
+        /// </returns>
         public List<List<List<T>>> getNGrams(List<List<T>> sets, Int32 N = 2, nGramsModeEnum mode = nGramsModeEnum.overlap)
         {
             List<List<List<T>>> output = new List<List<List<T>>>();
@@ -199,14 +343,20 @@ namespace imbSCI.Core.math.similarity
             switch (mode)
             {
                 case nGramsModeEnum.overlap:
-                    step = 1;
-                    remnant = 1;
-                    break;
-
+                    {
+                        step = 1;
+                        remnant = 1;
+                        break;
+                    }
                 case nGramsModeEnum.ordinal:
-                    step = N;
-                    remnant = 0;
-                    break;
+                    {
+                        step = N;
+                        remnant = 0;
+                        break;
+                    }
+
+                default:
+                    throw new Exception("Unexpected Case");
             }
 
             if (sets.Count <= N)

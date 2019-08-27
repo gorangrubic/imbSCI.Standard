@@ -1,3 +1,5 @@
+using imbSCI.Core.math;
+using imbSCI.Graph.SVG;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,8 +9,10 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace Svg
 {
@@ -349,30 +353,68 @@ namespace Svg
             return bitmap;
         }
 
-        /// <summary>
-        /// Saves the specified filepath.
-        /// </summary>
-        /// <param name="filepath">The filepath.</param>
-        public void Save(String filepath)
+        public const String SVGENDTAG = "</svg>";
+
+        public String GetXML()
         {
             var settings = new XmlWriterSettings();
             settings.Indent = true;
             settings.Encoding = Encoding.UTF8;
             settings.NamespaceHandling = NamespaceHandling.OmitDuplicates;
 
-            XmlWriter writer = XmlWriter.Create(filepath, settings);
+            
 
-            Write(writer);
+            //settings.OutputMethod = XmlOutputMethod.Html
+            MemoryStream ms = new MemoryStream();
+
+          //  SvgWriter svgWritter = new SvgWriter(settings, ms); 
+
+            XmlWriter svgWritter  = XmlWriter.Create(ms, settings);
+            
+          //  writer.XmlSpace
+            Write(svgWritter);
             // this.WriteElement(writer);
-            writer.Close();
+           svgWritter.Close();
 
-            //File.WriteAllText(filepath, output.Content);
+            String output = settings.Encoding.GetString(ms.GetBuffer());
+
+            output = output.Replace(" p1:", " ");
+            output = output.Replace("xlns:p1", "xlns:");
+
+
+            Int32 endOfXml = output.IndexOf(SVGENDTAG) + SVGENDTAG.Length;
+
+            output = output.Substring(0, endOfXml);
+
+            return output;
+
+        }
+
+        /// <summary>
+        /// Saves the specified filepath.
+        /// </summary>
+        /// <param name="filepath">The filepath.</param>
+        public void Save(String filepath)
+        {
+
+
+            String output = GetXML();
+
+
+
+            File.WriteAllText(filepath, output);
         }
 
         public void SaveJPEG(String filepath, Int32 DPI = 300)
         {
+            Int32 oldDPI = Ppi;
 
-            Bitmap bitmap = new Bitmap(Convert.ToInt32(Width.ToDeviceValue() * DPI), Convert.ToInt32(Height.ToDeviceValue() * DPI));
+            Ppi = DPI;
+
+           // Int32 m_rate = Convert.ToInt32(DPI.GetRatio(Ppi));
+            Int32 w = Convert.ToInt32(Width.ToDeviceValue());
+            Int32 h = Convert.ToInt32(Height.ToDeviceValue());
+            Bitmap bitmap = new Bitmap(w,h);
 
 
             SvgRenderer renderer = SvgRenderer.FromImage(bitmap);
@@ -383,6 +425,7 @@ namespace Svg
 
             bitmap.Save(filepath, ImageFormat.Jpeg);
 
+            Ppi = oldDPI;
 
         }
 

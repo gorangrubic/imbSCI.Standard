@@ -36,9 +36,7 @@ namespace imbSCI.DataComplex.extensions.data.schema
     using imbSCI.Core.extensions.text;
     using imbSCI.Data.enums.fields;
     using System;
-    using System.Collections.Generic;
     using System.Data;
-    using System.Linq;
 
     public static class dataTableShemaExtensions
     {
@@ -47,10 +45,63 @@ namespace imbSCI.DataComplex.extensions.data.schema
         /// </summary>
         /// <param name="table">The table.</param>
         /// <returns></returns>
-        public static T GetClonedShema<T>(this DataTable table, bool disablePrimaryKey = true) where T : DataTable, new()
+     /*   public static T GetClonedShema<T>(this DataTable table, bool disablePrimaryKey = true, String[] categories = null) where T : DataTable, new()
         {
             DataTable clone = table.Clone();
             T output = new T();
+
+            ColumnGroups groupsOfColumns = clone.getGroupsOfColumns();
+
+            if (categories != null)
+            {
+                List<String> matched = new List<string>();
+                foreach (String c in categories)
+                {
+                    var cg = groupsOfColumns.FirstOrDefault(x => x.name.Equals(c, StringComparison.InvariantCultureIgnoreCase));
+                    if (cg == null)
+                    {
+                        if (clone.Columns.Contains(c))
+                        {
+                            matched.Add(c);
+                        }
+                    }
+                    else
+                    {
+                        matched.AddRange(cg.Select(x => x.ColumnName));
+                    }
+
+                }
+
+                List<DataColumn> dcdel = new List<DataColumn>();
+                foreach (DataColumn dc in clone.Columns)
+                {
+                    if (!matched.Contains(dc.ColumnName))
+                    {
+                        dcdel.Add(dc);
+                    }
+                    //String g = dc.GetGroup();
+                    //if (!matched.Any())
+                    //{
+                    //    if (!matched.Contains(dc.ColumnName))
+                    //    {
+                            
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    if (!matched.Contains(g))
+                    //    {
+                    //        dcdel.Add(dc);
+                    //    }
+                    //}
+                }
+
+                foreach (DataColumn dc in dcdel)
+                {
+                    clone.Columns.Remove(dc);
+                }
+
+            }
 
             table.ExtendedProperties.copyInto(output.ExtendedProperties);
 
@@ -70,6 +121,11 @@ namespace imbSCI.DataComplex.extensions.data.schema
             output.SetRowMetaSet(table.GetRowMetaSet());
             //output.SetClassType(table.Get)
 
+
+
+
+
+
             List<string> catPri = table.GetCategoryPriority();
 
             if (disablePrimaryKey) output.PrimaryKey = new DataColumn[0];
@@ -82,7 +138,7 @@ namespace imbSCI.DataComplex.extensions.data.schema
             foreach (DataColumn dc in clone.Columns)
             {
                 DataColumn dce = output.Add(dc.GetSPE());
-                dce.SetValueType(dc.GetValueType()); //<--------- ad hok hack --- da vidim
+               // dce.SetValueType(dc.GetValueType()); //<--------- ad hok hack --- da vidim
 
                 //clone.Columns.Remove(dc);
                 //output.Columns.Add(dc);
@@ -97,8 +153,8 @@ namespace imbSCI.DataComplex.extensions.data.schema
             if (output.TableName.isNullOrEmpty()) output.TableName = "datatable_" + imbStringGenerators.getRandomString(4);
 
             return output;
-        }
-
+        }*/
+        /*
         public static void AddColumns(this DataTable table, Type type, params string[] columns)
         {
             settingsEntriesForObject seo = new settingsEntriesForObject(type, false);
@@ -113,7 +169,7 @@ namespace imbSCI.DataComplex.extensions.data.schema
                 {
                 }
             }
-        }
+        }*/
 
         /// <summary>
         /// Adds column using meta information of <see cref="imbSCI.Core.data.settingsPropertyEntry"/>

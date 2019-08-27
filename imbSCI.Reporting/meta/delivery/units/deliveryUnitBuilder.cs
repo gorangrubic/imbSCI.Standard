@@ -57,12 +57,14 @@ namespace imbSCI.Reporting.meta.delivery.units
             fileOpsBase.copyFile(inPath, outPath, item.name);
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'data' that could not be resolved
         /// <summary>
         /// Loads the template, applies <see cref="imbSCI.Reporting.reporting.render.IRenderExecutionContext.data"/> and saves into output path
         /// </summary>
         /// <param name="item">The item.</param>
         /// <param name="context">The context.</param>
         public static void loadFileAndSaveTemplate(this IDeliveryUnitItemFromFileSource item, IRenderExecutionContext context)
+#pragma warning restore CS1574 // XML comment has cref attribute 'data' that could not be resolved
         {
             string outPath = item.outputpath.toPath(context.directoryRoot.FullName, context.data);
             string inPath = item.sourcepath.toPath("", context.data);

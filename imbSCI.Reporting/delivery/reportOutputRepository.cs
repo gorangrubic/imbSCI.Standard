@@ -39,11 +39,13 @@ namespace imbSCI.Reporting.delivery
     using System.Collections.Generic;
     using System.IO;
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'resourceDictionaryBase{T}.Object}'
     /// <summary>
     ///
     /// </summary>
     /// <seealso cref="resourceDictionaryBase{T}.Object}" />
     public class reportOutputRepository : resourceDictionaryBase<reportOutputUnit>
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'resourceDictionaryBase{T}.Object}'
     {
         public void setOutputUnit(builderSettings settings, object output, string logicalPath, reportElementLevel level)
         {

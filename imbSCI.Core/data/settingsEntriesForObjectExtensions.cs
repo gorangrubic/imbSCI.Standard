@@ -29,10 +29,13 @@
 // ------------------------------------------------------------------------------------------------------------------
 using imbSCI.Core.extensions.data;
 using imbSCI.Core.extensions.table;
+using imbSCI.Core.reporting.render.builders;
+using imbSCI.Core.reporting.zone;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 
 namespace imbSCI.Core.data
 {
@@ -41,6 +44,150 @@ namespace imbSCI.Core.data
     /// </summary>
     public static class settingsEntriesForObjectExtensions
     {
+
+
+        public static String GetGUI(this PropertyInfo pi)
+        {
+            return pi.DeclaringType.Name + "." + pi.Name;
+        }
+        
+        /// <summary>
+        /// Static cached accessor for <see cref="settingsEntriesForObject"/>
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <returns></returns>
+        public static settingsEntriesForObject GetSEO(this Type key) {
+                if (SEOCache.ContainsKey(key)) return SEOCache[key];
+                settingsEntriesForObject output = new settingsEntriesForObject(key);
+                if (!SEOCache.ContainsKey(key))
+                {
+                    lock (_SEO_Get_lock) { if (!SEOCache.ContainsKey(key)) { SEOCache.Add(key, output); }
+}
+                }
+            return output;
+            }
+
+            private static Object _SEO_Get_lock = new Object();
+            private static Object _SEO_lock = new Object();
+            private static Dictionary<Type, settingsEntriesForObject> _SEOCache;
+            private static Dictionary<Type, settingsEntriesForObject> SEOCache
+            {
+                get
+                {
+                    if (_SEOCache == null)
+                    {
+                        lock (_SEO_Get_lock)
+                        {
+
+                            if (_SEOCache == null)
+                            {
+                                _SEOCache = new Dictionary<Type, settingsEntriesForObject>();
+                                // add here if any additional initialization code is required
+                            }
+                        }
+                    }
+                    return _SEOCache;
+                }
+            }
+
+        /// <summary>Gets C# code lines to be inserted before property declaration</summary>
+        /// <param name="property">The property.</param>
+        /// <param name="flags">The flags.</param>
+        /// <returns>List with C# code lines declaring attributes and XML documentation</returns>
+        public static List<String> GetPropertyCodeInsertLines(this settingsPropertyEntry property, PropertyAppendFlags flags = PropertyAppendFlags.setAll)
+        {
+            List<String> inserts = new List<string>();
+
+            if (flags.HasFlag(PropertyAppendFlags.setComponentModelAttributes))
+            {
+                inserts.Add($"[Category(\"{property.categoryName}\")]");
+                inserts.Add($"[DisplayName(\"{property.displayName}\")]");
+                inserts.Add($"[Description(\"{property.description}\")]");
+            }
+
+            if (flags.HasFlag(PropertyAppendFlags.setXmlSerializationAttributes))
+            {
+
+                if (property.IsXmlIgnore)
+                {
+                    inserts.Add($"[XmlIgnore]");
+                }
+            }
+
+            if (flags.HasFlag(PropertyAppendFlags.setSCIReportingDefinitions))
+            {
+                if (!property.escapeValueString)
+                {
+                    inserts.Add($"[imb(imbAttributeName.reporting_escapeoff)]");
+                }
+
+                if (!property.letter.isNullOrEmpty())
+                {
+                    inserts.Add($"[imb(imbAttributeName.measure_letter, \"{property.letter}\")]");
+                }
+
+                if (!property.unit.isNullOrEmpty())
+                {
+                    inserts.Add($"[imb(imbAttributeName.measure_setUnit, \"{property.unit}\")]");
+                }
+
+                if (!property.format.isNullOrEmpty())
+                {
+                    inserts.Add($"[imb(imbAttributeName.reporting_valueformat, \"{property.format}\")]");
+                }
+
+                if (property.width != 0)
+                {
+                    inserts.Add($"[imb(imbAttributeName.reporting_columnWidth, {property.width})]");
+                }
+
+                if (property.isHiddenInReport)
+                {
+                    inserts.Add($"[imb(imbAttributeName.reporting_hide)]");
+                }
+
+                if (!property.color.isNullOrEmpty())
+                {
+
+                    inserts.Add($"[imb(imbAttributeName.basicColor, \"{property.color}\")]");
+
+                }
+
+                if (property.Alignment != textCursorZoneCorner.none)
+                {
+                    inserts.Add($"[imb(templateFieldDataTable.col_alignment, textCursorZoneCorner.{property.Alignment})]");
+                }
+
+            }
+
+
+
+            if (flags.HasFlag(PropertyAppendFlags.setXmlDocumentation))
+            {
+                inserts.Add("/// <summary>");
+
+                inserts.Add($"/// {property.description}");
+
+                inserts.Add("/// </summary>");
+            }
+
+            return inserts;
+        }
+
+
+        /*
+        public static DataTable SetVerticalDataTable(settingsMemberInfoGroupDictionary output, DataTable table)
+        {
+            if (table != null)
+            {
+                table = new DataTable();
+                table.Columns.Add("Parametar");
+            }
+
+            
+        }*/
+
+
 
         /// <summary>
         /// Adds columns and transfers formating and other meta information specified in the <see cref="settingsPropertyEntry"/> entries. 
@@ -67,6 +214,15 @@ namespace imbSCI.Core.data
             return table;
         }
 
+        /// <summary>
+        /// Sets the data row.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <param name="table">The table.</param>
+        /// <param name="data">The data.</param>
+        /// <param name="dr">The dr.</param>
+        /// <param name="addRowBeforeEnd">if set to <c>true</c> [add row before end].</param>
+        /// <returns></returns>
         public static DataRow SetDataRow(this IEnumerable<settingsMemberInfoEntry> input, DataTable table, Object data, DataRow dr, bool addRowBeforeEnd = true)
         {
             if (dr == null) dr = table.NewRow(); // new DataTable(name);
@@ -96,7 +252,7 @@ namespace imbSCI.Core.data
         /// Gets the dictionary of values, key = prefix + PropertyInfo.Name
         /// </summary>
         /// <param name="input">The input.</param>
-        /// <param name="data">The data.</param>
+        /// <param name="data">Data instance, to read value from</param>
         /// <param name="prefix">The prefix.</param>
         /// <returns></returns>
         public static Dictionary<String, Object> GetDictionary(this IEnumerable<settingsMemberInfoEntry> input, Object data, String prefix = "")

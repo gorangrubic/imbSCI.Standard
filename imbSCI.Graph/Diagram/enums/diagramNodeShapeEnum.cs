@@ -64,5 +64,6 @@ namespace imbSCI.Graph.Diagram.enums
         /// The rhombus shape
         /// </summary>
         rhombus,
+
     }
 }

@@ -33,12 +33,20 @@ namespace imbSCI.Reporting.links
     using System.Collections;
     using System.Collections.Generic;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'IMakeHtml' that could not be resolved
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.Dictionary{System.String, imbSCI.Reporting.links.reportLinkCollection}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// Part of report link collection
     /// </summary>
     /// <seealso cref="System.Collections.Generic.Dictionary{System.String, imbSCI.Reporting.links.reportLinkCollection}" />
     /// <seealso cref="imbSCI.Reporting.interfaces.IMakeHtml" />
     public class reportLinkCollectionSet : IEnumerable<KeyValuePair<string, reportLinkCollection>>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.Dictionary{System.String, imbSCI.Reporting.links.reportLinkCollection}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1574 // XML comment has cref attribute 'IMakeHtml' that could not be resolved
     {
         public IEnumerator<KeyValuePair<string, reportLinkCollection>> GetEnumerator() => items.GetEnumerator();
 

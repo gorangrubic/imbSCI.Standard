@@ -3,6 +3,7 @@ using imbSCI.Core.files;
 using imbSCI.Core.files.folders;
 using imbSCI.Core.style.css;
 using imbSCI.Data;
+using imbSCI.Data.enums;
 using Svg;
 using System;
 using System.Collections.Generic;
@@ -60,7 +61,7 @@ namespace imbSCI.Graph.DiagramLibraries.DiaShape
         {
             if (filename == "") filename = name.getFilename("shape");
             filename = filename.ensureEndsWith(".shape");
-            String path = folder.pathFor(filename, Data.enums.getWritableFileMode.newOrExisting, description, true);
+            String path = folder.pathFor(filename, getWritableFileMode.newOrExisting, description, true);
 
             objectSerialization.saveObjectToXML(this, path);
             return path;
@@ -114,7 +115,7 @@ namespace imbSCI.Graph.DiagramLibraries.DiaShape
             {
                 filename = name.getFilename(".png");
             }
-            return RenderIcon(folder.pathFor(filename, Data.enums.getWritableFileMode.newOrExisting, "Icon for Dia shape [" + name + "]"), size, margin);
+            return RenderIcon(folder.pathFor(filename, getWritableFileMode.newOrExisting, "Icon for Dia shape [" + name + "]"), size, margin);
         }
 
         /// <summary>
@@ -163,7 +164,7 @@ namespace imbSCI.Graph.DiagramLibraries.DiaShape
         public String SaveSVG(folderNode folder, String filename = "")
         {
             if (filename == "") filename = name.getFilename(".svg");
-            String p = folder.pathFor(filename, Data.enums.getWritableFileMode.newOrExisting, "Exported SVG of Dia shape [" + name + "]", true);
+            String p = folder.pathFor(filename, getWritableFileMode.newOrExisting, "Exported SVG of Dia shape [" + name + "]", true);
 
             throw new NotImplementedException();
             //  File.WriteAllText(p, GetSVG().GetXML());

@@ -44,12 +44,20 @@ namespace imbSCI.Core.reporting.template
 
     #endregion imbVeles using
 
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.Dictionary{System.String, aceCommonTypes.reporting.template.reportTemplatePlaceholder}'
+#pragma warning disable CS1574 // XML comment has cref attribute 'IApplyToContent' that could not be resolved
     /// <summary>
     /// Skup placeholdera za template
     /// </summary>
     /// <seealso cref="System.Collections.Generic.Dictionary{System.String, aceCommonTypes.reporting.template.reportTemplatePlaceholder}" />
     /// <seealso cref="aceCommonTypes.reporting.template.IApplyToContent" />
     public class reportTemplatePlaceholderCollection : Dictionary<string, reportTemplatePlaceholder>, IApplyToContent //propertyValuePairsBase<reportTemplatePlaceholder>
+#pragma warning restore CS1574 // XML comment has cref attribute 'IApplyToContent' that could not be resolved
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.Dictionary{System.String, aceCommonTypes.reporting.template.reportTemplatePlaceholder}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     {
         /// <summary>
         /// Pravi kolekciju i odmah primenjuje templateString
@@ -210,6 +218,26 @@ namespace imbSCI.Core.reporting.template
 
             return mContent;
         }
+
+
+        public String applyToContent(Dictionary<String, String> row, String mContent, Boolean autoRemove = false)
+        {
+            if (row == null) return mContent;
+
+            foreach (var pair in row)
+            {
+                if (ContainsKey(pair.Key))
+                {
+                    mContent = mContent.Replace(this[pair.Key].templateForm, pair.Value);
+                }
+
+            }
+
+            if (autoRemove) mContent = removeFromContent(mContent);
+
+            return mContent;
+        }
+
 
         /// <summary>
         /// removes all placeholder tags from the content

@@ -36,12 +36,16 @@ namespace imbSCI.Core.math.range
     using System.Collections.Generic;
     using System.Linq;
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'aceCommonTypes.math.rangeValueBase{System.Int32}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// Range value for enumeration
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="aceCommonTypes.math.rangeValueBase{System.Int32}" />
     public class rangeValueEnum<T> : rangeValueBase<int>, IRangeValue<int> where T : IComparable, IConvertible
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'aceCommonTypes.math.rangeValueBase{System.Int32}'
     {
         public override void setValueRange(aceRangeConfig config)
         {

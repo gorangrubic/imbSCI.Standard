@@ -12,6 +12,31 @@ namespace imbSCI.Data
     public static class imbSciDataExtensions
     {
 
+        /// <summary>
+        /// Determines whether is null or empty enumerable (imbSCI)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="item">The item.</param>
+        /// <returns>
+        ///   <c>true</c> if [is null or empty] [the specified item]; otherwise, <c>false</c>.
+        /// </returns>
+        public static Boolean IsNullOrEmpty<T>(this IList<T> item)
+        {
+            if (item == null) return true;
+            if (!item.Any()) return true;
+            return false;
+        }
+
+        public static Boolean IsNullOrEmpty(this IEnumerable item)
+        {
+            if (item == null) return true;
+            foreach (var i in item)
+            {
+                return false;
+            }
+            return true;
+        }
+
 
         public static List<TItem> GetDifference<TItem>(this IEnumerable<TItem> first, IList<TItem> other)
         {
@@ -47,6 +72,43 @@ namespace imbSCI.Data
                 //oth.ForEach((XmlReadMode=))
 
                 // output.AddRangeUnique(other);
+            }
+
+            return output;
+        }
+
+
+        /// <summary>
+        /// Gets the cross section.
+        /// </summary>
+        /// <typeparam name="TItem">The type of the item.</typeparam>
+        /// <param name="others">The others.</param>
+        /// <returns></returns>
+        public static List<TItem> GetCrossSection<TItem>(this IEnumerable<IList<TItem>> others)
+        {
+            List<TItem> output = new List<TItem>();
+
+            foreach (List<TItem> items in others)
+            {
+                if (!output.Any())
+                {
+                    output.AddRange(items);
+                } else
+                {
+                    List<TItem> toRemove = new List<TItem>();
+                    foreach (TItem item in output)
+                    {
+                        if (!items.Contains(item))
+                        {
+                            toRemove.Add(item);
+                        }
+                    }
+
+                    foreach (TItem item in toRemove) output.Remove(item);
+
+                }
+
+                if (!output.Any()) return output;
             }
 
             return output;

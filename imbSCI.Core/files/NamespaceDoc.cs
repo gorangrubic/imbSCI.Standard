@@ -30,12 +30,14 @@
 namespace imbSCI.Core.files
 {
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'folderNode' that could not be resolved
     /// <summary>
     /// Object serialization, <see cref="folderNode"/> structure, text search engines, fileDataStructure base classes 
     /// </summary>
     /// <remarks>
     /// </remarks>
     [System.Runtime.CompilerServices.CompilerGenerated]
+#pragma warning restore CS1574 // XML comment has cref attribute 'folderNode' that could not be resolved
     class NamespaceDoc
     {
     }

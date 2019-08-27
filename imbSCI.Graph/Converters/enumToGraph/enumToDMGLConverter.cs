@@ -6,15 +6,6 @@ using System.Collections.Generic;
 
 namespace imbSCI.Graph.Converters.enumToGraph
 {
-    public class enumTypeStructure
-    {
-        public List<List<String>> items { get; set; } = new List<List<string>>();
-
-        public enumTypeStructure()
-        {
-        }
-    }
-
     /// <summary>
     /// Converts enum types or values into directed graphs showing flag relationships
     /// </summary>

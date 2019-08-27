@@ -67,6 +67,26 @@ namespace imbSCI.Core.math.range.finder
 
         internal Type hostType { get; set; }
 
+
+
+        /// <summary>
+        /// Sets property values to specified range position.
+        /// </summary>
+        /// <param name="rangePosition">Position in value range: 0 is <see cref="rangeFinder.Minimum"/>, 1 is <see cref="rangeFinder.Maximum"/></param>
+        /// <param name="target">Instance to set properties to</param>
+        public void SetValuesForRangePosition(Double rangePosition, T target)
+        {
+            foreach (var pair in metricProperties)
+            {
+                Object vl = pair.Value.GetValueForRangePosition(rangePosition);
+
+                pair.Key.SetValue(target, imbTypeExtensions.imbConvertValueSafe(vl, pair.Key.PropertyType), null);
+
+            }
+        }
+
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="rangeFinderCollectionForMetrics{T}"/> class.
         /// </summary>
@@ -98,7 +118,7 @@ namespace imbSCI.Core.math.range.finder
         /// Deploys the specified type.
         /// </summary>
         /// <param name="type">The type.</param>
-        public void Deploy(Type type)
+        protected void Deploy(Type type)
         {
             hostType = type;
             var hostTypeInfo = new settingsEntriesForObject(type, false);

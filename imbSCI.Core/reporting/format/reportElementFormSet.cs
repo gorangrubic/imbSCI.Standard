@@ -37,6 +37,7 @@ namespace imbSCI.Core.reporting.format
 
     // reportElement, reportOutputForm
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// Default output settings for metaContent elementLevel
     /// </summary>
@@ -46,6 +47,7 @@ namespace imbSCI.Core.reporting.format
     /// <seealso cref="aceCommonTypes.primitives.imbBindable" />
     /// <seealso cref="elementLevelFormPreset" />
     public class reportElementFormSet : imbBindable
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     {
         private Boolean _doTextShadowCopy = true;
 
@@ -60,6 +62,8 @@ namespace imbSCI.Core.reporting.format
 
         private Boolean _doEnableNamedDivsToData = true;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'c_close' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'c_open' that could not be resolved
         /// <summary>
         /// It will keep record for each named content section defined by: <see cref="aceCommonTypes.enums.appendType.c_open"/>  and <see cref="aceCommonTypes.enums.appendType.c_close"/> calls
         /// </summary>
@@ -67,6 +71,8 @@ namespace imbSCI.Core.reporting.format
         /// To have this operational you must have <see cref="doTextShadowCopy"/> set to TRUE.
         /// </remarks>
         public Boolean doEnableNamedDivsToData
+#pragma warning restore CS1574 // XML comment has cref attribute 'c_open' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'c_close' that could not be resolved
         {
             get { return _doEnableNamedDivsToData; }
             set { _doEnableNamedDivsToData = value; }

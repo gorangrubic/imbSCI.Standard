@@ -41,9 +41,19 @@ namespace imbSCI.Reporting.charts.core
         axisY2 = 8,
         showY1AxisLabel = 16,
         showY2AxisLabel = 32,
+        /// <summary>
+        /// The generated C3 code will be only JavaScript part
+        /// </summary>
         withoutHtml = 64,
         skipFirstRow = 128,
-        bindto = 256
+        /// <summary>
+        /// DEPRICATED
+        /// </summary>
+        bindto = 256,
+        /// <summary>
+        /// it will transpose (rotate columns and rows) table, to show data horizontally
+        /// </summary>
+        transposeTable = 512
 
         ///// <summary>
         ///// The types: one line template for types insertation

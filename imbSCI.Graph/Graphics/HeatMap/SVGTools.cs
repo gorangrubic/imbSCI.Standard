@@ -41,13 +41,13 @@ namespace imbSCI.Graph.Graphics.HeatMap
 
             Svg.SvgText label = new SvgText(text);
 
-            //throw new NotImplementedException();
+          
+            label.X = new SvgUnit (xStart + (format.width / 2) - ((text.Length * format.spatialUnit) / 2));
+            label.Y = new SvgUnit((yStart + (format.height / 2) + (format.spatialUnitHeight)));
 
-            //label.X = new SvgUnit (xStart + (format.width / 2) - ((text.Length * format.spatialUnit) / 2)));
-            //label.Y = (yStart + (format.height / 2) + (format.spatialUnitHeight)).Get_px();
-
-            //    label.Fill = new SvgColourServer(Color.Black),
-            //    label.Font = "Gulliver"
+            label.Fill = new SvgColourServer(Color.Black);
+            
+            //label.Font = new Font("Gulliver");
 
             return label;
         }
@@ -67,17 +67,17 @@ namespace imbSCI.Graph.Graphics.HeatMap
             var rct = new SvgRectangle();
 
             var tmp = format.GetResized(scaleFactor);
-            // tmp.x += xStart;
-            // tmp.y += yStart;
 
             Int32 newX = Convert.ToInt32((Convert.ToDouble(format.width) / 2) - (Convert.ToDouble(format.width) * (scaleFactor / 2)));
             Int32 newY = Convert.ToInt32((Convert.ToDouble(format.height) / 2) - (Convert.ToDouble(format.height) * (scaleFactor / 2)));
 
+
             rct.Fill = new SvgColourServer(color);
             rct.Stroke = new SvgColourServer(Color.White);
-            rct.StrokeWidth = 0;
-            rct.FillOpacity = 1;
+            rct.StrokeWidth = 1;
+            rct.FillOpacity = Opacity;
             rct.FillRule = SvgFillRule.Inherit;
+            
             // rct.Font = "Gulliver";
             // rct.FontSize = 10;
 

@@ -31,6 +31,11 @@ namespace imbSCI.DataComplex.trends
 {
     using System.Runtime.CompilerServices;
 
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'para'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'remarks'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag 'remarks' does not match the start tag 'para'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag 'summary' does not match the start tag 'para'.'
     /// <summary>
     /// <para>Measurement mechanism for sampling and trend interpretation<para>
     /// </summary>
@@ -57,6 +62,11 @@ namespace imbSCI.DataComplex.trends
     /// </remarks>
     /// <seealso cref="remarks" />
     [CompilerGenerated]
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag 'summary' does not match the start tag 'para'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag 'remarks' does not match the start tag 'para'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'remarks'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'para'.'
     internal class NamespaceDoc
     {
     }

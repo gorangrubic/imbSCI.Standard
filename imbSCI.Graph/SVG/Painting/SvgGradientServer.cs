@@ -23,6 +23,7 @@ namespace Svg
             this._stops = new List<SvgGradientStop>();
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'Children' that could not be resolved
         /// <summary>
         /// Called by the underlying <see cref="SvgElement"/> when an element has been added to the
         /// <see cref="Children"/> collection.
@@ -30,6 +31,7 @@ namespace Svg
         /// <param name="child">The <see cref="SvgElement"/> that has been added.</param>
         /// <param name="index">An <see cref="int"/> representing the index where the element was added to the collection.</param>
         protected override void AddElement(SvgElement child, int index)
+#pragma warning restore CS1574 // XML comment has cref attribute 'Children' that could not be resolved
         {
             if (child is SvgGradientStop)
             {
@@ -39,12 +41,14 @@ namespace Svg
             base.AddElement(child, index);
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'Children' that could not be resolved
         /// <summary>
         /// Called by the underlying <see cref="SvgElement"/> when an element has been removed from the
         /// <see cref="Children"/> collection.
         /// </summary>
         /// <param name="child">The <see cref="SvgElement"/> that has been removed.</param>
         protected override void RemoveElement(SvgElement child)
+#pragma warning restore CS1574 // XML comment has cref attribute 'Children' that could not be resolved
         {
             if (child is SvgGradientStop)
             {
@@ -96,12 +100,14 @@ namespace Svg
             }
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'ColourBlend' that could not be resolved
         /// <summary>
         /// Gets a <see cref="ColourBlend"/> representing the <see cref="SvgGradientServer"/>'s gradient stops.
         /// </summary>
         /// <param name="owner">The parent <see cref="SvgVisualElement"/>.</param>
         /// <param name="opacity">The opacity of the colour blend.</param>
         protected ColorBlend GetColourBlend(SvgVisualElement owner, float opacity)
+#pragma warning restore CS1574 // XML comment has cref attribute 'ColourBlend' that could not be resolved
         {
             ColorBlend blend = new ColorBlend();
             int colourBlends = this.Stops.Count;
@@ -167,9 +173,14 @@ namespace Svg
         }
 
         /// <summary>
+
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
         // If this gradient contains no stops then it will search any inherited gradients for stops.
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag was not expected at this location.'
         /// </summary>
         protected virtual void InheritStops()
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag was not expected at this location.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
         {
             if (this.Stops.Count == 0 && this.InheritGradient != null)
             {

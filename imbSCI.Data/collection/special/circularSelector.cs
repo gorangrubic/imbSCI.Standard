@@ -29,10 +29,14 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Data.collection.special
 {
+    using imbSCI.Data.collection.graph;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+
+
+   
 
     /// <summary>
     /// Circular and/or random item provider based on index loop.
@@ -42,6 +46,15 @@ namespace imbSCI.Data.collection.special
     /// <seealso cref="System.Collections.IEnumerable" />
     public class circularSelector<T> : IEnumerable
     {
+
+        public circularSelector(List<T> __items)
+        {
+            foreach (T it in __items)
+            {
+                items.Add(it);
+            }
+        }
+
         /// <summary>
         /// New instance with a number of instances within. the <see cref="circularSelector{T}"/> class.
         /// </summary>

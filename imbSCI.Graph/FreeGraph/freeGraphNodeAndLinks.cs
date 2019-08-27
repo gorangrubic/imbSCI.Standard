@@ -32,6 +32,7 @@ using System.Collections.Generic;
 
 namespace imbSCI.Graph.FreeGraph
 {
+    [Serializable]
     public class freeGraphNodeAndLinks : List<freeGraphLink>
     {
         /// <summary>

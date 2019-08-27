@@ -37,11 +37,13 @@ namespace imbSCI.Core.reporting.render
     using System.Collections.Generic;
     using System.Linq;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// Builder selector by target format
     /// </summary>
     /// <seealso cref="aceCommonTypes.primitives.imbBindable" />
     public class builderSelector : imbBindable, IEnumerable<KeyValuePair<reportOutputFormatName, ITextRender>>
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     {
         private Dictionary<reportOutputFormatName, ITextRender> registry = new Dictionary<reportOutputFormatName, ITextRender>();
 

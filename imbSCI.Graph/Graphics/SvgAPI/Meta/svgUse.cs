@@ -6,6 +6,8 @@ using System.Xml.Serialization;
 
 namespace imbSCI.Graph.Graphics.SvgAPI.Meta
 {
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag 'summary' does not match the start tag 'see'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
     /// <summary>
     /// The use element is instantiating already defined objects. It is a placeholder for <see cref="svgSymbol"> and other predefined elements.
     /// </summary>
@@ -13,6 +15,8 @@ namespace imbSCI.Graph.Graphics.SvgAPI.Meta
     /// <seealso cref="svgContainerElement.AddUse(svgSymbol, int, int, string)"/>
     /// <seealso cref="imbSCI.Graph.Graphics.SvgAPI.Core.svgGraphicElementBase" />
     [XmlRoot("use")]
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag 'summary' does not match the start tag 'see'.'
     public class svgUse : svgGraphicElementBase
     {
         [XmlIgnore]

@@ -33,7 +33,7 @@ namespace imbSCI.Graph.DGML.collections
 {
     public class NodeCollection : GraphElementCollection<Node>
     {
-        public NodeCollection()
+        public NodeCollection(DirectedGraph graph):base(graph)
         {
         }
     }

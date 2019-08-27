@@ -35,12 +35,16 @@ namespace imbSCI.Core.collection
     using System.Collections.Generic;
     using System.Linq;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'reportOutputRepository' that could not be resolved
     /// <summary>
     /// Simple generic dictionary used by: <see cref="aceCommonTypes.collection.reportOutputRepository"/>, <see cref="PropertyCollectionDictionary"/>/>
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="aceCommonTypes.primitives.imbBindable" />
     public abstract class resourceDictionaryBase<T> : dataBindableBase, IEnumerable
+#pragma warning restore CS1574 // XML comment has cref attribute 'reportOutputRepository' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     {
         /// <summary>
         /// The items
@@ -69,6 +73,8 @@ namespace imbSCI.Core.collection
         /// </summary>
         public void Clear() => items.Clear();
 
+#pragma warning disable CS1723 // XML comment has cref attribute 'T' that refers to a type parameter
+#pragma warning disable CS1723 // XML comment has cref attribute 'T' that refers to a type parameter
         /// <summary>
         /// Gets the <see cref="T"/> with the specified key.
         /// </summary>
@@ -78,6 +84,8 @@ namespace imbSCI.Core.collection
         /// <param name="key">The key.</param>
         /// <returns></returns>
         public T this[Enum key] => this[key.ToString()];
+#pragma warning restore CS1723 // XML comment has cref attribute 'T' that refers to a type parameter
+#pragma warning restore CS1723 // XML comment has cref attribute 'T' that refers to a type parameter
 
         /// <summary>
         /// Adds the specified key.
@@ -92,6 +100,8 @@ namespace imbSCI.Core.collection
         /// <returns></returns>
         protected abstract T getDefault();
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'PropertyCollection' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'PropertyCollection' that could not be resolved
         /// <summary>
         /// Gets or sets the <see cref="PropertyCollection"/> with the specified key. Automatically creates entry for new key
         /// </summary>
@@ -101,6 +111,8 @@ namespace imbSCI.Core.collection
         /// <param name="key">The key.</param>
         /// <returns></returns>
         public T this[String key]
+#pragma warning restore CS1574 // XML comment has cref attribute 'PropertyCollection' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'PropertyCollection' that could not be resolved
         {
             get
             {

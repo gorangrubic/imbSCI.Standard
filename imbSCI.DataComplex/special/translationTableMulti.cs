@@ -35,6 +35,8 @@ namespace imbSCI.DataComplex.special
     using System.Collections;
     using System.Collections.Generic;
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TKey, TValue}}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// Translation table with multiple key capability
     /// </summary>
@@ -43,6 +45,8 @@ namespace imbSCI.DataComplex.special
     /// <seealso cref="dataBindableBase" />
     /// <seealso cref="System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TKey, TValue}}" />
     [Serializable]
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TKey, TValue}}'
     public class translationTableMulti<TKey, TValue> : dataBindableBase, IEnumerable<KeyValuePair<TKey, TValue>>
     {
         public Int32 Count

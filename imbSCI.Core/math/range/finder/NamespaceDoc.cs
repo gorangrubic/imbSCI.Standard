@@ -29,6 +29,8 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Core.math.range.finder
 {
+#pragma warning disable CS1574 // XML comment has cref attribute 'DataTableExtensions' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'DataTable' that could not be resolved
     /// <summary>
     /// <para>Range finders are utility objects, used to make descriptive statistics from collection of numbers and add agregate rows and conditional formatting to DataTable reports</para>
     /// </summary>
@@ -51,6 +53,8 @@ namespace imbSCI.Core.math.range.finder
     /// </remarks>
     /// <seealso cref="DataTableExtensions" />
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+#pragma warning restore CS1574 // XML comment has cref attribute 'DataTable' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'DataTableExtensions' that could not be resolved
     internal class NamespaceDoc
     {
     }

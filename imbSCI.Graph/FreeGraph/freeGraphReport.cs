@@ -34,6 +34,7 @@ using imbSCI.Core.files.folders;
 using imbSCI.Core.math;
 using imbSCI.Data;
 using imbSCI.Data.collection.nested;
+using imbSCI.Data.enums;
 using imbSCI.Data.interfaces;
 using System;
 using System.Collections.Generic;
@@ -46,6 +47,7 @@ namespace imbSCI.Graph.FreeGraph
     /// Report on free graph
     /// </summary>
     /// <seealso cref="imbSCI.Data.interfaces.IObjectWithNameAndDescription" />
+    [Serializable]
     public class freeGraphReport : IObjectWithNameAndDescription
     {
         /// <summary>
@@ -58,7 +60,7 @@ namespace imbSCI.Graph.FreeGraph
             if (filename == "") filename = "analysis_" + name.getCleanFilepath(".xml");
             filename = filename.ensureEndsWith(".xml");
 
-            String p = folder.pathFor(filename, Data.enums.getWritableFileMode.overwrite, description);
+            String p = folder.pathFor(filename, getWritableFileMode.overwrite, description);
             objectSerialization.saveObjectToXML(this, p);
         }
 

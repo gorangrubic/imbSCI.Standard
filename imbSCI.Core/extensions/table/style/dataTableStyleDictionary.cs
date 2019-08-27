@@ -34,12 +34,16 @@ namespace imbSCI.Core.extensions.table.style
 {
     using imbSCI.Data.collection.nested;
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'imbSCI.Data.collection.nested.aceEnumDictionary{T, imbSCI.Core.extensions.table.style.dataTableStyleEntry}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     ///
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="imbSCI.Data.collection.nested.aceEnumDictionary{T, imbSCI.Core.extensions.table.style.dataTableStyleEntry}" />
     public class dataTableStyleDictionary<T> : aceEnumDictionary<T, dataTableStyleEntry>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'imbSCI.Data.collection.nested.aceEnumDictionary{T, imbSCI.Core.extensions.table.style.dataTableStyleEntry}'
     {
         public dataTableStyleDictionary()
         {

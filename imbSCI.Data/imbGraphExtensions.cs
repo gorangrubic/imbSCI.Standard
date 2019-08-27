@@ -561,7 +561,7 @@ namespace imbSCI.Data
         /// <returns></returns>
         public static List<T> getAllChildrenInType<T>(this T parent, Regex pathFilter = null, Boolean inverse = false, Boolean orderByPath = true, Int32 recursiveIndex = 1, Int32 recursiveLimit = 500, Boolean includingParent = false) where T : class, IObjectWithPathAndChildren
         {
-            List<IObjectWithPathAndChildren> output = parent.getAllChildren(pathFilter, inverse, orderByPath, recursiveIndex, recursiveLimit);
+            List<IObjectWithPathAndChildren> output = parent.getAllChildren(pathFilter, inverse, orderByPath, recursiveIndex, recursiveLimit, includingParent);
 
             List<T> response = new List<T>();
             foreach (IObjectWithPathAndChildren r in output)
@@ -587,7 +587,8 @@ namespace imbSCI.Data
         /// <param name="recursiveIndex">Index of the recursive calls (if orderByPath is true)</param>
         /// <param name="recursiveLimit">The recursive calls limit.</param>
         /// <returns></returns>
-        public static List<IObjectWithPathAndChildren> getAllChildren(this IObjectWithPathAndChildren parent, Regex pathFilter = null, Boolean inverse = false, Boolean orderByPath = false, Int32 recursiveIndex = 1, Int32 recursiveLimit = 500, Boolean includingParent = false)
+        public static List<IObjectWithPathAndChildren> getAllChildren(this IObjectWithPathAndChildren parent, Regex pathFilter = null, Boolean inverse = false, Boolean orderByPath = false,
+            Int32 recursiveIndex = 1, Int32 recursiveLimit = 500, Boolean includingParent = false)
         {
             List<IObjectWithPathAndChildren> output = new List<IObjectWithPathAndChildren>();
 
@@ -642,23 +643,28 @@ namespace imbSCI.Data
                     {
                         if (pathFilter != null)
                         {
-                            if (pathFilter.IsMatch(child.path))
+                            if (!child.path.isNullOrEmpty())
                             {
-                                if (!inverse) output.Add(child);
-                            }
-                            else
-                            {
-                                if (inverse) output.Add(child);
+                                if (pathFilter.IsMatch(child.path))
+                                {
+                                    if (!inverse) output.Add(child);
+                                }
+                                else
+                                {
+                                    if (inverse) output.Add(child);
+                                }
                             }
                         }
                         else
                         {
                             output.Add(child);
                         }
-
-                        if (child.Any())
+                        if (child != null)
                         {
-                            foreach (IObjectWithPathAndChildren c in child) n_stack.Add(c);
+                            if (child.Any())
+                            {
+                                foreach (IObjectWithPathAndChildren c in child) n_stack.Add(c);
+                            }
                         }
                     }
                 }
@@ -676,7 +682,7 @@ namespace imbSCI.Data
         /// <param name="children">The children.</param>
         public static void removeFromParent(this IEnumerable<IObjectWithPathAndChildren> children)
         {
-            foreach (IObjectWithPathAndChildren ch in children)
+            foreach (IObjectWithPathAndChildren ch in children.ToList())
             {
                 if (ch.parent != null)
                 {

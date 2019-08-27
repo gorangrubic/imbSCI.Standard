@@ -5,7 +5,7 @@
     <ApplicationIcon>imbSCI.ico</ApplicationIcon>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>imbSCI.Graph.Standard</PackageId>
-    <Version>0.3.372</Version>
+    <Version>0.3.478</Version>
     <Title>imbSCI.Graph - Converters, data structures, rendering</Title>
     <Summary>
       Conversion between imbSCI directed graph, undirected (free graph) graph, SVG rendering, import-export for Dia (software), Draw.io (diagramming app), Directed Graph Markup Language (DGML) and DOT graph language.
@@ -47,34 +47,29 @@
 
 
   <PropertyGroup>
-    <DocumentationFile>$(OutputPath)$(PackageId).xml</DocumentationFile>
+    <DocumentationFile>G:\imbVelesOpenSource\imbSCI.Standard\imbSCI.Graph\imbSCI.Graph.xml</DocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
-    <ShouldCreateLogs>True</ShouldCreateLogs>
-    <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
-    <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
-    <UpdateAssemblyFileVersion>False</UpdateAssemblyFileVersion>
-    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
-    <UpdatePackageVersion>True</UpdatePackageVersion>
-    <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
-    <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
-    <DebugType>pdbonly</DebugType>
+
+
+  <PropertyGroup>
+    <WarningLevel>1</WarningLevel>
+    <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
-    <ShouldCreateLogs>True</ShouldCreateLogs>
+    <PrimaryVersionType>AssemblyVersionAttribute</PrimaryVersionType>
+    <ShouldCreateLogs>False</ShouldCreateLogs>
     <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
-    <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
-    <UpdateAssemblyFileVersion>False</UpdateAssemblyFileVersion>
-    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
+    <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
+    <UpdateAssemblyFileVersion>True</UpdateAssemblyFileVersion>
+    <UpdateAssemblyInfoVersion>True</UpdateAssemblyInfoVersion>
+    <AssemblyVersionSettings>None.None.None.IncrementOnDemand</AssemblyVersionSettings>
+    <AssemblyFileVersionSettings>None.None.None.IncrementOnDemand</AssemblyFileVersionSettings>
+    <AssemblyInfoVersionSettings>None.None.None.IncrementOnDemand</AssemblyInfoVersionSettings>
     <UpdatePackageVersion>True</UpdatePackageVersion>
+    <PackageVersionSettings>AssemblyVersion.IncrementWithAutoReset.None</PackageVersionSettings>
     <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
     <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
-    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
-
 
 
   <ItemGroup>
@@ -82,12 +77,28 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="resources\extraction\bisnode_sigmam.html" />
+    <None Remove="resources\extraction\companywall_sigmam.html" />
+    <None Remove="resources\extraction\ods_order.ods" />
+    <None Remove="resources\extraction\odt_offer.odt" />
     <None Remove="resources\graph\Charts.xslt" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="imbSCI.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\extraction\bisnode_sigmam.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\extraction\companywall_sigmam.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\extraction\ods_order.ods">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\extraction\odt_offer.odt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\graph\Charts.xslt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

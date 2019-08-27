@@ -7,11 +7,13 @@ using System.Xml.Serialization;
 
 namespace imbSCI.Graph.Graphics.SvgAPI.Containers
 {
+#pragma warning disable CS1574 // XML comment has cref attribute 'svgGraphicElementBase' that could not be resolved
     /// <summary>
     /// SVG element that can contain sub elements
     /// </summary>
     /// <seealso cref="imbSCI.Graph.Graphics.SvgAPI.svgGraphicElementBase" />
     public abstract class svgContainerElement : svgGraphicElementBase
+#pragma warning restore CS1574 // XML comment has cref attribute 'svgGraphicElementBase' that could not be resolved
     {
         /// <summary>
         /// To the XML.

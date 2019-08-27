@@ -31,6 +31,7 @@ namespace imbSCI.Reporting.charts
 {
     using imbSCI.Core.extensions.data;
     using imbSCI.Core.extensions.io;
+    using imbSCI.Core.extensions.table;
     using imbSCI.Core.extensions.text;
     using imbSCI.Core.reporting.extensions;
     using imbSCI.Data;
@@ -40,27 +41,31 @@ namespace imbSCI.Reporting.charts
     using System.Data;
     using System.Linq;
     using System.Text;
-
     public static class chartTools
     {
         /// <summary>
         /// Builds the chart string for <c>C3js</c> rendering
         /// </summary>
-        /// <param name="chartType">Type of the chart.</param>
-        /// <param name="features">The features.</param>
-        /// <param name="data">The data.</param>
+        /// <param name="chartType">Type of chart to create.</param>
+        /// <param name="features">Used features</param>
+        /// <param name="data">Data table</param>
+        /// <param name="size">The size.</param>
         /// <param name="typesForSeries">The types for series.</param>
+        /// <param name="obj_id">The object identifier.</param>
         /// <returns></returns>
-        public static string buildChart(chartTypeEnum chartType, chartFeatures features, DataTable data, chartSizeEnum size, chartTypeEnum typesForSeries = chartTypeEnum.none)
+        public static string buildChart(chartTypeEnum chartType, chartFeatures features, DataTable data, chartSizeEnum size, chartTypeEnum typesForSeries = chartTypeEnum.none, String obj_id = "")
         {
-            if (features != chartFeatures.none)
-            {
-                features |= chartFeatures.bindto;
-            }
+            //if (features != chartFeatures.none)
+            //{
+            //    features |= chartFeatures.bindto;
+            //}
 
             PropertyCollection pc = new PropertyCollection();
 
-            string obj_id = data.TableName.getCleanPropertyName();
+            if (obj_id.isNullOrEmpty())
+            {
+                obj_id = data.TableName.getCleanPropertyName();
+            }
 
             pc.Add(chartDataColumnEnum.chart_bindto, obj_id);
 
@@ -106,7 +111,18 @@ namespace imbSCI.Reporting.charts
                 data.Rows.RemoveAt(0);
             }
 
-            string dataInsert = data.buildDataInsertHorizontaly();
+            string dataInsert = "";
+
+            if (features.HasFlag(chartFeatures.transposeTable))
+            {
+                dataInsert = data.buildDataInsertHorizontaly();
+            }
+            else
+            {
+                dataInsert = data.buildDataInsertVertically();
+            }
+
+
 
             string innerInsert = "";
 
@@ -156,7 +172,7 @@ namespace imbSCI.Reporting.charts
             StringBuilder sb = new StringBuilder();
 
             List<string> columnNames = dt.Columns.Cast<DataColumn>().
-                Select(column => column.ColumnName).ToList();
+                Select(column => column.GetHeading()).ToList();
 
             List<string> lines = new List<string>();
 
@@ -181,7 +197,9 @@ namespace imbSCI.Reporting.charts
                 sb.AppendLine(lines[i] + ins);
             }
 
-            return sb.ToString();
+            String output = sb.ToString();
+
+            return output;
         }
 
         /// <summary>
@@ -194,15 +212,17 @@ namespace imbSCI.Reporting.charts
             StringBuilder sb = new StringBuilder();
 
             IEnumerable<string> columnNames = dt.Columns.Cast<DataColumn>().
-                                              Select(column => column.ColumnName);
+                                              Select(column => column.GetHeading());
             sb.AppendLine(string.Join(",", columnNames));
 
             foreach (DataRow row in dt.Rows)
             {
-                IEnumerable<string> fields = row.ItemArray.Select(field => field.ToString());
+                IEnumerable<string> fields = row.ItemArray.Select(field => field.toStringSafe());
+
                 sb.AppendLine(string.Join(",", fields));
             }
-            return sb.ToString();
+            String output = sb.ToString();
+            return output;
         }
 
         private static string _wrapTemplate;
@@ -309,7 +329,7 @@ namespace imbSCI.Reporting.charts
           position: 'outer-middle'
         }
       }");
-                    _featureTemplates.Add(chartFeatures.bindto, "bindto: '#{{{chart_bindto}}}',");
+                    //    _featureTemplates.Add(chartFeatures.bindto, "bindto: '#{{{chart_bindto}}}',");
                 }
                 return _featureTemplates;
             }

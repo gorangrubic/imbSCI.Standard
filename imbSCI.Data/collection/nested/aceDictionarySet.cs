@@ -32,6 +32,8 @@ namespace imbSCI.Data.collection.nested
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Linq;
+
 
     /// <summary>
     /// Based on aceConcurrentBag
@@ -52,6 +54,14 @@ namespace imbSCI.Data.collection.nested
                     this.TryAdd((TEnum)it, new aceConcurrentBag<T>());
                     //  Add(, new aceConcurrentBag<T>());
                 }
+            }
+        }
+
+        public void Add(ILookup<TEnum, T> source)
+        {
+            foreach ( IGrouping<TEnum, T> l in source)
+            {
+                Add(l.Key, l);
             }
         }
 

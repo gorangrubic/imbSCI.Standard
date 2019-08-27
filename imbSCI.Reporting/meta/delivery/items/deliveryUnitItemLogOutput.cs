@@ -42,12 +42,14 @@ namespace imbSCI.Reporting.meta.delivery.items
     using imbSCI.Reporting.script;
     using System.IO;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'ITextRender' that could not be resolved
     /// <summary>
     /// Delivers <see cref="imbSCI.Core.interfaces.IAceLogable"/>, <see cref="imbSCI.Reporting.reporting.render.ITextRender"/> or <see cref="System.String"/> content on predefined output path
     /// </summary>
     /// <seealso cref="imbSCI.Reporting.meta.delivery.deliveryUnitItem" />
     /// <seealso cref="imbSCI.Reporting.meta.delivery.IDeliveryUnitItem" />
     public class deliveryUnitItemLogOutput : deliveryUnitItem, IDeliveryUnitItem
+#pragma warning restore CS1574 // XML comment has cref attribute 'ITextRender' that could not be resolved
     {
         /// <summary>
         ///

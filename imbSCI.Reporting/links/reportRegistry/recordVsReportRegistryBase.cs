@@ -35,11 +35,17 @@ namespace imbSCI.Reporting.links.reportRegistry
     using imbSCI.DataComplex.diagram.core;
     using System.Collections.Generic;
 
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IDictionary{System.String, imbSCI.Reporting.collections.reportRegistry.contentTreeDomainCollection}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// Global tree content structure registar
     /// </summary>
     /// <seealso cref="System.Collections.Generic.IDictionary{System.String, imbSCI.Reporting.collections.reportRegistry.contentTreeDomainCollection}" />
     public abstract class recordVsReportRegistryBase
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IDictionary{System.String, imbSCI.Reporting.collections.reportRegistry.contentTreeDomainCollection}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     {
         public ILogBuilder logger { get; protected set; }
 

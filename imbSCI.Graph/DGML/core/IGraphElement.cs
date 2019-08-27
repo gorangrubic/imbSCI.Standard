@@ -27,6 +27,7 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using imbSCI.Core.math.classificationMetrics;
 using imbSCI.Data.interfaces;
 
 //using System.Windows;
@@ -39,7 +40,7 @@ using System;
 
 namespace imbSCI.Graph.DGML.core
 {
-    public interface IGraphElement : IObjectWithName
+    public interface IGraphElement : IObjectWithName, IElementWithProporties
     {
         String Stroke { get; set; }
 

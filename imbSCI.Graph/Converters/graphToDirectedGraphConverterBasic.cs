@@ -32,10 +32,12 @@
 using System;
 using System.Collections.Generic;
 using imbSCI.Core.math;
+using imbSCI.Core.style.color;
 using imbSCI.Data;
 using imbSCI.Data.collection.graph;
 using imbSCI.Data.interfaces;
 using imbSCI.Graph.Converters.tools;
+using imbSCI.Graph.Data;
 using imbSCI.Graph.DGML;
 using imbSCI.Graph.DGML.core;
 
@@ -48,6 +50,19 @@ namespace imbSCI.Graph.Converters
     /// <seealso cref="imbSCI.Graph.Converters.graphToDirectedGraphConverterBase{imbSCI.Data.collection.graph.IGraphNode}" />
     public class graphToDirectedGraphConverterBasic : graphToDirectedGraphConverterBase<graphNode> // where T : IGraphNode, new()
     {
+
+        public graphToDirectedGraphConverterBasic()
+        {
+            setup = new GraphStylerSettings();
+            setup.GraphDirection = DGML.enums.GraphDirectionEnum.LeftToRight;
+            setup.GraphLayout = DGML.enums.GraphLayoutEnum.DependencyMatrix;
+            setup.alphaMin = 0.7;
+            setup.NodeGradient = new ColorGradient("#FF195ac5", "#FF195ac5", ColorGradientFunction.AtoB | ColorGradientFunction.Hue | ColorGradientFunction.Saturation | ColorGradientFunction.CircleCCW);
+            setup.LinkGradient = new ColorGradient("#FF195ac5", "#FF195ac5", ColorGradientFunction.AllAToB);
+
+            Deploy(setup);
+        }
+
         public override string GetCategoryID(graphNode nodeOrLink)
         {
             if (nodeOrLink == null) return "null";

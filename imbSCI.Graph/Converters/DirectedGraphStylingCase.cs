@@ -29,6 +29,7 @@
 // ------------------------------------------------------------------------------------------------------------------
 using imbSCI.Graph.Converters.tools;
 using imbSCI.Graph.DGML.collections;
+using System;
 
 //using System.Web.UI.WebControls;
 //using Accord;
@@ -41,7 +42,9 @@ namespace imbSCI.Graph.Converters
 
         public DirectedGraphStylingCase(GraphStylerSettings settings)
         {
+            if (settings == null) throw new ArgumentNullException(nameof(settings), "Style setup is null [" + GetType().Name + "]");
             setup = settings;
+            
             nodeStyler = new NodeWeightStylerCategories(setup.NodeGradient, setup);
             linkStyler = new NodeWeightStylerCategories(setup.LinkGradient, setup);
         }

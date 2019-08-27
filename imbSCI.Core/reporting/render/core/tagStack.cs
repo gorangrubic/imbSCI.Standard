@@ -33,11 +33,15 @@ namespace imbSCI.Core.reporting.render.core
     using System.Collections;
     using System.Collections.Generic;
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.Stack{aceCommonTypes.reporting.render.core.tagBlock}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     ///
     /// </summary>
     /// <seealso cref="System.Collections.Generic.Stack{aceCommonTypes.reporting.render.core.tagBlock}" />
     public class tagStack : IEnumerable, IEnumerable<tagBlock>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.Stack{aceCommonTypes.reporting.render.core.tagBlock}'
     {
         public Int32 Count => stack.Count;
 

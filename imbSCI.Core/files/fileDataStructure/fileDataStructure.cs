@@ -75,12 +75,14 @@ namespace imbSCI.Core.files.fileDataStructure
             }
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'generateReadmeFiles(aceAuthorNotation, string)' that could not be resolved
         /// <summary>
         /// Sets the folder description
         /// </summary>
         /// <param name="generateReadme">If true it will call <see cref="folderNode.generateReadmeFiles(aceAuthorNotation, string)"/> after description set.</param>
         /// <param name="notation">Information on author or application</param>
         public void SetFolderDescription(Boolean generateReadme = false, aceAuthorNotation notation = null)
+#pragma warning restore CS1574 // XML comment has cref attribute 'generateReadmeFiles(aceAuthorNotation, string)' that could not be resolved
         {
             if (folder == null)
             {

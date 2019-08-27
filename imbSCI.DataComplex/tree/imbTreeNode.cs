@@ -603,7 +603,9 @@ namespace imbSCI.DataComplex.tree
             }
             else
             {
+#pragma warning disable CS0184 // The given expression is never of the provided ('imbTreeNodeLeaf') type
                 if (this_imbTreeNodeBranch.Any(x => x is imbTreeNodeLeaf))
+#pragma warning restore CS0184 // The given expression is never of the provided ('imbTreeNodeLeaf') type
                 {
                     return imbTreeNodeType.leafed;
                 }
@@ -620,7 +622,9 @@ namespace imbSCI.DataComplex.tree
                 }
                 else
                 {
+#pragma warning disable CS0184 // The given expression is never of the provided ('imbTreeNodeBranch') type
                     if (this_imbTreeNodeBranch.All(x => x is imbTreeNodeBranch))
+#pragma warning restore CS0184 // The given expression is never of the provided ('imbTreeNodeBranch') type
                     {
                         return imbTreeNodeType.lateralFirst;
                     }
@@ -629,7 +633,9 @@ namespace imbSCI.DataComplex.tree
 
             foreach (imbTreeNodeBranch subs in subBranches)
             {
+#pragma warning disable CS0184 // The given expression is never of the provided ('imbTreeNodeLeaf') type
                 if (subs.Any(x => x is imbTreeNodeLeaf))
+#pragma warning restore CS0184 // The given expression is never of the provided ('imbTreeNodeLeaf') type
                 {
                     return imbTreeNodeType.lateralLast;
                 }

@@ -119,10 +119,12 @@ namespace imbSCI.Data.data.maps.datamap
         }
 
         // <summary>
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag was not expected at this location.'
         /// Vraca sve vrednosti iz niza
         /// </summary>
         /// <returns></returns>
         public List<Object> getValues()
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag was not expected at this location.'
         {
             return Enumerable.ToList<object>(Values);
         }

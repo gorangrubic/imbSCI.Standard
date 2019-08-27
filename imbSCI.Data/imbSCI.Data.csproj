@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45;net40</TargetFrameworks>
-    <ApplicationIcon>imbVeles48.ico</ApplicationIcon>
+    <ApplicationIcon></ApplicationIcon>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>imbSCI.Data.Standard</PackageId>
-    <Version>0.3.225</Version>
+    <Version>0.3.290</Version>
     <Title>imbSCI.Data - Coding for Science - Base library </Title>
     <Summary>Base layer of imbVeles Framework's imbSCI .NET Standard 2.0 libraries. 
     The library provides the core layer of shared: enumerations, interfaces and extensions as well as a number of thread-safe collections and data structures.</Summary>
@@ -30,8 +30,8 @@ Purpose of the * .NET 4.0 target is to provide compatibility with Windows XP, th
     <RepositoryType>GitHub</RepositoryType>
     <Authors>Goran Grubić</Authors>
     <Company>imbVeles</Company>
-    <AssemblyVersion>0.3.1.10</AssemblyVersion>
-    <FileVersion>0.3.1.10</FileVersion>
+    <AssemblyVersion>0.3.2</AssemblyVersion>
+    <FileVersion>0.3.2</FileVersion>
     <Product>imbSCI.Data.Standard</Product>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <RootNamespace>imbSCI.Data</RootNamespace>
@@ -60,36 +60,27 @@ Purpose of the * .NET 4.0 target is to provide compatibility with Windows XP, th
     <DocumentationFile>$(OutputPath)$(PackageId).xml</DocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
-    <ShouldCreateLogs>True</ShouldCreateLogs>
-    <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
-    <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
-    <UpdateAssemblyFileVersion>False</UpdateAssemblyFileVersion>
-    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
-    <UpdatePackageVersion>True</UpdatePackageVersion>
-    <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
-    <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
-    <WarningLevel>0</WarningLevel>
-    <DebugType>pdbonly</DebugType>
+
+
+
+  <PropertyGroup>
+    <WarningLevel>1</WarningLevel>
+    <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
-    <ShouldCreateLogs>True</ShouldCreateLogs>
+    <PrimaryVersionType>AssemblyVersionAttribute</PrimaryVersionType>
+    <ShouldCreateLogs>False</ShouldCreateLogs>
     <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
-    <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
-    <UpdateAssemblyFileVersion>False</UpdateAssemblyFileVersion>
-    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
+    <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
+    <UpdateAssemblyFileVersion>True</UpdateAssemblyFileVersion>
+    <UpdateAssemblyInfoVersion>True</UpdateAssemblyInfoVersion>
+    <AssemblyVersionSettings>None.None.None.IncrementOnDemand</AssemblyVersionSettings>
+    <AssemblyFileVersionSettings>None.None.None.IncrementOnDemand</AssemblyFileVersionSettings>
+    <AssemblyInfoVersionSettings>None.None.None.IncrementOnDemand</AssemblyInfoVersionSettings>
     <UpdatePackageVersion>True</UpdatePackageVersion>
+    <PackageVersionSettings>AssemblyVersion.IncrementWithAutoReset.None</PackageVersionSettings>
     <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
     <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
   </PropertyGroup>
-
-  
-
-  <ItemGroup>
-    <Content Include="imbVeles48.ico" />
-  </ItemGroup>
 
 
   <Target Name="CopyPackage" AfterTargets="Pack">

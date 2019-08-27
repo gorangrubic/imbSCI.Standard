@@ -48,6 +48,12 @@ namespace imbSCI.Core.style.color
         public double hue { get; set; } = 1.0;
 
         public double saturation { get; set; } = 1.0;
+        /// <summary>
+        /// Luminosity - from 0 to 1
+        /// </summary>
+        /// <value>
+        /// The luminosity.
+        /// </value>
         public double luminosity { get; set; } = 1.0;
 
         private const double scale = 240.0;
@@ -64,6 +70,12 @@ namespace imbSCI.Core.style.color
             set { saturation = CheckRange(value / scale); }
         }
 
+        /// <summary>
+        /// Luminosity - from 0 to <see cref="scale"/> (240)
+        /// </summary>
+        /// <value>
+        /// The luminosity.
+        /// </value>
         public double Luminosity
         {
             get { return luminosity * scale; }
@@ -180,14 +192,14 @@ namespace imbSCI.Core.style.color
         /// <summary>
         /// Initializes a new instance of the <see cref="HSLColor"/> class.
         /// </summary>
-        /// <param name="_hue">The hue.</param>
-        /// <param name="_saturation">The saturation.</param>
-        /// <param name="_luminosity">The luminosity.</param>
+        /// <param name="_hue">Unscaled Hue : from 0 to 1.</param>
+        /// <param name="_saturation">Unscaled Saturation: from 0 to 1.</param>
+        /// <param name="_luminosity">Unscaled Luminosity: from 0 to 1.</param>
         public HSLColor(double _hue, double _saturation, double _luminosity)
         {
-            this.hue = hue;
-            this.saturation = saturation;
-            this.luminosity = luminosity;
+            this.hue = _hue;
+            this.saturation = _saturation;
+            this.luminosity = _luminosity;
         }
     }
 }

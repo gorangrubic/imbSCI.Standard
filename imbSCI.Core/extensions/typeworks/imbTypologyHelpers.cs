@@ -33,21 +33,50 @@ namespace imbSCI.Core.extensions.typeworks
     using imbSCI.Core.extensions.text;
     using imbSCI.Data;
 
-    #region imbVeles using
 
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using System.Text;
+    using System.Text.RegularExpressions;
 
-    #endregion imbVeles using
 
     /// <summary>
     /// Advanced reflection operations
     /// </summary>
     public static class imbTypologyHelpers
     {
+        public static List<Type> CollectTypesOfProperties(this Type hostType)
+        {
+            List<Type> output = new List<Type>();
+            var hostTypes = new List<Type>() { hostType };
+
+            return hostTypes.CollectTypesOfProperties();
+        }
+
+
+        public static List<Type> CollectTypesOfProperties(this IEnumerable<Type> hostTypes)
+        {
+            List<Type> output = new List<Type>();
+
+            foreach (Type host in hostTypes)
+            {
+                var props = host.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+
+                foreach (var prop in props)
+                {
+                    if (!output.Contains(prop.PropertyType))
+                    {
+                        output.Add(prop.PropertyType);
+                    }
+                }
+            }
+
+            return output;
+        }
+
+
         /// <summary>
         /// Collects the types that are discovered around <c>hostType</c>, according to rules defined with <c>flags</c>
         /// </summary>
@@ -64,6 +93,11 @@ namespace imbSCI.Core.extensions.typeworks
             if (hostType != null)
             {
                 namespaceString = hostType.Namespace;
+
+                if (flags.HasFlag(CollectTypeFlags.ofTypeProperties))
+                {
+                    output.AddRange(CollectTypesOfProperties(new List<Type>() { hostType }));
+                }
             }
 
             if (!flags.HasFlag(CollectTypeFlags.ofThisAssembly) || flags.HasFlag(CollectTypeFlags.ofAllAssemblies))
@@ -219,6 +253,59 @@ namespace imbSCI.Core.extensions.typeworks
             return output;
         }
 
+
+        private static Object _REGEX_typename_lock = new Object();
+        private static Regex _REGEX_typename;
+        /// <summary>
+        /// static and autoinitiated object
+        /// </summary>
+        public static Regex REGEX_typename
+        {
+            get
+            {
+                if (_REGEX_typename == null)
+                {
+                    lock (_REGEX_typename_lock)
+                    {
+
+                        if (_REGEX_typename == null)
+                        {
+                            _REGEX_typename = new Regex(@"([\w\d]+)");
+                            
+                            // add here if any additional initialization code is required
+                        }
+                    }
+                }
+                return _REGEX_typename;
+            }
+        }
+
+
+        public static String GetCleanTypeName(this Type type, Boolean showGenerics = true)
+        {
+            var generics = type.GetGenericArguments();
+            if (generics.Any())
+            {
+                String output = REGEX_typename.Match(type.Name).Value;
+                if (showGenerics)
+                {
+                    output = output + "<";
+                    String insert = "";
+                    foreach (Type g in generics)
+                    {
+                        insert = insert.add(g.Name, ",");
+                    }
+                    output += insert;
+                    output = output + ">";
+                }
+                return output;
+            } else
+            {
+                return type.Name;
+            }
+        }
+            
+
         /// <summary>
         /// Gets the clean full name the type.
         /// </summary>
@@ -345,7 +432,14 @@ namespace imbSCI.Core.extensions.typeworks
             baseTypes.AddRange(type.GetBaseTypes(callCount++), uniqueTypes);
 
             baseTypes.Reverse();
-            if (includeSelf) baseTypes.Add(type);
+            if (includeSelf)
+            {
+                if (!baseTypes.Contains(type)) baseTypes.Add(type);
+            } else
+            {
+                baseTypes.Remove(type);
+            }
+
             if (untilClass != null)
             {
                 Int32 ind = baseTypes.IndexOf(untilClass) + 1;

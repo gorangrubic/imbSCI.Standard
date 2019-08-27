@@ -1,10 +1,16 @@
 using imbSCI.Core.extensions.data;
 using imbSCI.Core.extensions.text;
+using imbSCI.Core.math.range.finder;
 using imbSCI.Core.math.range.matrix;
 using imbSCI.Core.reporting.zone;
+using imbSCI.Core.style.color;
+using imbSCI.Graph.Graphics.SvgDocument;
+
+
 using Svg;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 
 namespace imbSCI.Graph.Graphics.HeatMap
@@ -38,9 +44,11 @@ namespace imbSCI.Graph.Graphics.HeatMap
         /// </summary>
         /// <param name="model">The model.</param>
         /// <param name="filePath">The file path.</param>
-        public void RenderAndSave(HeatMapModel model, String filePath)
+        public Svg.SvgDocument RenderAndSave(HeatMapModel model, String filePath)
         {
-            var doc = Render(model, filePath);
+            Svg.SvgDocument output = Render(model, filePath);
+
+            return output;
         }
 
         protected void prepareLabels(HeatMapModel model)
@@ -68,7 +76,15 @@ namespace imbSCI.Graph.Graphics.HeatMap
         /// <returns></returns>
         public Svg.SvgDocument Render(HeatMapModel model, String filePath = "")
         {
-            model.DetectMinMax();
+            rangeFinder valueRange = model.DetectMinMax();
+
+            var lColor = style.LowColor.GetColorVersionWithAlpha(style.MinOpacity); //.ColorToHex();
+            var hColor = style.HighColor.GetColorVersionWithAlpha(style.MaxOpacity); //.ColorToHex();
+
+
+
+            ColorGradient colorGradient = new ColorGradient(lColor, hColor, ColorGradientFunction.AllAToB);
+            
 
             cursorZoneSpatialSettings format = style.fieldContainer.GetFormatSetup();
             format.spatialUnit = 8;
@@ -81,7 +97,8 @@ namespace imbSCI.Graph.Graphics.HeatMap
             {
                 Width = width,
                 Height = height,
-                Ppi = 100,
+                Ppi = 100
+                
             };
 
             var mainContainer = new SvgGroup();
@@ -137,7 +154,7 @@ namespace imbSCI.Graph.Graphics.HeatMap
 
                     if (x == 0)
                     {
-                        Double ratio = model.GetRatioForScale(y, style.minimalOpacity, model.height); //(1+ style.minimalOpacity).GetRatio(y+1);
+                        Double ratio = valueRange.GetPositionInRange(y);  //model.GetRatioForScale(y, style.minimalOpacity, model.height); //(1+ style.minimalOpacity).GetRatio(y+1);
                         Double scaleFactor2 = ratio;
                         if (!style.options.HasFlag(HeatMapRenderOptions.resizeFields))
                         {
@@ -145,11 +162,14 @@ namespace imbSCI.Graph.Graphics.HeatMap
                         }
 
                         if (ratio > 1) ratio = 1;
-                        var lbl2 = format.GetRectangle((-format.width * 2), yStart, style.BaseColor, (float)ratio, scaleFactor2);
+                        var lbl2 = format.GetRectangle((-format.width * 2), yStart, colorGradient.GetColor(ratio), Convert.ToSingle(ratio), scaleFactor2);
                         vertScale.Children.Add(lbl2);
 
                         Svg.SvgText label2 = yLabels[y].GetSvgText(format, -1, y);
                         vertLabels.Children.Add(label2);
+
+                        //Svg.SvgText label = xLabels[x].GetSvgText(format, x, -1);
+
                         //Svg.SvgText label2 = new SvgText(yLabels[y])
                         //{
                         //    X = (format.margin.left - format.width).Get_px(),
@@ -179,20 +199,17 @@ namespace imbSCI.Graph.Graphics.HeatMap
                         vertValues.Children.Add(value);
                     }
 
-                    Double val = model.GetRatioValue(x, y, style.minimalOpacity);
+                    Double val = valueRange.GetPositionInRange(model[x, y]); // model.GetRatioValue(x, y, style.minimalOpacity);
+                    Color valC = colorGradient.GetColor(val);
 
-                    //val = val / (1 + style.minimalOpacity);
-                    //val = val + style.minimalOpacity;
-                    //if (val > 1) val = 1;
 
                     Double scaleFactor = val;
-                    //Color color = style.fieldGradient.GetHexColor(val, true).getColorFromHex();
-
+                    
                     if (!style.options.HasFlag(HeatMapRenderOptions.resizeFields))
                     {
                         scaleFactor = 1;
                     }
-                    var rct = format.GetRectangle(xStart, yStart, style.BaseColor, (float)val, scaleFactor);
+                    var rct = format.GetRectangle(xStart, yStart, valC, Convert.ToSingle(val), scaleFactor);
 
                     group.Children.Add(rct);
                 }

@@ -32,7 +32,7 @@ using System.Xml.Serialization;
 
 namespace imbSCI.Graph.DGML.core
 {
-    public class Link : GraphElement, IGraphElement
+    public class Link : GraphElement, IGraphElement,IFreeGraphLink
     {
         public Link()
         {

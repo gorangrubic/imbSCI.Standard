@@ -33,11 +33,15 @@ using System.Linq;
 
 namespace imbSCI.Graph.FreeGraph
 {
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.List{imbNLP.PartOfSpeech.TFModels.semanticCloud.core.freeGraphNodeBase}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// Result of a query over <see cref="freeGraph"/> collection, contains clones of  matched graphs
     /// </summary>
     /// <seealso cref="System.Collections.Generic.List{imbNLP.PartOfSpeech.TFModels.semanticCloud.core.freeGraphNodeBase}" />
     public class freeGraphQueryResult : List<freeGraphNodeBase>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.List{imbNLP.PartOfSpeech.TFModels.semanticCloud.core.freeGraphNodeBase}'
     {
         public freeGraphQueryResult()
         {

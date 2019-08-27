@@ -31,12 +31,16 @@ namespace imbSCI.DataComplex.data.dataUnits.core
 {
     using imbSCI.DataComplex.data.dataUnits.enums;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'DataTable' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'dataUnitBase' that could not be resolved
     /// <summary>
     /// The agregator data units have ability to process an external <see cref="DataTable"/> and to populate their fields according to <see cref="imbSCI.Core.attributes.imbAttributeName.reporting_agregate_function"/>
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="imbReportingCore.data.dataUnits.core.dataUnitBase" />
     public class dataUnitAgregator<T> : dataUnitBase
+#pragma warning restore CS1574 // XML comment has cref attribute 'dataUnitBase' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'DataTable' that could not be resolved
     {
         public dataUnitAgregator() : base(typeof(T))
         {

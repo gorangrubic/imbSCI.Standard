@@ -37,6 +37,8 @@ namespace imbSCI.DataComplex.data.modelRecords
     using System.Collections.Generic;
     using System.Reflection;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'modelRecordParentBase' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// Collection of algorithm instances with coresponding <see cref="modelRecordParentBase"/> records, indexed by algorithm <see cref="IObjectWithNameAndDescription"/> that produces it
     /// </summary>
@@ -45,6 +47,8 @@ namespace imbSCI.DataComplex.data.modelRecords
     /// <seealso cref="aceCommonTypes.primitives.imbBindable" />
     /// <seealso cref="System.Collections.Generic.IEnumerable{T}" />
     public abstract class instanceWithRecordCollectionBase<T, TRecord> : modelRecordCollection<T, TRecord>, IEnumerable<KeyValuePair<T, TRecord>>
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'modelRecordParentBase' that could not be resolved
         where T : class, IObjectWithName, IObjectWithDescription, IObjectWithNameAndDescription
         where TRecord : modelRecordBase, IModelRecord
     {

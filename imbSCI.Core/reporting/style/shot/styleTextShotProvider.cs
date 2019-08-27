@@ -34,11 +34,13 @@ namespace imbSCI.Core.reporting.style.shot
     using imbSCI.Data.enums.appends;
     using System;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// Provider for text styling shots
     /// </summary>
     /// <seealso cref="aceCommonTypes.primitives.imbBindable" />
     public class styleTextShotProvider
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     {
         protected styleTheme theme;
 

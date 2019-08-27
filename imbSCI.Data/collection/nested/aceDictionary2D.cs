@@ -144,6 +144,8 @@ namespace imbSCI.Data.collection.nested
             return false;
         }
 
+#pragma warning disable CS1723 // XML comment has cref attribute 'TValue' that refers to a type parameter
+#pragma warning disable CS1723 // XML comment has cref attribute 'TValue' that refers to a type parameter
         /// <summary>
         /// Access to stored 2D value. Returns <see cref="TValue"/> default value if not defined within the matrix
         /// </summary>
@@ -154,6 +156,8 @@ namespace imbSCI.Data.collection.nested
         /// <param name="key2">The key2.</param>
         /// <returns></returns>
         public TValue this[TD1Key key1, TD2Key key2]
+#pragma warning restore CS1723 // XML comment has cref attribute 'TValue' that refers to a type parameter
+#pragma warning restore CS1723 // XML comment has cref attribute 'TValue' that refers to a type parameter
         {
             get
             {

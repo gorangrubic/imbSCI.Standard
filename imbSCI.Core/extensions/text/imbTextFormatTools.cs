@@ -40,6 +40,7 @@ namespace imbSCI.Core.extensions.text
     /// </summary>
     public static class imbTextFormatTools
     {
+#pragma warning disable CS1574 // XML comment has cref attribute 'aceGeneralException' that could not be resolved
         /// <summary>
         /// Helper method, actually just adds <see cref="Environment.NewLine"/> before the message specified -- alias of <see cref="addLine(string, string)"/>, don't use this.
         /// </summary>
@@ -48,6 +49,7 @@ namespace imbSCI.Core.extensions.text
         /// <returns></returns>
         /// <exception cref="aceCommonTypes.core.exceptions.aceGeneralException"></exception>
         public static string log(this String output, String msg)
+#pragma warning restore CS1574 // XML comment has cref attribute 'aceGeneralException' that could not be resolved
         {
             output += Environment.NewLine + msg;
 

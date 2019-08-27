@@ -41,12 +41,16 @@ namespace imbSCI.Core.reporting.colors
 
     #endregion imbVeles using
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'IHasDescribeMethod' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// GUI framework - data model to save color definition
     /// </summary>
     /// <seealso cref="aceCommonTypes.primitives.imbBindable" />
     /// <seealso cref="aceCommonTypes.interfaces.IHasDescribeMethod" />
     public class aceColorEntry : imbBindable, IHasDescribeMethod
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'IHasDescribeMethod' that could not be resolved
     {
         #region --- baseColorHex ------- Bindable property
 

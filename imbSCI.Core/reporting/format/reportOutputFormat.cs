@@ -36,11 +36,17 @@ namespace imbSCI.Core.reporting.format
     using System;
     using System.Collections.Generic;
 
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'aceCommonTypes.collection.aceEnumDictionary{aceCommonTypes.reporting.format.reportElementLevel, aceCommonTypes.reporting.format.reportElementFormSet}'
     /// <summary>
     /// Definitions of output forms, formats and so on
     /// </summary>
     /// <seealso cref="aceCommonTypes.collection.aceEnumDictionary{aceCommonTypes.reporting.format.reportElementLevel, aceCommonTypes.reporting.format.reportElementFormSet}" />
     public class reportOutputFormat : aceEnumDictionary<reportElementLevel, reportElementFormSet>
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'aceCommonTypes.collection.aceEnumDictionary{aceCommonTypes.reporting.format.reportElementLevel, aceCommonTypes.reporting.format.reportElementFormSet}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     {
         private List<templateFieldBasic> fields = new List<templateFieldBasic>();
 

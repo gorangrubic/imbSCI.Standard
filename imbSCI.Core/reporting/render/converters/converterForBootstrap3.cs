@@ -32,6 +32,9 @@ namespace imbSCI.Core.reporting.render.converters
     using imbSCI.Core.reporting.template;
     using imbSCI.Data.enums.fields;
 
+
+
+
     public class converterForBootstrap3 : converterEnumBase<bootstrap_component, bootstrap_containers, bootstrap_color, bootstrap_size>
     {
         /// <summary>

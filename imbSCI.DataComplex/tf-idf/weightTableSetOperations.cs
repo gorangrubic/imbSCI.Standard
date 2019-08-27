@@ -205,6 +205,7 @@ namespace imbSCI.DataComplex
             return output;
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
         /// <summary>
         /// Builds the frequency table shema
         /// </summary>
@@ -213,6 +214,7 @@ namespace imbSCI.DataComplex
         /// <returns></returns>
         /// <exception cref="aceCommonTypes.core.exceptions.dataException">Table name selection failed into stackoverflow - null - Table autoname failed [" + i.ToString() + "]</exception>
         public static DataTable buildFrequencyTable(string documentName, DataSet tableDataSet = null)
+#pragma warning restore CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
         {
             if (documentName.isNullOrEmpty()) documentName = "TermTable";
             if (tableDataSet == null) tableDataSet = new DataSet(documentName + "_set");

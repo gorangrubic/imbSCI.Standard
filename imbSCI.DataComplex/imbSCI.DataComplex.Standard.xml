@@ -10,6 +10,42 @@
             </summary>
             <seealso cref="!:imbSCI.DataComplex.converters.core.ConverterBase&lt;System.Data.DataTable, System.String, imbSCI.DataComplex.converters.DataTableConverterASCIISettings&gt;" />
         </member>
+        <member name="M:imbSCI.DataComplex.converters.DataTableConverterASCII.Convert(System.String,imbSCI.DataComplex.converters.DataTableConverterASCIISettings)">
+            <summary>
+            Converts the textual input into datatable with string values
+            </summary>
+            <param name="input">The input.</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException">There is no row at index[" + settings.columnNameRowIndex + "] - where column name row expected - input</exception>
+        </member>
+        <member name="P:imbSCI.DataComplex.converters.DataTableConverterASCII.autoEncoding">
+            <summary>
+            static and autoinitiated object
+            </summary>
+        </member>
+        <member name="P:imbSCI.DataComplex.converters.DataTableConverterASCIISettings.separatorReplacement">
+            <summary>
+            What value to use as replacement for <see cref="P:imbSCI.DataComplex.converters.DataTableConverterASCIISettings.columnSeparator"/> and <see cref="P:imbSCI.DataComplex.converters.DataTableConverterASCIISettings.rowSeparator"/> if found in cell value
+            </summary>
+            <value>
+            The separator replacement.
+            </value>
+        </member>
+        <member name="P:imbSCI.DataComplex.converters.DataTableConverterASCIISettings.columnNameRowIndex">
+            <summary>
+            Index of row with column name. To disable, set: -1
+            </summary>
+            <value>
+            The index of the column name row.
+            </value>
+        </member>
+        <member name="M:imbSCI.DataComplex.converters.maps.columnMapSet`1.RecognizeSet(System.Collections.Generic.List{System.String})">
+            <summary>
+            Returns column map having the highest crosssection with given column labels
+            </summary>
+            <param name="columnLabels">The column labels.</param>
+            <returns></returns>
+        </member>
         <member name="T:imbSCI.DataComplex.DataComplexExamples">
             <summary>Example, demonstrating data annotation with reporting, using generic, DataTable based, collection</summary>
             <seealso cref="T:imbSCI.DataComplex.data.TestMicroEnvironmentBase" />
@@ -2282,6 +2318,38 @@
             <param name="table">The table.</param>
             <returns></returns>
         </member>
+        <member name="M:imbSCI.DataComplex.extensions.data.operations.dataTableDataOperations.GetLegendDataTable(System.Data.DataTable,System.Collections.Generic.List{imbSCI.Data.enums.fields.templateFieldDataTable})">
+            <summary>
+            Creates Legend for a data table
+            </summary>
+            <param name="table">The table.</param>
+            <param name="columns">The columns.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataComplex.extensions.data.operations.dataTableDataOperations.GetTableVersionWithoutEmptyRows(System.Data.DataTable,System.Collections.Generic.List{System.String},System.Boolean)">
+            <summary>
+            Gets a table version, without rows having default field value for all columns, except ones specified in <c>columnsToIgnore</c>
+            </summary>
+            <param name="table">The table.</param>
+            <param name="columnsToIgnore">The columns to ignore.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataComplex.extensions.data.operations.dataTableDataOperations.GetSubColumnTableByParams(System.Data.DataTable,System.Int32,System.String[])">
+            <summary>
+            Gets table with limited number of rows and with selected column groups. Params alias for <see cref="M:imbSCI.DataComplex.extensions.data.operations.dataTableDataOperations.GetSubColumnTable(System.Data.DataTable,System.Int32,System.String[])"/>
+            </summary>
+            <param name="table">The table.</param>
+            <param name="rowsLimit">The rows limit. -1 to disable row limit.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataComplex.extensions.data.operations.dataTableDataOperations.GetSubColumnTable(System.Data.DataTable,System.Int32,System.String[])">
+            <summary>
+            Gets table with limited number of rows and with selected column groups
+            </summary>
+            <param name="table">The table.</param>
+            <param name="rowsLimit">The rows limit. -1 to disable row limit.</param>
+            <returns></returns>
+        </member>
         <member name="M:imbSCI.DataComplex.extensions.data.operations.dataTableDataOperations.GetLimited(System.Data.DataTable,System.Int32)">
             <summary>
             Gets the limited.
@@ -2602,7 +2670,7 @@
             <param name="fieldsOrCategoriesToShow">Category or property name to include in DataTable. If its empty it will ignore this criteria</param>
             <returns>DataTable object with proper DataColumn shema made from Primitive, Enum and ToStrings</returns>
         </member>
-        <member name="M:imbSCI.DataComplex.extensions.data.schema.dataTableShemaExtensions.GetClonedShema``1(System.Data.DataTable,System.Boolean)">
+        <member name="M:imbSCI.DataComplex.extensions.data.schema.dataTableShemaExtensions.GetClonedShema``1(System.Data.DataTable,System.Boolean,System.String[])">
             <summary>
             Gets the cloned shema.
             </summary>
@@ -3532,6 +3600,13 @@
             <summary>
             Returns Array of relative frequencies
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.DataComplex.special.instanceCountCollection`1.GetInstancesWithFrequency(System.Int32)">
+            <summary>
+            Gets the instances with frequency.
+            </summary>
+            <param name="frequency">The frequency.</param>
             <returns></returns>
         </member>
         <member name="M:imbSCI.DataComplex.special.instanceCountCollection`1.GetRFreq(`0)">

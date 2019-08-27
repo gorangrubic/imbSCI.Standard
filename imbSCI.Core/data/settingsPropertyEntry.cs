@@ -101,6 +101,14 @@ namespace imbSCI.Core.data
             name = dc.ColumnName;
             description = dc.GetDesc();
             type = dc.DataType;
+
+            var t = dc.GetValueType();
+
+            if (t != typeof(String))
+            {
+                type = t;
+            }
+
             categoryName = dc.GetGroup();
             format = dc.GetFormat();
             letter = dc.GetLetter();
@@ -111,6 +119,7 @@ namespace imbSCI.Core.data
             unit = dc.GetUnit();
             textColor = dc.GetTextColor().ColorToHex();
             width = dc.GetWidth();
+            Alignment = dc.GetAligment();
 
             //spe.displayName = dc.Caption;
             //spe.name = dc.ColumnName;

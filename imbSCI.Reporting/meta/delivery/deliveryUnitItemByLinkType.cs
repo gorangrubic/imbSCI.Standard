@@ -33,11 +33,19 @@ namespace imbSCI.Reporting.meta.delivery
     using imbSCI.Data.enums.appends;
     using System.Collections.Generic;
 
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'imbSCI.Cores.collection.aceEnumDictionary{imbSCI.Cores.enums.appendLinkType, System.Collections.Generic.List{imbSCI.Reporting.meta.delivery.IDeliveryUnitItem}}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     ///
     /// </summary>
     /// <seealso cref="imbSCI.Cores.collection.aceEnumDictionary{imbSCI.Cores.enums.appendLinkType, System.Collections.Generic.List{imbSCI.Reporting.meta.delivery.IDeliveryUnitItem}}" />
     public class deliveryUnitItemByLinkType : aceEnumDictionary<appendLinkType, List<IDeliveryUnitItem>>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'imbSCI.Cores.collection.aceEnumDictionary{imbSCI.Cores.enums.appendLinkType, System.Collections.Generic.List{imbSCI.Reporting.meta.delivery.IDeliveryUnitItem}}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     {
     }
 }

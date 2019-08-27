@@ -185,6 +185,8 @@ namespace imbSCI.DataComplex.tables
             return output;
         }
 
+#pragma warning disable CS1723 // XML comment has cref attribute 'T' that refers to a type parameter
+#pragma warning disable CS1723 // XML comment has cref attribute 'T' that refers to a type parameter
         /// <summary>
         /// Gets or creates <see cref="T"/>, alias of <see cref="GetOrCreate(string)"/> call
         /// </summary>
@@ -194,6 +196,8 @@ namespace imbSCI.DataComplex.tables
         /// <param name="key">The key.</param>
         /// <returns></returns>
         public T this[string key]
+#pragma warning restore CS1723 // XML comment has cref attribute 'T' that refers to a type parameter
+#pragma warning restore CS1723 // XML comment has cref attribute 'T' that refers to a type parameter
         {
             get
             {

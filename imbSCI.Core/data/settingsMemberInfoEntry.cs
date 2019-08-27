@@ -58,11 +58,21 @@ namespace imbSCI.Core.data
         public String relevantTypeName { get; set; } = "";
         public List<String> additionalInfo { get; set; } = new List<string>();
 
-        public String info_link { get; set; } = "";
+        public String info_link => helpContent.link;
 
-        public String info_helpTips { get; set; } = "";
+        public String info_helpTips => helpContent.hints;
 
-        public String info_helpTitle { get; set; } = "";
+        public String info_helpTitle => helpContent.title;
+
+        //{ get
+        //    {
+        //        return helpContent.title;
+        //    }
+        //    set
+        //    {
+        //        helpContent
+        //    }
+        //}
 
 
         /// <summary>
@@ -91,6 +101,11 @@ namespace imbSCI.Core.data
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        internal settingsMemberInfoEntry()
+        {
+
         }
 
         public settingsMemberInfoEntry(Object __primitive)
@@ -239,21 +254,23 @@ namespace imbSCI.Core.data
 
                 case imbAttributeName.fileProvideByteOrder:
                     break;
-
-                case imbAttributeName.help:
-                case imbAttributeName.helpDescription:
                 case imbAttributeName.helpPurpose:
+                    helpContent.purpose = dtc_val.toStringSafe();
+                    break;
+                 case imbAttributeName.helpDescription:
+                case imbAttributeName.help:
                 case imbAttributeName.menuHelp:
+                    helpContent.description = dtc_val;
                     additionalInfo.Add(dtc_val.toStringSafe(""));
                     break;
 
                 case imbAttributeName.helpTips:
-                    info_helpTips = dtc_val.toStringSafe("");
+                    helpContent.hints = dtc_val.toStringSafe("");
                     break;
 
                 case imbAttributeName.helpTitle:
-
-                    info_helpTitle = dtc_val.toStringSafe("");
+                    helpContent.title = dtc_val.toStringSafe(""); 
+                     
                     break;
 
                 case imbAttributeName.hideInMenu:
@@ -500,6 +517,9 @@ namespace imbSCI.Core.data
 
                 case imbAttributeName.xmlNodeValueProperty:
                     break;
+                default:
+                    throw new NotImplementedException("This attribute name [" + dtc + "] is not yet supported");
+                    break;
             }
         }
 
@@ -516,7 +536,7 @@ namespace imbSCI.Core.data
                     break;
 
                 case templateFieldDataTable.col_alignment:
-
+                    Alignment = (textCursorZoneCorner)dtc_val;
                     break;
 
                 case templateFieldDataTable.col_attributes:
@@ -666,6 +686,11 @@ namespace imbSCI.Core.data
                     break;
 
                 case templateFieldDataTable.data_query:
+
+                    if (dtc_val is Func<Object, String> func)
+                    {
+                        FuncRenderQuery = func;
+                    }
                     break;
 
                 case templateFieldDataTable.data_rowcountselected:
@@ -733,8 +758,13 @@ namespace imbSCI.Core.data
                 case templateFieldDataTable.title:
                     displayName = dtc_val.toStringSafe(displayName);
                     break;
+                default:
+                    throw new NotImplementedException("This templateField [" + dtc + "] is not yet supported");
+                    break;
             }
         }
+
+        public Func<Object, String> FuncRenderQuery { get; set; }
 
         /// <summary>
         /// Deploys values according to values found in attributes
@@ -742,8 +772,6 @@ namespace imbSCI.Core.data
         /// <param name="propAttributes">The property attributes.</param>
         public void deployAttributes(Object[] propAttributes)
         {
-
-
             foreach (Object propAtt in propAttributes)
             {
                 descAttribute = propAtt as DescriptionAttribute;
@@ -893,9 +921,6 @@ namespace imbSCI.Core.data
                     displayName = mi.Name;
                 }
             }
-
-            //imbAttributeCollection coll = imbAttributeTools.getImbAttributeDictionary(mi);
-            //helpContent = coll.getHelpContent();
         }
 
         /// <summary>
@@ -1204,9 +1229,9 @@ namespace imbSCI.Core.data
 
         private List<Object> _acceptableValues = new List<object>();
 
-        protected settingsMemberInfoEntry()
-        {
-        }
+        //protected settingsMemberInfoEntry()
+        //{
+        //}
 
         /// <summary>
         /// prihvatljive vrednosti

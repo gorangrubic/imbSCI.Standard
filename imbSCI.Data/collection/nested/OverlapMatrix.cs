@@ -9,12 +9,20 @@ namespace imbSCI.Data.collection.nested
 
 
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'imbSCI.Data.collection.nested.aceDictionary2D{System.Int32, System.Int32, System.Collections.Generic.List{T}}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// Matrix of overlapping elements
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="imbSCI.Data.collection.nested.aceDictionary2D{System.Int32, System.Int32, System.Collections.Generic.List{T}}" />
     public class OverlapMatrix<T> : aceDictionary2D<Int32, Int32, List<T>> where T : IEquatable<T>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'imbSCI.Data.collection.nested.aceDictionary2D{System.Int32, System.Int32, System.Collections.Generic.List{T}}'
     {
         /// <summary>
         /// Deploys the specified collections.

@@ -48,20 +48,26 @@ namespace imbSCI.DataComplex.data
 
         public abstract string VAR_LogPrefix { get; }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'dataSet' that could not be resolved
         /// <summary>
         /// Summary statistics inside <see cref="dataCollectionExtendedList"/> and <see cref="dataSet"/>
         /// </summary>
         public const string DATANAME_Summary = "summary";
+#pragma warning restore CS1574 // XML comment has cref attribute 'dataSet' that could not be resolved
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'dataSet' that could not be resolved
         /// <summary>
         /// Children statistics inside <see cref="dataCollectionExtendedList"/> and <see cref="dataSet"/>
         /// </summary>
         public const string DATANAME_Children = "children";
+#pragma warning restore CS1574 // XML comment has cref attribute 'dataSet' that could not be resolved
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'dataSet' that could not be resolved
         /// <summary>
         /// Instance statistics inside <see cref="dataCollectionExtendedList"/> and <see cref="dataSet"/>
         /// </summary>
         public const string DATANAME_Instance = "instance";
+#pragma warning restore CS1574 // XML comment has cref attribute 'dataSet' that could not be resolved
 
         private PropertyCollectionExtendedList _dataCollectionExtendedList = new PropertyCollectionExtendedList();
 
@@ -86,6 +92,7 @@ namespace imbSCI.DataComplex.data
         /// <returns>Updated or newly created property collection</returns>
         public abstract PropertyCollectionExtended AppendDataFields(PropertyCollectionExtended data = null);
 
+#pragma warning disable CS1066 // The default value specified for parameter 'data' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
         /// <summary>
         /// Appends its data points into new or existing property collection
         /// </summary>
@@ -95,6 +102,7 @@ namespace imbSCI.DataComplex.data
         /// </returns>
         /// <exception cref="NotImplementedException"></exception>
         PropertyCollection IAppendDataFields.AppendDataFields(PropertyCollection data = null) => (PropertyCollection)AppendDataFields(data as PropertyCollectionExtended);
+#pragma warning restore CS1066 // The default value specified for parameter 'data' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
 
         public void log(string message)
         {

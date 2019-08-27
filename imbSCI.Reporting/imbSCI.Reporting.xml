@@ -4,14 +4,40 @@
         <name>imbSCI.Reporting</name>
     </assembly>
     <members>
-        <member name="M:imbSCI.Reporting.charts.chartTools.buildChart(imbSCI.Reporting.charts.core.chartTypeEnum,imbSCI.Reporting.charts.core.chartFeatures,System.Data.DataTable,imbSCI.Reporting.charts.core.chartSizeEnum,imbSCI.Reporting.charts.core.chartTypeEnum)">
+        <member name="T:imbSCI.Reporting.charts.C3WordPressChartBuilder">
             <summary>
-            Builds the chart string for <c>C3js</c> rendering
+            Builder for C3 charts for Gutenberg shortcode block in WordPress page-post content
+            </summary>
+        </member>
+        <member name="P:imbSCI.Reporting.charts.C3WordPressChartBuilder.shortcodeTool">
+            <summary>
+            Gets or sets the shortcode tool.
+            </summary>
+            <value>
+            The shortcode tool.
+            </value>
+        </member>
+        <member name="M:imbSCI.Reporting.charts.C3WordPressChartBuilder.BuildChart(imbSCI.Reporting.charts.core.chartTypeEnum,imbSCI.Reporting.charts.core.chartFeatures,System.Data.DataTable,imbSCI.Reporting.charts.core.chartSizeEnum,imbSCI.Reporting.charts.core.chartTypeEnum)">
+            <summary>
+            Builds the chart.
             </summary>
             <param name="chartType">Type of the chart.</param>
             <param name="features">The features.</param>
             <param name="data">The data.</param>
+            <param name="size">The size.</param>
             <param name="typesForSeries">The types for series.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Reporting.charts.chartTools.buildChart(imbSCI.Reporting.charts.core.chartTypeEnum,imbSCI.Reporting.charts.core.chartFeatures,System.Data.DataTable,imbSCI.Reporting.charts.core.chartSizeEnum,imbSCI.Reporting.charts.core.chartTypeEnum,System.String)">
+            <summary>
+            Builds the chart string for <c>C3js</c> rendering
+            </summary>
+            <param name="chartType">Type of chart to create.</param>
+            <param name="features">Used features</param>
+            <param name="data">Data table</param>
+            <param name="size">The size.</param>
+            <param name="typesForSeries">The types for series.</param>
+            <param name="obj_id">The object identifier.</param>
             <returns></returns>
         </member>
         <member name="M:imbSCI.Reporting.charts.chartTools.buildDataInsertHorizontaly(System.Data.DataTable)">
@@ -44,14 +70,66 @@
             imbControl property templates tipa Dictionary{chartTypeEnum, String}
             </summary>
         </member>
+        <member name="F:imbSCI.Reporting.charts.core.chartFeatures.withoutHtml">
+            <summary>
+            The generated C3 code will be only JavaScript part
+            </summary>
+        </member>
+        <member name="F:imbSCI.Reporting.charts.core.chartFeatures.bindto">
+            <summary>
+            DEPRICATED
+            </summary>
+        </member>
+        <member name="F:imbSCI.Reporting.charts.core.chartFeatures.transposeTable">
+            <summary>
+            it will transpose (rotate columns and rows) table, to show data horizontally
+            </summary>
+        </member>
         <member name="F:imbSCI.Reporting.charts.core.chartTypeEnum.none">
             <summary>
             The donut: prsten-krug izdeljen na procente
             </summary>
         </member>
+        <member name="T:imbSCI.Reporting.charts.ShortcodeJSInsertTool">
+            <summary>
+            Generates shortcode content for WordPress
+            </summary>
+            <remarks>
+            This should be used with proper WordPress plugin for created shortcode. The plugin has to Base64 decode shortcode content. See below PHP example for proper WP plugin
+            </remarks>
+            <code>
+            function jschart_shortcode( $atts, $content = null ) {
+            $a = shortcode_atts(array(
+                'id' => 'element_id'), $atts );
+             $js = base64_decode($a['js']);
+            
+            return '&lt;div id="' .$a['id']. '" >&lt;/div>&lt;script>'.$js.'&lt;/script>';
+            }
+            add_shortcode( 'jschart', 'jschart_shortcode' );
+            </code>
+        </member>
+        <member name="M:imbSCI.Reporting.charts.ShortcodeJSInsertTool.Create(System.String,System.String,imbSCI.Core.math.classificationMetrics.reportExpandedData)">
+            <summary>
+            Creates WordPress shortcode code to embedd the specified js content. 
+            </summary>
+            <param name="js_content">JavaScript content to be enbedded. If the string contains {0}, it will be replaced with <c>custom_id</c></param>
+            <param name="custom_id">DIV identifier, the custom value. Leave empty to have automatically assigned unique ID for created DIV</param>
+            <param name="extendedAttributes">Optional pair of additional shortcode attributes</param>
+            <returns>WP shortcode code. If <see cref="P:imbSCI.Reporting.charts.ShortcodeJSInsertTool.UseGutenbergContainerBlock"/> it will be wrapped in given gutenberg container, <see cref="P:imbSCI.Reporting.charts.ShortcodeJSInsertTool.GutenbergContainerBlock"/></returns>
+        </member>
+        <member name="P:imbSCI.Reporting.charts.WordPressChartTool.chartTemplate">
+            <summary>
+            static and autoinitiated object
+            </summary>
+        </member>
+        <member name="P:imbSCI.Reporting.charts.WordPressKoplasChartTool.chartTemplate">
+            <summary>
+            static and autoinitiated object
+            </summary>
+        </member>
         <member name="T:imbSCI.Reporting.config.imbSCIReportingConfig">
             <summary>
-            General configuration object for domain of <see cref="N:imbSCI.Reporting" />
+            General configuration object for domain of <see cref="N:imbSCI.Reporting"/>
             </summary>
         </member>
         <member name="M:imbSCI.Reporting.config.imbSCIReportingConfig.#ctor">
@@ -61,7 +139,7 @@
         </member>
         <member name="P:imbSCI.Reporting.config.imbSCIReportingConfig.isDefaultReplaced">
             <summary>
-            Gets or sets a value indicating whether, since program start, <see cref="P:imbSCI.Reporting.config.imbSCIReportingConfig.settings" /> were replaced with another instance, i.e. loaded externally
+            Gets or sets a value indicating whether, since program start, <see cref="P:imbSCI.Reporting.config.imbSCIReportingConfig.settings"/> were replaced with another instance, i.e. loaded externally
             </summary>
             <value>
               <c>true</c> if this instance is default replaced; otherwise, <c>false</c>.
@@ -69,7 +147,7 @@
         </member>
         <member name="P:imbSCI.Reporting.config.imbSCIReportingConfig.settings">
             <summary>
-            General configuration instance for domain of <see cref="N:imbSCI.Reporting" />
+            General configuration instance for domain of <see cref="N:imbSCI.Reporting"/>
             </summary>
             <value>
             Global settings
@@ -80,19 +158,23 @@
         </member>
         <member name="T:imbSCI.Reporting.delivery.reportOutputRepository">
              <summary>
+            
              </summary>
              <seealso cref="!:resourceDictionaryBase&lt;T&gt;.Object&gt;" />
         </member>
         <member name="P:imbSCI.Reporting.delivery.reportOutputRepository.name">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.delivery.reportOutputRepository.form">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.delivery.reportOutputRepository.basePath">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.delivery.reportOutputRepository.directoryPath">
@@ -108,6 +190,7 @@
         </member>
         <member name="P:imbSCI.Reporting.delivery.reportOutputUnit.name">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.delivery.reportOutputUnit.path">
@@ -127,6 +210,7 @@
         </member>
         <member name="P:imbSCI.Reporting.delivery.reportOutputUnit.fileformat">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.delivery.reportOutputUnit.level">
@@ -136,6 +220,7 @@
         </member>
         <member name="P:imbSCI.Reporting.delivery.reportOutputUnit.form">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.delivery.reportOutputUnit.output">
@@ -180,7 +265,7 @@
         </member>
         <member name="M:imbSCI.Reporting.enums.imbEnumConverterExtensions.getDefaultExtension(imbSCI.Core.reporting.format.reportOutputFormatName)">
             <summary>
-            Alias of <see cref="M:imbSCI.Reporting.enums.imbEnumConverterExtensions.getFilenameExtension(imbSCI.Core.reporting.format.reportOutputFormatName)" />
+            Alias of <see cref="M:imbSCI.Reporting.enums.imbEnumConverterExtensions.getFilenameExtension(imbSCI.Core.reporting.format.reportOutputFormatName)"/>
             </summary>
             <param name="outputFormat"></param>
             <returns></returns>
@@ -290,8 +375,40 @@
         </member>
         <member name="T:imbSCI.Reporting.exceptions.aceReportException">
              <summary>
+            
              </summary>
              <seealso cref="!:imbSCI.Cores.core.exceptions.aceReportException" />
+        </member>
+        <member name="M:imbSCI.Reporting.Html.Builders.JSBuilder.AppendSelectXPath(System.String)">
+            <summary>
+            Like: document.evaluate('/html/body/div[4]/div[2]/div/div/div/div[3]/div/span[2]/span', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
+            </summary>
+            <param name="xpath">The xpath.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Reporting.Html.Builders.JSBuilder.StartSelectXPath(System.String)">
+            <summary>
+            Like: document.evaluate('/html/body/div[4]/div[2]/div/div/div/div[3]/div/span[2]/span', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
+            </summary>
+            <param name="xpath">The xpath.</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Reporting.Html.Units.HtmlUnitTools.GetInsertPosition(imbSCI.Reporting.Html.Units.Core.HtmlUnitLocation,System.String)">
+            <summary>
+            Designate string index position where a unit should be inserted
+            </summary>
+            <param name="UnitLocation">The unit location.</param>
+            <param name="html">The HTML.</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">UnitLocation - Location enum must have start or end bits set</exception>
+        </member>
+        <member name="M:imbSCI.Reporting.Html.Units.JS.JavaScriptBlockBuilder.ToBlock(System.String,System.String)">
+            <summary>
+            Optional code prefix and sufix
+            </summary>
+            <param name="codePrefix">The code prefix.</param>
+            <param name="codeSufix">The code sufix.</param>
+            <returns></returns>
         </member>
         <member name="T:imbSCI.Reporting.includes.reportIncludeFile">
             <summary>
@@ -365,10 +482,12 @@
         </member>
         <member name="T:imbSCI.Reporting.interfaces.IHasReportRegistry">
              <summary>
+            
              </summary>
         </member>
         <member name="T:imbSCI.Reporting.interfaces.IMetaHasHeader">
              <summary>
+            
              </summary>
              \ingroup_disabled docCore
         </member>
@@ -442,6 +561,7 @@
         </member>
         <member name="P:imbSCI.Reporting.links.groups.reportInPackageGroup.parent">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.links.groups.reportInPackageGroup.getPath(System.String)">
@@ -465,13 +585,13 @@
         </member>
         <member name="M:imbSCI.Reporting.links.reportLink.#ctor(imbSCI.Reporting.links.reportLink,System.Boolean)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.links.reportLink" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.links.reportLink"/> class.
             </summary>
             <param name="source">The source.</param>
         </member>
         <member name="M:imbSCI.Reporting.links.reportLink.#ctor(System.String,System.String,System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.links.reportLink" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.links.reportLink"/> class.
             </summary>
             <param name="__title">The title.</param>
             <param name="__description">The description.</param>
@@ -479,7 +599,7 @@
         </member>
         <member name="M:imbSCI.Reporting.links.reportLink.#ctor(System.String,System.String,imbSCI.Reporting.links.reportRegistry.reportingRegistryQuery)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.links.reportLink" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.links.reportLink"/> class.
             </summary>
             <param name="__title">The title.</param>
             <param name="__description">The description.</param>
@@ -530,13 +650,14 @@
         </member>
         <member name="M:imbSCI.Reporting.links.reportLinkCollection.#ctor(System.String,System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.links.reportLinkCollection" /> class. Creates main group with specified name and secription
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.links.reportLinkCollection"/> class. Creates main group with specified name and secription
             </summary>
             <param name="mainGroupName">Name of the main group.</param>
             <param name="mainGroupDesc">The main group desc.</param>
         </member>
         <member name="P:imbSCI.Reporting.links.reportLinkCollection.items">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.links.reportLinkCollection.title">
@@ -576,7 +697,7 @@
         </member>
         <member name="M:imbSCI.Reporting.links.reportLinkCollection.AddLinkToElement(imbSCI.Core.interfaces.IMetaContentNested,System.String,System.String,imbSCI.Core.reporting.ILogBuilder)">
             <summary>
-            Linking to element instance, it will be resolved by <see cref="T:imbSCI.Reporting.meta.metaTools" />
+            Linking to element instance, it will be resolved by <see cref="T:imbSCI.Reporting.meta.metaTools"/>
             </summary>
             <param name="toElement">To element.</param>
             <returns></returns>
@@ -588,6 +709,7 @@
         </member>
         <member name="P:imbSCI.Reporting.links.reportLinkCollection.groups">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.links.reportLinkCollection.templateBootstrapAllowedExtensions">
@@ -607,6 +729,7 @@
         </member>
         <member name="P:imbSCI.Reporting.links.reportLinkCollectionSet.items">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.links.reportLinkCollectionSet.name">
@@ -638,25 +761,27 @@
         </member>
         <member name="P:imbSCI.Reporting.links.reportLinkRegistry.Item(System.String)">
             <summary>
-            Gets the <see cref="T:imbSCI.Reporting.links.reportLinkCollection" /> with the specified key.
+            Gets the <see cref="T:imbSCI.Reporting.links.reportLinkCollection"/> with the specified key.
             </summary>
             <value>
-            The <see cref="T:imbSCI.Reporting.links.reportLinkCollection" />.
+            The <see cref="T:imbSCI.Reporting.links.reportLinkCollection"/>.
             </value>
             <param name="key">The key.</param>
             <returns></returns>
         </member>
         <member name="P:imbSCI.Reporting.links.reportLinkRegistry.items">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.links.reportLinkRegistry.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.links.reportLinkRegistry" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.links.reportLinkRegistry"/> class.
             </summary>
         </member>
         <member name="P:imbSCI.Reporting.links.reportLinkToolbar.size">
              <summary>
+            
              </summary>
         </member>
         <member name="T:imbSCI.Reporting.links.reportRegistry.recordVsReportRegistryBase">
@@ -729,14 +854,17 @@
         </member>
         <member name="P:imbSCI.Reporting.links.reportRegistry.recordVsReportRegistryBase.byRecord">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.links.reportRegistry.recordVsReportRegistryBase.byReport">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.links.reportRegistry.recordVsReportRegistryBase.byToken">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.links.reportRegistry.reportingRegistryQuery.reportLevelString">
@@ -744,7 +872,7 @@
         </member>
         <member name="M:imbSCI.Reporting.links.reportRegistry.reportingRegistryQuery.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.links.reportRegistry.reportingRegistryQuery" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.links.reportRegistry.reportingRegistryQuery"/> class.
             </summary>
             <param name="__path">The path.</param>
         </member>
@@ -775,10 +903,10 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.basic.metaContentNoChildren.Item(System.String)">
             <summary>
-            Gets the <see cref="T:System.Object" /> with the specified name.
+            Gets the <see cref="T:System.Object"/> with the specified name.
             </summary>
             <value>
-            The <see cref="T:System.Object" />.
+            The <see cref="T:System.Object"/>.
             </value>
             <param name="name">The name.</param>
             <returns></returns>
@@ -791,31 +919,37 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.metaAttachmentBlock.includeFilePath">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.metaAttachmentBlock.filename">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.metaAttachmentBlock.caption">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.metaAttachmentBlock.description">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.metaAttachmentBlock.templateNeedle">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.metaAttachmentBlock.isDataTemplate">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.blocks.metaAttachmentBlock.#ctor(System.String,System.String,System.String,System.String,System.String,System.Boolean)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.blocks.metaAttachmentBlock" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.blocks.metaAttachmentBlock"/> class.
             </summary>
             <param name="__includeFilePath">The include file path.</param>
             <param name="__filename">The filename.</param>
@@ -832,6 +966,7 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.metaCodeBlock.codetypename">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.metaCodeBlock.title">
@@ -887,14 +1022,17 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.MetaContainerNestedBase.colors">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.MetaContainerNestedBase.position">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.MetaContainerNestedBase.width">
              <summary>
+            
              </summary>
         </member>
         <member name="T:imbSCI.Reporting.meta.blocks.metaDataTable">
@@ -905,6 +1043,7 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.metaDataTable.stylerSettings">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.blocks.metaDataTable.construct(System.Object[])">
@@ -921,6 +1060,7 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.metaDataTable.title">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.metaDataTable.table">
@@ -941,7 +1081,7 @@
         </member>
         <member name="T:imbSCI.Reporting.meta.blocks.metaExternalBlock">
             <summary>
-            Imports content from file or <see cref="!:imbSCI.Reporting.reporting.render.ITextRender" /> instance
+            Imports content from file or <see cref="!:imbSCI.Reporting.reporting.render.ITextRender"/> instance
             </summary>
             <seealso cref="T:imbSCI.Reporting.meta.blocks.MetaContainerNestedBase" />
         </member>
@@ -957,6 +1097,7 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.metaExternalBlock.includeFilePath">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.metaExternalBlock.includeTextBuilder">
@@ -1037,6 +1178,7 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.metaLink.description">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.metaLink.tool">
@@ -1145,10 +1287,10 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.metaLinkCollection.Item(System.Int32)">
             <summary>
-            Gets the <see cref="T:imbSCI.Core.interfaces.IMetaContentNested" /> with the specified key.
+            Gets the <see cref="T:imbSCI.Core.interfaces.IMetaContentNested"/> with the specified key.
             </summary>
             <value>
-            The <see cref="T:imbSCI.Core.interfaces.IMetaContentNested" />.
+            The <see cref="T:imbSCI.Core.interfaces.IMetaContentNested"/>.
             </value>
             <param name="key">The key.</param>
             <returns></returns>
@@ -1207,10 +1349,12 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.metaNotation.description">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.metaNotation.url">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.blocks.metaNotation.softwareName">
@@ -1545,7 +1689,7 @@
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.deliveryInstance.#ctor(imbSCI.Reporting.meta.delivery.deliveryUnit)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.delivery.deliveryInstance" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.delivery.deliveryInstance"/> class.
             </summary>
             <param name="__unit">The unit.</param>
         </member>
@@ -1556,8 +1700,17 @@
             <param name="data">The data.</param>
             <returns></returns>
         </member>
+        <member name="M:imbSCI.Reporting.meta.delivery.deliveryInstance.executeAndSave(imbSCI.Reporting.meta.documentSet.metaDocumentRootSet,System.String,System.Data.PropertyCollection)">
+            <summary>
+            Calls prepare and then <see cref="M:imbSCI.Reporting.meta.delivery.deliveryInstance.execute(imbSCI.Reporting.meta.documentSet.metaDocumentRootSet,System.String,System.Data.PropertyCollection)"/>
+            </summary>
+            <param name="report">The report.</param>
+            <param name="runstamp">The runstamp.</param>
+            <param name="__data">The data.</param>
+        </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryInstance.doBuildDeliveryMeta">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.deliveryInstance.execute(imbSCI.Reporting.meta.documentSet.metaDocumentRootSet,System.String,System.Data.PropertyCollection)">
@@ -1628,31 +1781,37 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryInstance.unit">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryInstance.name">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryInstance.compiled">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryInstance.repo">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryInstance.renders">
              <summary>
+            
              </summary>
         </member>
         <member name="T:imbSCI.Reporting.meta.delivery.deliveryUnit">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.deliveryUnit.setup">
             <summary>
-            Setup all <see cref="T:imbSCI.Reporting.meta.delivery.deliveryUnitItem" />s and other structural things
+            Setup all <see cref="T:imbSCI.Reporting.meta.delivery.deliveryUnitItem"/>s and other structural things
             </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.deliveryUnit.describe(imbSCI.Core.reporting.ILogBuilder)">
@@ -1718,6 +1877,7 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnit.blockBuilder">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.deliveryUnit.updateTemplates(imbSCI.Reporting.meta.delivery.deliveryInstance)">
@@ -1730,6 +1890,7 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnit.outputpath">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnit.scriptFlags">
@@ -1739,18 +1900,22 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnit.theme">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnit.itemByLevel">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnit.outputByLevel">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnit.outputContent">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnit.includeItems">
@@ -1760,14 +1925,15 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnit.items">
              <summary>
+            
              </summary>
         </member>
         <member name="T:imbSCI.Reporting.meta.delivery.deliveryUnitItem">
             <summary>
-            One element of <see cref="T:imbSCI.Reporting.meta.delivery.deliveryUnit" />
+            One element of <see cref="T:imbSCI.Reporting.meta.delivery.deliveryUnit"/>
             </summary>
-            <seealso cref="T:imbSCI.Reporting.meta.documentSet.metaDocumentSet" />
-            <seealso cref="T:imbSCI.Reporting.meta.document.metaDocument" />
+            <seealso cref="T:imbSCI.Reporting.meta.documentSet.metaDocumentSet"/>
+            <seealso cref="T:imbSCI.Reporting.meta.document.metaDocument"/>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnitItem.sourceFileInfo">
             <summary>
@@ -1776,18 +1942,22 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnitItem.output_fileinfo">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnitItem.includeSourceFolder">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnitItem.template">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnitItem.filenameTemplate">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.deliveryUnitItem.getOutFilePath(imbSCI.Core.reporting.render.IRenderExecutionContext,imbSCI.Core.interfaces.IMetaContentNested,System.Data.PropertyCollection,imbSCI.Core.reporting.format.reportOutputFormatName,System.IO.DirectoryInfo)">
@@ -1803,6 +1973,7 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnitItem.runstampRecord">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.deliveryUnitItem.isExecuted(System.String,System.Boolean)">
@@ -1817,55 +1988,62 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnitItem.levels">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnitItem.name">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnitItem.description">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.deliveryUnitItem.#ctor(imbSCI.Reporting.meta.delivery.deliveryUnitItemType)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.delivery.deliveryUnitItem" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.delivery.deliveryUnitItem"/> class.
             </summary>
             <param name="__itemType">Type of the item.</param>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnitItem.outputpath">
             <summary>
-            The output file path - relative to deliveryInstance output path: <see cref="!:imbSCI.Reporting.reporting.render.IRenderExecutionContext.directoryRoot" />, may include subfolders, filename template and extension
+            The output file path - relative to deliveryInstance output path: <see cref="!:imbSCI.Reporting.reporting.render.IRenderExecutionContext.directoryRoot"/>, may include subfolders, filename template and extension
             </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnitItem.sourcepath">
             <summary>
-            The input file/folder path - relative to <see cref="M:System.IO.Directory.GetCurrentDirectory" />
+            The input file/folder path - relative to <see cref="M:System.IO.Directory.GetCurrentDirectory"/>
             </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnitItem.itemType">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnitItem.location">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnitItem.flags">
              <summary>
+            
              </summary>
         </member>
         <member name="T:imbSCI.Reporting.meta.delivery.deliveryUnitItemByLinkType">
              <summary>
+            
              </summary>
              <seealso cref="!:imbSCI.Cores.collection.aceEnumDictionary&lt;imbSCI.Cores.enums.appendLinkType, System.Collections.Generic.List&lt;imbSCI.Reporting.meta.delivery.IDeliveryUnitItem&gt;&gt;" />
         </member>
         <member name="T:imbSCI.Reporting.meta.delivery.deliveryUnitItemCollection">
             <summary>
-            Collection of <see cref="T:imbSCI.Reporting.meta.delivery.deliveryUnitItem" />s associated to <see cref="T:imbSCI.Reporting.meta.delivery.deliveryUnit" /> definition
+            Collection of <see cref="T:imbSCI.Reporting.meta.delivery.deliveryUnitItem"/>s associated to <see cref="T:imbSCI.Reporting.meta.delivery.deliveryUnit"/> definition
             </summary>
             <seealso cref="!:System.Collections.Generic.IEnumerable&lt;imbSCI.Reporting.meta.delivery.deliveryUnitItem&gt;" />
-            <seealso cref="T:imbSCI.Reporting.meta.delivery.IDeliveryUnitItem" />
+            <seealso cref="T:imbSCI.Reporting.meta.delivery.IDeliveryUnitItem"/>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.deliveryUnitItemCollection.containsItemFromSourcefile(System.IO.FileInfo)">
             <summary>
@@ -1957,7 +2135,7 @@
         </member>
         <member name="F:imbSCI.Reporting.meta.delivery.deliveryUnitItemLocationBase.localResource">
             <summary>
-            The local resource - item will be saved into current scope <see cref="!:imbSCI.Reporting.reporting.render.IRenderExecutionContext.directoryScope" />
+            The local resource - item will be saved into current scope <see cref="!:imbSCI.Reporting.reporting.render.IRenderExecutionContext.directoryScope"/>
             </summary>
         </member>
         <member name="F:imbSCI.Reporting.meta.delivery.deliveryUnitItemLocationBase.globalDocumentResource">
@@ -1987,10 +2165,10 @@
         </member>
         <member name="F:imbSCI.Reporting.meta.delivery.deliveryUnitItemType.contentTemplate">
             <summary>
-            Text template with <see cref="T:imbSCI.Data.enums.fields.templateFieldSubcontent" /> and (optionally) <see cref="T:imbSCI.Data.enums.fields.templateFieldBasic" /> and other placeholders.
+            Text template with <see cref="T:imbSCI.Data.enums.fields.templateFieldSubcontent"/> and (optionally) <see cref="T:imbSCI.Data.enums.fields.templateFieldBasic"/> and other placeholders.
             </summary>
             <remarks>
-            <para>Subcontent is automatically extracted into <see cref="T:System.Data.PropertyCollection" /></para>
+            <para>Subcontent is automatically extracted into <see cref="T:System.Data.PropertyCollection"/></para>
             </remarks>
         </member>
         <member name="F:imbSCI.Reporting.meta.delivery.deliveryUnitItemType.content">
@@ -2000,7 +2178,7 @@
         </member>
         <member name="F:imbSCI.Reporting.meta.delivery.deliveryUnitItemType.dataTemplate">
             <summary>
-            String templates with <see cref="T:imbSCI.Data.enums.fields.templateFieldBasic" /> and other placeholders.
+            String templates with <see cref="T:imbSCI.Data.enums.fields.templateFieldBasic"/> and other placeholders.
             </summary>
         </member>
         <member name="F:imbSCI.Reporting.meta.delivery.deliveryUnitItemType.supportFile">
@@ -2028,7 +2206,7 @@
             Collection of renders
             </summary>
             <seealso cref="!:System.Collections.Generic.IEnumerable&lt;imbSCI.Reporting.meta.delivery.deliveryUnit&gt;" />
-            <seealso cref="!:imbSCI.Reporting.reporting.render.IRender" />
+            <seealso cref="!:imbSCI.Reporting.reporting.render.IRender"/>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.deliveryUnitRenderCollection.get``1">
             <summary>
@@ -2045,34 +2223,41 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.deliveryUnitRenderCollection.items">
              <summary>
+            
              </summary>
         </member>
         <member name="T:imbSCI.Reporting.meta.delivery.IDeliveryUnitItem">
              <summary>
+            
              </summary>
              <seealso cref="T:imbSCI.Data.interfaces.IObjectWithNameAndDescription" />
         </member>
         <member name="T:imbSCI.Reporting.meta.delivery.items.deliveryUnitDirectoryConstructor">
              <summary>
+            
              </summary>
              <seealso cref="T:imbSCI.Reporting.meta.delivery.deliveryUnitItem" />
              <seealso cref="T:imbSCI.Reporting.meta.delivery.items.IDeliveryUnitItemOutputRender" />
         </member>
         <member name="T:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemContentTemplated">
              <summary>
+            
              </summary>
              <seealso cref="T:imbSCI.Reporting.meta.delivery.deliveryUnitItem" />
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemContentTemplated.sourceRender">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemContentTemplated.filenameSufix">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemContentTemplated.format">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemContentTemplated.saveOutput(imbSCI.Core.reporting.render.IRenderExecutionContext,System.String,System.Data.PropertyCollection,System.String,System.Boolean)">
@@ -2085,6 +2270,7 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemContentTemplated.levelsOfNewDirectory">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemContentTemplated.#ctor(System.String,imbSCI.Reporting.meta.delivery.items.deliveryUnitItemSimpleRenderOutput,imbSCI.Core.reporting.format.reportOutputFormatName,System.Collections.Generic.IEnumerable{imbSCI.Data.enums.reportElementLevel})">
@@ -2125,6 +2311,7 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemFileOutput.templateOutput">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemFileOutput.#ctor(System.String,imbSCI.Data.enums.fields.templateFieldSubcontent,imbSCI.Reporting.meta.delivery.deliveryUnitItemLocationBase,System.String,System.String)">
@@ -2137,7 +2324,7 @@
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemFileOutput.#ctor(System.String,System.String,System.String,System.String,imbSCI.Reporting.meta.delivery.items.deliveryUnitItemContentTemplated)">
             <summary>
-            Content from file to be exported at output path with optional <see cref="T:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemContentTemplated" /> macro template
+            Content from file to be exported at output path with optional <see cref="T:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemContentTemplated"/> macro template
             </summary>
             <param name="__sourcepath">The sourcepath - relative to reportTheme directory</param>
             <param name="__outputPath">The output path - relative to deliveryInstance directory root. if null then it will not do file output</param>
@@ -2174,46 +2361,52 @@
         </member>
         <member name="T:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemLogOutput">
             <summary>
-            Delivers <see cref="T:imbSCI.Core.interfaces.IAceLogable" />, <see cref="!:imbSCI.Reporting.reporting.render.ITextRender" /> or <see cref="T:System.String" /> content on predefined output path
+            Delivers <see cref="T:imbSCI.Core.interfaces.IAceLogable"/>, <see cref="!:imbSCI.Reporting.reporting.render.ITextRender"/> or <see cref="T:System.String"/> content on predefined output path
             </summary>
             <seealso cref="T:imbSCI.Reporting.meta.delivery.deliveryUnitItem" />
             <seealso cref="T:imbSCI.Reporting.meta.delivery.IDeliveryUnitItem" />
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemLogOutput.specialSource">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemLogOutput.log">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemLogOutput.logRender">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemLogOutput.logStatic">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemLogOutput.templateOutput">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemLogOutput.#ctor(imbSCI.Core.interfaces.IAceLogable,System.String,imbSCI.Reporting.meta.delivery.items.deliveryUnitItemContentTemplated)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemLogOutput" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemLogOutput"/> class.
             </summary>
             <param name="__log">The log.</param>
             <param name="__outputPath">The output path.</param>
         </member>
         <member name="T:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemPaletteCSS">
              <summary>
+            
              </summary>
              <seealso cref="T:imbSCI.Reporting.meta.delivery.deliveryUnitItem" />
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemPaletteCSS.#ctor(System.String,System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemPaletteCSS" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemPaletteCSS"/> class.
             </summary>
             <param name="opath">The opath.</param>
         </member>
@@ -2225,26 +2418,32 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemSimpleRenderOutput.outputRender">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemSimpleRenderOutput.format">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemSimpleRenderOutput.levels">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemSimpleRenderOutput.levelsOfNewDirectory">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemSimpleRenderOutput.levelOfNewFile">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemSimpleRenderOutput.levelOfNewPage">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemSimpleRenderOutput.collectOperationStart(imbSCI.Core.reporting.render.IRenderExecutionContext,imbSCI.Core.interfaces.IMetaContentNested,imbSCI.Core.collection.PropertyCollectionDictionary)">
@@ -2296,6 +2495,7 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.items.deliveryUnitItemSupportFile.linkType">
              <summary>
+            
              </summary>
         </member>
         <member name="T:imbSCI.Reporting.meta.delivery.items.IDeliverySupportFile">
@@ -2307,14 +2507,14 @@
         </member>
         <member name="T:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger">
             <summary>
-            Criteria to match an <see cref="T:imbSCI.Core.interfaces.IMetaContentNested" />
+            Criteria to match an <see cref="T:imbSCI.Core.interfaces.IMetaContentNested"/>
             </summary>
             <remarks>
-            <para>The <see cref="T:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger" /> has multiple <c>OR</c> inner criteria-tests:</para>
-            <para><see cref="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.type" />, <see cref="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.level" />, <see cref="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.element" />, <see cref="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.pathMatch" />  and <see cref="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.pathMatchRule" /></para>
-            <para><see cref="M:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.evaluateSelf(imbSCI.Core.interfaces.IMetaContentNested)" /> returns result of these applying <c>OR</c> - <c>||</c> logic operator, the operator is immutable.</para>
-            <para><see cref="M:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.evaluate(imbSCI.Core.interfaces.IMetaContentNested,System.Boolean)" /> is method used for <see cref="T:imbSCI.Reporting.meta.delivery.metaContentCriteriaTriggerCollection" /> evaluation.</para>
-            <para>Results of multiple <see cref="T:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger" /> instances within the collection are combined with associated <see cref="T:imbSCI.Reporting.meta.delivery.metaContentTriggerOperator" /> logic operators.</para>
+            <para>The <see cref="T:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger"/> has multiple <c>OR</c> inner criteria-tests:</para>
+            <para><see cref="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.type"/>, <see cref="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.level"/>, <see cref="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.element"/>, <see cref="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.pathMatch"/>  and <see cref="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.pathMatchRule"/></para>
+            <para><see cref="M:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.evaluateSelf(imbSCI.Core.interfaces.IMetaContentNested)"/> returns result of these applying <c>OR</c> - <c>||</c> logic operator, the operator is immutable.</para>
+            <para><see cref="M:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.evaluate(imbSCI.Core.interfaces.IMetaContentNested,System.Boolean)"/> is method used for <see cref="T:imbSCI.Reporting.meta.delivery.metaContentCriteriaTriggerCollection"/> evaluation.</para>
+            <para>Results of multiple <see cref="T:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger"/> instances within the collection are combined with associated <see cref="T:imbSCI.Reporting.meta.delivery.metaContentTriggerOperator"/> logic operators.</para>
             </remarks>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.evaluate(imbSCI.Core.interfaces.IMetaContentNested,System.Boolean)">
@@ -2325,53 +2525,59 @@
             <param name="defaultOrLastResult">if set to <c>true</c> [default or last result].</param>
             <returns></returns>
             <remarks>
-            <para>Results of multiple <see cref="T:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger" /> instances within the collection are combined with associated <see cref="T:imbSCI.Reporting.meta.delivery.metaContentTriggerOperator" /> logic operators.</para>
+            <para>Results of multiple <see cref="T:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger"/> instances within the collection are combined with associated <see cref="T:imbSCI.Reporting.meta.delivery.metaContentTriggerOperator"/> logic operators.</para>
             </remarks>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.evaluateSelf(imbSCI.Core.interfaces.IMetaContentNested)">
             <summary>
-            Evaluates it self - returns raw result without applying <see cref="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.triggerOperator" />.
+            Evaluates it self - returns raw result without applying <see cref="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.triggerOperator"/>.
             </summary>
             <param name="testContent">Content of the test.</param>
             <returns>Returns <c>true</c> on first criteria matched, otherwise returns <c>false</c></returns>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.uid">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.triggerOperator">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.pathMatchRule">
             <summary>
-            After <see cref="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.pathMatch" /> retrieves a targeted <see cref="T:imbSCI.Core.interfaces.IMetaContentNested" /> it will be tested if it's inside defined <c>scope</c>
+            After <see cref="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.pathMatch"/> retrieves a targeted <see cref="T:imbSCI.Core.interfaces.IMetaContentNested"/> it will be tested if it's inside defined <c>scope</c>
             </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.pathMatch">
             <summary>
-            RegexExpression to match <see cref="P:imbSCI.Core.interfaces.IMetaContentNested.path" /> against (path with name)
+            RegexExpression to match <see cref="P:imbSCI.Core.interfaces.IMetaContentNested.path"/> against (path with name)
             </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.type">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.level">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger.element">
              <summary>
+            
              </summary>
         </member>
         <member name="T:imbSCI.Reporting.meta.delivery.metaContentCriteriaTriggerCollection">
             <summary>
-            Criteriae to test <see cref="T:imbSCI.Core.interfaces.IMetaContentNested" /> against
+            Criteriae to test <see cref="T:imbSCI.Core.interfaces.IMetaContentNested"/> against
             </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.metaContentCriteriaTriggerCollection.items">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.metaContentCriteriaTriggerCollection.evaluate(imbSCI.Core.interfaces.IMetaContentNested)">
@@ -2382,15 +2588,15 @@
             <param name="defaultOrLastResult">if set to <c>true</c> [default or last result].</param>
             <returns></returns>
             <remarks>
-            <para>Results of multiple <see cref="T:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger" /> instances within the collection are combined with associated <see cref="T:imbSCI.Reporting.meta.delivery.metaContentTriggerOperator" /> logic operators.</para>
+            <para>Results of multiple <see cref="T:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger"/> instances within the collection are combined with associated <see cref="T:imbSCI.Reporting.meta.delivery.metaContentTriggerOperator"/> logic operators.</para>
             </remarks>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.metaContentCriteriaTriggerCollection.AddCriteria(imbSCI.Reporting.meta.delivery.metaContentTriggerOperator,imbSCI.Core.reporting.style.enums.metaModelTargetEnum,System.String,System.Type,imbSCI.Data.enums.reportElementLevel,imbSCI.Core.interfaces.IMetaContentNested)">
             <summary>
-            Adds new <see cref="T:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger" /> match rule and its operator
+            Adds new <see cref="T:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger"/> match rule and its operator
             </summary>
             <param name="opera">The operator: how this criteria combines with others in this collection</param>
-            <param name="pathCriteria">The path with <see cref="!:imbSCI.Data.extensions.data.imbPathExtensions.getChildByPath(IObjectWithChildSelector, string)" /> and to test if it returns the same IElement  </param>
+            <param name="pathCriteria">The path with <see cref="!:imbSCI.Data.extensions.data.imbPathExtensions.getChildByPath(IObjectWithChildSelector, string)"/> and to test if it returns the same IElement  </param>
             <param name="metaElementTypeToMatch">Type that test instance must be compatibile with</param>
             <param name="level">The level of element to test against</param>
             <param name="element">The element instance to test against</param>
@@ -2398,7 +2604,7 @@
         </member>
         <member name="T:imbSCI.Reporting.meta.delivery.metaContentTriggerOperator">
             <summary>
-            Operator - the way <see cref="T:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger" /> is evaluated together with other criterias within <see cref="T:imbSCI.Reporting.meta.delivery.metaContentCriteriaTriggerCollection" />
+            Operator - the way <see cref="T:imbSCI.Reporting.meta.delivery.metaContentCriteriaTrigger"/> is evaluated together with other criterias within <see cref="T:imbSCI.Reporting.meta.delivery.metaContentCriteriaTriggerCollection"/>
             </summary>
         </member>
         <member name="F:imbSCI.Reporting.meta.delivery.metaContentTriggerOperator.ignore">
@@ -2428,15 +2634,17 @@
         </member>
         <member name="T:imbSCI.Reporting.meta.delivery.services.templateBlocksForHtml">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.services.templateBlocksForHtml.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.delivery.services.templateBlocksForHtml" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.delivery.services.templateBlocksForHtml"/> class.
             </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.services.templateBlocksForHtml.outputRender">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.services.templateBlocksForHtml.BuildIncludeTemplate(imbSCI.Reporting.meta.delivery.deliveryInstance,System.Data.PropertyCollection)">
@@ -2455,6 +2663,7 @@
         </member>
         <member name="T:imbSCI.Reporting.meta.delivery.units.deliveryUnitBuilder">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.units.deliveryUnitBuilder.prepareOperationFileSource(imbSCI.Reporting.meta.delivery.items.IDeliveryUnitItemFromFileSource,imbSCI.Core.reporting.render.IRenderExecutionContext)">
@@ -2466,27 +2675,48 @@
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.units.deliveryUnitBuilder.loadFileAndSaveTemplate(imbSCI.Reporting.meta.delivery.items.IDeliveryUnitItemFromFileSource,imbSCI.Core.reporting.render.IRenderExecutionContext)">
             <summary>
-            Loads the template, applies <see cref="!:imbSCI.Reporting.reporting.render.IRenderExecutionContext.data" /> and saves into output path
+            Loads the template, applies <see cref="!:imbSCI.Reporting.reporting.render.IRenderExecutionContext.data"/> and saves into output path
             </summary>
             <param name="item">The item.</param>
             <param name="context">The context.</param>
         </member>
         <member name="M:imbSCI.Reporting.meta.delivery.units.deliveryUnitBuilder.AddStandardHtmlItems(imbSCI.Reporting.meta.delivery.deliveryUnit)">
             <summary>
-            Adds a set of <see cref="T:imbSCI.Reporting.meta.delivery.deliveryUnitItem" />s for the standard HTML report
+            Adds a set of <see cref="T:imbSCI.Reporting.meta.delivery.deliveryUnitItem"/>s for the standard HTML report
             </summary>
             <param name="unit">The unit.</param>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.units.deliveryUnitBuilder.themepath">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.delivery.units.deliveryUnitBuilder.includepath">
              <summary>
+            
              </summary>
+        </member>
+        <member name="T:imbSCI.Reporting.meta.delivery.units.deliveryUnitCompactHelp">
+            <summary>
+            Delivery unit for compact report
+            </summary>
+            <seealso cref="T:imbSCI.Reporting.meta.delivery.deliveryUnit" />
+        </member>
+        <member name="M:imbSCI.Reporting.meta.delivery.units.deliveryUnitCompactHelp.setup">
+            <summary>
+            Setups the specified folder: output folder
+            </summary>
+            <param name="folder">The folder.</param>
+        </member>
+        <member name="T:imbSCI.Reporting.meta.delivery.units.deliveryUnitCompactReport">
+            <summary>
+            Delivery unit for compact report
+            </summary>
+            <seealso cref="T:imbSCI.Reporting.meta.delivery.deliveryUnit" />
         </member>
         <member name="T:imbSCI.Reporting.meta.delivery.units.deliveryUnitMainReport">
              <summary>
+            
              </summary>
              <seealso cref="T:imbSCI.Reporting.meta.delivery.deliveryUnit" />
         </member>
@@ -2580,7 +2810,7 @@
         <member name="T:imbSCI.Reporting.meta.documentSet.metaDocumentSet">
             <summary>
             Root reporting object - supports multiply documents and hierarchy
-            UPDATE: Now not :) <see cref="T:imbSCI.Reporting.meta.documentSet.metaDocumentRootSet" />
+            UPDATE: Now not :) <see cref="T:imbSCI.Reporting.meta.documentSet.metaDocumentRootSet"/>
             </summary>
             <remarks>
             <para>Meta model is universal data and structure model for imbVeles reporting</para>
@@ -2670,20 +2900,20 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.documentSet.metaDocumentSet.Item(System.String)">
             <summary>
-            Gets the <see cref="T:imbSCI.Core.interfaces.IMetaContentNested" /> with the specified key.
+            Gets the <see cref="T:imbSCI.Core.interfaces.IMetaContentNested"/> with the specified key.
             </summary>
             <value>
-            The <see cref="T:imbSCI.Core.interfaces.IMetaContentNested" />.
+            The <see cref="T:imbSCI.Core.interfaces.IMetaContentNested"/>.
             </value>
             <param name="key">The key.</param>
             <returns></returns>
         </member>
         <member name="P:imbSCI.Reporting.meta.documentSet.metaDocumentSet.Item(System.Int32)">
             <summary>
-            Gets the <see cref="T:imbSCI.Core.interfaces.IMetaContentNested" /> with the specified key.
+            Gets the <see cref="T:imbSCI.Core.interfaces.IMetaContentNested"/> with the specified key.
             </summary>
             <value>
-            The <see cref="T:imbSCI.Core.interfaces.IMetaContentNested" />.
+            The <see cref="T:imbSCI.Core.interfaces.IMetaContentNested"/>.
             </value>
             <param name="key">The key.</param>
             <returns></returns>
@@ -2755,16 +2985,18 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.document.documentDatabaseReport.overview">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.document.documentDatabaseReport.#ctor(System.Data.PropertyCollection)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.document.documentDatabaseReport" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.document.documentDatabaseReport"/> class.
             </summary>
             <param name="data">The data.</param>
         </member>
         <member name="P:imbSCI.Reporting.meta.document.documentDatabaseReport.tables">
              <summary>
+            
              </summary>
         </member>
         <member name="T:imbSCI.Reporting.meta.document.metaDocument">
@@ -2785,6 +3017,7 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.document.metaDocument.description">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.document.metaDocument.collect(imbSCI.Core.collection.PropertyCollectionDictionary)">
@@ -2829,20 +3062,20 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.document.metaDocument.Item(System.String)">
             <summary>
-            Gets the <see cref="T:imbSCI.Core.interfaces.IMetaContentNested" /> with the specified key.
+            Gets the <see cref="T:imbSCI.Core.interfaces.IMetaContentNested"/> with the specified key.
             </summary>
             <value>
-            The <see cref="T:imbSCI.Core.interfaces.IMetaContentNested" />.
+            The <see cref="T:imbSCI.Core.interfaces.IMetaContentNested"/>.
             </value>
             <param name="key">The key.</param>
             <returns></returns>
         </member>
         <member name="P:imbSCI.Reporting.meta.document.metaDocument.Item(System.Int32)">
             <summary>
-            Gets the <see cref="T:imbSCI.Core.interfaces.IMetaContentNested" /> with the specified key.
+            Gets the <see cref="T:imbSCI.Core.interfaces.IMetaContentNested"/> with the specified key.
             </summary>
             <value>
-            The <see cref="T:imbSCI.Core.interfaces.IMetaContentNested" />.
+            The <see cref="T:imbSCI.Core.interfaces.IMetaContentNested"/>.
             </value>
             <param name="key">The key.</param>
             <returns></returns>
@@ -2930,10 +3163,10 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.ImetaCollection`1.Item(System.String)">
             <summary>
-            Gets the <see cref="T:imbSCI.Core.interfaces.IMetaContentNested" /> with the specified key.
+            Gets the <see cref="T:imbSCI.Core.interfaces.IMetaContentNested"/> with the specified key.
             </summary>
             <value>
-            The <see cref="T:imbSCI.Core.interfaces.IMetaContentNested" />.
+            The <see cref="T:imbSCI.Core.interfaces.IMetaContentNested"/>.
             </value>
             <param name="key">The key.</param>
             <returns></returns>
@@ -2952,14 +3185,15 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.metaCollection`1.items">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.metaCollection`1.Item(System.String)">
             <summary>
-            Gets the <see cref="T:imbSCI.Core.interfaces.IMetaContentNested" /> with the specified key.
+            Gets the <see cref="T:imbSCI.Core.interfaces.IMetaContentNested"/> with the specified key.
             </summary>
             <value>
-            The <see cref="T:imbSCI.Core.interfaces.IMetaContentNested" />.
+            The <see cref="T:imbSCI.Core.interfaces.IMetaContentNested"/>.
             </value>
             <param name="key">The key.</param>
             <returns></returns>
@@ -3015,6 +3249,7 @@
         </member>
         <member name="T:imbSCI.Reporting.meta.metaTools">
              <summary>
+            
              </summary>
              \ingroup_disabled docElementCore
         </member>
@@ -3031,21 +3266,21 @@
              Same element
              <see cref = "F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.scope" />
              <c>test</c> is direct child of <c>currentScope</c>
-             <see cref="F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.scopeChild" />
+             <see cref="F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.scopeChild"/>
              <c>test</c> is child at any level of <c>currentScope</c>
-             <see cref="F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.scopeEachChild" />
+             <see cref="F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.scopeEachChild"/>
              <c>test</c> is parent at any level of <c>currentScope</c>
-             <see cref="F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.scopeParent" />
+             <see cref="F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.scopeParent"/>
              <c>test</c> is not null
-             <see cref="F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.scopeRelativePath" />
-
-             For any other <see cref="T:imbSCI.Core.reporting.style.enums.metaModelTargetEnum" /> value it will return <c>false</c>, except for <see cref="F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.none" /> returns <c>true</c>
+             <see cref="F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.scopeRelativePath"/>
+            
+             For any other <see cref="T:imbSCI.Core.reporting.style.enums.metaModelTargetEnum"/> value it will return <c>false</c>, except for <see cref="F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.none"/> returns <c>true</c>
              </remarks>
-             <seealso cref="F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.scope" />
-             <seealso cref="F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.scopeChild" />
-             <seealso cref="F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.scopeEachChild" />
-             <seealso cref="F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.scopeParent" />
-             <seealso cref="F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.scopeRelativePath" />
+             <seealso cref="F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.scope"/>
+             <seealso cref="F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.scopeChild"/>
+             <seealso cref="F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.scopeEachChild"/>
+             <seealso cref="F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.scopeParent"/>
+             <seealso cref="F:imbSCI.Core.reporting.style.enums.metaModelTargetEnum.scopeRelativePath"/>
         </member>
         <member name="M:imbSCI.Reporting.meta.metaTools.RenderSetAsDropDowns(imbSCI.Reporting.links.reportLinkCollectionSet,imbSCI.Core.reporting.render.converters.converterBase)">
             <summary>
@@ -3280,24 +3515,29 @@
         </member>
         <member name="T:imbSCI.Reporting.meta.page.metaCustomizedExternalContentPage">
              <summary>
+            
              </summary>
              <seealso cref="T:imbSCI.Reporting.meta.page.metaCustomizedSimplePage" />
              <seealso cref="T:imbSCI.Reporting.interfaces.IMetaComposeAndConstruct" />
         </member>
         <member name="P:imbSCI.Reporting.meta.page.metaCustomizedExternalContentPage.introContentPath">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.page.metaCustomizedExternalContentPage.outroContentPath">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.page.metaCustomizedIntroPage.introContentPath">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.page.metaCustomizedIntroPage.outroContentPath">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.page.metaCustomizedIntroPage.compose(imbSCI.Reporting.script.docScript)">
@@ -3396,7 +3636,7 @@
         </member>
         <member name="M:imbSCI.Reporting.meta.page.metaDataTablePage.setup(System.Data.DataTable)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.page.metaDataTablePage" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.page.metaDataTablePage"/> class.
             </summary>
             <param name="__data">The data.</param>
             <param name="displayTitle">The display title.</param>
@@ -3421,10 +3661,12 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.page.metaLogBuilderOutputPage.logBuilder">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.page.metaLogBuilderOutputPage.instanceID">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.page.metaLogBuilderOutputPage.compose(imbSCI.Reporting.script.docScript)">
@@ -3484,20 +3726,20 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.page.metaPage.Item(System.String)">
             <summary>
-            Gets the <see cref="T:System.Object" /> with the specified name.
+            Gets the <see cref="T:System.Object"/> with the specified name.
             </summary>
             <value>
-            The <see cref="T:System.Object" />.
+            The <see cref="T:System.Object"/>.
             </value>
             <param name="name">The name.</param>
             <returns></returns>
         </member>
         <member name="P:imbSCI.Reporting.meta.page.metaPage.Item(System.Int32)">
             <summary>
-            Gets the <see cref="T:imbSCI.Core.interfaces.IMetaContentNested" /> with the specified key.
+            Gets the <see cref="T:imbSCI.Core.interfaces.IMetaContentNested"/> with the specified key.
             </summary>
             <value>
-            The <see cref="T:imbSCI.Core.interfaces.IMetaContentNested" />.
+            The <see cref="T:imbSCI.Core.interfaces.IMetaContentNested"/>.
             </value>
             <param name="key">The key.</param>
             <returns></returns>
@@ -3574,7 +3816,7 @@
         </member>
         <member name="M:imbSCI.Reporting.meta.page.metaServicePage.#ctor(System.String,System.String,System.String,System.Int32)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.page.metaServicePage" />
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.page.metaServicePage"/>
             </summary>
             <param name="__description">Mapped to both: description of this page and as extra content of <c>header</c></param>
             <param name="__title">Display title that is mapped to <c>header.name</c></param>
@@ -3583,7 +3825,7 @@
         </member>
         <member name="M:imbSCI.Reporting.meta.page.metaServicePage.#ctor(System.String,System.String,System.String,imbSCI.Reporting.meta.page.metaServicePagePosition)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.page.metaServicePage" />
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.page.metaServicePage"/>
             </summary>
             <param name="__description">Mapped to both: description of this page and as extra content of <c>header</c></param>
             <param name="__title">Display title that is mapped to <c>header.name</c></param>
@@ -3592,6 +3834,7 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.page.metaServicePage.position">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.meta.page.metaServicePage.filenameBase">
@@ -3609,6 +3852,7 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.page.serviceDocScriptLog.log">
              <summary>
+            
              </summary>
         </member>
         <member name="T:imbSCI.Reporting.meta.presets.links.footnote">
@@ -3725,11 +3969,12 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.presets.servicepages.pagePresetDataTableReportOverview.dataset">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.presets.servicepages.pagePresetDataTableReportOverview.#ctor(System.String,System.String,System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.presets.servicepages.pagePresetDataTableReportOverview" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.presets.servicepages.pagePresetDataTableReportOverview"/> class.
             </summary>
         </member>
         <member name="T:imbSCI.Reporting.meta.presets.servicepages.pagePresetGeneralReadme">
@@ -3740,7 +3985,7 @@
         </member>
         <member name="M:imbSCI.Reporting.meta.presets.servicepages.pagePresetGeneralReadme.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.presets.servicepages.pagePresetGeneralReadme" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.meta.presets.servicepages.pagePresetGeneralReadme"/> class.
             </summary>
         </member>
         <member name="T:imbSCI.Reporting.meta.presets.servicepages.pagePresetTableReport">
@@ -3874,6 +4119,7 @@
         </member>
         <member name="T:imbSCI.Reporting.meta.render.metaStyleComposer`1">
              <summary>
+            
              </summary>
              <typeparam name="T"></typeparam>
              <seealso cref="!:imbSCI.Cores.primitives.imbBindable" />
@@ -3886,6 +4132,7 @@
         </member>
         <member name="M:imbSCI.Reporting.meta.render.metaStyleComposer`1.getBuilder">
              <summary>
+            
              </summary>
              <returns></returns>
         </member>
@@ -3944,6 +4191,7 @@
         </member>
         <member name="P:imbSCI.Reporting.meta.theme.metaDocumentTheme.name">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.meta.theme.metaDocumentTheme.loadTemplates">
@@ -4059,6 +4307,38 @@
             <summary>
             Generate menu with development documentation links
             </summary>
+        </member>
+        <member name="P:imbSCI.Reporting.model.reportModelContentBase.path">
+            <summary>
+            Gets or sets the assigned identifier.
+            </summary>
+            <value>
+            The assigned identifier.
+            </value>
+        </member>
+        <member name="P:imbSCI.Reporting.model.reportModelContentBase.name">
+            <summary>
+            Title for humans
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="T:imbSCI.Reporting.model.reportModelFileAttachment">
+            <summary>
+            Set of files to attach
+            </summary>
+            <seealso cref="!:imbSCI.Reporting.model.reportModelDataContentBase&lt;imbSCI.Reporting.includes.reportIncludeFileCollection&gt;" />
+        </member>
+        <member name="T:imbSCI.Reporting.NamespaceGroupDoc">
+            <summary>
+            <para>
+            Static web site creation, templating, scriptable reporting and other support classes for reporting.
+            imbSCI libraries will help you with in-code data annotation for easier reporting, some interesting data structures(like directed and free graphs, multidimensional collections…), serialization and data manipulation, script driven reporting, single-model for multiple-outputs, static web site generation, generation of D3(JavaScript) charts and graphs, text templates.Data formats covered: text, markdown, html, html-bootstrap, open document text, Excel spreadsheet, CSV, XML, JSON, R Tidy Dataset and more.
+            </para>
+            </summary>
+            <remarks>
+            </remarks>
         </member>
         <member name="T:imbSCI.Reporting.resources.reportingCoreManager">
             <summary>
@@ -4353,10 +4633,11 @@
             Renders DataTable
             </summary>
             <param name="table">The table.</param>
-            <param name="doThrowException">if set to <c>true</c> it will throw an exception on <see cref="!:validateTable()" /> return false.</param>
+            <param name="doThrowException">if set to <c>true</c> it will throw an exception on <see cref="!:validateTable()"/> return false.</param>
         </member>
         <member name="P:imbSCI.Reporting.script.docScript.flags">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.script.docScript.ToFile(imbSCI.Reporting.script.docScriptInstructionTextFormatEnum,System.String,imbSCI.Data.enums.externalTool)">
@@ -4378,13 +4659,13 @@
         </member>
         <member name="M:imbSCI.Reporting.script.docScript.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.script.docScript" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.script.docScript"/> class.
             </summary>
             <param name="__name">The name.</param>
         </member>
         <member name="M:imbSCI.Reporting.script.docScript.#ctor(imbSCI.Core.reporting.render.IRenderExecutionContext)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.script.docScript" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.script.docScript"/> class.
             </summary>
             <param name="__context">The context.</param>
         </member>
@@ -4442,7 +4723,7 @@
         </member>
         <member name="M:imbSCI.Reporting.script.docScript.s_style">
             <summary>
-            Turns off active styling - current was set with <see cref="F:imbSCI.Core.reporting.style.enums.styleApplicationFlag.setAsActive" /> call
+            Turns off active styling - current was set with <see cref="F:imbSCI.Core.reporting.style.enums.styleApplicationFlag.setAsActive"/> call
             </summary>
             <returns></returns>
         </member>
@@ -4505,7 +4786,7 @@
             <summary>
             Load content into page/document. Inner append is performed for each line
             </summary>
-            <param name="innerAppend">Way loaded content should be appended: <see cref="!:imbSCI.Cores.enums.appendType.i_document" />, <see cref="!:imbSCI.Cores.enums.appendType.i_page" />, and any other append for each line>:<see cref="!:imbSCI.Cores.enums.appendType" /></param>
+            <param name="innerAppend">Way loaded content should be appended: <see cref="!:imbSCI.Cores.enums.appendType.i_document"/>, <see cref="!:imbSCI.Cores.enums.appendType.i_page"/>, and any other append for each line>:<see cref="!:imbSCI.Cores.enums.appendType"/></param>
             <param name="path">The path.</param>
             <param name="format">The format.</param>
             <returns></returns>
@@ -4536,6 +4817,7 @@
         </member>
         <member name="P:imbSCI.Reporting.script.docScript.context">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.script.docScriptAppendExtensions.titleToFilename(System.String)">
@@ -4564,6 +4846,7 @@
         </member>
         <member name="P:imbSCI.Reporting.script.docScriptAppendExtensions.defaultRowLimit">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.script.docScriptAppendExtensions.AppendMacroDataTableBlock(imbSCI.Reporting.interfaces.ITextAppendContentExtended,System.Data.DataTable,System.String,System.Int32,imbSCI.Reporting.script.macroOptions)">
@@ -4853,7 +5136,7 @@
         </member>
         <member name="M:imbSCI.Reporting.script.docScriptCompiled.#ctor(imbSCI.Reporting.script.docScript)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.script.docScriptCompiled" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.script.docScriptCompiled"/> class.
             </summary>
             <param name="script">The script.</param>
         </member>
@@ -4889,7 +5172,8 @@
              Execution context with all resorces required internally.
              </summary>
              <remarks>
-             <para>It will not start compilation instantly. Once you're ready <see cref="!:docScriptExecution.execute(string, imbSCI.Core.reporting.format.reportOutputFormatName, PropertyCollection, string)" />  method should be called.</para>
+             <para>It will not start compilation instantly. Once you're ready <see cref="!:docScriptExecution.execute(string, imbSCI.Core.reporting.format.reportOutputFormatName, PropertyCollection, string)"/>  method should be called.</para>
+            
              </remarks>
              <param name="__render">The render - particular output engine</param>
              <param name="__style">The style - colors and fonts</param>
@@ -4898,7 +5182,7 @@
         </member>
         <member name="M:imbSCI.Reporting.script.docScriptExecution.#ctor(System.String,imbSCI.Core.reporting.style.core.styleTheme,System.Data.PropertyCollection,System.Collections.Generic.IEnumerable{imbSCI.Core.reporting.render.ITextRender})">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.script.docScriptExecution" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.script.docScriptExecution"/> class.
             </summary>
             <param name="name">The name.</param>
             <param name="__style">The style.</param>
@@ -4929,25 +5213,25 @@
         </member>
         <member name="M:imbSCI.Reporting.script.docScriptExecution.resolveAreaForStyleShot(System.Object)">
             <summary>
-            Resolves target into <see cref="T:imbSCI.Core.reporting.zone.selectRangeArea" /> where <c>target</c> can be: <see cref="T:imbSCI.Reporting.script.styleShotTargetEnum" />, <see cref="T:imbSCI.Core.reporting.zone.selectRangeArea" /> or string path for <see cref="!:imbSCI.Data.collection.PropertyCollectionDictionary" />
+            Resolves target into <see cref="T:imbSCI.Core.reporting.zone.selectRangeArea"/> where <c>target</c> can be: <see cref="T:imbSCI.Reporting.script.styleShotTargetEnum"/>, <see cref="T:imbSCI.Core.reporting.zone.selectRangeArea"/> or string path for <see cref="!:imbSCI.Data.collection.PropertyCollectionDictionary"/>
             </summary>
             <param name="target">The target.</param>
             <returns>Area to apply style to</returns>
-            <seealso cref="T:imbSCI.Core.reporting.zone.selectRangeAreaDictionary" />
-            <seealso cref="T:imbSCI.Core.reporting.zone.selectRangeArea" />
-            <seealso cref="T:imbSCI.Core.reporting.style.shot.IStyleInstruction" />
-            <seealso cref="T:imbSCI.Core.reporting.style.areaStyleInstruction" />
+            <seealso cref="T:imbSCI.Core.reporting.zone.selectRangeAreaDictionary"/>
+            <seealso cref="T:imbSCI.Core.reporting.zone.selectRangeArea"/>
+            <seealso cref="T:imbSCI.Core.reporting.style.shot.IStyleInstruction"/>
+            <seealso cref="T:imbSCI.Core.reporting.style.areaStyleInstruction"/>
         </member>
         <member name="M:imbSCI.Reporting.script.docScriptExecution.resolveAreaForStyleShot(imbSCI.Reporting.script.styleShotTargetEnum)">
             <summary>
-            Resolve <see cref="T:imbSCI.Reporting.script.styleShotTargetEnum" /> into <see cref="T:imbSCI.Core.reporting.zone.selectRangeArea" />
+            Resolve <see cref="T:imbSCI.Reporting.script.styleShotTargetEnum"/> into <see cref="T:imbSCI.Core.reporting.zone.selectRangeArea"/>
             </summary>
             <param name="target">The target - </param>
             <returns>Area to apply style with</returns>
         </member>
         <member name="M:imbSCI.Reporting.script.docScriptExecution.resolvePathForStyleShotArea(imbSCI.Reporting.script.styleShotTargetEnum)">
             <summary>
-            Resolve <see cref="T:imbSCI.Reporting.script.styleShotTargetEnum" /> into string path for <c>metaContentRanges</c>
+            Resolve <see cref="T:imbSCI.Reporting.script.styleShotTargetEnum"/> into string path for <c>metaContentRanges</c>
             </summary>
             <param name="target">The target.</param>
             <returns>
@@ -4976,6 +5260,7 @@
         </member>
         <member name="T:imbSCI.Reporting.script.docScriptExecutionBase">
              <summary>
+            
              </summary>
              <seealso cref="!:imbACE.Core.core.builderForLog" />
              <seealso cref="T:imbSCI.Core.reporting.render.IRenderExecutionContext" />
@@ -5004,10 +5289,13 @@
         </member>
         <member name="P:imbSCI.Reporting.script.docScriptExecutionBase.linkRegistry">
              <summary>
+            
              </summary>
+            
         </member>
         <member name="P:imbSCI.Reporting.script.docScriptExecutionBase.specialLogOuts">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.script.docScriptExecutionBase.settings">
@@ -5034,6 +5322,7 @@
         </member>
         <member name="P:imbSCI.Reporting.script.docScriptExecutionBase.builder">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.script.docScriptExecutionBase.styleStack">
@@ -5095,6 +5384,7 @@
         </member>
         <member name="P:imbSCI.Reporting.script.docScriptExecutionBase.dataDictionary">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.script.docScriptExecutionBase.data">
@@ -5110,7 +5400,7 @@
         </member>
         <member name="M:imbSCI.Reporting.script.docScriptExecutionBase.#ctor(System.String,System.Boolean)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.script.docScriptExecutionBase" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.script.docScriptExecutionBase"/> class.
             </summary>
             <param name="__filename">The log output filename with extension .md. It will automatically set .md extension</param>
             <param name="autoSave">if set to <c>true</c> if will do automatic save on each log call.</param>
@@ -5165,6 +5455,7 @@
         </member>
         <member name="P:imbSCI.Reporting.script.docScriptExecutionBase.name">
              <summary>
+            
              </summary>
         </member>
         <member name="M:imbSCI.Reporting.script.docScriptExecutionBase.error(System.String,imbSCI.Data.enums.appends.appendType,System.Exception)">
@@ -5198,17 +5489,17 @@
         </member>
         <member name="F:imbSCI.Reporting.script.docScriptFlags.allowFailedInstructions">
             <summary>
-            It will allow exection of <see cref="T:imbSCI.Reporting.script.docScriptInstructionCompiled" /> even in case of compilation failure
+            It will allow exection of <see cref="T:imbSCI.Reporting.script.docScriptInstructionCompiled"/> even in case of compilation failure
             </summary>
         </member>
         <member name="F:imbSCI.Reporting.script.docScriptFlags.disableGlobalCollection">
             <summary>
-            The disable global collection call on <see cref="!:deliveryInstance.executePrepare(meta.documentSet.metaDocumentSet, string, PropertyCollection)" />
+            The disable global collection call on <see cref="!:deliveryInstance.executePrepare(meta.documentSet.metaDocumentSet, string, PropertyCollection)"/>
             </summary>
         </member>
         <member name="F:imbSCI.Reporting.script.docScriptFlags.enableLocalCollection">
             <summary>
-            It will allow AppendDataFields call on newScope when <see cref="!:deliveryInstance.x_scopeAutoCreate(IObjectWithPathAndChildSelector)" /> performed
+            It will allow AppendDataFields call on newScope when <see cref="!:deliveryInstance.x_scopeAutoCreate(IObjectWithPathAndChildSelector)"/> performed
             </summary>
         </member>
         <member name="T:imbSCI.Reporting.script.docScriptInstruction">
@@ -5242,7 +5533,7 @@
         </member>
         <member name="M:imbSCI.Reporting.script.docScriptInstruction.#ctor(imbSCI.Data.enums.appends.appendType,System.String,System.Boolean)">
             <summary>
-            The most common Append instruction: <see cref="T:imbSCI.Reporting.script.docScriptInstruction" /> class.
+            The most common Append instruction: <see cref="T:imbSCI.Reporting.script.docScriptInstruction"/> class.
             </summary>
             <remarks>
             Applicable with appendType: cite, code,
@@ -5496,7 +5787,7 @@
         </member>
         <member name="F:imbSCI.Reporting.script.docScriptInstructionTextFormatEnum.cs_compose">
             <summary>
-            C# source code for direct execution of report generation <see cref="M:imbSCI.Reporting.script.docScript.ToString(imbSCI.Reporting.script.docScriptInstructionTextFormatEnum)" />
+            C# source code for direct execution of report generation <see cref="M:imbSCI.Reporting.script.docScript.ToString(imbSCI.Reporting.script.docScriptInstructionTextFormatEnum)"/>
             </summary>
         </member>
         <member name="F:imbSCI.Reporting.script.docScriptInstructionTextFormatEnum.meta">
@@ -5515,7 +5806,7 @@
         </member>
         <member name="T:imbSCI.Reporting.script.exeAppenders.exeAppendBase">
             <summary>
-            exeAppend is custom-code module injectable in <see cref="T:imbSCI.Reporting.script.docScript" /> execution pipeline.
+            exeAppend is custom-code module injectable in <see cref="T:imbSCI.Reporting.script.docScript"/> execution pipeline.
             </summary>
             <seealso cref="T:imbSCI.Reporting.script.exeAppenders.IExeAppend" />
         </member>
@@ -5539,6 +5830,7 @@
         </member>
         <member name="P:imbSCI.Reporting.script.exeAppenders.exeAppendBase.staticData">
              <summary>
+            
              </summary>
         </member>
         <member name="P:imbSCI.Reporting.script.exeAppenders.exeAppendBase.dataSet">
@@ -5566,7 +5858,7 @@
         </member>
         <member name="M:imbSCI.Reporting.script.exeAppenders.exeAppendBase.execute(imbSCI.Core.reporting.render.IRenderExecutionContext,imbSCI.Core.reporting.render.ITextRender)">
             <summary>
-            Executes the <see cref="T:imbSCI.Reporting.script.exeAppenders.exeAppendBase" /> instance
+            Executes the <see cref="T:imbSCI.Reporting.script.exeAppenders.exeAppendBase"/> instance
             </summary>
             <param name="context">The context.</param>
             <param name="render">The render.</param>
@@ -5610,7 +5902,7 @@
         </member>
         <member name="M:imbSCI.Reporting.script.exeAppenders.exeAppendTemplateBundleItem.#ctor(imbSCI.Reporting.script.exeAppenders.exeAppendTemplateOptions,System.String,imbSCI.Core.collection.PropertyCollectionExtended)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.script.exeAppenders.exeAppendTemplateBundleItem" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.script.exeAppenders.exeAppendTemplateBundleItem"/> class.
             </summary>
             <param name="__options">The options.</param>
             <param name="__filePath">The source file/directory path</param>
@@ -5685,7 +5977,7 @@
         </member>
         <member name="M:imbSCI.Reporting.script.exeAppenders.exeAppendTemplatedBundle.#ctor(System.String,imbSCI.Core.collection.PropertyCollectionExtended)">
             <summary>
-            Initializes a new instance of the <see cref="T:imbSCI.Reporting.script.exeAppenders.exeAppendTemplatedBundle" /> class.
+            Initializes a new instance of the <see cref="T:imbSCI.Reporting.script.exeAppenders.exeAppendTemplatedBundle"/> class.
             </summary>
             <param name="targetpath">The targetpath.</param>
             <param name="pce">The pce.</param>
@@ -5749,10 +6041,81 @@
             Use default if exists
             </summary>
         </member>
-        <member name="T:imbReportingCore.meta.style.IMetaContentStyle">
+        <member name="P:imbSCI.Reporting.wordpress.blocks.prototype.MultiItemContentBlockBase.itemTemplate">
             <summary>
-            Interface to access metaContentStyle
+            Template for a item
             </summary>
+            <value>
+            The item template.
+            </value>
+        </member>
+        <member name="M:imbSCI.Reporting.wordpress.blocks.prototype.ReportContentBlockBase.Deploy">
+            <summary>
+            Initializes template strings and other settings
+            </summary>
+        </member>
+        <member name="M:imbSCI.Reporting.wordpress.blocks.prototype.ReportContentBlockBase.IsTemplateSet(System.String,System.Int32)">
+            <summary>
+            Determines whether given template string is ready for consumption
+            </summary>
+            <param name="template">The template.</param>
+            <param name="numberOfPlaceholders">Required number of <see cref="M:System.String.Format(System.String,System.Object)"/> placeholders. Leave it zero to skip the placeholder check</param>
+            <returns>
+              <c>true</c> if [is template set] [the specified template]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:imbSCI.Reporting.wordpress.environment.permalinkStructure">
+            <summary>
+            Permalink generator - used to predict link of a document in the final deployement
+            </summary>
+        </member>
+        <member name="M:imbSCI.Reporting.wordpress.environment.permalinkStructure.GetPermalink(imbSCI.Reporting.wordpress.reportDocument,System.DateTime,System.Collections.Generic.Dictionary{imbSCI.Reporting.wordpress.environment.permalinkStructure.permalinkElements,System.String})">
+            <summary>
+            Gets the permalink.
+            </summary>
+            <param name="document">The document.</param>
+            <param name="date">The date.</param>
+            <param name="extraData">The extra data.</param>
+            <returns></returns>
+        </member>
+        <member name="P:imbSCI.Reporting.wordpress.reportDocument.deployement_id">
+            <summary>
+            Universal identifier assigned during report deployement/publication
+            </summary>
+            <value>
+            The deployement identifier.
+            </value>
+        </member>
+        <member name="P:imbSCI.Reporting.wordpress.reportDocument.LinkLabel">
+            <summary>
+            Overrides <c>Title</c> when used for inbound link rendering 
+            </summary>
+            <value>
+            The link label.
+            </value>
+        </member>
+        <member name="P:imbSCI.Reporting.wordpress.reportDocument.name">
+            <summary>
+            Alias of <see cref="P:imbSCI.Reporting.wordpress.reportDocument.Title"/>
+            </summary>
+        </member>
+        <member name="M:imbSCI.Reporting.wordpress.reportDocumentTools.GetCategories(imbSCI.Reporting.wordpress.reportDocument,System.Boolean,System.Boolean)">
+            <summary>
+            Gets the categories> from leaf to root
+            </summary>
+            <param name="document">The document.</param>
+            <param name="skipSelf">if set to <c>true</c> [skip self].</param>
+            <param name="allowRootDocument">if set to <c>true</c> [allow root document].</param>
+            <returns></returns>
+        </member>
+        <member name="M:imbSCI.Reporting.wordpress.reportDocumentTools.GetCategory(imbSCI.Reporting.wordpress.reportDocument,System.Boolean,System.Boolean)">
+            <summary>
+            Gets the category.
+            </summary>
+            <param name="document">The document.</param>
+            <param name="skipSelf">in case <c>document</c> is a category, if set to <c>true</c> it will not include it into consideration</param>
+            <param name="allowRootDocument">if set to <c>true</c> [allow root document].</param>
+            <returns></returns>
         </member>
     </members>
 </doc>

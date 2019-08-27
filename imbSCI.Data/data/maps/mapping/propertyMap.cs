@@ -34,15 +34,41 @@ namespace imbSCI.Data.data.maps.mapping
     using imbSCI.Data.collection;
     using imbSCI.Data.interfaces;
     using System;
+    using System.Collections.Generic;
 
     #endregion imbVeles using
 
     /// <summary>
     /// 2014c> podesavanje mapiranja sa jedne klase na drugu
     /// </summary>
-    public class propertyMap : aceCollection<propertyMapEntry>, IObjectWithName
+    public class propertyMap : List<propertyMapEntry>, IObjectWithName
     {
-        #region --- name ------- Naziv mapiranja - koristi se kod kesiranja klasa-to-klasa mapiranja
+        public static String GetPropertyMapName(Type sourceType, Type targetType)
+        {
+            String typeNameA = sourceType.Name;
+            String typeNameB = targetType.Name;
+
+            if (typeNameA.CompareTo(typeNameB) < 0)
+            {
+                var tb = typeNameB;
+                typeNameB = typeNameA;
+                typeNameA = tb;
+            }
+
+            return typeNameA + "-" + typeNameB;
+        }
+
+        public propertyMap(Type sourceType, Type targetType)
+        {
+            name = GetPropertyMapName(sourceType, targetType);
+        }
+
+        public propertyMap(Type targetAndSourceType)
+        {
+            name = targetAndSourceType.Name;
+        }
+
+        
 
         private String _name;
 
@@ -55,10 +81,10 @@ namespace imbSCI.Data.data.maps.mapping
             set
             {
                 _name = value;
-                OnPropertyChanged("name");
+                
             }
         }
 
-        #endregion --- name ------- Naziv mapiranja - koristi se kod kesiranja klasa-to-klasa mapiranja
+      
     }
 }

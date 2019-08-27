@@ -171,6 +171,7 @@ namespace imbSCI.Core.reporting
             return true;
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'log(string)' that could not be resolved
         /// <summary>
         /// Allows access to the console output bugger to the <c>logger</c> and sets its color and prefix. If you call this method on logger that was already set to output, it will result in changed color
         /// </summary>
@@ -178,6 +179,7 @@ namespace imbSCI.Core.reporting
         /// <param name="prefix">The prefix that will appear in front of each <see cref="IAceLogable.log(string)"/> call. It will update it if already registered prefix exist</param>
         /// <param name="preferedColor">If not <see cref="ConsoleColor.Black"/> - it will assign specified color to the logger. Otherwise, if <see cref="ConsoleColor.Black"/> is specified, it will assign automatically a color from the <see cref="colorSelector"/></param>
         public virtual void setAsOutput(IConsoleControl logger, String prefix = "", ConsoleColor preferedColor = ConsoleColor.Black)
+#pragma warning restore CS1574 // XML comment has cref attribute 'log(string)' that could not be resolved
         {
             lock (setAsOutputLock)
             {

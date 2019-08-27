@@ -33,7 +33,9 @@ using imbSCI.Core.files.folders;
 using imbSCI.Core.math;
 using imbSCI.Core.reporting;
 using imbSCI.Data.interfaces;
+using imbSCI.Graph.DGML;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -44,7 +46,7 @@ namespace imbSCI.Graph.FreeGraph
     /// Undirected graph structure, defined by <see cref="freeGraphNodeBase"/> and <see cref=freeGraphLinkBase"/>
     /// </summary>
     [Serializable]
-    public class freeGraph : IObjectWithName
+    public class freeGraph : IObjectWithName, IFreeGraph
     {
         /// <summary>
         /// Ime koje je dodeljeno objektu
@@ -323,6 +325,11 @@ namespace imbSCI.Graph.FreeGraph
             }
 
             return output;
+        }
+
+        public IEnumerator<freeGraphLinkBase> EnumerateLinks()
+        {
+            return linkRegistry.EnumerateLinks();
         }
 
         public freeGraph()
@@ -703,6 +710,19 @@ namespace imbSCI.Graph.FreeGraph
         /// <returns></returns>
         protected List<freeGraphNodeBase> GetLinksBase(String nodeName, Boolean BtoA = false, Int32 distanceCorrection = 0, Boolean cloneAndAdjustWeight = true) => linkRegistry.GetLinkedNodesBase(nodeName, BtoA, distanceCorrection, cloneAndAdjustWeight);
 
+
+        /// <summary>
+        /// Gets the links for node.
+        /// </summary>
+        /// <param name="nodeName">Name of the node.</param>
+        /// <param name="AtoB">Forward links</param>
+        /// <param name="BtoA">Backward links</param>
+        /// <returns></returns>
+        public List<freeGraphLinkBase> GetLinksForNode(String nodeName, Boolean AtoB=true, Boolean BtoA=false)
+        {
+             return linkRegistry.GetLinks(nodeName, AtoB, BtoA);
+        }
+
         /// <summary>
         /// Gets the nodes.
         /// </summary>
@@ -934,6 +954,17 @@ namespace imbSCI.Graph.FreeGraph
             return output;
         }
 
+        public List<freeGraphLinkBase> GetAllLinks()
+        {
+            return linkRegistry.GetAllLinks();
+        }
+
+        public List<freeGraphNodeBase> GetAllNodes()
+        {
+            return nodeDictionary.Values.ToList();
+
+        }
+
         /// <summary>
         /// List of nodes, used only for serialization and deserialization
         /// </summary>
@@ -949,5 +980,25 @@ namespace imbSCI.Graph.FreeGraph
         /// The links.
         /// </value>
         public List<freeGraphLinkBase> links { get; set; } = new List<freeGraphLinkBase>();
+
+        IEnumerable<IFreeGraphNode> IFreeGraph.Nodes {
+            get
+            {
+                if (!nodes.Any()) nodes = GetAllNodes();
+                return nodes;
+            }
+}
+
+        IEnumerable<IFreeGraphLink> IFreeGraph.Links {
+            get
+            {
+                if (links.Any()) links = GetAllLinks();
+                return links;
+            }
+             }
+
+        string IObjectWithName.name { get { return name; } set { } }  
+
+        string IObjectWithUID.UID => Id;
     }
 }

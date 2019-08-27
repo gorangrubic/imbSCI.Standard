@@ -225,6 +225,7 @@ namespace imbSCI.Data.enums.appends
         /// </summary>
         s_style,
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'templateFieldBasic' that could not be resolved
         /// <summary>
         /// The i meta: new meta entry
         /// </summary>
@@ -232,6 +233,7 @@ namespace imbSCI.Data.enums.appends
         ///     Used with <see cref="templateFieldBasic"/> <c>meta_</c> values to direct
         /// </remarks>
         i_meta,
+#pragma warning restore CS1574 // XML comment has cref attribute 'templateFieldBasic' that could not be resolved
 
         /// <summary>
         /// The i chart: new chart

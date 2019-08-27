@@ -39,6 +39,7 @@ using System;
 
 namespace imbSCI.Core.files
 {
+    using imbSCI.Data;
     using System.IO;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
@@ -59,6 +60,22 @@ namespace imbSCI.Core.files
     /// </summary>
     public static class objectSerialization
     {
+
+
+        public static string Base64Encode(string plainText)
+        {
+            if (plainText.isNullOrEmpty()) return "";
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
+
+        public static string Base64Decode(string base64EncodedData)
+        {
+            if (base64EncodedData.isNullOrEmpty()) return "";
+            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+        }
+
         public static string SerializeJson<T>(T aObject) where T : new()
         {
             T serializedObj = new T();
@@ -89,7 +106,7 @@ namespace imbSCI.Core.files
         /// <param name="input">The input.</param>
         /// <param name="logger">The logger.</param>
         /// <returns></returns>
-        public static T CloneViaXML<T>(this T input, ILogBuilder logger = null) where T : new()
+        public static T CloneViaXML<T>(this T input, ILogBuilder logger = null) where T : class, new()
         {
             String xml = ObjectToXML(input);
 
@@ -103,16 +120,8 @@ namespace imbSCI.Core.files
         /// <param name="input">The input.</param>
         /// <param name="logger">The logger.</param>
         /// <returns></returns>
-        public static T CloneViaBinary<T>(this T input, ILogBuilder logger = null) where T : new()
+        public static T CloneViaBinary<T>(this T input, ILogBuilder logger = null) where T : class, new()
         {
-          //  MemoryStream stream = new MemoryStream();
-
-            // Persist to file
-
-           // var formatter = new BinaryFormatter();
-
-//            formatter.Serialize(stream, input);
-
             // Don't serialize a null object, simply return the default for that object
             if (Object.ReferenceEquals(input, null))
             {
@@ -128,13 +137,67 @@ namespace imbSCI.Core.files
                 return (T)formatter.Deserialize(stream);
             }
 
-            // Restore from file
 
-
-     
             stream.Close();
 
             return default(T);
+        }
+
+
+        public static T DeserializeBinaryFromFile<T>(String filepath) where T:class
+        {
+            var bytes = File.ReadAllBytes(filepath);
+            return DeserializeBinary(bytes) as T;
+        }
+
+        public static Object DeserializeBinaryFromFile(String filepath)
+        {
+            var bytes = File.ReadAllBytes(filepath);
+            return DeserializeBinary(bytes);
+        }
+
+        public static Object DeserializeBinary(Byte[] bytes)
+        {
+
+            if (bytes == null)
+            {
+                return null;
+            }
+            else
+            {
+                if (bytes.Length == 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    MemoryStream ms = new MemoryStream(bytes);
+                    return formatter.Deserialize(ms);
+                }
+            }
+        }
+
+        public static void SerializeBinaryToFile(this Object input, String filepath)
+        {
+            var bytes = SerializeBinary(input);
+            File.WriteAllBytes(filepath, bytes);
+        }
+
+        public static Byte[] SerializeBinary(this Object input)
+        {
+            if (input == null)
+            {
+                return new byte[0];
+            }
+            else
+            {
+                MemoryStream streamMemory = new MemoryStream();
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(streamMemory, input);
+                return streamMemory.GetBuffer();
+            }
+
         }
 
 
@@ -145,7 +208,7 @@ namespace imbSCI.Core.files
         /// <typeparam name="T"></typeparam>
         /// <param name="settings"></param>
         /// <returns></returns>
-        public static String ObjectToXML<T>(T settings)
+        public static String ObjectToXML<T>(T settings) where T : class
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
             TextWriter writer = new StringWriter();
@@ -189,7 +252,7 @@ namespace imbSCI.Core.files
         /// <param name="targetType">The t.</param>
         /// <returns>Deserialized instance, casted to specified generic type</returns>
         /// <exception cref="ArgumentException">Generic type T is a interface and target type was not specified - please specify argument for target type - targetType</exception>
-        public static T ObjectFromXML<T>(String xml, Type targetType = null)
+        public static T ObjectFromXML<T>(String xml, Type targetType = null) where T : class
         {
             XmlSerializer deserializer = null;
             if (targetType == null)
@@ -210,22 +273,22 @@ namespace imbSCI.Core.files
         }
 
 
-        /*
+
         /// <summary>
-        /// Unserialize object from XML
+        /// Unserializes object from XML
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public static Object ObjectFromXML(String xml, Type t)
+        public static Object ObjectOfTypeFromXML(String xml, Type t)
         {
             XmlSerializer deserializer = new XmlSerializer(t);
             TextReader reader = new StringReader(xml);
             object obj = deserializer.Deserialize(reader);
-            
+
             reader.Close();
             return obj;
-        }*/
+        }
 
 
 
@@ -248,7 +311,7 @@ namespace imbSCI.Core.files
         /// <param name="filepath">The filepath.</param>
         /// <param name="data">The data instance to be saved</param>
         /// <exception cref="System.ArgumentNullException">data</exception>
-        public static void saveObjectToXML<T>(String filepath, T data, ILogBuilder logger = null) // where T:class, new()
+        public static void saveObjectToXML<T>(String filepath, T data, ILogBuilder logger = null) where T : class
         {
             if (data == null) throw new ArgumentNullException(nameof(data));
             XmlSerializer serializer = new XmlSerializer(typeof(T));
@@ -306,7 +369,7 @@ namespace imbSCI.Core.files
         /// <typeparam name="T"></typeparam>
         /// <param name="filepath">The filepath.</param>
         /// <returns></returns>
-        public static T loadObjectFromXML<T>(String filepath, ILogBuilder logger = null) // where T : class, new()
+        public static T loadObjectFromXML<T>(String filepath, ILogBuilder logger = null) where T : class
         {
 
             if (!File.Exists(filepath))
@@ -324,6 +387,14 @@ namespace imbSCI.Core.files
             Type t = typeof(T);
 
             String xmlString = File.ReadAllText(filepath);
+
+            if (!(xmlString.Contains(t.Name) || xmlString.StartsWith("<?xml")))
+            {
+                T altOutput = imbTypeExtensions.getInstance(t) as T;
+                if (logger != null) logger.log("XML structure failed");
+                return altOutput;
+            }
+
             //if (!xmlString.Contains(t.Name))
             //{
             //    if (logger != null) logger.log("Loading XML object from [" + filepath + "] aborted because the file seems not to be serialization of type [" + t.Name + "]");

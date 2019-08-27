@@ -206,6 +206,13 @@ namespace imbSCI.Core.attributes
         //{
         //}
 
+        /// <summary>To be used with <see cref="templateFieldDataTable"/> enumeration</summary>
+        /// <param name="_name">The name.</param>
+        /// <param name="_keyname">The keyname.</param>
+        /// <param name="letterOrSufix">The letter or sufix.</param>
+        /// <param name="symbolOrName">Name of the symbol or.</param>
+        /// <param name="formatA">The format a.</param>
+        /// <param name="formatB">The format b.</param>
         public imbAttribute(imbAttributeName _name, Enum _keyname, String letterOrSufix, String symbolOrName, String formatA = "", String formatB = "")
         {
             name = _name.ToString();
@@ -216,6 +223,17 @@ namespace imbSCI.Core.attributes
 
             objMsg = tup;
         }
+
+
+        public imbAttribute(templateFieldDataTable _reportingField, Object value)
+        {
+            name = imbAttributeName.DataTableExport.ToString();
+            nameEnum = imbAttributeName.DataTableExport;
+            objMsg = _reportingField; // = imbAttributeName.DataTableExport;
+            objExtra = value;
+
+        }
+
 
         /// <summary>
         /// Sets <c>_msg</c> color as hexadecimal value, to specified <c>imbAttributeName</c> attribue

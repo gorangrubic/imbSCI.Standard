@@ -43,11 +43,15 @@ namespace imbSCI.DataComplex.special
     using System.ComponentModel;
     using System.Data;
 
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'aceCommonTypes.collection.special.instanceCountCollection{System.Int32}'
     /// <summary>
     /// Instance frequency and value stats
     /// </summary>
     /// <seealso cref="aceCommonTypes.collection.special.instanceCountCollection{System.Int32}" />
     public class numericSampleStatistics : instanceCountCollection<int>, IObjectWithNameAndDescription
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'aceCommonTypes.collection.special.instanceCountCollection{System.Int32}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     {
         /*
         public DataTable GetStatsTable(dataTableDeliveryEnum format, dataTableSummaryRowEnum whatToSummarize = dataTableSummaryRowEnum.none)
@@ -229,6 +233,7 @@ namespace imbSCI.DataComplex.special
             OnPropertyChanged("Count");
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
         /// <summary>
         /// Adds the specified value in sample.
         /// </summary>
@@ -236,6 +241,7 @@ namespace imbSCI.DataComplex.special
         /// <param name="originHash">The origin hash.</param>
         /// <exception cref="aceCommonTypes.core.exceptions.dataException">The origin already have value into this sample statistics - null - Bad application - origin exists</exception>
         public void Add(int valueInSample, string originHash = "")
+#pragma warning restore CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
         {
             sumOfValues += valueInSample;
             _maxValue = Math.Max(_maxValue, valueInSample);

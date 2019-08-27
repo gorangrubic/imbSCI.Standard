@@ -246,9 +246,14 @@ namespace imbSCI.Graph.MXGraph.canvas
 
         /// <summary>
         /// Draws the given string. Possible values for format are empty string for
+
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
         // plain text and html for HTML markup.
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag was not expected at this location.'
         /// </summary>
         void Text(double x, double y, double w, double h, string str, string align, string valign,
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag was not expected at this location.'
                 bool wrap, string format, string overflow, bool clip, double rotation, string dir);
 
         /// <summary>

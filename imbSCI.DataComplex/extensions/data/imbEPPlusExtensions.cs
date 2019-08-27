@@ -374,7 +374,7 @@ namespace imbSCI.DataComplex.extensions.data
 
         public static ExcelRange getExcelRange(this ExcelWorksheet worksheet, ExcelRow row, selectZone zone)
         {
-            return worksheet.Cells[row.Row + zone.y, zone.x + 1, row.Row + zone.y + zone.height, zone.weight + zone.x + 1];
+            return worksheet.Cells[row.Row + zone.y, zone.x + 1, row.Row + zone.y + zone.height, zone.width + zone.x + 1];
         }
 
         /// <summary>

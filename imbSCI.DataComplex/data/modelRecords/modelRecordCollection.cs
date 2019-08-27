@@ -39,6 +39,7 @@ namespace imbSCI.DataComplex.data.modelRecords
     using System.Collections.Generic;
     using System.Linq;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// Dictionary of <see cref="IModelRecord"/> records, indexed by key of any type <see cref="object"/>
     /// </summary>
@@ -47,6 +48,7 @@ namespace imbSCI.DataComplex.data.modelRecords
     /// <seealso cref="aceCommonTypes.primitives.imbBindable" />
     /// <seealso cref="System.Collections.Generic.IEnumerable{T}" />
     public abstract class modelRecordCollection<T, TRecord> : imbBindable, IEnumerable<KeyValuePair<T, TRecord>>
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
         where TRecord : modelRecordBase, IModelRecord
     {
         /// <summary>
@@ -120,6 +122,7 @@ namespace imbSCI.DataComplex.data.modelRecords
             return records[i];
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
         /// <summary>
         /// Gets the record using one of supplied arguments.
         /// </summary>
@@ -128,6 +131,7 @@ namespace imbSCI.DataComplex.data.modelRecords
         /// <returns>Record associated with the key</returns>
         /// <exception cref="aceCommonTypes.core.exceptions.dataException">No valid arguments supplied: autoCreateOnMissing[" + autoCreateOnMissing + "] but " + nameof(key) + " not found.</exception>
         public virtual TRecord GetRecord(T key, bool autoCreateOnMissing = false)
+#pragma warning restore CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
         {
             if (!key.isNullOrEmptyString())
             {
@@ -150,6 +154,7 @@ namespace imbSCI.DataComplex.data.modelRecords
             return null;
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
         /// <summary>
         /// Seaches for record using supplied <c>key</c> or <c>instanceID</c>
         /// </summary>
@@ -158,6 +163,7 @@ namespace imbSCI.DataComplex.data.modelRecords
         /// <returns></returns>
         /// <exception cref="aceCommonTypes.core.exceptions.dataException">No valid arguments supplied. At least one argument must be valid [null or empty string] to find the record in the collection</exception>
         public virtual TRecord SeachForRecord(T key, string instanceID = "")
+#pragma warning restore CS1574 // XML comment has cref attribute 'dataException' that could not be resolved
         {
             if (key.isNullOrEmpty()) return this[key];
             if (!instanceID.isNullOrEmpty())

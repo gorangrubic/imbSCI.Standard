@@ -6,12 +6,18 @@ namespace imbSCI.Data.collection.graph
 {
     using System.Collections;
 
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String, T}}'
     /// <summary>
     /// Invisible (not part of the node <see cref="IGraphNode.path"/>) root node for multiple, separate, graph trees.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String, T}}" />
     public class graphMultiRoot<T> : IEnumerable<KeyValuePair<String, T>> where T : class, IGraphNode, new()
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String, T}}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="graphMultiRoot{T}"/> class.
@@ -22,6 +28,7 @@ namespace imbSCI.Data.collection.graph
 
         private T instance { get; set; } = new T();
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'defaultPathSeparator' that could not be resolved
         /// <summary>
         /// Gets the path separator used in this path format - if its not set it will look for parent's default path separator to set it. If there is no parent, it will use <see cref="defaultPathSeparator"/>
         /// </summary>
@@ -29,6 +36,7 @@ namespace imbSCI.Data.collection.graph
         /// The path separator.
         /// </value>
         public virtual string pathSeparator
+#pragma warning restore CS1574 // XML comment has cref attribute 'defaultPathSeparator' that could not be resolved
         {
             get
             {

@@ -30,6 +30,7 @@
 namespace imbSCI.Core.attributes
 {
     using imbSCI.Core.data;
+    using imbSCI.Core.math.measurement;
 
     /// <summary>
     /// Ime podešavanja na koje se odnosi imbAttribut
@@ -592,6 +593,11 @@ namespace imbSCI.Core.attributes
         measure_expression,
 
         measure_operand,
+
+        /// <summary>
+        /// This property will be excluded from <see cref="MetricsBase"/> computations
+        /// </summary>
+        measure_excludeFromMetrics,
 
         /// <summary>
         /// The measure valuegroup:: defines into what measure parameter this one will be calculated

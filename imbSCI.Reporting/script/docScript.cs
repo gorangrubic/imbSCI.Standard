@@ -76,6 +76,8 @@ namespace imbSCI.Reporting.script
     using System.IO;
     using d = docScriptArguments;
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.List{imbSCI.Cores.reporting.script.docScriptInstruction}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// Script that genererates output document. It may be used multiple times to generate different outputs
     /// </summary>
@@ -84,6 +86,8 @@ namespace imbSCI.Reporting.script
     /// </remarks>
     /// <seealso cref="System.Collections.Generic.List{imbSCI.Cores.reporting.script.docScriptInstruction}" />
     public class docScript : List<docScriptInstruction>, ITextAppendContent, ITextAppendContentExtended, IEquatable<docScript>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.List{imbSCI.Cores.reporting.script.docScriptInstruction}'
     {
         /// <summary>
         /// Appends the executable kernel
@@ -473,12 +477,14 @@ namespace imbSCI.Reporting.script
             c_link(name, url, caption, "", linkType);
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'validateTable()' that could not be resolved
         /// <summary>
         /// Renders DataTable
         /// </summary>
         /// <param name="table">The table.</param>
         /// <param name="doThrowException">if set to <c>true</c> it will throw an exception on <see cref="validateTable()"/> return false.</param>
         public void AppendTable(DataTable table, bool doThrowException = true)
+#pragma warning restore CS1574 // XML comment has cref attribute 'validateTable()' that could not be resolved
         {
             if (table.validateTable())
             {
@@ -968,6 +974,9 @@ namespace imbSCI.Reporting.script
             return tmp;
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'appendType' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'i_page' that could not be resolved
+#pragma warning disable CS1574 // XML comment has cref attribute 'i_document' that could not be resolved
         /// <summary>
         /// Load content into page/document. Inner append is performed for each line
         /// </summary>
@@ -976,6 +985,9 @@ namespace imbSCI.Reporting.script
         /// <param name="format">The format.</param>
         /// <returns></returns>
         public docScriptInstruction i_load(appendType innerAppend, string path, reportOutputFormatName format)
+#pragma warning restore CS1574 // XML comment has cref attribute 'i_document' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'i_page' that could not be resolved
+#pragma warning restore CS1574 // XML comment has cref attribute 'appendType' that could not be resolved
         {
             var tmp = add(appendType.i_load).arg(d.dsa_path, path).arg(d.dsa_innerAppend, innerAppend).arg(d.dsa_format, format);
             return tmp;

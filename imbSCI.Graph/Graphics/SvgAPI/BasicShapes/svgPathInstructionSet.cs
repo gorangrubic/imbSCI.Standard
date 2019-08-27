@@ -6,11 +6,15 @@ using System.Text.RegularExpressions;
 
 namespace imbSCI.Graph.Graphics.SvgAPI.BasicShapes
 {
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.List{imbSCI.Graph.Graphics.SvgAPI.BasicShapes.svgPathInstructionBase}'
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     /// <summary>
     /// Path instructions set
     /// </summary>
     /// <seealso cref="System.Collections.Generic.List{imbSCI.Graph.Graphics.SvgAPI.BasicShapes.svgPathInstructionBase}" />
     public class svgPathInstructionSet : List<svgPathInstructionBase>
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.List{imbSCI.Graph.Graphics.SvgAPI.BasicShapes.svgPathInstructionBase}'
     {
         public static Regex REGEX_ARGUMENTSELECT = new Regex(@"(\w{1}[\d\s,\.]*)");
 

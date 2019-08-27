@@ -622,69 +622,7 @@ namespace imbSCI.Core.reporting.lowLevelApi
                 {
                     String content = dc.markdownFieldForColumn(dr, skipEscape.Contains(dc), dcfs[dc.ColumnName]);
                     content = content.Replace(Environment.NewLine, "");
-                    /*
 
-                    String content = "";
-                    Object value = dr[dc];
-
-                    content = value.toStringSafe("  ", dcf.valueFormat);
-
-                    //if (!dcf.valueFormat.isNullOrEmpty())
-                    //{
-                    //    if (value is IFormattable)
-                    //    {
-                    //        IFormattable value_IFormattable = (IFormattable)value;
-                    //        content = value_IFormattable.ToString(dcf.valueFormat, CultureInfo.CurrentCulture);
-                    //    }
-
-                    //} else
-                    //{
-                    //    content = value.toStringSafe("  ");
-                    //}
-
-                    if (value is Int32)
-                    {
-                        if ((((Int32)value) == Int32.MaxValue) || (((Int32)value) == Int32.MinValue)) content = "-";
-                    }
-
-                    if (!skipEscape.Contains(dc))
-                    {
-                        content = content.markdownEscape();
-                    }
-
-                    // filter out table crushers
-                    content = content.Replace("|", " : ");
-                    content = content.Replace(Environment.NewLine, "");
-
-                    switch (dcf.importance)
-                    {
-                        case dataPointImportance.important:
-                            content = "**" + content + "**";
-                            break;
-
-                        case dataPointImportance.alarm:
-                            content = "`**" + content + "**`";
-                            break;
-
-                        case dataPointImportance.normal:
-
-                            break;
-                    }
-
-                    if (dc.GetEncodeMode() != toDosCharactersMode.none)
-                    {
-                        content = content.toDosCharacters(dc.GetEncodeMode());
-                    }
-
-                    Int32 columnWidth = dc.GetWidth();
-                    if (columnWidth > 0)
-                    {
-                        if (content.Length<columnWidth) content = content.PadRight(columnWidth);
-                    }
-
-                    String wrapTag = dc.GetWrapTag();
-                    if (!wrapTag.isNullOrEmpty()) content = "<span>" + content + "</span>";
-                    */
                     rowline = rowline.add(content, "|"); // imbSciStringExtensions.add(rowline, content, "|");
                 }
                 rowline = rowline + "|" + Environment.NewLine;

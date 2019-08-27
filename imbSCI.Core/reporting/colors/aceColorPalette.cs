@@ -420,6 +420,8 @@ namespace imbSCI.Core.reporting.colors
         //#endregion
 
         /// public ObservableCollection<Color> colorsBottom = new ObservableCollection<Color>();
+
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'Color'.'
         // [XmlIgnore]
         // public ObservableCollection<Color> colorsFore = new ObservableCollection<Color>();
         // [XmlIgnore]
@@ -436,6 +438,7 @@ namespace imbSCI.Core.reporting.colors
         /// blanko konstruktor
         /// </summary>
         public aceColorPalette()
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'Color'.'
         {
         }
 

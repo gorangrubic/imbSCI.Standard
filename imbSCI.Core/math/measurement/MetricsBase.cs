@@ -1,3 +1,4 @@
+using imbSCI.Core.attributes;
 using imbSCI.Core.extensions.table;
 using imbSCI.Core.math.classificationMetrics;
 using imbSCI.Core.math.range.finder;
@@ -9,10 +10,23 @@ using System.Reflection;
 
 namespace imbSCI.Core.math.measurement
 {
+
+
     /// <summary>
-    /// Base class for metrics containers
+    /// Base class for data structures with metrics. It allows basic arithmentic operations over all Int32, Double and Decimal properties of a class that extends it.
     /// </summary>
-    public abstract class MetricsBase
+    /// <remarks>
+    /// <para>
+    /// The class automates arhithmetics over all numeric, settable public properties of objects. The operations can be performed against another <see cref="MetricsBase"/> object or <see cref="Double"/> value.
+    /// </para>
+    /// <para>
+    /// For properties you want to exclude from computation operations declare <see cref="imbAttribute"/> with <see cref="imbAttributeName.measure_excludeFromMetrics"/>
+    /// </para>
+    /// <seealso cref="Plus{T}(T)"/>
+    /// <seealso cref="Minus{T}(T)"/>
+    /// <seealso cref="Divide{T}(T)"/>
+    /// </remarks>
+    public abstract class MetricsBase : MetricsDictionaries
     {
         /// <summary>
         /// Sends metric data into
@@ -32,6 +46,16 @@ namespace imbSCI.Core.math.measurement
             {
                 target.Add(pi.Name, ((Double)pi.GetValue(this, null)).ToString(formatDouble));
             }
+
+            foreach (var pi in Decimals)
+            {
+                target.Add(pi.Name, ((Decimal)pi.GetValue(this, null)).ToString(formatDouble));
+            }
+
+            foreach (var pi in IgnoreComputations)
+            {
+                target.Add(pi.Name, ((Decimal)pi.GetValue(this, null)).ToString(formatDouble));
+            }
             return target;
         }
 
@@ -48,6 +72,7 @@ namespace imbSCI.Core.math.measurement
         public void Plus<T>(T b) where T : MetricsBase
         {
             Type tb = typeof(T);
+            if (b == null) return;
 
             foreach (var pi in Integers)
             {
@@ -62,6 +87,14 @@ namespace imbSCI.Core.math.measurement
                 var pib = tb.GetProperty(pi.Name);
                 Double rb = (Double)pib.GetValue(b, null);
                 Double ra = (Double)pi.GetValue(this, null);
+                pi.SetValue(this, rb + ra, null);
+            }
+
+            foreach (var pi in Decimals)
+            {
+                var pib = tb.GetProperty(pi.Name);
+                Decimal rb = (Decimal)pib.GetValue(b, null);
+                Decimal ra = (Decimal)pi.GetValue(this, null);
                 pi.SetValue(this, rb + ra, null);
             }
         }
@@ -88,6 +121,14 @@ namespace imbSCI.Core.math.measurement
                 var pib = tb.GetProperty(pi.Name);
                 Double rb = (Double)pib.GetValue(b, null);
                 Double ra = (Double)pi.GetValue(this, null);
+                pi.SetValue(this, rb - ra, null);
+            }
+
+            foreach (var pi in Decimals)
+            {
+                var pib = tb.GetProperty(pi.Name);
+                Decimal rb = (Decimal)pib.GetValue(b, null);
+                Decimal ra = (Decimal)pi.GetValue(this, null);
                 pi.SetValue(this, rb - ra, null);
             }
         }
@@ -119,7 +160,16 @@ namespace imbSCI.Core.math.measurement
                 Double r = 0;
                 if (ra != 0 && rb != 0) r = ra / rb;
                 pi.SetValue(this, r, null);
-                //pi.SetValue(this, rb / ra, null);
+            }
+
+            foreach (var pi in Decimals)
+            {
+                var pib = tb.GetProperty(pi.Name);
+                Decimal rb = (Decimal)pib.GetValue(b, null);
+                Decimal ra = (Decimal)pi.GetValue(this, null);
+                Decimal r = 0;
+                if (ra != 0 && rb != 0) r = ra / rb;
+                pi.SetValue(this, r, null);
             }
         }
 
@@ -147,6 +197,13 @@ namespace imbSCI.Core.math.measurement
                 Double ra = (Double)pi.GetValue(this, null);
                 pi.SetValue(this, rb * ra, null);
             }
+            foreach (var pi in Decimals)
+            {
+                var pib = tb.GetProperty(pi.Name);
+                Decimal rb = (Decimal)pib.GetValue(b, null);
+                Decimal ra = (Decimal)pi.GetValue(this, null);
+                pi.SetValue(this, rb * ra, null);
+            }
         }
 
         /// <summary>
@@ -171,6 +228,14 @@ namespace imbSCI.Core.math.measurement
                 if (ra != 0 && b != 0) r = Convert.ToDouble(ra) / b;
                 pi.SetValue(this, r, null);
             }
+            foreach (var pi in Decimals)
+            {
+                Decimal ra = (Decimal)pi.GetValue(this, null);
+                Decimal r = 0;
+                if (ra != 0 && b != 0) r = Convert.ToDecimal(ra) / (Decimal)b;
+
+                pi.SetValue(this, r, null);
+            }
         }
 
         /// <summary>
@@ -190,6 +255,11 @@ namespace imbSCI.Core.math.measurement
                 Double ra = (Double)pi.GetValue(this, null);
                 pi.SetValue(this, ra * b, null);
             }
+            foreach (var pi in Decimals)
+            {
+                Decimal ra = (Decimal)pi.GetValue(this, null);
+                pi.SetValue(this, ra * (Decimal)b, null);
+            }
         }
 
         /// <summary>
@@ -198,13 +268,29 @@ namespace imbSCI.Core.math.measurement
         protected void Init()
         {
             var t = GetType();
+
+            if (MetricsExtensions.CachedMetricsDefinitions.ContainsKey(t.FullName))
+            {
+                MetricsExtensions.CachedMetricsDefinitions[t.FullName].SetTo(this);
+                return;
+            }
+
+
+
+
             PropertyInfo[] props = t.GetProperties(BindingFlags.Instance | BindingFlags.Public);
             props = props.ToList().OrderBy(x => x.Name).ToArray();
 
-            Integers.Clear();
-            Doubles.Clear();
             foreach (var p in props)
             {
+
+                if (p.hasAttribute(imbAttributeName.measure_excludeFromMetrics))
+                {
+                    IgnoreComputations.Add(p);
+                    IgnoreComputationsDict.Add(p.Name, p);
+                    continue;
+                }
+
                 if (p.GetIndexParameters().Length == 0)
                 {
                     if (p.PropertyType == typeof(Int32))
@@ -217,8 +303,15 @@ namespace imbSCI.Core.math.measurement
                         Doubles.Add(p);
                         DoublesDict.Add(p.Name, p);
                     }
+                    else if (p.PropertyType == typeof(Decimal))
+                    {
+                        Decimals.Add(p);
+                        DecimalsDict.Add(p.Name, p);
+                    }
                 }
             }
+
+            MetricsExtensions.StoreMetricsDefinition(this);
         }
 
         /*
@@ -289,13 +382,31 @@ namespace imbSCI.Core.math.measurement
         {
             if (DoublesDict.ContainsKey(propertyName))
             {
-                return (Double)DoublesDict[propertyName].GetValue(this, null); ;
+                return (Double)DoublesDict[propertyName].GetValue(this, null);
             }
-            if (IntegersDict.ContainsKey(propertyName))
+            else if (IntegersDict.ContainsKey(propertyName))
             {
                 return Convert.ToDouble(IntegersDict[propertyName].GetValue(this, null));
             }
+            else if (DecimalsDict.ContainsKey(propertyName))
+            {
+                return Convert.ToDouble(DecimalsDict[propertyName].GetValue(this, null));
+            }
+            else if (IgnoreComputationsDict.ContainsKey(propertyName))
+            {
+                return Convert.ToDouble(IgnoreComputationsDict[propertyName]);
+            }
+
             return 0;
+        }
+
+        public virtual Decimal GetDecimalVector(String propertyName)
+        {
+            if (DecimalsDict.ContainsKey(propertyName))
+            {
+                return (Decimal)DecimalsDict[propertyName].GetValue(this, null);
+            }
+            return default(Decimal);
         }
 
         /// <summary>
@@ -304,7 +415,7 @@ namespace imbSCI.Core.math.measurement
         /// <param name="includeIntegers">if set to <c>true</c> [include integers].</param>
         /// <param name="includeDoubles">if set to <c>true</c> [include doubles].</param>
         /// <returns></returns>
-        public virtual Dictionary<String, Double> GetDictionary(Boolean includeIntegers = true, Boolean includeDoubles = true)
+        public virtual Dictionary<String, Double> GetDictionary(Boolean includeIntegers = true, Boolean includeDoubles = true, Boolean includeDecimals = true, Boolean includeIgnored = true)
         {
             Dictionary<String, Double> output = new Dictionary<string, double>();
 
@@ -323,6 +434,20 @@ namespace imbSCI.Core.math.measurement
                     output.Add(pi.Name, GetVector(pi.Name));
                 }
             }
+            if (includeDecimals)
+            {
+                foreach (var pi in Decimals)
+                {
+                    output.Add(pi.Name, GetVector(pi.Name));
+                }
+            }
+            if (includeIgnored)
+            {
+                foreach (var pi in IgnoreComputations)
+                {
+                    output.Add(pi.Name, GetVector(pi.Name));
+                }
+            }
 
             return output;
         }
@@ -333,7 +458,7 @@ namespace imbSCI.Core.math.measurement
         /// <param name="includeIntegers">if set to <c>true</c> [include integers].</param>
         /// <param name="includeDoubles">if set to <c>true</c> [include doubles].</param>
         /// <returns></returns>
-        public virtual List<Double> GetVectors(Boolean includeIntegers = true, Boolean includeDoubles = true)
+        public virtual List<Double> GetVectors(Boolean includeIntegers = true, Boolean includeDoubles = true, Boolean includeDecimals = true, Boolean includeIgnored = true)
         {
             List<Double> output = new List<Double>();
 
@@ -352,6 +477,20 @@ namespace imbSCI.Core.math.measurement
                     output.Add(GetVector(pi.Name));
                 }
             }
+            if (includeDecimals)
+            {
+                foreach (var pi in Decimals)
+                {
+                    output.Add(GetVector(pi.Name));
+                }
+            }
+            if (includeIgnored)
+            {
+                foreach (var pi in IgnoreComputations)
+                {
+                    output.Add(GetVector(pi.Name));
+                }
+            }
             return output;
         }
 
@@ -361,7 +500,7 @@ namespace imbSCI.Core.math.measurement
         /// <param name="includeIntegers">if set to <c>true</c> [include integers].</param>
         /// <param name="includeDoubles">if set to <c>true</c> [include doubles].</param>
         /// <returns></returns>
-        public virtual List<String> GetFields(Boolean includeIntegers = true, Boolean includeDoubles = true)
+        public virtual List<String> GetFields(Boolean includeIntegers = true, Boolean includeDoubles = true, Boolean includeDecimals = true, Boolean includeIgnored = true)
         {
             List<String> output = new List<string>();
 
@@ -380,13 +519,24 @@ namespace imbSCI.Core.math.measurement
                     output.Add(pi.Name);
                 }
             }
+            if (includeDecimals)
+            {
+                foreach (var pi in Decimals)
+                {
+                    output.Add(pi.Name);
+                }
+            }
+            if (includeIgnored)
+            {
+                foreach (var pi in IgnoreComputations)
+                {
+                    output.Add(pi.Name);
+                }
+            }
+
             return output;
         }
 
-        protected Dictionary<String, PropertyInfo> IntegersDict { get; set; } = new Dictionary<String, PropertyInfo>();
-        protected Dictionary<String, PropertyInfo> DoublesDict { get; set; } = new Dictionary<String, PropertyInfo>();
 
-        protected List<PropertyInfo> Integers { get; set; } = new List<PropertyInfo>();
-        protected List<PropertyInfo> Doubles { get; set; } = new List<PropertyInfo>();
     }
 }

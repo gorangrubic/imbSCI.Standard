@@ -90,6 +90,7 @@ namespace imbSCI.Core.extensions.typeworks
             var vals = target.imbGetAllProperties();
             foreach (KeyValuePair<String, PropertyInfo> pair in vals)
             {
+                if (!pair.Value.CanWrite) continue;
                 if (!ignore.Contains(pair.Key))
                 {
                     Object tmp = source.imbGetPropertySafe(pair.Key, null);

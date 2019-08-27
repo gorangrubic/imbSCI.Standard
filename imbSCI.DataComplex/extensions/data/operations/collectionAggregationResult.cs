@@ -32,12 +32,16 @@ namespace imbSCI.DataComplex.extensions.data.operations
     using imbSCI.Core.math.aggregation;
     using System.Collections.Generic;
 
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.Dictionary{aceCommonTypes.math.aggregation.dataPointAggregationType, T}'
     /// <summary>
     /// Results of collection aggregation
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="System.Collections.Generic.Dictionary{aceCommonTypes.math.aggregation.dataPointAggregationType, T}" />
     public class collectionAggregationResult<T> : Dictionary<dataPointAggregationType, T> where T : class, new()
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.Dictionary{aceCommonTypes.math.aggregation.dataPointAggregationType, T}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     {
         public T firstItem { get; set; }
         public T lastItem { get; set; }

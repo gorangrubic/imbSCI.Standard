@@ -400,6 +400,17 @@ namespace imbSCI.Core.extensions.text
             {
                 return source as String;
             }
+
+            if (source is DateTime source_datetime)
+            {
+                return source_datetime.ToString(numberFormat);
+            }
+
+            if (source is Decimal source_decimal)
+            {
+                return source_decimal.ToString(numberFormat);
+            }
+
             if (source is Double)
             {
                 return ((Double)source).ToString(numberFormat, CultureInfo.InvariantCulture);

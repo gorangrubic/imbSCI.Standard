@@ -36,20 +36,103 @@ namespace imbSCI.Graph.DGML.collections
 {
     public abstract class GraphElementCollection<T> : List<T> where T : IGraphElement, new()
     {
+        protected GraphElementCollection(DirectedGraph graph)
+        {
+            Graph = graph;
+        }
+
+        protected DirectedGraph Graph { get; set; }
+
         /// <summary>
-        /// Gets the <see cref="T"/> with the specified identifier.
+        /// Gets the <see cref="T"/> with the specified identifier. Returns null if not found
         /// </summary>
         /// <value>
         /// The <see cref="T"/>.
         /// </value>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>Null if not found</returns>
         public T this[String id]
         {
             get
             {
                 return this.FirstOrDefault(x => x.Id == id);
             }
+        }
+
+         public T AddOrGet(String i_id, String Label="", Boolean returnOnlyNewNodes=true)
+        {
+
+            T n = this.FirstOrDefault(x => x.Id == i_id);
+            if (n== null)
+            {
+                n = new T()
+                {
+                    Id = i_id,
+                    Label = Label
+                };
+                Add(n);
+
+                if (returnOnlyNewNodes) return n;
+            } else
+            {
+                if (!returnOnlyNewNodes) return n;
+            }
+            return n;
+
+        }
+
+        /// <summary>
+        /// Adds or gets elements from the list
+        /// </summary>
+        /// <param name="id_list">The identifier list.</param>
+        /// <param name="returnOnlyNewNodes">if set to <c>true</c> [return only new nodes].</param>
+        /// <returns></returns>
+        public List<T> Get(IEnumerable<String> id_list)
+        {
+            List<T> output = new List<T>();
+            foreach (String i in id_list)
+            {
+                T n = this.FirstOrDefault(x => x.Id == i);
+                if (n == null)
+                {
+
+                }
+                else
+                {
+                     output.Add(n);
+                }
+            }
+            return output;
+        }
+
+
+        /// <summary>
+        /// Adds or gets elements from the list
+        /// </summary>
+        /// <param name="id_list">The identifier list.</param>
+        /// <param name="returnOnlyNewNodes">if set to <c>true</c> [return only new nodes].</param>
+        /// <returns></returns>
+        public List<T> AddOrGet(IEnumerable<String> id_list, Boolean returnOnlyNewNodes=true)
+        {
+            List<T> output = new List<T>();
+            foreach (String i in id_list)
+            {
+                T n = this.FirstOrDefault(x => x.Id == i);
+                if (n== null)
+                {
+                    n = new T()
+                    {
+                        Id = i
+                    };
+                    Add(n);
+
+                    if (returnOnlyNewNodes) output.Add(n);
+                } else
+                {
+                    if (!returnOnlyNewNodes) output.Add(n);
+                }
+            }
+            return output;
         }
 
         /// <summary>

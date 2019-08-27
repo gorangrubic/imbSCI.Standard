@@ -63,6 +63,17 @@ namespace imbSCI.Graph.Converters
         /// <returns></returns>
         public abstract Double GetLinkWeight(TGraphFrom nodeA, TGraphFrom nodeB);
 
+        //public virtual String GetNodeLabel(TGraphFrom nodeA)
+        //{
+        //    String output = nodeA.name;
+        //    if (nodeA == null)
+        //    {
+        //        output = "[a:null]";
+        //    }
+        //    return GetNodeName(nodeA);
+        //    return output;
+        //}
+
         /// <summary>
         /// Gets the label for link - by default implementation returns empty string
         /// </summary>

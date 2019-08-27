@@ -31,6 +31,11 @@ using System.Runtime.CompilerServices;
 
 namespace imbSCI.Core.files.search
 {
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag 'remarks' does not match the start tag 'para'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag 'summary' does not match the start tag 'para'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'para'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'remarks'.'
     /// <summary>
     /// <para>Structures to query and search huge files<para>
     /// </summary>
@@ -57,6 +62,11 @@ namespace imbSCI.Core.files.search
     /// </remarks>
     /// <seealso cref="remarks" />
     [CompilerGenerated]
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'remarks'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'para'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag 'summary' does not match the start tag 'para'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag 'remarks' does not match the start tag 'para'.'
     //[xmlFilter(targetOp.group, "Structures to query and search huge files", "remarks")]
     public class NamespaceDoc
     {

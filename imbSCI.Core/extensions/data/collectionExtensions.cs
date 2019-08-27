@@ -47,7 +47,6 @@ namespace imbSCI.Core.extensions.data
     using System.Data;
     using System.Linq;
     using System.Text.RegularExpressions;
-
     /// <summary>
     /// Ekstenzije za manipulaciju kolekcijama
     /// </summary>
@@ -635,6 +634,7 @@ namespace imbSCI.Core.extensions.data
             return false;
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'aceGeneralException' that could not be resolved
         /// <summary>
         /// Gets the first instance that <c>is</c> compatibile with <c>T</c> in supplied collection. Supports PropertyCollection and other collections
         /// </summary>
@@ -651,6 +651,7 @@ namespace imbSCI.Core.extensions.data
         /// Uses <c>is</c> keyword to test.
         /// </remarks>
         public static T getFirstOfType<T>(this IEnumerable source, Boolean makeNewIfNotFound = false, Object defaultReturn = null, Boolean disableException = false)
+#pragma warning restore CS1574 // XML comment has cref attribute 'aceGeneralException' that could not be resolved
         {
             if (source is PropertyCollection)
             {
@@ -752,6 +753,8 @@ namespace imbSCI.Core.extensions.data
             return output;
         }
 
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'example'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag 'example' does not match the start tag 'Enum'.'
         /// <summary>
         /// Makes flaf array from once or multiply nested arrays - to be used with <c>params</c> method parameter in order to support both <c>params</c> and <c>Array</c> calls.
         /// </summary>
@@ -765,6 +768,8 @@ namespace imbSCI.Core.extensions.data
         /// </example>
         /// \ingroup_disabled ace_ext_collections
         public static T[] getFlatArray<T>(this IEnumerable source, params Type[] keepUnFlat)
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag 'example' does not match the start tag 'Enum'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'example'.'
         {
             List<T> output = new List<T>();
             String keepOut = "";
@@ -804,6 +809,8 @@ namespace imbSCI.Core.extensions.data
             return output.ToArray();
         }
 
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'example'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag 'example' does not match the start tag 'Enum'.'
         /// <summary>
         /// This is universal List flattener - used internally by <see cref="getFlatArray{T}(IEnumerable)"/> to gather child <c>IEnumerable</c> items.
         /// </summary>
@@ -818,6 +825,8 @@ namespace imbSCI.Core.extensions.data
         /// </example>
         /// \ingroup_disabled ace_ext_collections
         public static List<T> getFlatList<T>(this IEnumerable source, params Type[] keepUnFlat)
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag 'example' does not match the start tag 'Enum'.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'Expected an end tag for element 'example'.'
         {
             List<T> output = new List<T>();
             String keepOut = "";
@@ -1255,6 +1264,18 @@ namespace imbSCI.Core.extensions.data
 
             return null;
         }
+
+        public static Object getLastSafe(this IEnumerable source)
+        {
+            Object head = null;
+            foreach (Object ob in source)
+            {
+                head = ob;
+            }
+
+            return head;
+        }
+
 
         //public static Boolean Any(this ICollection source)
         //{

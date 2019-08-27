@@ -39,12 +39,14 @@ namespace imbSCI.Core.extensions.table.dynamics
     //{
     //}
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'dataTableDynamicStyleEntry' that could not be resolved
     /// <summary>
     /// Affects rows on specified index positions
     /// </summary>
     /// <typeparam name="TEnum">The type of the enum.</typeparam>
     /// <seealso cref="imbSCI.Core.extensions.table.dataTableDynamicStyleEntry" />
     public class dataRowIndexDynamicStyle<TEnum> : tableStyleDynamicRule
+#pragma warning restore CS1574 // XML comment has cref attribute 'dataTableDynamicStyleEntry' that could not be resolved
     {
         public TEnum styleKey { get; set; }
 

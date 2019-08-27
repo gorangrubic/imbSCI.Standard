@@ -35,6 +35,7 @@ namespace imbSCI.DataComplex.data.modelRecords
     using imbSCI.Data.interfaces;
     using System.Collections.Generic;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// Base class for <see cref="IModelRecord"/> data model reports about an algorithm execution
     /// </summary>
@@ -42,6 +43,7 @@ namespace imbSCI.DataComplex.data.modelRecords
     /// <seealso cref="IAppendDataFields" />
     /// <seealso cref="IAppendDataFieldsExtended" />
     public abstract class modelRecordParentBase<TInstance, TChildInstance, TChildRecord> : modelRecordBase, IAppendDataFields, IAppendDataFieldsExtended,
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
         IModelParentRecord<TInstance, TChildInstance, TChildRecord>, IAutosaveEnabled, ILogable, IConsoleControl
     where TChildInstance : class, IObjectWithName, IObjectWithDescription, IObjectWithNameAndDescription
     where TChildRecord : modelRecordBase, IModelRecord, IModelStandalone
@@ -230,14 +232,18 @@ namespace imbSCI.DataComplex.data.modelRecords
             _finishChild();
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute '_recordStart' that could not be resolved
         /// <summary>
         /// Records the start. Make sure to call <see cref="_recordStart"/> at beginning of the method
         /// </summary>
         public abstract void recordStart(string __testRunStamp, string __instanceID, params object[] resources);
+#pragma warning restore CS1574 // XML comment has cref attribute '_recordStart' that could not be resolved
 
+#pragma warning disable CS1574 // XML comment has cref attribute '_recordFinish' that could not be resolved
         /// <summary>
         /// Records the finish. Make sure to call <see cref="_recordFinish"/> at the end of the method
         /// </summary>
         public abstract void recordFinish(params object[] resources);
+#pragma warning restore CS1574 // XML comment has cref attribute '_recordFinish' that could not be resolved
     }
 }

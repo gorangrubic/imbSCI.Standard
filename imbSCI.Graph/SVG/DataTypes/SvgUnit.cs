@@ -156,11 +156,13 @@ namespace Svg
             return this._deviceValue.Value;
         }
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'Perscentage' that could not be resolved
         /// <summary>
         /// Converts the current unit to a percentage, if applicable.
         /// </summary>
         /// <returns>An <see cref="SvgUnit"/> of type <see cref="SvgUnitType.Perscentage"/>.</returns>
         public SvgUnit ToPercentage()
+#pragma warning restore CS1574 // XML comment has cref attribute 'Perscentage' that could not be resolved
         {
             switch (this.Type)
             {

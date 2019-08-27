@@ -27,14 +27,22 @@
 // Email: hardy@veles.rs
 // </summary>
 // ------------------------------------------------------------------------------------------------------------------
+using imbSCI.Core.collection;
 using imbSCI.Core.math;
+using imbSCI.Core.math.range.finder;
+using imbSCI.Core.math.range.frequency;
+using imbSCI.Data.collection.special;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Drawing;
 
 //using Accord.Imaging;
 using System.Xml.Serialization;
 
 namespace imbSCI.Core.style.color
 {
+
     /// <summary>
     ///
     /// </summary>
@@ -74,6 +82,28 @@ namespace imbSCI.Core.style.color
         }
 
         /// <summary>
+        /// Circles full Hue circle around the color
+        /// </summary>
+        /// <param name="HexA">The hexadecimal a.</param>
+        public ColorGradient(String HexA)
+        {
+            ColorGradientFunction options = ColorGradientFunction.CircleCW | ColorGradientFunction.HueValueAToB;
+
+            HexColorA = ColorWorks.FormatHexColorTo(HexA, ColorHexFormats.ARGB); 
+            HexColorB = HexColorA;
+            gradient = options;
+            Prepare();
+        }
+
+        public ColorGradient(Color A, Color B, ColorGradientFunction options)
+        {
+            HexColorA = A.ColorToHex();
+            HexColorB = B.ColorToHex();
+            gradient = options;
+            Prepare();
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ColorGradient"/> class.
         /// </summary>
         /// <param name="HexA">The hexadecimal a.</param>
@@ -81,8 +111,8 @@ namespace imbSCI.Core.style.color
         /// <param name="options">The options.</param>
         public ColorGradient(String HexA, String HexB, ColorGradientFunction options)
         {
-            HexColorA = HexA;
-            HexColorB = HexB;
+            HexColorA = ColorWorks.FormatHexColorTo(HexA, ColorHexFormats.ARGB);
+            HexColorB = ColorWorks.FormatHexColorTo(HexB, ColorHexFormats.ARGB);
             gradient = options;
             Prepare();
         }
@@ -91,35 +121,107 @@ namespace imbSCI.Core.style.color
         /// Gets the color of the hexadecimal.
         /// </summary>
         /// <param name="ratio">The ratio: from 0 to 1</param>
+        /// <param name="withAlpha">if set to <c>true</c> [with alpha].</param>
         /// <returns></returns>
         public String GetHexColor(Double ratio, Boolean withAlpha = true)
         {
-            ratio = ratio % 1;
 
+            ColorHSVPoint output = GetHSVColor(ratio);
+
+            String hex = output.GetHexColor(withAlpha);
+            return hex;
+        }
+
+        /// <summary>
+        /// Gets a color for given 0 to 1 ratio (i.e. position in range)
+        /// </summary>
+        /// <param name="ratio">The ratio - position in range from 0 to 1.</param>
+        /// <returns></returns>
+        public ColorHSVPoint GetHSVColor(Double ratio)
+        {
             if (!IsReady) Prepare();
 
-            var r = PointRange * ratio;
+           
+            ColorHSVPoint output = BaseColor.Clone();
 
-            var output = PointA.Clone();
 
-            if (gradient.HasFlag(ColorGradientFunction.CircleCW))
+            if (gradient.HasFlag(ColorGradientFunction.Hue))
             {
-            }
-            else if (gradient.HasFlag(ColorGradientFunction.CircleCCW))
+                output.H = Convert.ToInt32(RangeH.GetValueForRangePosition(ratio));
+            } 
+
+            if (gradient.HasFlag(ColorGradientFunction.Value))
             {
+                output.V = Convert.ToSingle(RangeV.GetValueForRangePosition(ratio));
             }
 
-            if (gradient.HasFlag(ColorGradientFunction.Hue)) output.H = output.H + r.H;
+            if (gradient.HasFlag(ColorGradientFunction.Saturation))
+            {
+                output.S = Convert.ToSingle(RangeS.GetValueForRangePosition(ratio)); // output.S + r.S;
+            }
 
-            if (gradient.HasFlag(ColorGradientFunction.Value)) output.V = output.V + r.V;
-
-            if (gradient.HasFlag(ColorGradientFunction.Saturation)) output.S = output.S + r.S;
-
-            if (gradient.HasFlag(ColorGradientFunction.Alpha)) output.A = output.A + r.A;
+            if (gradient.HasFlag(ColorGradientFunction.Alpha))
+            {
+                output.A = Convert.ToSingle(RangeA.GetValueForRangePosition(ratio));
+            }
 
             output.DeployValues();
+            return output;
+        }
 
-            return r.GetHexColor(withAlpha);
+        /// <summary>
+        /// Gets a color for given 0 to 1 ratio (i.e. position in range)
+        /// </summary>
+        /// <param name="ratio">The ratio - position in range from 0 to 1.</param>
+        /// <returns></returns>
+        public Color GetColor(Double ratio)
+        {
+            
+            ColorHSVPoint output = GetHSVColor(ratio);
+
+            return output.GetColor();
+        }
+
+        public List<ColorHSVPoint> GetColorHSVSteps(Int32 colorSegments, Boolean withAlpha = true)
+        {
+            if (!IsReady) Prepare();
+
+            List<ColorHSVPoint> output = new List<ColorHSVPoint>();
+
+            for (int i = 0; i <= colorSegments; i++)
+            {
+                Double r = i.GetRatio(colorSegments);
+
+                ColorHSVPoint head = GetHSVColor(r);
+                output.Add(head);
+
+                
+            }
+
+            return output;
+
+        }
+
+
+        public List<String> GetColorSteps(Int32 colorSegments, Boolean withAlpha = true)
+        {
+            if (!IsReady) Prepare();
+
+            List<String> output = new List<string>();
+
+            for (int i = 0; i <= colorSegments; i++)
+            {
+                Double r = i.GetRatio(colorSegments);
+
+                ColorHSVPoint head = GetHSVColor(r);
+
+                var ci_hex = head.GetHexColor();
+                if (!output.Contains(ci_hex)) output.Add(ci_hex);
+                
+            }
+
+            return output;
+
         }
 
         /// <summary>
@@ -136,23 +238,17 @@ namespace imbSCI.Core.style.color
             Double c = 1.GetRatio(colorSegments);
             Double ci = c;
 
-            var r = PointRange.GetRangeMultiplied(c);
+            //var r = PointRange.GetRangeMultiplied(c);
 
-            var head = PointA.Clone();
+            //var head = PointA.Clone();
 
             if (!IsReady) Prepare();
 
             for (int i = 0; i < colorSegments; i++)
             {
-                if (gradient.HasFlag(ColorGradientFunction.Hue)) head.H = head.H + r.H;
+                Double r = i.GetRatio(colorSegments);
 
-                if (gradient.HasFlag(ColorGradientFunction.Value)) head.V = head.V + r.V;
-
-                if (gradient.HasFlag(ColorGradientFunction.Saturation)) head.S = head.S + r.S;
-
-                if (gradient.HasFlag(ColorGradientFunction.Alpha)) head.A = head.A + r.A;
-
-                head.DeployValues();
+                ColorHSVPoint head = GetHSVColor(r);
 
                 var ci_hex = head.GetHexColor();
                 if (!output.ContainsKey(ci_hex)) output.Add(ci_hex, ci);
@@ -162,35 +258,49 @@ namespace imbSCI.Core.style.color
             return output;
         }
 
+
+        public rangeFinder RangeA { get; set; } = new rangeFinder();
+        public rangeFinder RangeS { get; set; } = new rangeFinder();
+        public rangeFinder RangeV { get; set; } = new rangeFinder();
+        public rangeFinder RangeH { get; set; } = new rangeFinder();
+
         protected void Prepare()
         {
-            PointA = new ColorHSVPoint(HexColorA);
-            PointB = new ColorHSVPoint(HexColorB);
+            var pointA = new ColorHSVPoint(HexColorA);
+            var pointB = new ColorHSVPoint(HexColorB);
 
-            PointRange = PointA.GetRange(PointB);
+            RangeA.Learn(pointA.A);
+            RangeA.Learn(pointB.A);
 
-            if (gradient.HasFlag(ColorGradientFunction.CircleCW))
-            {
-                PointRange.H = 360;
-            }
-            else if (gradient.HasFlag(ColorGradientFunction.CircleCCW))
-            {
-                PointRange.H = -360;
-            }
+            RangeS.Learn(pointA.S);
+            RangeS.Learn(pointB.S);
+
+            RangeV.Learn(pointA.V);
+            RangeV.Learn(pointB.V);
+
+            RangeH.Learn(pointA.H);
+            RangeH.Learn(pointB.H);
+
+            BaseColor = pointA;
+           
         }
 
-        protected ColorHSVPoint PointA { get; set; } = null;
-        protected ColorHSVPoint PointB { get; set; } = null;
+        protected ColorHSVPoint BaseColor { get; set; } = null;
 
-        protected ColorHSVPoint PointRange { get; set; } = null;
+       // protected ColorHSVPoint PointA { get; set; } = null;
+       // protected ColorHSVPoint PointB { get; set; } = null;
+
+       // protected ColorHSVPoint PointRange { get; set; } = null;
 
         [XmlIgnore]
         public Boolean IsReady
         {
             get
             {
-                if (PointA == null) return false;
-                if (PointB == null) return false;
+                if (!RangeA.IsLearned) return false;
+                if (!RangeS.IsLearned) return false;
+                if (!RangeV.IsLearned) return false;
+                if (!RangeH.IsLearned) return false;
                 return true;
             }
         }

@@ -34,11 +34,13 @@ namespace imbSCI.Core.reporting.colors
     using System.Drawing;
     using System.Drawing.Drawing2D;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// Containes one color/brush/gradient for particular purpose
     /// </summary>
     /// <seealso cref="aceCommonTypes.primitives.imbBindable" />
     internal class acePaletteShotPart : imbBindable
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     {
         public acePaletteShotPart(Color inColor, Brush inBrush, String inHexColor, Int32 inIndex)
         {

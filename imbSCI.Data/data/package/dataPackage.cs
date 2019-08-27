@@ -55,6 +55,7 @@ namespace imbSCI.Data.data.package
 
         private aceConcurrentBag<dataItemContainer> _bagContent;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'content' that could not be resolved
         /// <summary>
         /// Concurrent version of the <see cref="content"/>
         /// </summary>
@@ -62,6 +63,7 @@ namespace imbSCI.Data.data.package
         /// The content of the bag.
         /// </value>
         private aceConcurrentBag<dataItemContainer> bagContent
+#pragma warning restore CS1574 // XML comment has cref attribute 'content' that could not be resolved
         {
             get
             {
@@ -90,6 +92,7 @@ namespace imbSCI.Data.data.package
         /// <returns>item that was held by the instance</returns>
         protected abstract T GetInstanceToPack(TWrapper wrapper);
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'content' that could not be resolved
         /// <summary>
         /// Serializes and stores an item into <see cref="content"/> collection. , before serialization it calls <see cref="IDataPackageItem.OnBeforeSave"/>
         /// </summary>
@@ -98,6 +101,7 @@ namespace imbSCI.Data.data.package
         /// <remarks>Makes the container using <see cref="GetInstanceToPack(TWrapper)"/> and <see cref="GetDataPackageID(TWrapper)"/>. Calls <see cref="IDataPackageItem.OnBeforeSave"/> between these two.</remarks>
         /// <returns></returns>
         protected virtual dataItemContainer AddDataItem(TWrapper wrapper, XmlSerializer xmlSer = null)
+#pragma warning restore CS1574 // XML comment has cref attribute 'content' that could not be resolved
         {
             dataItemContainer iContainer = new dataItemContainer();
             T item = GetInstanceToPack(wrapper);

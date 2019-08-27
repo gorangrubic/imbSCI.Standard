@@ -95,11 +95,13 @@ namespace imbSCI.Data.data.maps.datamap
         /// <returns>Broj nepronadjenih propertija u mapi</returns>
         Int32 activateShema(Type __mappedType, String[] __fields = null);
 
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag was not expected at this location.'
         /// Postavlja vrednosti u objekat
         /// </summary>
         /// <param name="target">Objekat u koji treba da se upisu vrednosti</param>
         /// <param name="values">Lista sa istim redosledom kao i u mapi</param>
         void setValues(Object target, IValuePairs values);
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag was not expected at this location.'
 
         TVP getValuePairs<TVP>(Object target) where TVP : class, IValuePairs, new();
 

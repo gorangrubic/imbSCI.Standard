@@ -559,6 +559,8 @@ namespace imbSCI.Core.reporting.zone
             return true;
         }
 
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag 'c' does not match the start tag 'returns'.'
+#pragma warning disable CS1570 // XML comment has badly formed XML -- 'End tag was not expected at this location.'
         /// <summary>
         /// Determines whether X and Y coordinates are exactly on a border of this area
         /// </summary>
@@ -568,6 +570,8 @@ namespace imbSCI.Core.reporting.zone
         ///   <c>true</c> if X,Y coordinates showing exactly border area of this area</c>.
         /// </returns>
         public Boolean isOnEdge(Int32 tX, Int32 tY)
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag was not expected at this location.'
+#pragma warning restore CS1570 // XML comment has badly formed XML -- 'End tag 'c' does not match the start tag 'returns'.'
         {
             if (tX < TopLeft.x) return false;
             if (tX > BottomRight.x) return false;

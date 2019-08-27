@@ -37,12 +37,14 @@ namespace imbSCI.Core.math.measureSystem
     using imbSCI.Core.math.range;
     using System;
 
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'measure{TValue}.Boolean}'
     /// <summary>
     /// Measure with Boolean value
     /// </summary>
     /// <seealso cref="measure{TValue}.Boolean}" />
     /// <seealso cref="System.ICloneable" />
     public class measureBoolean : measure<bool>, ICloneable
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'measure{TValue}.Boolean}'
     {
         public measureBoolean(measureBooleanRoles roleEnum, measureBooleanPreset unitEnum, Boolean defaultValue) : base()
         {

@@ -61,6 +61,7 @@ namespace imbSCI.Core.reporting.style
         //    }
         //}
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'appendType' that could not be resolved
         /// <summary>
         /// Resolves autoshot into a series of instructions
         /// </summary>
@@ -72,6 +73,7 @@ namespace imbSCI.Core.reporting.style
         /// <seealso cref="acePaletteVariationRole"/>
         /// <returns></returns>
         public List<IStyleInstruction> resolve(styleTheme theme, params Object[] __resources)
+#pragma warning restore CS1574 // XML comment has cref attribute 'appendType' that could not be resolved
         {
             List<IStyleInstruction> output = new List<IStyleInstruction>();
             acePaletteVariationRole colorRole = acePaletteVariationRole.none;

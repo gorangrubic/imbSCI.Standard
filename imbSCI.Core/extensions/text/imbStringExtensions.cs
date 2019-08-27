@@ -29,8 +29,7 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Core.extensions.text
 {
-    #region imbVeles using
-
+    using imbNLP.Data.enums;
     using imbSCI.Core.extensions.enumworks;
     using imbSCI.Data;
     using imbSCI.Data.enums.fields;
@@ -42,7 +41,6 @@ namespace imbSCI.Core.extensions.text
     using System.Text;
     using System.Text.RegularExpressions;
 
-    #endregion imbVeles using
 
     /// <summary>
     /// Proširenja operacija nad stringovima
@@ -131,20 +129,20 @@ namespace imbSCI.Core.extensions.text
         /// <param name="orThese">The or these.</param>
         /// <returns></returns>
         /// <exception cref="aceGeneralException">None of these argument is value - null - or(first, ... orThese others)</exception>
-        public static String or(this String first, params String[] orThese)
+        public static T or<T>(this T first, params T[] orThese)
         {
             if (!first.isNullOrEmpty()) return first;
-            foreach (String these in orThese)
+
+            foreach (T these in orThese)
             {
                 if (!these.isNullOrEmpty()) return these;
             }
             //var axe = new aceGeneralException("Silent exception at> imbStringCollectionExtensions.or(): None of these argument is value", null, orThese, "or(first, ... orThese others)");
             //aceLog.log(axe.title);
             //aceLog.log(axe.Message);
-            return "";
+            return default(T);
         }
 
-        #region SHORT STRING EXTNSION OPERATORS -----------------------------------------------------------------------------------------|
 
         ///// <summary>
         ///// Formats <c>fin</c> parameters into <c>format</c> string
@@ -245,7 +243,6 @@ namespace imbSCI.Core.extensions.text
             return output;
         }
 
-        #endregion SHORT STRING EXTNSION OPERATORS -----------------------------------------------------------------------------------------|
 
         /// <summary>
         /// 2014 Maj: uklanja duple substringove - dupli razmak, newline, ..
@@ -558,7 +555,7 @@ namespace imbSCI.Core.extensions.text
         }
 
         /// <summary>
-        /// 2017: Pravi varijacije od skracenice
+        /// Generates different forms for specified abbreviation or acronim
         /// </summary>
         /// <remarks>
         /// <para>Predstavlja primenu <b>enum wordVariationsMethodType.Abrevations</b> </para>
@@ -600,7 +597,55 @@ namespace imbSCI.Core.extensions.text
         }
 
         /// <summary>
-        /// Vraca skracenicu reci
+        /// Gets letter case enum for specified string 
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <returns></returns>
+        public static nlpTextCase GetTextCase(this String source)
+        {
+
+            Boolean firstLetterUppercase = false;
+            Boolean otherLetterUppercase = false;
+            Boolean Lowercase = false;
+
+            char[] array = source.ToCharArray();
+            for (int i = 0; i < array.Length; i++)
+            {
+                Char c = array[i];
+                if (i == 0)
+                {
+                    if (Char.IsUpper(c))
+                    {
+                        firstLetterUppercase = true;
+                    } else
+                    {
+                        Lowercase = true;
+                    }
+                } else
+                {
+                    if (Char.IsUpper(c))
+                    {
+                        otherLetterUppercase = true;
+                    }
+                    else
+                    {
+                        Lowercase = true;
+                    }
+                }
+
+                if (Lowercase && otherLetterUppercase) return nlpTextCase.mixedCase;
+            }
+            if (firstLetterUppercase && Lowercase) return nlpTextCase.firstUpperRestLower;
+
+            if (firstLetterUppercase && otherLetterUppercase) return nlpTextCase.upperCase;
+
+            if (Lowercase) return nlpTextCase.lowerCase;
+
+            return nlpTextCase.unknown;
+        }
+
+        /// <summary>
+        /// Creates abbreviated form of specified word, by removing vowels and/or picking capital letters in mixed case string 
         /// </summary>
         /// <param name="source"></param>
         /// <param name="targetLength"></param>
@@ -609,11 +654,35 @@ namespace imbSCI.Core.extensions.text
         public static String imbGetWordAbbrevation(this String source, Int32 targetLength = 3, Boolean toCapital = true)
         {
             if (String.IsNullOrEmpty(source)) return "";
-            String output = "";
+            String output = source;
 
-            output = _samoglasnici.Replace(source, "");
+            if (String.IsNullOrEmpty(output)) return output = source;
 
-            if (String.IsNullOrEmpty(source)) return output = source;
+
+
+            var letter_case = source.GetTextCase();
+
+            if (letter_case == nlpTextCase.mixedCase)
+            {
+                output = String.Concat(output.ToArray().Select(c => Char.IsUpper(c)));
+
+            } else
+            {
+                output = _samoglasnici.Replace(output, "");
+            }
+
+            //if (output.Length > targetLength)
+            //{
+            //    if (letter_case == nlpTextCase.firstUpperRestLower || letter_case == nlpTextCase.lowerCase || letter_case == nlpTextCase.upperCase)
+            //    {
+
+                   
+
+            //    }
+            //}
+            
+
+
             if (output.Length < 1) return output;
             if (source[0] != output[0]) output = source[0] + output;
             targetLength = Math.Min(output.Length, targetLength);
@@ -623,7 +692,7 @@ namespace imbSCI.Core.extensions.text
         }
 
         /// <summary>
-        /// Creates abbreviation from multi word phrase - it also supports single word source
+        /// Creates abbreviation from multi word phrase - it also supports single word source using <see cref="imbGetWordAbbrevation(string, int, bool)"/>
         /// </summary>
         /// <param name="source"></param>
         /// <param name="targetLength"></param>

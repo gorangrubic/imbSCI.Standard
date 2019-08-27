@@ -35,10 +35,12 @@ namespace imbSCI.DataComplex.data.modelRecords
     using imbSCI.Data.interfaces;
     using System;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'testDefinition' that could not be resolved
     /// <summary>
     /// Data model objects -- with records of <see cref="imbFramework.tests.testDefinition"/> execution
     /// </summary>
     public interface IModelRecord : IAppendDataFieldsExtended, IAutosaveEnabled, ILogable, IConsoleControl //, ILogSerializableProvider<IModelRecordSerializable>
+#pragma warning restore CS1574 // XML comment has cref attribute 'testDefinition' that could not be resolved
     {
         // void initiate(String __instanceID, String __testRunStamp);
         string UID { get; }

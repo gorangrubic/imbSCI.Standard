@@ -29,10 +29,12 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Data.data.package
 {
+#pragma warning disable CS1574 // XML comment has cref attribute 'graphWrapNode{TItem}' that could not be resolved
     /// <summary>
     /// DataPackage serialization model provides simple tools for serialization of complex data structures like <see cref="graphWrapNode{TItem}"/>
     /// </summary>
     internal class NamespaceDoc
+#pragma warning restore CS1574 // XML comment has cref attribute 'graphWrapNode{TItem}' that could not be resolved
     {
     }
 }

@@ -299,7 +299,21 @@ namespace imbSCI.Core.extensions.text
             return input.Length;
         }
 
-
+        /// <summary>
+        ///  Makes inversed string
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns></returns>
+        public static String Inverse(this String input)
+        {
+            String output = "";
+            var outputChars = new List<Char>() { };
+            for (int i = 0; i < input.Length; i++)
+            {
+                outputChars.Add(input[(input.Length - 1) - i]);
+            }
+            return String.Concat(outputChars);
+        }
 
         /// <summary>
         /// It extracts common substring at left end (at start, root) of input strings
@@ -358,18 +372,18 @@ namespace imbSCI.Core.extensions.text
                 }
                 else
                 {
-                    if (currentChar == "")
+                    if (currentChar != "")
                     {
                         sb.Append(currentChar);
                     }
                 }
                 p++;
-
+                iteration = nextIteration;
             }
 
-            return sb.ToString();
+            String output =  sb.ToString();
 
-
+            return output;
         }
 
 
@@ -551,8 +565,32 @@ namespace imbSCI.Core.extensions.text
             return output;
         }
 
+
         /// <summary>
-        /// Skraćuje string na zadati limit, ako ima potrebe. Dodace sufix samo ako je skracivao string. Podrzava snapToWord
+        /// Trims to limit.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <param name="limit">The limit.</param>
+        /// <param name="removeNewLine">if set to <c>true</c> [remove new line].</param>
+        /// <param name="sufix">The sufix.</param>
+        /// <param name="isInvert">if set to <c>true</c> [is invert].</param>
+        /// <param name="snapToWord">if set to <c>true</c> [snap to word].</param>
+        /// <returns></returns>
+        public static List<String> trimToLimit(this List<String> input, int limit, Boolean removeNewLine, String sufix = "... ",
+                                         Boolean isInvert = false, Boolean snapToWord = true)
+        {
+            List<String> output = new List<string>();
+
+            foreach (String l in input)
+            {
+                output.Add(l.trimToLimit(limit, removeNewLine, sufix, isInvert, snapToWord));
+            }
+            return output;
+        }
+
+
+        /// <summary>
+        /// Trims the string to given length limit, and adds sufix if trimmed. 
         /// </summary>
         /// <param name="input">String koji se skraćuje</param>
         /// <param name="limit">Do koje dužine je dozvoljen</param>

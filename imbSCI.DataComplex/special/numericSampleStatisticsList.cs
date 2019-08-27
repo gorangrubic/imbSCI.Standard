@@ -38,11 +38,15 @@ namespace imbSCI.DataComplex.special
     using System.Data;
     using System.Linq;
 
+#pragma warning disable CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
+#pragma warning disable CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.List{aceCommonTypes.collection.special.numericSampleStatistics}'
     /// <summary>
     /// Ordinal collection of entries
     /// </summary>
     /// <seealso cref="System.Collections.Generic.List{aceCommonTypes.collection.special.numericSampleStatistics}" />
     public class numericSampleStatisticsList : List<numericSampleStatistics>, IDataTableBuilderCollection, IObjectWithNameAndDescription
+#pragma warning restore CS1584 // XML comment has syntactically incorrect cref attribute 'System.Collections.Generic.List{aceCommonTypes.collection.special.numericSampleStatistics}'
+#pragma warning restore CS1658 // Type parameter declaration must be an identifier not a type. See also error CS0081.
     {
         /// <summary>
         /// Name for this instance

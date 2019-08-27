@@ -34,11 +34,13 @@ namespace imbSCI.Reporting.meta.blocks
     using imbSCI.Data;
     using imbSCI.Reporting.script;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'ITextRender' that could not be resolved
     /// <summary>
     /// Imports content from file or <see cref="imbSCI.Reporting.reporting.render.ITextRender"/> instance
     /// </summary>
     /// <seealso cref="MetaContainerNestedBase" />
     public class metaExternalBlock : MetaContainerNestedBase
+#pragma warning restore CS1574 // XML comment has cref attribute 'ITextRender' that could not be resolved
     {
         /// <summary>
         /// Name for this instance

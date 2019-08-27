@@ -34,6 +34,7 @@ namespace imbSCI.Core.reporting.template
     #region imbVeles using
 
     using System;
+    using System.Collections.Generic;
     using System.Data;
 
     #endregion imbVeles using
@@ -64,6 +65,13 @@ namespace imbSCI.Core.reporting.template
         /// <param name="mContent">Content of the m.</param>
         /// <returns></returns>
         public string applyToContent(PropertyCollection source, String mContent = null)
+        {
+            if (imbSciStringExtensions.isNullOrEmptyString(mContent)) mContent = template;
+
+            return placeholders.applyToContent(source, mContent);
+        }
+
+        public string applyToContent(Dictionary<String,String> source, String mContent = null)
         {
             if (imbSciStringExtensions.isNullOrEmptyString(mContent)) mContent = template;
 

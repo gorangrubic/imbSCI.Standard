@@ -29,6 +29,7 @@
 // ------------------------------------------------------------------------------------------------------------------
 namespace imbSCI.Core.extensions.text
 {
+    using imbSCI.Data;
     #region imbVeles using
 
     using System;
@@ -313,6 +314,30 @@ namespace imbSCI.Core.extensions.text
         /// <para>Selects: koplas.co.rs</para>
         /// </remarks>
         public static Regex _select_isLettersWithDotsFromStart = new Regex(@"\A([\w\.]*)", RegexOptions.Compiled);
+
+        public static Boolean isStartWithNumber(this String input)
+        {
+            if (input.isNullOrEmpty()) return false;
+            switch (input[0])
+            {
+                case '0':
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                    case '9':
+                    return true;
+                    break;
+                default:
+                    break;
+
+            }
+            return false;
+        }
 
         /// <summary>
         /// Test if input matches \A([\w\.]*)

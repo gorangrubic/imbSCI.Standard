@@ -43,11 +43,13 @@ namespace imbSCI.Reporting.script
     using System.Linq;
     using d = docScriptArguments;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// Compiled resion of the script
     /// </summary>
     /// <seealso cref="imbSCI.Cores.primitives.imbBindable" />
     public class docScriptCompiled : imbBindable
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     {
         /// <summary>
         /// Adds the specified ins.
@@ -76,7 +78,9 @@ namespace imbSCI.Reporting.script
                 if (indata != null)
                 {
                     var tmp = indata[currentDataPath];
+#pragma warning disable CS0184 // The given expression is never of the provided ('DictionaryEntry') type
                     if (tmp is DictionaryEntry)
+#pragma warning restore CS0184 // The given expression is never of the provided ('DictionaryEntry') type
                     {
                         //DictionaryEntry entry = (DictionaryEntry)tmp;
                         //dataItem = entry.Value as PropertyCollection;

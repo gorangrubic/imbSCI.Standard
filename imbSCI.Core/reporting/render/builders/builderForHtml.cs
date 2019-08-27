@@ -80,37 +80,37 @@ namespace imbSCI.Core.reporting.render.builders
 
         public FileInfo savePage(string name, reportOutputFormatName format = reportOutputFormatName.none)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public object addDocument(string name, bool scopeToNew = true, getWritableFileMode mode = getWritableFileMode.autoRenameExistingOnOtherDate, reportOutputFormatName format = reportOutputFormatName.none)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public object addPage(string name, bool scopeToNew = true, getWritableFileMode mode = getWritableFileMode.autoRenameThis, reportOutputFormatName format = reportOutputFormatName.none)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public override void AppendImage(string imageSrc, string imageAltText, string imageRef)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         public override void AppendMath(string mathFormula, string mathFormat = "asciimath")
         {
-            throw new NotImplementedException();
+
         }
 
         public override void AppendLabel(string content, bool isBreakLine = true, object comp_style = null)
         {
-            throw new NotImplementedException();
+
         }
 
         public override void AppendPanel(string content, string comp_heading = "", string comp_description = "", object comp_style = null)
         {
-            throw new NotImplementedException();
+
         }
 
         public void AppendLine()

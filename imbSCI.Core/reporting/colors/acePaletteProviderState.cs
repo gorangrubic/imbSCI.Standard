@@ -38,6 +38,7 @@ namespace imbSCI.Core.reporting.colors
     using imbSCI.Data.data;
     using System;
 
+#pragma warning disable CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     /// <summary>
     /// Set of properties that drive variations in palette application.
     /// </summary>
@@ -45,6 +46,7 @@ namespace imbSCI.Core.reporting.colors
     /// <seealso cref="aceCommonTypes.primitives.imbBindable" />
     /// <seealso cref="System.ICloneable" />
     internal sealed class acePaletteProviderState : imbBindable, ICloneable
+#pragma warning restore CS1574 // XML comment has cref attribute 'imbBindable' that could not be resolved
     {
         private Int32 _bgIndex = 0;
 
